@@ -80,6 +80,7 @@ boolean zoomAnimation = false;
 
 void setup(){
   size(800, 450);
+  frameRate(24);
 
   buf = createGraphics(8000, 1350, JAVA2D);
   buf.beginDraw();
@@ -113,9 +114,10 @@ void draw(){
   drawMiniMap();
   
   buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip) {
+  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    useBrush();
+    //useBrush();
+    drawBrush(3);
   }
   buf.endDraw();
   
@@ -200,7 +202,10 @@ void moveViewport(){
 
 
 void drawMiniMap(){
-  rect(630,10,160,27);
+ stroke(0,0,0);
+ strokeWeight(1);
+ fill(255,255,255);
+ rect(630,10,160,27);
  
  if (drawCounter % 3 == 0) {
    miniMapPosX = calcMiniMapPosX() + 630;
