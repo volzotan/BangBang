@@ -109,7 +109,7 @@ void draw(){
   buf.beginDraw();
   if (drawCounter % 2 == frameToSkip /*&& player.isPlaying()*/) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    useBrush2();
+    useBrush();
     //drawBrush(3);
   }
   buf.endDraw();
@@ -121,12 +121,6 @@ void draw(){
 
   // rect(350,175,100,100); // Schutzzone eingeblendet
 
-}
-
-void useBrush2() {
-   buf.stroke(0,0,0);
-    buf.strokeWeight(10);
-    buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pmouseX + prevOffsetX, pmouseY + prevOffsetY);   
 }
 
 void useBrush() {
