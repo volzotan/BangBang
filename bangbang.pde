@@ -72,12 +72,6 @@ int miniMapPosY = 0;                // wird aber sofort bei Programmstart übers
 int angle = 0;
 
 
-// Experimental
-
-PImage zoomImg;
-float val;
-boolean zoomAnimation = false;
-
 void setup(){
   size(800, 450);
   frameRate(24);
@@ -104,7 +98,6 @@ void setup(){
 void draw(){
   //x = x + ((mouseX-x)/verfolgungsDaempfung);
  
- if (!zoomAnimation) {
  x = x + (mouseX-x)/verfolgungsDaempfungX;
  y = y + (mouseY-y)/verfolgungsDaempfungY;
  drawCounter++;
@@ -114,10 +107,10 @@ void draw(){
   drawMiniMap();
   
   buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
+  if (drawCounter % 2 == frameToSkip /*&& player.isPlaying()*/) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    //useBrush();
-    drawBrush(3);
+    useBrush();
+    //drawBrush(3);
   }
   buf.endDraw();
   
@@ -125,24 +118,9 @@ void draw(){
     prevOffsetX = copyOffsetX;
     prevOffsetY = copyOffsetY;
   }
-  
-  if (keyCode == UP) {
-    zoomAnimation = true;
-    //val = buf.height;
-    val = 1;
-  } 
- } else {
-  zoomImg = buf.get(0, 0, buf.width, buf.height); // mehrfaches Anwenden von resize auf die gleiche Grafik führt zu Informationsverlust im Bild
-  /*val = val - (val - height)/10;                // resize und scale sind genauso langsam
-  zoomImg.resize(0,(int) val);
-  */
-  val = val - (val - 0.5)/10;
-  scale(val);
-  image(zoomImg, 0 ,0);
- 
- 
- }
+
   // rect(350,175,100,100); // Schutzzone eingeblendet
+
 }
 
 void useBrush() {

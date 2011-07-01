@@ -72,14 +72,9 @@ int miniMapPosY = 0;                // wird aber sofort bei Programmstart übers
 int angle = 0;
 
 
-// Experimental
-
-PImage zoomImg;
-float val;
-boolean zoomAnimation = false;
-
 void setup(){
   size(800, 450);
+  frameRate(24);
 
   buf = createGraphics(8000, 1350, JAVA2D);
   buf.beginDraw();
@@ -103,7 +98,6 @@ void setup(){
 void draw(){
   //x = x + ((mouseX-x)/verfolgungsDaempfung);
  
- if (!zoomAnimation) {
  x = x + (mouseX-x)/verfolgungsDaempfungX;
  y = y + (mouseY-y)/verfolgungsDaempfungY;
  drawCounter++;
@@ -113,9 +107,10 @@ void draw(){
   drawMiniMap();
   
   buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip) {
+  if (drawCounter % 2 == frameToSkip /*&& player.isPlaying()*/) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
     useBrush();
+    //drawBrush(3);
   }
   buf.endDraw();
   
@@ -123,21 +118,9 @@ void draw(){
     prevOffsetX = copyOffsetX;
     prevOffsetY = copyOffsetY;
   }
-  
-  if (keyCode == UP) {
-    zoomAnimation = true;
-    val = buf.height;
-  } 
- } else {
-  zoomImg = buf.get(0, 0, buf.width, buf.height); // mehrfaches Anwenden von resize auf die gleiche Grafik führt zu Informationsverlust im Bild
-  val = val - (val - height)/10;
-  zoomImg.resize(0,(int) val);
-  
-  image(zoomImg, 0 ,0);
- 
- 
- }
+
   // rect(350,175,100,100); // Schutzzone eingeblendet
+
 }
 
 void useBrush() {
@@ -197,7 +180,10 @@ void moveViewport(){
 
 
 void drawMiniMap(){
-  rect(630,10,160,27);
+ stroke(0,0,0);
+ strokeWeight(1);
+ fill(255,255,255);
+ rect(630,10,160,27);
  
  if (drawCounter % 3 == 0) {
    miniMapPosX = calcMiniMapPosX() + 630;
