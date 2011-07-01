@@ -7,7 +7,7 @@
  * Alle Zeichenanweisungen die außerhalb der Methoden unten 
  * stattfinden müssen Stroke, Fill, etc wieder auf einen Basiswert zurücksetzen
  */
- 
+ /*
 void drawBrush() {
   drawBrush(0); 
 }  
@@ -22,7 +22,7 @@ void drawBrush(int BrushId) {
     default: BrushOne();
   }  
 }
-
+*/
 /** 
  * "Stempel" mit 5 Ellipsen im Pentagram
  */
@@ -37,7 +37,7 @@ void BrushOne() {
   }
   buf.fill(255);
   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
-  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
+  //buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
 }
 
 void BrushTwo() {

@@ -90,7 +90,7 @@ void setup(){
   // load and instantiate audio player
   minim = new Minim(this);
   player = minim.loadFile("bangbang.mp3");
-  beat = new BeatDetect();
+  //beat = new BeatDetect();
   player.play();
 
 }
@@ -107,7 +107,7 @@ void draw(){
   drawMiniMap();
   
   buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip /*&& player.isPlaying()*/) {
+  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
     useBrush();
     //drawBrush(3);
@@ -139,7 +139,7 @@ void useBrush() {
 
 void moveViewport(){ 
   image(getBufSlice(), 0, 0);
-  
+
   float xPos = mouseX-width/2;  // xPos,yPos sind Koordinaten relativ zum Mittelpunkt
   float yPos = mouseY-height/2;
   
@@ -171,8 +171,6 @@ void moveViewport(){
     } else if(yPosKoord < 0) {
       yPosKoord = 0;
    }
-  
-  
   
   copyOffsetX = xPosKoord;
   copyOffsetY = yPosKoord;
