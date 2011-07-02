@@ -19,8 +19,8 @@ int copyOffsetY;
 int copyWidth;
 int copyHeight;
 
-int prevOffsetX;
-int prevOffsetY;
+int prevOffsetX = 0;
+int prevOffsetY = 0;
  
 float x = 400;
 float y = 225;
@@ -70,7 +70,7 @@ PImage scaledMiniMap;
 
 void setup(){
   size(800, 450);
-  frameRate(24);
+  frameRate(30);
 
   buf = createGraphics(8000, 1350, JAVA2D);
   buf.beginDraw();
@@ -107,8 +107,7 @@ void draw(){
   buf.beginDraw();
   if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    useBrush();
-    //drawBrush(3);
+    BrushThree();
   }
   buf.endDraw();
   
@@ -119,20 +118,6 @@ void draw(){
 
   // rect(350,175,100,100); // Schutzzone eingeblendet
 
-}
-
-void useBrush() {
-  angle += 10;
-    float val = cos(radians(angle)) * 10.0;
-    for (int a = 0; a < 360; a += 10) {
-      float xoff = cos(radians(a)) * val;
-      float yoff = sin(radians(a)) * val;
-      fill(0);
-      buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val, val);
-    }
-    fill(255);
-    //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
-    buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
 }
 
 void moveViewport(){ 
