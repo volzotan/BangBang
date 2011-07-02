@@ -107,7 +107,7 @@ void draw(){
   buf.beginDraw();
   if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    BrushThree();
+    BrushOne();
   }
   buf.endDraw();
   
