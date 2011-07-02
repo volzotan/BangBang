@@ -32,10 +32,10 @@ void BrushOne() {
   for (int a = 0; a < 360; a += 10) {
     float xoff = cos(radians(a)) * val;
     float yoff = sin(radians(a)) * val;
-    fill(0);     
+    buf.fill(0);     
     buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val, val);
   }
-  fill(255);
+  buf.fill(255);
   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
   buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
 }

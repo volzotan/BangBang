@@ -108,6 +108,7 @@ void draw(){
   if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
     BrushOne();
+    //println(player.position());
   }
   buf.endDraw();
   
@@ -161,9 +162,13 @@ void moveViewport(){
 
 
 void drawMiniMap(){
+ // rgb stroke black
  stroke(0,0,0);
+ // stroke width 1 pixel
  strokeWeight(1);
- fill(255,255,255,255);
+ // rgb fill fully transparent
+ fill(255,255,255,0);
+ // minimap window position
  rect(630,10,160,27);
  
  if (drawCounter % 5 == 0) {
