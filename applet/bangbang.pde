@@ -1,10 +1,3 @@
-/*  Fehler beim Ellipsenzeichen im Zusammenhang mit x + copyOffsetX (Zeichnen über den Rand)
- *  Fehler beim Viewport-Verschieben im oberen linken Quadranten
- *
- *  Schutzzone wirklich sinnvoll bei konstantem Scrollen?
- *
- */
- 
 
 // Minim
 
@@ -55,7 +48,7 @@ PShape vignette;
 
 // Richtung
 
-  float xRichtungsFaktor = 1;
+  float xRichtungsFaktor = 10;
   float yRichtungsFaktor = 0;        // ohne Mauseinwirkung konstantes Scrollen nach Rechts
   
   int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
@@ -71,6 +64,9 @@ int miniMapPosY = 0;                // wird aber sofort bei Programmstart übers
 // Brush
 int angle = 0;
 
+
+// Experimental
+PImage scaledMiniMap;
 
 void setup(){
   size(800, 450);
@@ -93,6 +89,8 @@ void setup(){
   //beat = new BeatDetect();
   player.play();
 
+  scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
+   scaledMiniMap.resize(0, 27);
 }
 
 void draw(){
@@ -180,8 +178,14 @@ void moveViewport(){
 void drawMiniMap(){
  stroke(0,0,0);
  strokeWeight(1);
- fill(255,255,255);
+ fill(255,255,255,255);
  rect(630,10,160,27);
+ 
+ if (drawCounter % 5 == 0) {
+   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
+   scaledMiniMap.resize(0, 27);
+ }
+ image(scaledMiniMap, 630, 10);
  
  if (drawCounter % 3 == 0) {
    miniMapPosX = calcMiniMapPosX() + 630;
