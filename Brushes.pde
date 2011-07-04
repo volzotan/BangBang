@@ -34,7 +34,7 @@ void BrushOne() {
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
     float xoff = cos(radians(a)) * val;
     float yoff = sin(radians(a)) * val;    
-    buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val, val);
+    buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val + player.left.get(0) * 20, val + player.left.get(0) * 20);
   }
   buf.fill(0,0,0,255);
   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
