@@ -118,7 +118,7 @@ void draw(){
   }
 
   // rect(350,175,100,100); // Schutzzone eingeblendet
-
+  println(frameRate);
 }
 
 void moveViewport(){ 

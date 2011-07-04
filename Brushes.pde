@@ -27,15 +27,16 @@ void drawBrush(int BrushId) {
  * "Stempel" mit 5 Ellipsen im Pentagram
  */
 void BrushOne() {
+  buf.noStroke();
+  buf.fill(0,0,0,150); 
   angle += 10;
   float val = cos(radians(angle)) * 10.0;
-  for (int a = 0; a < 360; a += 10) {
+  for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
     float xoff = cos(radians(a)) * val;
-    float yoff = sin(radians(a)) * val;
-    buf.fill(0);     
+    float yoff = sin(radians(a)) * val;    
     buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val, val);
   }
-  buf.fill(255);
+  buf.fill(0,0,0,255);
   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
   buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
 }
