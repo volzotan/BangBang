@@ -43,16 +43,18 @@ int autoScrollY = 0;
 int drawCounter = 0;
 int frameToSkip = 0;
 
-// Vignette
-PShape vignette;
+// Vignette / Hintergrund
+PImage vignette;
+PImage bgCanvas;
+
 
 // Richtung
 
-  float xRichtungsFaktor = 10;
-  float yRichtungsFaktor = 0;        // ohne Mauseinwirkung konstantes Scrollen nach Rechts
+float xRichtungsFaktor = 10;
+float yRichtungsFaktor = 0;        // ohne Mauseinwirkung konstantes Scrollen nach Rechts
   
-  int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
-  int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
+int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
+int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
 
 // MiniMap
@@ -72,10 +74,12 @@ void setup(){
   size(800, 450);
   frameRate(30);
 
+  bgCanvas = loadImage("bg_leinwand.jpg");
+
   buf = createGraphics(8000, 900, JAVA2D);
   buf.beginDraw();
-    buf.smooth();
-    buf.background(240);
+  buf.smooth();
+  buf.background(bgCanvas);
   buf.endDraw();
  
   copyOffsetX = 0;
@@ -90,7 +94,7 @@ void setup(){
   player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
+  scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
 }
 
 void draw(){
@@ -100,25 +104,26 @@ void draw(){
  y = y + (mouseY-y)/verfolgungsDaempfungY;
  drawCounter++;
   
-  moveViewport();
+ moveViewport();
   
-  drawMiniMap();
+ drawVignette();  
+ drawMiniMap();
   
-  buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
-    //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    BrushOne();
-    //println(player.position());
-  }
-  buf.endDraw();
+ buf.beginDraw();
+ if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
+   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
+   BrushOne();
+   //println(player.position());
+ }
+ buf.endDraw();
   
-  if (drawCounter % 3 == 0) {
-    prevOffsetX = copyOffsetX;
-    prevOffsetY = copyOffsetY;
-  }
+ if (drawCounter % 3 == 0) {
+   prevOffsetX = copyOffsetX;
+   prevOffsetY = copyOffsetY;
+ }
 
-  // rect(350,175,100,100); // Schutzzone eingeblendet
-  println(frameRate);
+ // rect(350,175,100,100); // Schutzzone eingeblendet
+ println(frameRate);
 }
 
 void moveViewport(){ 
@@ -160,6 +165,10 @@ void moveViewport(){
   copyOffsetY = yPosKoord;
 }
 
+void drawVignette(){
+  vignette = loadImage("vignette.png");
+  image(vignette, 0, 0);
+}
 
 void drawMiniMap(){
  // rgb stroke black
@@ -169,7 +178,7 @@ void drawMiniMap(){
  // rgb fill fully transparent
  fill(255,255,255,0);
  // minimap window position
- rect(629,9,162,20);                              // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2
+ rect(629,9,161,19);                              // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2
  
  if (drawCounter % 5 == 0) {
    scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
