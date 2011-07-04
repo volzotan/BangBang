@@ -19,8 +19,8 @@ int copyOffsetY;
 int copyWidth;
 int copyHeight;
 
-int prevOffsetX;
-int prevOffsetY;
+int prevOffsetX = 0;
+int prevOffsetY = 0;
  
 float x = 400;
 float y = 225;
@@ -70,9 +70,9 @@ PImage scaledMiniMap;
 
 void setup(){
   size(800, 450);
-  frameRate(24);
+  frameRate(30);
 
-  buf = createGraphics(8000, 1350, JAVA2D);
+  buf = createGraphics(8000, 900, JAVA2D);
   buf.beginDraw();
     buf.smooth();
     buf.background(240);
@@ -90,7 +90,7 @@ void setup(){
   player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 27);
+   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
 }
 
 void draw(){
@@ -107,8 +107,8 @@ void draw(){
   buf.beginDraw();
   if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
     //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    useBrush();
-    //drawBrush(3);
+    BrushOne();
+    //println(player.position());
   }
   buf.endDraw();
   
@@ -118,21 +118,7 @@ void draw(){
   }
 
   // rect(350,175,100,100); // Schutzzone eingeblendet
-
-}
-
-void useBrush() {
-  angle += 10;
-    float val = cos(radians(angle)) * 10.0;
-    for (int a = 0; a < 360; a += 10) {
-      float xoff = cos(radians(a)) * val;
-      float yoff = sin(radians(a)) * val;
-      fill(0);
-      buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val, val);
-    }
-    fill(255);
-    //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
-    buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
+  println(frameRate);
 }
 
 void moveViewport(){ 
@@ -176,16 +162,20 @@ void moveViewport(){
 
 
 void drawMiniMap(){
+ // rgb stroke black
  stroke(0,0,0);
+ // stroke width 1 pixel
  strokeWeight(1);
- fill(255,255,255,255);
- rect(630,10,160,27);
+ // rgb fill fully transparent
+ fill(255,255,255,0);
+ // minimap window position
+ rect(629,9,162,20);                              // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2
  
  if (drawCounter % 5 == 0) {
    scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 27);
+   scaledMiniMap.resize(0, 18);                    // resize-Wert ist buf.height/50
  }
- image(scaledMiniMap, 630, 10);
+ image(scaledMiniMap, 630, 10);                    
  
  if (drawCounter % 3 == 0) {
    miniMapPosX = calcMiniMapPosX() + 630;
@@ -198,14 +188,14 @@ void drawMiniMap(){
 int calcMiniMapPosX() {
   float diffX =  (copyOffsetX / (buf.width/100));  // Prozentualer Vorrückungsgrad
   
-  float verschiebungX = 1.6 * diffX;
+  float verschiebungX = 1.6 * diffX;                // Konstante ist buf.width/50/100
   return (int) verschiebungX;
 }
 
 int calcMiniMapPosY() {
   float diffY =  (copyOffsetY / (buf.height/100));  // Prozentualer Vorrückungsgrad
   
-  float verschiebungY = 0.27 * diffY;
+  float verschiebungY = 0.18 * diffY;              // Konstante ist buf.width/50/100
   return (int) verschiebungY;
 }
 

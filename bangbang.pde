@@ -72,7 +72,7 @@ void setup(){
   size(800, 450);
   frameRate(30);
 
-  buf = createGraphics(8000, 1350, JAVA2D);
+  buf = createGraphics(8000, 900, JAVA2D);
   buf.beginDraw();
     buf.smooth();
     buf.background(240);
@@ -90,7 +90,7 @@ void setup(){
   player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 27);
+   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
 }
 
 void draw(){
@@ -169,13 +169,13 @@ void drawMiniMap(){
  // rgb fill fully transparent
  fill(255,255,255,0);
  // minimap window position
- rect(630,10,160,27);
+ rect(629,9,162,20);                              // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2
  
  if (drawCounter % 5 == 0) {
    scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 27);
+   scaledMiniMap.resize(0, 18);                    // resize-Wert ist buf.height/50
  }
- image(scaledMiniMap, 630, 10);
+ image(scaledMiniMap, 630, 10);                    
  
  if (drawCounter % 3 == 0) {
    miniMapPosX = calcMiniMapPosX() + 630;
@@ -188,14 +188,14 @@ void drawMiniMap(){
 int calcMiniMapPosX() {
   float diffX =  (copyOffsetX / (buf.width/100));  // Prozentualer Vorrückungsgrad
   
-  float verschiebungX = 1.6 * diffX;
+  float verschiebungX = 1.6 * diffX;                // Konstante ist buf.width/50/100
   return (int) verschiebungX;
 }
 
 int calcMiniMapPosY() {
   float diffY =  (copyOffsetY / (buf.height/100));  // Prozentualer Vorrückungsgrad
   
-  float verschiebungY = 0.27 * diffY;
+  float verschiebungY = 0.18 * diffY;              // Konstante ist buf.width/50/100
   return (int) verschiebungY;
 }
 
