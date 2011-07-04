@@ -172,17 +172,17 @@ void drawVignette(){
 
 void drawMiniMap(){
  // rgb stroke black
- stroke(0,0,0);
+ stroke(0,0,0,90);
  // stroke width 1 pixel
  strokeWeight(1);
  // rgb fill fully transparent
- fill(255,255,255,0);
+ fill(0,0,0,50);
  // minimap window position
  rect(629,9,161,19);                              // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2
  
  if (drawCounter % 5 == 0) {
    scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 18);                    // resize-Wert ist buf.height/50
+   scaledMiniMap.resize(0, 18);                   // resize-Wert ist buf.height/50
  }
  image(scaledMiniMap, 630, 10);                    
  
@@ -190,6 +190,9 @@ void drawMiniMap(){
    miniMapPosX = calcMiniMapPosX() + 630;
    miniMapPosY = calcMiniMapPosY() + 10;
  }
+ 
+  // rgb stroke black
+ stroke(0,0,0,0);
  
  rect(miniMapPosX, miniMapPosY, 16, 9);
 }
