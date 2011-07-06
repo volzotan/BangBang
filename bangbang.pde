@@ -1,16 +1,21 @@
-// Minim
+// controlP5
+import controlP5.*;
 
+// GUI
+ControlP5 controlP5;
+
+// Minim
 import ddf.minim.*;
 import ddf.minim.signals.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*; 
  
-// Audio Player
+// Audio Player, Beat detection
 Minim minim;
 AudioPlayer player;
 BeatDetect beat;
 
- 
+// Canvas setup 
 PImage bufSlice;
 PGraphics buf;
 int copyOffsetX;
@@ -20,36 +25,34 @@ int copyHeight;
 
 int prevOffsetX = 0;
 int prevOffsetY = 0;
- 
-float x = 400;
-float y = 225;
 
+// Vignette / Hintergrund 
+PImage vignette;
+PImage bgCanvas;
+ 
+float x = 400; // was macht das?
+float y = 225; // was macht das?
+
+// scroll protection
 int groesseSchutzzoneX = 0;            // in Ausdehnung um relativen Nullpunkt in alle Richtungen
 int groesseSchutzzoneY = 0;            // 0 = deaktiviert
 
-
-// Dynamik
+// Dynamik; dampen mouse movements for brush following
 float verfolgungsDaempfungX = 10;
 float verfolgungsDaempfungY = 10;
 
+// automatic scrolling
 float scrollGeschwindigkeit = 10;
 
 int autoScrollX = 0;
 int autoScrollY = 0;
 
-
-// Optimierung                        // funktioniert in dem bestimme Operationen nur bei jedem 2.,3.,... draw() ausgeführt werden 
+// Optimierung                        // funktioniert in dem bestimmte Operationen nur bei jedem 2.,3.,... draw() ausgeführt werden 
 int drawCounter = 0;
 int frameToSkip = 0;
 
-// Vignette / Hintergrund
-PImage vignette;
-PImage bgCanvas;
-
-
 // Richtung
-
-float xRichtungsFaktor = 10;
+float xRichtungsFaktor = 10;        // x und y vertauscht?
 float yRichtungsFaktor = 0;        // ohne Mauseinwirkung konstantes Scrollen nach Rechts
   
 int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
@@ -57,20 +60,14 @@ int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
 
 // MiniMap
-
 int miniMapPosX = 0;                // Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17)
 int miniMapPosY = 0;                // wird aber sofort bei Programmstart überschrieben  
-
+PImage scaledMiniMap;               // Experimentell
 
 // Brush
 int angle = 0;
 
-
-// Experimental
-PImage scaledMiniMap;
-
 // Variablen zum Effektezeichnen
-
 int mousePosX = 0;
 int mousePosY = 0;
 int[] lastMousePosX = new int[30];
@@ -79,20 +76,17 @@ int[] lastMousePosY = new int[30];
 // Abstract JS
 int num,cnt,px,py;
 Particle[] particles;
-boolean initialised=false,doClear=false;
 float lastRelease=-1;
+
+// setup
+boolean initialised = false, doClear = false;
 
 void setup(){
   size(800, 450, P2D);
   frameRate(30);
 
-  bgCanvas = loadImage("bg_leinwand.jpg");
-
-  buf = createGraphics(8000, 900, P2D);
-  buf.beginDraw();
-  buf.smooth();
-  buf.background(bgCanvas);
-  buf.endDraw();
+  initCanvas(true);
+  setupGUI();
  
   copyOffsetX = 0;
   copyOffsetY = (buf.height - height) / 2;      // startet am linken äußeren Rand in der Mitte
@@ -103,7 +97,7 @@ void setup(){
   minim = new Minim(this);
   player = minim.loadFile("bangbang.mp3");
   beat = new BeatDetect();
-  player.play();
+  //player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
@@ -119,39 +113,49 @@ void setup(){
 }
 
 void draw(){
-  beat.detect(player.mix);
-  //x = x + ((mouseX-x)/verfolgungsDaempfung);
+  if(doClear) {
+    initCanvas(true);
+    doClear = false;
+    initialised = false;
+    player.pause();
+    player.rewind();
+  }
+
+  if(!initialised) {
+    drawGUI();
+  } else {  
+    beat.detect(player.mix);
+    //x = x + ((mouseX-x)/verfolgungsDaempfung);
  
-  x = x + (mouseX-x)/verfolgungsDaempfungX;
-  y = y + (mouseY-y)/verfolgungsDaempfungY;
-  drawCounter++;
+    x = x + (mouseX-x)/verfolgungsDaempfungX;
+    y = y + (mouseY-y)/verfolgungsDaempfungY;
+    drawCounter++;
   
-  moveViewport();
+    moveViewport();
   
-  drawVignette();  
-  drawMiniMap();
+    drawVignette();  
+    drawMiniMap();
   
-  buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
-    //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    BrushOne();
-    //println(player.position());
-  }
-  buf.endDraw();
+    buf.beginDraw();
+    if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
+      BrushOne();      
+    }
+    buf.endDraw();
   
-  if (drawCounter % 3 == 0) {
-    prevOffsetX = copyOffsetX;
-    prevOffsetY = copyOffsetY;
-  }
+    if (drawCounter % 3 == 0) {
+      prevOffsetX = copyOffsetX;
+      prevOffsetY = copyOffsetY;
+    }
 
-  if (drawCounter % 3 == 0 && player.isPlaying()) {
-    mousePosX = copyOffsetX + mouseX;
-    mousePosY = copyOffsetY + mouseY;
+    if (drawCounter % 3 == 0 && player.isPlaying()) {
+      mousePosX = copyOffsetX + mouseX;
+      mousePosY = copyOffsetY + mouseY;
    
-    castEffect();
+      castEffect();
+    }
   }
 
- println(frameRate);
+  println(frameRate + " at " + player.position());
 }
 
 void moveViewport(){ 
@@ -264,9 +268,26 @@ PImage getBufSlice() {
 }
 
 
+void initCanvas(boolean useBGImage) {
+  bgCanvas = loadImage("bg_leinwand.jpg");
+
+  buf = createGraphics(8000, 900, P2D);
+  buf.beginDraw();
+  buf.smooth();
+  buf.background(bgCanvas);
+  buf.endDraw();  
+}  
+
+void keyReleased() {
+  if (key=='r' || key=='R') doClear = true;
+}
+
 void stop() {                                       // Minim Stop
   player.close();
   minim.stop();
   super.stop();
 }
 
+String timestamp() {
+  return String.format("%1$ty%1$tm%1$td_%1$tH%1$tM%1$tS", Calendar.getInstance());
+}
