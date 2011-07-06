@@ -31,7 +31,9 @@ void BrushTwo() {
 }
 
 void brushThree() {
+  buf.line(x + copyOffsetX, y + copyOffsetY, deltaMouseX, deltaMouseY);
+  
 
-  deltaMouseX = mouseX + copyOffsetX;
-  deltaMouseY = mouseY + copyOffsetY;
+  deltaMouseX = (int) x + copyOffsetX;
+  deltaMouseY = (int) y + copyOffsetY;
 }

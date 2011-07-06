@@ -58,7 +58,7 @@ int angle = 0;
 
 // Variablen zum Effektezeichnen TODO, wozu mousePosX doppelt? mouseX/mouseY sind global verfügbar?!
 int deltaMouseX = 0;
-int deltaMouseY = 0;
+int deltaMouseY = 450;
 int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 
 // Particle System
@@ -118,11 +118,9 @@ void draw(){
       moveViewport();
       buf.beginDraw();
       if (drawCounter % 1 == 0) {
-        BrushOne();      
+        brushThree();      
       }
       if (drawCounter % 3 == 0) {
-        mousePosX = copyOffsetX + mouseX;
-        mousePosY = copyOffsetY + mouseY;
    
         castEffect();
       }      
