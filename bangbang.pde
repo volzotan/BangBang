@@ -95,10 +95,9 @@ void draw(){
     player.rewind();
   }
   
-  drawVignette(); 
-
   if(!initialised) {
     image(getBufSlice(), 0, 0);
+    drawVignette();
     drawGUI();
   } else {  
     controlP5.hide();
@@ -107,9 +106,7 @@ void draw(){
     x = x + (mouseX-x)/verfolgungsDaempfungX;
     y = y + (mouseY-y)/verfolgungsDaempfungY;
     drawCounter++;
-  
-    drawMiniMap();
-    
+      
     if(player.isPlaying()) {
       moveViewport();
       buf.beginDraw();
@@ -128,7 +125,9 @@ void draw(){
       ps.addParticle(mouseX,mouseY);       
     } else {
       image(getBufSlice(), 0, 0); 
-    }  
+    }
+    drawVignette();
+    drawMiniMap();  
   
     if (drawCounter % 3 == 0) {
       prevOffsetX = copyOffsetX;
