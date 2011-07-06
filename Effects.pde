@@ -1,8 +1,28 @@
 void AbstractJs() {
-  float dir = int(random(36))*10;
-  Particle particle = new Particle();
-  particle.init(dir); 
-  particle.update();
+    int partNum,i;
+    float dir;
+    
+    if(px==-1) {
+      px=mouseX;
+      py=mouseY;
+      dir=0;
+    }
+    else if(px==mouseX && py==mouseY) dir=int(random(36))*10;
+    else dir=degrees(atan2(mouseY-py,mouseX-px))-90;
+  
+    i=0;
+    while(i<num) {
+      if(particles[i].age<1) {
+        particles[i].init(dir);
+        break;
+      }
+      i++;
+    }
+    
+    px=mouseX;
+    py=mouseY;
+    
+    
 }
 
  /*  Variablen zum Effektezeichnen
@@ -13,9 +33,14 @@ void AbstractJs() {
   */
   
   
-
+//kommentier mal wer die entsprechenden Sekunden von unserer Aufstellung hier rein!
 void castEffect() {
   int pos = player.position();
+  
+  // Abstract JS
+  for(int i=0; i<num; i++) 
+    if(particles[i].age>0) particles[i].update();    
+  // EO Abstract JS
   
   if (pos < player.length() * 0.5) {
     // 0 - 50%
@@ -24,6 +49,13 @@ void castEffect() {
       if (pos < player.length() * 0.125) {
         // 0 - 12.5%
         happyBlackRectangle(5000);
+        BrushTwo();
+        rectMode(CENTER_DIAMETER);
+        ellipseMode(CENTER_DIAMETER);
+        noStroke();
+        AbstractJs();
+        rectMode(CORNER);
+        ellipseMode(CENTER);
       } else {
         // 12.5 - 25%
       }

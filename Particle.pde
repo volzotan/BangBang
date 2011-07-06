@@ -62,20 +62,20 @@ class Particle {
       else buf.fill(255,200-(age/2),0,150);
     }
       
-    pushMatrix();
-    translate(v.x,v.y);
-    rotate(radians(dir));
+    buf.pushMatrix();
+    buf.translate(v.x,v.y);
+    buf.rotate(radians(dir));
     buf.rect(copyOffsetX,+copyOffsetX,1,16);
-    popMatrix();
+    buf.popMatrix();
     
     if(age==0) {
       if(random(100)>50) buf.fill(200,0,0,200);
       else buf.fill(00,200,255,200);
       float size=2+random(4);
       if(random(100)>95) size+=5;
-      buf.ellipse(v.x+copyOffsetX,v.y+copyOffsetY,size,size);
+      buf.ellipse(v.x,v.y,size,size);
     }
-    if(v.x<0 || v.x>(width+copyOffsetX) || v.y<0 || v.y>(height+copyOffsetY)) age=0;
+    if(v.x<0 || v.x>(width+copyWidth) || v.y<0 || v.y>(height+copyHeight)) age=0;
     
     if(age<30) {
       stateCnt--;

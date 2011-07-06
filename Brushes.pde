@@ -46,3 +46,18 @@ void BrushOne() {
   }
 }
 
+void BrushTwo() {
+  if((   0 < player.position() && 2000 > player.position()) ||
+     (3000 < player.position() && 5000 > player.position()) ||
+     (6000 < player.position() && 8500 > player.position())) 
+  {
+    buf.stroke(0,0,0);
+    buf.strokeWeight(5);     
+  } else {
+    buf.stroke(100,100,100);
+    buf.strokeWeight(10);    
+  }
+  int pX = (pmouseX != mouseX) ? pmouseX : mouseX;
+  int pY = (pmouseY != mouseY) ? pmouseY : mouseY;
+  buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pX + prevOffsetX, pY + prevOffsetY);
+}

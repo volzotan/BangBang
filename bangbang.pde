@@ -76,6 +76,11 @@ int mousePosY = 0;
 int[] lastMousePosX = new int[30];
 int[] lastMousePosY = new int[30];
 
+// Abstract JS
+int num,cnt,px,py;
+Particle[] particles;
+boolean initialised=false,doClear=false;
+float lastRelease=-1;
 
 void setup(){
   size(800, 450, P2D);
@@ -97,44 +102,54 @@ void setup(){
   // load and instantiate audio player
   minim = new Minim(this);
   player = minim.loadFile("bangbang.mp3");
-  //beat = new BeatDetect();
+  beat = new BeatDetect();
   player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
+  
+  //Abstract JS
+  cnt=0;
+  num=150;
+  particles=new Particle[num];
+  for(int i=0; i<num; i++) particles[i]=new Particle();
+
+  px=-1;
+  py=-1;  
 }
 
 void draw(){
+  beat.detect(player.mix);
   //x = x + ((mouseX-x)/verfolgungsDaempfung);
  
- x = x + (mouseX-x)/verfolgungsDaempfungX;
- y = y + (mouseY-y)/verfolgungsDaempfungY;
- drawCounter++;
+  x = x + (mouseX-x)/verfolgungsDaempfungX;
+  y = y + (mouseY-y)/verfolgungsDaempfungY;
+  drawCounter++;
   
- moveViewport();
+  moveViewport();
   
- drawVignette();  
- drawMiniMap();
+  drawVignette();  
+  drawMiniMap();
   
- buf.beginDraw();
- if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
-   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-   BrushOne();
-   //println(player.position());
- }
- buf.endDraw();
+  buf.beginDraw();
+  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
+    //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
+    BrushOne();
+    //println(player.position());
+  }
+  buf.endDraw();
   
- if (drawCounter % 3 == 0) {
-   prevOffsetX = copyOffsetX;
-   prevOffsetY = copyOffsetY;
- }
+  if (drawCounter % 3 == 0) {
+    prevOffsetX = copyOffsetX;
+    prevOffsetY = copyOffsetY;
+  }
 
- if (drawCounter % 3 == 0 && player.isPlaying()) {
-   mousePosX = copyOffsetX + mouseX;
-   mousePosY = copyOffsetY + mouseY;
+  if (drawCounter % 3 == 0 && player.isPlaying()) {
+    mousePosX = copyOffsetX + mouseX;
+    mousePosY = copyOffsetY + mouseY;
    
-   castEffect();
- }
+    castEffect();
+  }
 
  println(frameRate);
 }
