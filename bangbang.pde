@@ -48,7 +48,6 @@ int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
 // use this with % to execute functions at every nth draw execution
 int drawCounter = 0;
-int frameToSkip = 0;
 
 // MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben  
 int miniMapPosX = 0, miniMapPosY = 0;
@@ -58,7 +57,8 @@ PImage scaledMiniMap;
 int angle = 0;
 
 // Variablen zum Effektezeichnen TODO, wozu mousePosX doppelt? mouseX/mouseY sind global verfügbar?!
-int mousePosX = 0, mousePosY = 0;
+int deltaMouseX = 0;
+int deltaMouseY = 0;
 int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 
 // Particle System
@@ -117,7 +117,7 @@ void draw(){
     if(player.isPlaying()) {
       moveViewport();
       buf.beginDraw();
-      if (drawCounter % 2 == frameToSkip) {
+      if (drawCounter % 1 == 0) {
         BrushOne();      
       }
       if (drawCounter % 3 == 0) {

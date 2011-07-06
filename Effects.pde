@@ -16,7 +16,8 @@ void castEffect() {
       // 0 - 25%
       if (pos < player.length() * 0.125) {
         // 0 - 12.5%
-        happyBlackRectangle(5000);
+        
+        //happyBlackRectangle(5000);
       } else {
         // 12.5 - 25%
       }
@@ -32,14 +33,14 @@ void castEffect() {
     // 50 - 100%
     if (pos < player.length() * 0.75) {
       // 50 - 75%
-      if (pos < player.length() * 0.125) {
+      if (pos < player.length() * 0.625) {
         // 50 - 62.5%
       } else {
         // 62.5 - 75%
       }
     } else {
       // 75 - 100%
-      if (pos < player.length() * 0.375) {
+      if (pos < player.length() * 0.875) {
         // 75 - 87.5%
       } else {
         // 87.5 - 100%

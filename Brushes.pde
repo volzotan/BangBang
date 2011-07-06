@@ -29,3 +29,9 @@ void BrushTwo() {
   int pY = (pmouseY != mouseY) ? pmouseY : mouseY;
   buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pX + prevOffsetX, pY + prevOffsetY);
 }
+
+void brushThree() {
+
+  deltaMouseX = mouseX + copyOffsetX;
+  deltaMouseY = mouseY + copyOffsetY;
+}
