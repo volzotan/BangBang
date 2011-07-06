@@ -25,7 +25,7 @@ void keyReleased() {
   if (' ' == key) { 
     if(player.isPlaying()) {
       player.pause();
-    } else {
+    } else if(initialised && player.position() < player.length()) {
       player.play();
     }  
   }
