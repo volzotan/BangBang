@@ -101,7 +101,7 @@ void draw(){
   if(!initialised) {
     drawGUI();
   } else {  
-    controlP56.hide()
+    controlP5.hide();
     beat.detect(player.mix);
      
     x = x + (mouseX-x)/verfolgungsDaempfungX;
