@@ -95,10 +95,10 @@ void draw(){
     player.rewind();
   }
   
-  moveViewport();
-  drawVignette();  
+  drawVignette(); 
 
   if(!initialised) {
+    image(getBufSlice(), 0, 0);
     drawGUI();
   } else {  
     controlP5.hide();
@@ -111,6 +111,7 @@ void draw(){
     drawMiniMap();
     
     if(player.isPlaying()) {
+      moveViewport();
       buf.beginDraw();
       if (drawCounter % 2 == frameToSkip) {
         BrushOne();      
@@ -125,7 +126,9 @@ void draw(){
     
       ps.run();
       ps.addParticle(mouseX,mouseY);       
-    }
+    } else {
+      image(getBufSlice(), 0, 0); 
+    }  
   
     if (drawCounter % 3 == 0) {
       prevOffsetX = copyOffsetX;
