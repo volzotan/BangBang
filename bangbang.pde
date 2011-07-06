@@ -1,4 +1,3 @@
-
 // Minim
 
 import ddf.minim.*;
@@ -79,12 +78,12 @@ int[] lastMousePosY = new int[30];
 
 
 void setup(){
-  size(800, 450);
+  size(800, 450, P2D);
   frameRate(30);
 
   bgCanvas = loadImage("bg_leinwand.jpg");
 
-  buf = createGraphics(8000, 900, JAVA2D);
+  buf = createGraphics(8000, 900, P2D);
   buf.beginDraw();
   buf.smooth();
   buf.background(bgCanvas);
