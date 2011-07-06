@@ -73,8 +73,8 @@ int mousePosY = 0;
 int[] lastMousePosX = new int[30];
 int[] lastMousePosY = new int[30];
 
-  // Particle System
-  ParticleSystem ps;
+// Particle System
+ParticleSystem ps;
 
 // setup
 boolean initialised = false, doClear = false;
@@ -113,7 +113,7 @@ void draw(){
   }
 
   if(!initialised) {
-    drawGUI();
+    drawGUI();  
   } else {  
     beat.detect(player.mix);
     //x = x + ((mouseX-x)/verfolgungsDaempfung);
@@ -144,8 +144,8 @@ void draw(){
    
       castEffect();
     }
-  ps.run();
-  ps.addParticle(mouseX,mouseY);    
+    ps.run();
+    ps.addParticle(mouseX,mouseY);    
   }
 
   println(frameRate + " at " + player.position());
