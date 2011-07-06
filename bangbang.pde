@@ -70,6 +70,14 @@ int angle = 0;
 // Experimental
 PImage scaledMiniMap;
 
+// Variablen zum Effektezeichnen
+
+int mousePosX = 0;
+int mousePosY = 0;
+int[] lastMousePosX = new int[30];
+int[] lastMousePosY = new int[30];
+
+
 void setup(){
   size(800, 450);
   frameRate(30);
@@ -122,7 +130,13 @@ void draw(){
    prevOffsetY = copyOffsetY;
  }
 
- // rect(350,175,100,100); // Schutzzone eingeblendet
+ if (drawCounter % 3 == 0 && player.isPlaying()) {
+   mousePosX = copyOffsetX + mouseX;
+   mousePosY = copyOffsetY + mouseY;
+   
+   castEffect();
+ }
+
  println(frameRate);
 }
 
@@ -163,6 +177,26 @@ void moveViewport(){
   
   copyOffsetX = xPosKoord;
   copyOffsetY = yPosKoord;
+}
+
+boolean testOnCanvasX(int xPosCoord) {
+    if(xPosKoord > buf.width - width) {
+      return false;
+    } else if(xPosKoord < 0) {
+      return false;
+   }
+   
+   return true;
+}
+
+boolean testOnCanvasY(int yPosCoord) {
+    if(yPosKoord > buf.height - height) {
+      return false;
+    } else if(yPosKoord < 0) {
+      return false;
+   }
+   
+   return true;
 }
 
 void drawVignette(){
@@ -221,3 +255,4 @@ void stop() {                                       // Minim Stop
   minim.stop();
   super.stop();
 }
+

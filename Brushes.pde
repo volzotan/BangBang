@@ -39,4 +39,10 @@ void BrushOne() {
   buf.fill(0,0,0,255);
   //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
   buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
+  
+  if(drawCounter % 1 == 0) {                                                                    // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
+    lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
+    lastMousePosY[drawCounter%30] = (int) y + copyOffsetY + (int) player.left.get(0) * 50;
+  }
 }
+
