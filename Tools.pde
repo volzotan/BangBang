@@ -61,6 +61,10 @@ void initCanvas(boolean useBGImage) {
   buf.endDraw();  
 }
 
+void initGUIImages() {
+  pauseImage = loadImage("pause.png");
+}  
+
 void initVignette() {
   vignette = loadImage("vignette.png");  
 }  
