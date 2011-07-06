@@ -20,28 +20,28 @@ PImage bufSlice;
 PGraphics buf;
 int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
 
-// Vignette / Hintergrund 
+// Vignette / Background image 
 PImage vignette, bgCanvas;
  
-// TODO, was macht das? 
-float x = 400, y = 225; // was macht das?
+// TODO, what is this good for?
+float x = 400, y = 225;
 
-// scroll protection: Pixelausdehnung um relativen Nullpunkt in alle Richtungen, 0 = deaktiviert
-int groesseSchutzzoneX = 0, groesseSchutzzoneY = 0;            // 0 = deaktiviert
+// Protected zone (rectangle) around the relative center in which scrolling doesn't happen, 0 = no such zone
+int groesseSchutzzoneX = 0, groesseSchutzzoneY = 0;
 
-// Dynamik; dampen mouse movements for brush following
+// dampen mouse movements for brush following
 float verfolgungsDaempfungX = 10, verfolgungsDaempfungY = 10;
 
 // automatic scrolling TODO wo besteht der unterschied zwischen diesen 3 (2) variablen?
 float scrollGeschwindigkeit = 10;
 int autoScrollX = 0, autoScrollY = 0;
-// Richtung; ohne Mauseinwirkung konstantes Scrollen nach Rechts
+// Direction; constant scrolling in any direction without any mouse movements
 float xRichtungsFaktor = 10, yRichtungsFaktor = 0;
   
 int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
 int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
-// Optimierung                        // funktioniert in dem bestimmte Operationen nur bei jedem 2.,3.,... draw() ausgeführt werden 
+// use this with % to execute functions at every nth draw execution
 int drawCounter = 0, frameToSkip = 0;
 
 // MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben  
@@ -101,7 +101,7 @@ void draw(){
   if(!initialised) {
     drawGUI();
   } else {  
-    controlP5.hide();
+    controlP56.hide()
     beat.detect(player.mix);
      
     x = x + (mouseX-x)/verfolgungsDaempfungX;
