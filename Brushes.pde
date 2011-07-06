@@ -1,7 +1,7 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
-void BrushOne() {
+void brushOne() {
   buf.noStroke();
   buf.fill(0,0,0,150); 
   angle += 10;
@@ -22,7 +22,7 @@ void BrushOne() {
 }
 
 // kontinuierliche linie
-void BrushTwo() {
+void brushTwo() {
   buf.stroke(0,0,0);
   buf.strokeWeight(5);     
   int pX = (pmouseX != mouseX) ? pmouseX : mouseX;

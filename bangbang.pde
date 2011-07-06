@@ -117,7 +117,7 @@ void draw(){
     if(player.isPlaying()) {
       moveViewport();
       buf.beginDraw();
-      if (drawCounter % 1 == 0) {
+      if (drawCounter % 2 == 0) {
         brushThree();      
       }
       if (drawCounter % 3 == 0) {
@@ -127,7 +127,7 @@ void draw(){
       buf.endDraw();
     
       ps.run();
-      ps.addParticle(mouseX,mouseY);
+      //ps.addParticle(mouseX,mouseY);
       drawVignette();
       drawMiniMap();      
     } else {
