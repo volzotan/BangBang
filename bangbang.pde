@@ -91,6 +91,9 @@ void setup(){
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
   
   ps = new ParticleSystem(1, new PVector(width/2,height/2,0));
+  
+  deltaMouseX = 470;
+  deltaMouseY = 450;
 }
 
 void draw(){
