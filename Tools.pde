@@ -62,7 +62,7 @@ void initCanvas(boolean useBGImage) {
 }
 
 void initGUIImages() {
-  pauseImage = loadImage("pause.png");
+  pauseImage = loadImage("pause_new.png");
 }  
 
 void initVignette() {

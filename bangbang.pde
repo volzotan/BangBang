@@ -3,6 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 controlP5;
+PImage playImage, pauseImage;
 
 // Minim
 import ddf.minim.*;
@@ -67,6 +68,7 @@ void setup(){
 
   initCanvas(true);
   initVignette();
+  initGUIImages();
   setupGUI();
  
   copyOffsetX = 0;
@@ -122,12 +124,13 @@ void draw(){
       buf.endDraw();
     
       ps.run();
-      ps.addParticle(mouseX,mouseY);       
+      ps.addParticle(mouseX,mouseY);
+      drawVignette();
+      drawMiniMap();      
     } else {
-      image(getBufSlice(), 0, 0); 
-    }
-    drawVignette();
-    drawMiniMap();  
+      image(getBufSlice(), 0, 0);
+      image(pauseImage, 0, 0);      
+    }  
   
     if (drawCounter % 3 == 0) {
       prevOffsetX = copyOffsetX;
