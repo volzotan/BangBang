@@ -24,18 +24,22 @@ int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffset
 // Vignette / Background image 
 PImage vignette, bgCanvas;
  
-// TODO, what is this good for?
-float x = 400, y = 225;
+// Viewport-Initialisierung / Viewport-Bewegungsvariablen
+float x = 400;
+float y = 225;          // Legt Position des Viewports bei Initialisierung fest
 
 // Protected zone (rectangle) around the relative center in which scrolling doesn't happen, 0 = no such zone
-int groesseSchutzzoneX = 0, groesseSchutzzoneY = 0;
+int groesseSchutzzoneX = 0; 
+int groesseSchutzzoneY = 0;
 
 // dampen mouse movements for brush following
-float verfolgungsDaempfungX = 10, verfolgungsDaempfungY = 10;
+float verfolgungsDaempfungX = 10;
+float verfolgungsDaempfungY = 10;
 
-// automatic scrolling TODO wo besteht der unterschied zwischen diesen 3 (2) variablen?
+// Global auto-scrolling value
 float scrollGeschwindigkeit = 10;
-int autoScrollX = 0, autoScrollY = 0;
+int autoScrollX = 0;
+int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
 float xRichtungsFaktor = 10, yRichtungsFaktor = 0;
   
@@ -43,7 +47,8 @@ int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
 int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
 // use this with % to execute functions at every nth draw execution
-int drawCounter = 0, frameToSkip = 0;
+int drawCounter = 0;
+int frameToSkip = 0;
 
 // MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben  
 int miniMapPosX = 0, miniMapPosY = 0;
