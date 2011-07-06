@@ -1,88 +1,115 @@
-class Particle {
-  Vec2D v,vD;
-  float dir,dirMod,speed;
-  int col,age,stateCnt,type;
-  
-  Particle() {
-    v=new Vec2D(0,0);
-    vD=new Vec2D(0,0);
-    age=0;
+// A class to describe a group of Particles
+// An ArrayList is used to manage the list of Particles 
+
+class ParticleSystem {
+
+  ArrayList particles;    // An arraylist for all the particles
+  PVector origin;        // An origin point for where particles are born
+
+  ParticleSystem(int num, PVector v) {
+    particles = new ArrayList();              // Initialize the arraylist
+    origin = v.get();                        // Store the origin point
+    for (int i = 0; i < num; i++) {
+      particles.add(new Particle(origin));    // Add "num" amount of particles to the arraylist
+    }
   }
 
-  void init(float _dir) {
-    dir=_dir;
-
-    float prob=random(100);
-    if(prob<80) age=15+int(random(30));
-    else if(prob<99) age=45+int(random(50));
-    else age=100+int(random(100));
-    
-    if(random(100)<80) speed=random(2)+0.5;
-    else speed=random(2)+2;
-
-    if(random(100)<80) dirMod=20;
-    else dirMod=60;
-    
-    v.set(mouseX+copyOffsetX,mouseY+copyOffsetY);
-    initMove();
-    dir=_dir;
-    stateCnt=10;
-    if(random(100)>50) col=0;
-    else col=1;
-    
-        type=(int)random(30000)%2;
-
-  }
-    
-  void initMove() {
-    if(random(100)>50) dirMod=-dirMod;
-    dir+=dirMod;
-    
-    vD.set(speed,0);
-    vD.rotate(radians(dir+90));
-
-    stateCnt=10+int(random(5));
-    if(random(100)>90) stateCnt+=30;
-  }
-  
-  void update() {
-    age--;
-    
-    if(age>=30) {
-      vD.rotate(radians(1));
-      vD.mult(1.01f);
-    }
-    
-    v.add(vD);
-    if(col==0) buf.fill(255-age,0,100,150);
-    else buf.fill(100,200-(age/2),255-age,150);
-    
-    if(type==1) {
-      if(col==0) buf.fill(255-age,100,0,150);
-      else buf.fill(255,200-(age/2),0,150);
-    }
-      
-    pushMatrix();
-    translate(v.x,v.y);
-    rotate(radians(dir));
-    buf.rect(copyOffsetX,+copyOffsetX,1,16);
-    popMatrix();
-    
-    if(age==0) {
-      if(random(100)>50) buf.fill(200,0,0,200);
-      else buf.fill(00,200,255,200);
-      float size=2+random(4);
-      if(random(100)>95) size+=5;
-      buf.ellipse(v.x+copyOffsetX,v.y+copyOffsetY,size,size);
-    }
-    if(v.x<0 || v.x>(width+copyOffsetX) || v.y<0 || v.y>(height+copyOffsetY)) age=0;
-    
-    if(age<30) {
-      stateCnt--;
-      if(stateCnt==0) {
-        initMove();
+  void run() {
+    // Cycle through the ArrayList backwards b/c we are deleting
+    for (int i = particles.size()-1; i >= 0; i--) {
+      Particle p = (Particle) particles.get(i);
+      p.run();
+      if (p.dead()) {
+        particles.remove(i);
       }
     }
-   } 
+  }
+
+  void addParticle() {
+    particles.add(new Particle(origin));
+  }
   
+    void addParticle(float x, float y) {
+    particles.add(new Particle(new PVector(x,y)));
+  }
+
+  void addParticle(Particle p) {
+    particles.add(p);
+  }
+
+  // A method to test if the particle system still has particles
+  boolean dead() {
+    if (particles.isEmpty()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+}
+
+// A simple Particle class
+class Particle {
+  PVector loc;
+  PVector vel;
+  PVector acc;
+  float r;
+  float timer;
+  
+  // Another constructor (the one we are using here)
+  Particle(PVector l) {
+    acc = new PVector(0,0.05,0);
+    vel = new PVector(random(-1,1),random(-2,0),0);
+    loc = l.get();
+    r = 10.0;
+    timer = 100.0;
+  }
+
+  void run() {
+    update();
+    render();
+  }
+
+  // Method to update location
+  void update() {
+    vel.add(acc);
+    loc.add(vel);
+    timer -= 1.0;
+  }
+
+  // Method to display
+  void render() {
+    ellipseMode(CENTER);
+    stroke(255,timer);
+    fill(100,timer);
+    ellipse(loc.x,loc.y,r,r);
+    displayVector(vel,loc.x,loc.y,10);
+  }
+  
+  // Is the particle still useful?
+  boolean dead() {
+    if (timer <= 0.0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+   void displayVector(PVector v, float x, float y, float scayl) {
+    pushMatrix();
+    float arrowsize = 4;
+    // Translate to location to render vector
+    translate(x,y);
+    stroke(255);
+    // Call vector heading function to get direction (note that pointing up is a heading of 0) and rotate
+    rotate(v.heading2D());
+    // Calculate length of vector & scale it to be bigger or smaller if necessary
+    float len = v.mag()*scayl;
+    // Draw three lines to make an arrow (draw pointing up since we've rotate to the proper direction)
+    line(0,0,len,0);
+    line(len,0,len-arrowsize,+arrowsize/2);
+    line(len,0,len-arrowsize,-arrowsize/2);
+    popMatrix();
+  } 
+
 }

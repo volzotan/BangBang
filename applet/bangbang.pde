@@ -1,82 +1,80 @@
+// controlP5
+import controlP5.*;
+
+// GUI
+ControlP5 controlP5;
+PImage playImage, pauseImage;
 
 // Minim
-
 import ddf.minim.*;
 import ddf.minim.signals.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*; 
  
-// Audio Player
+// Audio Player, Beat detection
 Minim minim;
 AudioPlayer player;
 BeatDetect beat;
 
- 
+// Canvas setup 
 PImage bufSlice;
 PGraphics buf;
-int copyOffsetX;
-int copyOffsetY;
-int copyWidth;
-int copyHeight;
+int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
 
-int prevOffsetX = 0;
-int prevOffsetY = 0;
+// Vignette / Background image 
+PImage vignette, bgCanvas;
  
+// Viewport-Initialisierung / Viewport-Bewegungsvariablen
 float x = 400;
-float y = 225;
+float y = 225;          // Legt Position des Viewports bei Initialisierung fest
 
-int groesseSchutzzoneX = 0;            // in Ausdehnung um relativen Nullpunkt in alle Richtungen
-int groesseSchutzzoneY = 0;            // 0 = deaktiviert
+// Protected zone (rectangle) around the relative center in which scrolling doesn't happen, 0 = no such zone
+int groesseSchutzzoneX = 0; 
+int groesseSchutzzoneY = 0;
 
-
-// Dynamik
+// dampen mouse movements for brush following
 float verfolgungsDaempfungX = 10;
 float verfolgungsDaempfungY = 10;
 
+// Global auto-scrolling value
 float scrollGeschwindigkeit = 10;
-
 int autoScrollX = 0;
 int autoScrollY = 0;
-
-
-// Optimierung                        // funktioniert in dem bestimme Operationen nur bei jedem 2.,3.,... draw() ausgeführt werden 
-int drawCounter = 0;
-int frameToSkip = 0;
-
-// Vignette
-PShape vignette;
-
-// Richtung
-
-  float xRichtungsFaktor = 10;
-  float yRichtungsFaktor = 0;        // ohne Mauseinwirkung konstantes Scrollen nach Rechts
+// Direction; constant scrolling in any direction without any mouse movements
+float xRichtungsFaktor = 10, yRichtungsFaktor = 0;
   
-  int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
-  int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
+int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
+int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
+// use this with % to execute functions at every nth draw execution
+int drawCounter = 0;
 
-// MiniMap
-
-int miniMapPosX = 0;                // Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17)
-int miniMapPosY = 0;                // wird aber sofort bei Programmstart überschrieben  
-
+// MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben  
+int miniMapPosX = 0, miniMapPosY = 0;
+PImage scaledMiniMap;
 
 // Brush
 int angle = 0;
 
+// Variablen zum Effektezeichnen TODO, wozu mousePosX doppelt? mouseX/mouseY sind global verfügbar?!
+int deltaMouseX = 0;
+int deltaMouseY = 450;
+int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 
-// Experimental
-PImage scaledMiniMap;
+// Particle System
+ParticleSystem ps;
+
+// setup
+boolean initialised = false, doClear = false;
 
 void setup(){
-  size(800, 450);
+  size(800, 450, JAVA2D);
   frameRate(30);
 
-  buf = createGraphics(8000, 900, JAVA2D);
-  buf.beginDraw();
-    buf.smooth();
-    buf.background(240);
-  buf.endDraw();
+  initCanvas(true);
+  initVignette();
+  initGUIImages();
+  setupGUI();
  
   copyOffsetX = 0;
   copyOffsetY = (buf.height - height) / 2;      // startet am linken äußeren Rand in der Mitte
@@ -86,124 +84,69 @@ void setup(){
   // load and instantiate audio player
   minim = new Minim(this);
   player = minim.loadFile("bangbang.mp3");
-  //beat = new BeatDetect();
-  player.play();
+  beat = new BeatDetect();
+  //player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
+  scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
+  
+  ps = new ParticleSystem(1, new PVector(width/2,height/2,0));
+  
+  deltaMouseX = 470;
+  deltaMouseY = 450;
 }
 
 void draw(){
-  //x = x + ((mouseX-x)/verfolgungsDaempfung);
- 
- x = x + (mouseX-x)/verfolgungsDaempfungX;
- y = y + (mouseY-y)/verfolgungsDaempfungY;
- drawCounter++;
-  
-  moveViewport();
-  
-  drawMiniMap();
-  
-  buf.beginDraw();
-  if (drawCounter % 2 == frameToSkip && player.isPlaying()) {
-    //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 5, 5);
-    BrushOne();
-    //println(player.position());
+  if(doClear) {
+    initCanvas(true);
+    doClear = false;
+    initialised = false;
+    player.pause();
+    player.rewind();
   }
-  buf.endDraw();
   
-  if (drawCounter % 3 == 0) {
-    prevOffsetX = copyOffsetX;
-    prevOffsetY = copyOffsetY;
+  if(!initialised) {
+    image(getBufSlice(), 0, 0);
+    drawVignette();
+    drawGUI();
+  } else {  
+    controlP5.hide();
+    beat.detect(player.mix);
+     
+    x = x + (mouseX-x)/verfolgungsDaempfungX;
+    y = y + (mouseY-y)/verfolgungsDaempfungY;
+    drawCounter++;
+      
+    if(player.isPlaying()) {
+      moveViewport();
+      buf.beginDraw();
+      if (drawCounter % 2 == 0) {
+        brushThree();      
+      }
+      if (drawCounter % 3 == 0) {
+   
+        castEffect();
+      }      
+      buf.endDraw();
+    
+      ps.run();
+      //ps.addParticle(mouseX,mouseY);
+      drawVignette();
+      drawMiniMap();      
+    } else {
+      image(getBufSlice(), 0, 0);
+      image(pauseImage, 0, 0);      
+    }  
+  
+    if (drawCounter % 3 == 0) {
+      prevOffsetX = copyOffsetX;
+      prevOffsetY = copyOffsetY;
+    }   
   }
 
-  // rect(350,175,100,100); // Schutzzone eingeblendet
-  println(frameRate);
+  println(frameRate + " at " + player.position());
 }
-
-void moveViewport(){ 
-  image(getBufSlice(), 0, 0);
-
-  float xPos = mouseX-width/2;  // xPos,yPos sind Koordinaten relativ zum Mittelpunkt
-  float yPos = mouseY-height/2;
   
-  if (drawCounter % 2 == 0) {
-    if ((abs(xPos) >  groesseSchutzzoneX ) || (abs(yPos) >  groesseSchutzzoneY )) {          // Schutzzone
-      
-      yPos = yPos * 1.7;        // "normalisiert" den Richtungsvektor den yPos darstellt
-      
-      xRichtungsFaktor = (xPos / (abs(xPos) + abs(yPos)));
-      yRichtungsFaktor = (yPos / (abs(xPos) + abs(yPos)));
-      
-    }
-  }
-
-  float xBeschleunigungsFaktor = xRichtungsFaktor * scrollGeschwindigkeit + autoScrollX;    // AutoScrolling unabhängig vom Beschleunigungsfaktor
-  float yBeschleunigungsFaktor = yRichtungsFaktor * scrollGeschwindigkeit + autoScrollY;
-  
-  xPosKoord = copyOffsetX + (int) xBeschleunigungsFaktor;
-  yPosKoord = copyOffsetY + (int) yBeschleunigungsFaktor;
-  
-  if(xPosKoord > buf.width - width) {
-      xPosKoord = buf.width - width;
-    } else if(xPosKoord < 0) {
-      xPosKoord = 0;
-   }
-  
-   if(yPosKoord > buf.height - height) {
-      yPosKoord = buf.height - height;
-    } else if(yPosKoord < 0) {
-      yPosKoord = 0;
-   }
-  
-  copyOffsetX = xPosKoord;
-  copyOffsetY = yPosKoord;
-}
-
-
-void drawMiniMap(){
- // rgb stroke black
- stroke(0,0,0);
- // stroke width 1 pixel
- strokeWeight(1);
- // rgb fill fully transparent
- fill(255,255,255,0);
- // minimap window position
- rect(629,9,162,20);                              // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2
- 
- if (drawCounter % 5 == 0) {
-   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-   scaledMiniMap.resize(0, 18);                    // resize-Wert ist buf.height/50
- }
- image(scaledMiniMap, 630, 10);                    
- 
- if (drawCounter % 3 == 0) {
-   miniMapPosX = calcMiniMapPosX() + 630;
-   miniMapPosY = calcMiniMapPosY() + 10;
- }
- 
- rect(miniMapPosX, miniMapPosY, 16, 9);
-}
-
-int calcMiniMapPosX() {
-  float diffX =  (copyOffsetX / (buf.width/100));  // Prozentualer Vorrückungsgrad
-  
-  float verschiebungX = 1.6 * diffX;                // Konstante ist buf.width/50/100
-  return (int) verschiebungX;
-}
-
-int calcMiniMapPosY() {
-  float diffY =  (copyOffsetY / (buf.height/100));  // Prozentualer Vorrückungsgrad
-  
-  float verschiebungY = 0.18 * diffY;              // Konstante ist buf.width/50/100
-  return (int) verschiebungY;
-}
-
-PImage getBufSlice() {
-  return buf.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
-}
-
-
 void stop() {                                       // Minim Stop
   player.close();
   minim.stop();
