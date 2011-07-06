@@ -73,10 +73,8 @@ int mousePosY = 0;
 int[] lastMousePosX = new int[30];
 int[] lastMousePosY = new int[30];
 
-// Abstract JS
-int num,cnt,px,py;
-Particle[] particles;
-float lastRelease=-1;
+  // Particle System
+  ParticleSystem ps;
 
 // setup
 boolean initialised = false, doClear = false;
@@ -102,14 +100,7 @@ void setup(){
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
   
-  //Abstract JS
-  cnt=0;
-  num=150;
-  particles=new Particle[num];
-  for(int i=0; i<num; i++) particles[i]=new Particle();
-
-  px=-1;
-  py=-1;  
+  ps = new ParticleSystem(1, new PVector(width/2,height/2,0));
 }
 
 void draw(){
@@ -153,6 +144,8 @@ void draw(){
    
       castEffect();
     }
+  ps.run();
+  ps.addParticle(mouseX,mouseY);    
   }
 
   println(frameRate + " at " + player.position());
