@@ -17,7 +17,6 @@ void castEffect() {
       if (pos < player.length() * 0.125) {
         // 0 - 12.5%
         happyBlackRectangle(5000);
-        BrushTwo();
       } else {
         // 12.5 - 25%
       }

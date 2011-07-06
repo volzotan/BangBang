@@ -1,30 +1,5 @@
-/**
- * Zu verwendende Parameter
- *   ?
- * Fehlende Implementierungen:
- *
- * Probleme:
- * Alle Zeichenanweisungen die außerhalb der Methoden unten 
- * stattfinden müssen Stroke, Fill, etc wieder auf einen Basiswert zurücksetzen
- */
- /*
-void drawBrush() {
-  drawBrush(0); 
-}  
- 
-void drawBrush(int BrushId) {
-  switch(BrushId) {
-    case 1: BrushOne();   break;  
-    case 2: BrushTwo();   break;  
-    case 3: BrushThree(); break;  
-    case 4: BrushFour();  break;  
-    case 5: BrushFive();  break;    
-    default: BrushOne();
-  }  
-}
-*/
 /** 
- * "Stempel" mit 5 Ellipsen im Pentagram
+ * "Stempel" mit 5 Ellipsen im Umkreis
  */
 void BrushOne() {
   buf.noStroke();
@@ -37,15 +12,16 @@ void BrushOne() {
     buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50, val + player.left.get(0) * 20, val + player.left.get(0) * 20);
   }
   buf.fill(0,0,0,255);
-  //buf.ellipse(x + copyOffsetX, y + copyOffsetY, 2 * player.left.get(0) * 50, 2 * player.right.get(0) * 50);
-  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2 /* * player.right.get(0) * 50*/ );
+  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2);
   
-  if(drawCounter % 1 == 0) {                                                                    // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
+  // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
+  if(drawCounter % 1 == 0) {                              
     lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY + (int) player.left.get(0) * 50;
   }
 }
 
+// kontinuierliche linie
 void BrushTwo() {
   buf.stroke(0,0,0);
   buf.strokeWeight(5);     

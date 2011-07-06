@@ -48,11 +48,7 @@ class ParticleSystem {
 
 }
 
-
-
-
 // A simple Particle class
-
 class Particle {
   PVector loc;
   PVector vel;
