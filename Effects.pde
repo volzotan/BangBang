@@ -48,22 +48,31 @@ void castEffect() {
       // 0 - 25%      
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
-        if((player.position() <  3050) && (player.position() > 1950) ||
-           (player.position() <  6050) && (player.position() > 4950)) 
+        // 1. udn 2. part gegenstimme
+        if((pos <  3050) && (pos > 1950) ||
+           (pos <  6050) && (pos > 4950)) 
         {
            brushOne(true); 
         }
-        tintenklecks(2300, 8);
-        tintenklecks(5200, 6.5);
       } else {
         // 12.5 - 25% // 5.998 - 11.996
-        if((player.position() < 10550) && (player.position() > 9750)) {
+        // 3. part gegenstimme
+        if((pos < 10550) && (pos > 9750)) {
           brushOne(true);
-        }  
-        ps.addParticle(x+copyOffsetX,y+copyOffsetY);
+        }
+        // general pause  
+        if((pos > 11850) && (pos > 10450)) {
+
+        }
+        // gesang
+        if(pos > 11850) {
+          ps.addParticle(x+copyOffsetX,y+copyOffsetY);
+        }        
       }
     } else {
       // 25 - 50%
+      // gesang
+      ps.addParticle(x+copyOffsetX,y+copyOffsetY);       
       if (pos < player.length() * 0.375) {
         // 25 - 37.5% // 11.997 - 17.994 
         
@@ -78,15 +87,31 @@ void castEffect() {
       // 50 - 75%
       if (pos < player.length() * 0.625) {
         // 50 - 62.5% // 23.993 - 29.990
+        tintenklecks(24000, 8);
+        tintenklecks(25000, 6.5);
+        tintenklecks(27000, 3);
+        tintenklecks(28000, 10);        
       } else {
         // 62.5 - 75% // 29.991 - 35.989
+        tintenklecks(30000, 1);
+        tintenklecks(31000, 11);   
+        tintenklecks(33000, 8);
+        tintenklecks(33900, 6.5);        
       }
     } else {
       // 75 - 100%
       if (pos < player.length() * 0.875) {
         // 75 - 87.5% // 35.990 - 41.987
+        tintenklecks(39000, 4);
+        tintenklecks(40000, 7);
+        if((pos > 40550)) {
+          brushOne(true);
+        }        
       } else {
         // 87.5 - 100% // 41.988 - 47.986
+        if((pos < 43350)) {
+          brushOne(true);
+        }        
       }
     }
   }

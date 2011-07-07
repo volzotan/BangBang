@@ -147,11 +147,17 @@ void draw(){
       ps.run();
       flock.run();
       drawVignette();
-      drawMiniMap(); 
+      drawMiniMap();       
       tempBrushValue *= 0.95;      
     } else {
-      image(getBufSlice(), 0, 0);
-      image(pauseImage, 0, 0);      
+      if (player.position() < 47986) {
+        image(getBufSlice(), 0, 0);
+        image(pauseImage, 0, 0);    
+      } else {
+        moveViewport();
+        drawVignette();
+        drawMiniMap();          
+      }     
     }  
   
     if (drawCounter % 3 == 0) {
