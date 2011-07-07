@@ -90,7 +90,7 @@ void setup(){
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
   
-  ps = new ParticleSystem(1, new PVector(width/2,height/2,0));
+  ps = new ParticleSystem(0, new PVector(width/2,height/2,0));
   
   deltaMouseX = 470;
   deltaMouseY = 450;
@@ -130,7 +130,6 @@ void draw(){
       buf.endDraw();
     
       ps.run();
-      ps.addParticle(mouseX,mouseY);
       drawVignette();
       drawMiniMap();      
     } else {

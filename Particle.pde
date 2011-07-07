@@ -29,7 +29,7 @@ class ParticleSystem {
     particles.add(new Particle(origin));
   }
   
-    void addParticle(float x, float y) {
+  void addParticle(float x, float y) {
     particles.add(new Particle(new PVector(x,y)));
   }
 
@@ -63,7 +63,9 @@ class Particle {
 
   void run() {
     update();
-    render();
+    if((int) timer % 6 == 0) {
+      render();
+    }
   }
 
   // Method to update location
@@ -76,10 +78,10 @@ class Particle {
   // Method to display
   void render() {
     ellipseMode(CENTER);
-    stroke(255,timer);
-    fill(100,timer);
-    ellipse(loc.x,loc.y,r,r);
-    displayVector(vel,loc.x,loc.y,10);
+    buf.stroke(0,timer);
+    buf.fill(0,timer);
+    buf.ellipse(loc.x,loc.y,r,r);
+    //displayVector(vel,loc.x,loc.y,10);
   }
   
   // Is the particle still useful?

@@ -20,6 +20,7 @@
 // 09,8 - 10,5 :: 2. Stimme
 
 // 10,5 - 11,8 :: General Pause
+
 // 11,8 - 24,0 :: Gesang
 // 24,0 - 25,0 :: BangBang
 // 25,0 - 25,2 :: Pause
@@ -52,6 +53,7 @@ void castEffect() {
         tintenklecks(5200);
       } else {
         // 12.5 - 25% // 5.998 - 11.996
+       ps.addParticle(x+copyOffsetX,y+copyOffsetY);
       }
     } else {
       // 25 - 50%
