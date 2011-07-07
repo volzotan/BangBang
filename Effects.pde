@@ -87,23 +87,23 @@ void castEffect() {
       // 50 - 75%
       if (pos < player.length() * 0.625) {
         // 50 - 62.5% // 23.993 - 29.990
-        tintenklecks(24000, 8);
-        tintenklecks(25000, 6.5);
-        tintenklecks(27000, 3);
-        tintenklecks(28000, 10);        
+        tintenklecks(24000,  8  , pos);
+        tintenklecks(25000,  6.5, pos);
+        tintenklecks(27000,  3  , pos);
+        tintenklecks(28000, 10  , pos);        
       } else {
         // 62.5 - 75% // 29.991 - 35.989
-        tintenklecks(30000, 1);
-        tintenklecks(31000, 11);   
-        tintenklecks(33000, 8);
-        tintenklecks(33900, 6.5);        
+        tintenklecks(30000,  1  , pos);
+        tintenklecks(31000, 11  , pos);   
+        tintenklecks(33000,  8  , pos);
+        tintenklecks(33900,  6.5, pos);        
       }
     } else {
       // 75 - 100%
       if (pos < player.length() * 0.875) {
         // 75 - 87.5% // 35.990 - 41.987
-        tintenklecks(39000, 4);
-        tintenklecks(40000, 7);
+        tintenklecks(39000,  4  , pos);
+        tintenklecks(40000,  7  , pos);
         if((pos > 40550)) {
           brushOne(true);
         }        
@@ -126,9 +126,10 @@ void happyBlackRectangle(int time) {
   }
 } 
 
-void tintenklecks(int time, float size) {
-  if ((player.position() < time + 165) && (player.position() > time - 165)) {
-    buf.shape(klecks, copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 112 * size, 100 * size);
+void tintenklecks(int time, float size, int pos) {
+  if ((pos < time + 165) && (pos > time - 165)) {
+    int r = floor(random(0,8.5));
+    buf.shape(kleckse[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1));
   }
 } 
 

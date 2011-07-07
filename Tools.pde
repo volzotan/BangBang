@@ -64,7 +64,9 @@ void initCanvas(boolean useBGImage) {
 void initImages() {
   pauseImage = loadImage("pause_new.png");
   playImage = loadImage("play_new.png");
-  klecks = loadShape("klecks.svg");
+  for(int i = 0; i < 9; i++) {
+    kleckse[i] = loadShape("klecks_"+i+".svg");
+  }  
 }  
 
 void initVignette() {

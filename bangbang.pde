@@ -4,7 +4,7 @@ import controlP5.*;
 // GUI
 ControlP5 controlP5;
 PImage playImage, pauseImage;
-PShape klecks;
+PShape kleckse[] = new PShape[9];
 
 // Minim
 import ddf.minim.*;
@@ -38,7 +38,7 @@ float verfolgungsDaempfungX = 10;
 float verfolgungsDaempfungY = 10;
 
 // Global auto-scrolling value
-float scrollGeschwindigkeit = 10;
+float scrollGeschwindigkeit = 5;
 int autoScrollX = 0;
 int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
@@ -171,7 +171,7 @@ void draw(){
     lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
   }
-  println(frameRate + " at " + player.position());
+  //println(frameRate + " at " + player.position());
 }
   
 void stop() {                                       // Minim Stop
