@@ -49,8 +49,8 @@ void castEffect() {
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
         
-        tintenklecks(2300);
-        tintenklecks(5200);
+        tintenklecks(2300, 8);
+        tintenklecks(5200, 6.5);
       } else {
         // 12.5 - 25% // 5.998 - 11.996
        ps.addParticle(x+copyOffsetX,y+copyOffsetY);
@@ -93,8 +93,8 @@ void happyBlackRectangle(int time) {
   }
 } 
 
-void tintenklecks(int time) {
+void tintenklecks(int time, float size) {
   if ((player.position() < time + 165) && (player.position() > time - 165)) {
-    buf.shape(klecks, copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1));
+    buf.shape(klecks, copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 112 * size, 100 * size);
   }
 } 
