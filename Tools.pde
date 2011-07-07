@@ -64,7 +64,7 @@ void initCanvas(boolean useBGImage) {
 void initImages() {
   pauseImage = loadImage("pause_new.png");
   playImage = loadImage("play_new.png");
-  for(int i = 0; i < 12; i++) {
+  for(int i = 0; i < 8; i++) {
     inkSplatter[i] = loadImage("klecks_"+i+".png");
   }  
 }  

@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 controlP5;
-PImage playImage, pauseImage, inkSplatter[] = new PImage[12];
+PImage playImage, pauseImage, inkSplatter[] = new PImage[8];
 PShape kleckse[] = new PShape[9];
 
 // Minim
