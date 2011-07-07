@@ -38,7 +38,7 @@ float verfolgungsDaempfungX = 10;
 float verfolgungsDaempfungY = 10;
 
 // Global auto-scrolling value
-float scrollGeschwindigkeit = 10;
+float scrollGeschwindigkeit = 20;
 int autoScrollX = 0;
 int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
