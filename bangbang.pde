@@ -91,7 +91,7 @@ void setup(){
   
   // load and instantiate audio player
   minim = new Minim(this);
-  player = minim.loadFile("bangbang.mp3");
+  player = minim.loadFile("BettyChungBangBang.mp3");
   beat = new BeatDetect();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);

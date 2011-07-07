@@ -36,6 +36,8 @@ void keyReleased() {
       player.pause();
     } else if(initialised && player.position() < 47986) {
       player.play();
+    } else if(!initialised) {
+      Play(0);
     }  
   }
 }
