@@ -59,6 +59,8 @@ void castEffect() {
       // 25 - 50%
       if (pos < player.length() * 0.375) {
         // 25 - 37.5% // 11.997 - 17.994 
+        
+        //initFlock(3);
       } else {
         // 37.5 - 50% // 17.995 - 23.992
       }
@@ -78,7 +80,6 @@ void castEffect() {
         // 75 - 87.5% // 35.990 - 41.987
       } else {
         // 87.5 - 100% // 41.988 - 47.986
-        initFlock(3);
       }
     }
   }
@@ -102,7 +103,7 @@ void tintenklecks(int time, float size) {
 void initFlock(int amount) {
   for (int j = 0; j < 10; j++) {
     for (int i = 0; i < amount; i++) {
-      flock.addBoid(new Boid(new PVector(lastMousePosX[j*3],lastMousePosY[j*3]), 3.0, 0.05));
+      flock.addBoid(new Boid(new PVector(lastMousePosX[j*3], lastMousePosY[j*3]), 3.0, 0.05));
     }  
   }
 }  
