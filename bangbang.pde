@@ -55,7 +55,7 @@ int miniMapPosX = 0, miniMapPosY = 0;
 PImage scaledMiniMap;
 
 // Brush
-int angle = 0;
+int angle = 0, tempBrushValue;
 
 // Variablen zur Kontrolle des Brushes
 int deltaMouseX = 0;
@@ -121,7 +121,10 @@ void draw(){
   } else {  
     controlP5.hide();
     beat.detect(player.mix);
-     
+    if(beat.isOnset()) {
+       tempBrushValue = 80; 
+    }
+           
     x = x + (mouseX-x)/verfolgungsDaempfungX;
     y = y + (mouseY-y)/verfolgungsDaempfungY;
     drawCounter++;
@@ -144,7 +147,8 @@ void draw(){
       ps.run();
       flock.run();
       drawVignette();
-      drawMiniMap();      
+      drawMiniMap(); 
+      tempBrushValue *= 0.95;      
     } else {
       image(getBufSlice(), 0, 0);
       image(pauseImage, 0, 0);      

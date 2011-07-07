@@ -38,8 +38,8 @@ void brushTwo() {
 }
 
 void brushThree() {
-  buf.stroke(0,0,0);
-  buf.strokeWeight(5); 
+  buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
+  buf.strokeWeight(5+tempBrushValue*0.13); 
   
   float verhaeltnisSumme = x + copyOffsetX - directionArrayX[drawCounter%10] + y + copyOffsetY - directionArrayY[drawCounter%10];
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
