@@ -65,6 +65,11 @@ int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 // Particle System
 ParticleSystem ps;
 
+
+// EXPERIMENTAL
+int[] directionArrayX = new int[10];
+int[] directionArrayY = new int[10];
+
 // setup
 boolean initialised = false, doClear = false;
 
@@ -123,6 +128,10 @@ void draw(){
       if (drawCounter % 1 == 0) {
         brushThree();      
       }
+      
+      directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
+      directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;
+      
       if (drawCounter % 3 == 0) {
    
         castEffect();

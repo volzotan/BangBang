@@ -36,6 +36,12 @@ void brushThree() {
   int test = (int) (y + copyOffsetY + player.left.get(0) * 70);
   buf.line(x + copyOffsetX, test, deltaMouseX, deltaMouseY);
   
+  if (drawCounter % 10 == 0) {
+    buf.strokeWeight(1); 
+    buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, test);
+  }
+ 
+  
   deltaMouseX = (int) x + copyOffsetX;
   deltaMouseY = test;
 }
