@@ -45,7 +45,7 @@ void castEffect() {
   if (pos < player.length() * 0.5) {
     // 0 - 50%
     if (pos < player.length() * 0.25) {
-      // 0 - 25%
+      // 0 - 25%      
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
         
@@ -78,11 +78,11 @@ void castEffect() {
         // 75 - 87.5% // 35.990 - 41.987
       } else {
         // 87.5 - 100% // 41.988 - 47.986
+        initFlock(30);
       }
     }
   }
 }
-
 
 
 void happyBlackRectangle(int time) {
@@ -98,3 +98,9 @@ void tintenklecks(int time, float size) {
     buf.shape(klecks, copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 112 * size, 100 * size);
   }
 } 
+
+void initFlock(int amount) {
+  for (int i = 0; i < amount; i++) {
+    flock.addBoid(new Boid(new PVector(width/2,height/2), 3.0, 0.05));
+  }  
+}  

@@ -65,6 +65,8 @@ int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 // Particle System
 ParticleSystem ps;
 
+// Bird flock
+Flock flock;
 
 // EXPERIMENTAL
 int[] directionArrayX = new int[10];
@@ -96,6 +98,8 @@ void setup(){
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
   
   ps = new ParticleSystem(0, new PVector(width/2,height/2,0));
+  flock = new Flock();
+  boolean initFlock = false;
   
   deltaMouseX = 470;
   deltaMouseY = 450;
@@ -139,6 +143,7 @@ void draw(){
       buf.endDraw();
     
       ps.run();
+      flock.run();
       drawVignette();
       drawMiniMap();      
     } else {
