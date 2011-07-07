@@ -1,6 +1,5 @@
 // gui instanz und buttons erstellen
 void setupGUI(){
-  doStart = true;
   controlP5 = new ControlP5(this);
   controlP5.addButton("Play",0,(int) width/2-100,(int) height/2-100,200,200);
   controlP5.setColorActive(color(255,255,255,0));

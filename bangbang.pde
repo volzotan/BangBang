@@ -65,7 +65,7 @@ int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 ParticleSystem ps;
 
 // setup
-boolean initialised = false, doClear = false, doStart = false;
+boolean initialised = false, doClear = false;
 
 void setup(){
   size(800, 450, JAVA2D);
@@ -100,7 +100,6 @@ void draw(){
   if(doClear) {
     initCanvas(true);
     doClear = false;
-    doStart = true;
     initialised = false;
     player.pause();
     player.rewind();
@@ -108,10 +107,10 @@ void draw(){
   
   if(!initialised) {
     image(getBufSlice(), 0, 0);
+    image(playImage, 0, 0);
     drawGUI();
   } else {  
     controlP5.hide();
-    doStart = false;
     beat.detect(player.mix);
      
     x = x + (mouseX-x)/verfolgungsDaempfungX;
@@ -144,11 +143,12 @@ void draw(){
       prevOffsetY = copyOffsetY;
     }   
   }
-  
-  if (doStart) {
-    image(playImage, 0, 0);
-  }
 
+  // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
+  if(drawCounter % 1 == 0) {                              
+    lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
+    lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
+  }
   println(frameRate + " at " + player.position());
 }
   

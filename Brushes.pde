@@ -13,27 +13,20 @@ void brushOne() {
   }
   buf.fill(0,0,0,255);
   buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50, 2 , 2);
-  
-  // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
-  if(drawCounter % 1 == 0) {                              
-    lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
-    lastMousePosY[drawCounter%30] = (int) y + copyOffsetY + (int) player.left.get(0) * 50;
-  }
 }
 
 // kontinuierliche linie
 void brushTwo() {
   buf.stroke(0,0,0);
   buf.strokeWeight(5);     
-  int pX = (pmouseX != mouseX) ? pmouseX : mouseX;
-  int pY = (pmouseY != mouseY) ? pmouseY : mouseY;
-  buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pX + prevOffsetX, pY + prevOffsetY);
+  buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pmouseX + prevOffsetX, pmouseY + prevOffsetY);
 }
 
 void brushThree() {
+  buf.stroke(0,0,0);
+  buf.strokeWeight(5); 
   buf.line(x + copyOffsetX, y + copyOffsetY, deltaMouseX, deltaMouseY);
   
-
   deltaMouseX = (int) x + copyOffsetX;
   deltaMouseY = (int) y + copyOffsetY;
 }

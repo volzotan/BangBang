@@ -6,7 +6,32 @@
   */
   
   
-//kommentier mal wer die entsprechenden Sekunden von unserer Aufstellung hier rein!
+// Effect ranges
+//
+// 00,0 - 02,0 :: 1. Stimme
+// 02,0 - 03,0 :: 2. Stimme
+// 03,0 - 05,0 :: 1. Stimme
+// 05,0 - 06,0 :: 2. Stimme
+// 06,0 - 09,8 :: 1. Stimme
+// 09,8 - 10,5 :: 2. Stimme
+
+// 10,5 - 11,8 :: General Pause
+// 11,8 - 24,0 :: Gesang
+// 24,0 - 25,0 :: BangBang
+// 25,0 - 25,2 :: Pause
+// 25,2 - 27,0 :: Gesang
+// 27,0 - 28,0 :: BangBang
+// 28,0 - 28,2 :: Pause
+// 28,2 - 30,2 :: Gesang
+// 30,2 - 31,0 :: BangBang
+// 31,0 - 33,0 :: Gesang
+// 33,0 - 33,9 :: BangBang
+// 33,9 - 39,0 :: Gesang
+// 39,0 - 40,1 :: BangBang
+// 40,1 - 40,6 :: Pause
+
+// 40,6 - 43,3 :: Muster 1
+// 43,3 - 47,5 :: Ende
 void castEffect() {
   int pos = player.position();
   
