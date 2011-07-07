@@ -86,7 +86,6 @@ void setup(){
   minim = new Minim(this);
   player = minim.loadFile("bangbang.mp3");
   beat = new BeatDetect();
-  //player.play();
 
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
@@ -131,7 +130,7 @@ void draw(){
       buf.endDraw();
     
       ps.run();
-      //ps.addParticle(mouseX,mouseY);
+      ps.addParticle(mouseX,mouseY);
       drawVignette();
       drawMiniMap();      
     } else {

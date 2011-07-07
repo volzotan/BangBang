@@ -39,11 +39,7 @@ class ParticleSystem {
 
   // A method to test if the particle system still has particles
   boolean dead() {
-    if (particles.isEmpty()) {
-      return true;
-    } else {
-      return false;
-    }
+    return particles.isEmpty();
   }
 
 }
