@@ -100,6 +100,7 @@ void draw(){
   if(doClear) {
     initCanvas(true);
     doClear = false;
+    doStart = true;
     initialised = false;
     player.pause();
     player.rewind();
