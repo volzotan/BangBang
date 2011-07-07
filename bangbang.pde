@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 controlP5;
-PImage playImage, pauseImage;
+PImage playImage, pauseImage, inkSplatter[] = new PImage[12];
 PShape kleckse[] = new PShape[9];
 
 // Minim
@@ -97,7 +97,7 @@ void setup(){
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
   
-  ps = new ParticleSystem(0, new PVector(width/2,height/2,0));
+  //ps = new ParticleSystem(0, new PVector(width/2,height/2,0));
   flock = new Flock();
   boolean initFlock = false;
   
@@ -144,7 +144,7 @@ void draw(){
       }      
       buf.endDraw();
     
-      ps.run();
+      //ps.run();
       flock.run();
       drawVignette();
       drawMiniMap();       

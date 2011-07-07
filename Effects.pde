@@ -66,13 +66,13 @@ void castEffect() {
         }
         // gesang
         if(pos > 11850) {
-          ps.addParticle(x+copyOffsetX,y+copyOffsetY);
+          //ps.addParticle(x+copyOffsetX,y+copyOffsetY);
         }        
       }
     } else {
       // 25 - 50%
       // gesang
-      ps.addParticle(x+copyOffsetX,y+copyOffsetY);       
+      //ps.addParticle(x+copyOffsetX,y+copyOffsetY);       
       if (pos < player.length() * 0.375) {
         // 25 - 37.5% // 11.997 - 17.994 
         
@@ -129,7 +129,7 @@ void happyBlackRectangle(int time) {
 void tintenklecks(int time, float size, int pos) {
   if ((pos < time + 165) && (pos > time - 165)) {
     int r = floor(random(0,8.5));
-    buf.shape(kleckse[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1));
+    buf.image(inkSplatter[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 50*size, 50*size);
   }
 } 
 
