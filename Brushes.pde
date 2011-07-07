@@ -49,6 +49,12 @@ void brushThree() {
   int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 50));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
   
+  if (drawCounter % 10 == 0) {
+  buf.stroke(1);
+  buf.strokeWeight(1);
+  buf.stroke(254,0,0);
+  buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, y + copyOffsetY);
+  }
   /*
   if (drawCounter % 10 == 0) {
     buf.strokeWeight(1); 
