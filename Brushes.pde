@@ -32,16 +32,22 @@ void brushTwo() {
 void brushThree() {
   buf.stroke(0,0,0);
   buf.strokeWeight(5); 
-
-  int test = (int) (y + copyOffsetY + player.left.get(0) * 70);
-  buf.line(x + copyOffsetX, test, deltaMouseX, deltaMouseY);
   
+  float verhaeltnisSumme = directionArrayX[drawCounter%10] + directionArrayY[drawCounter%10];
+  float verhaeltnisX = directionArrayX[drawCounter%10] / verhaeltnisSumme;
+  float verhaeltnisY = directionArrayY[drawCounter%10] / verhaeltnisSumme;
+  
+  int oldX = (int) (x + copyOffsetX + verhaeltnisX * (player.left.get(0) * 90));
+  int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 90));
+  buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
+  
+  /*
   if (drawCounter % 10 == 0) {
     buf.strokeWeight(1); 
     buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, test);
   }
- 
+ */
   
-  deltaMouseX = (int) x + copyOffsetX;
-  deltaMouseY = test;
+  deltaMouseX = oldX;
+  deltaMouseY = oldY;
 }
