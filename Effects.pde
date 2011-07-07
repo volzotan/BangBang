@@ -3,6 +3,10 @@
   * + boolean testOnCanvasX(int zuTestendeKoordinate) gibt an ob 
   *   eine Koordinate die vollgezeichnet werden soll sich auf der Zeichenflaeche befindet
   * + lastMousePosX[0-29] gibt vorherige absolute Mausposition aus
+  *
+  *  bei einer Mindestframerate von 24 wird durchschnittliche alle 42ms ein draw gezeichnet
+  *  bei jedem zweiten draw ein brush() bedeutet eine Ausführung alle 82ms. Zur Sicherheit
+  *  das doppelte Intervall bei der Positionsüberprüfung berücksichtigen
   */
   
   
@@ -42,7 +46,8 @@ void castEffect() {
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
         
-        //happyBlackRectangle(5000);
+        tintenklecks(2300);
+        tintenklecks(5200);
       } else {
         // 12.5 - 25% // 5.998 - 11.996
       }
@@ -80,5 +85,13 @@ void happyBlackRectangle(int time) {
     for (int i = 0; i<30; i++) {
       buf.rect(lastMousePosX[i], lastMousePosY[i], 10, 10);
     }
+  }
+} 
+
+void tintenklecks(int time) {
+  if ((player.position() < time + 165) && (player.position() > time - 165)) {
+    PShape klecks;
+    klecks = loadShape("klecks.svg");
+    buf.shape(klecks, copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1));
   }
 } 
