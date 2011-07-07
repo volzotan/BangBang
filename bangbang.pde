@@ -4,6 +4,7 @@ import controlP5.*;
 // GUI
 ControlP5 controlP5;
 PImage playImage, pauseImage;
+PShape klecks;
 
 // Minim
 import ddf.minim.*;
@@ -73,7 +74,7 @@ void setup(){
 
   initCanvas(true);
   initVignette();
-  initGUIImages();
+  initImages();
   setupGUI();
  
   copyOffsetX = 0;

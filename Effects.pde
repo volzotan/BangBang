@@ -93,8 +93,6 @@ void happyBlackRectangle(int time) {
 
 void tintenklecks(int time) {
   if ((player.position() < time + 165) && (player.position() > time - 165)) {
-    PShape klecks;
-    klecks = loadShape("klecks.svg");
     buf.shape(klecks, copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1));
   }
 } 

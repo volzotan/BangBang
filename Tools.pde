@@ -61,9 +61,10 @@ void initCanvas(boolean useBGImage) {
   buf.endDraw();  
 }
 
-void initGUIImages() {
+void initImages() {
   pauseImage = loadImage("pause_new.png");
   playImage = loadImage("play_new.png");
+  klecks = loadShape("klecks.svg");
 }  
 
 void initVignette() {
