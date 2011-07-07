@@ -29,7 +29,8 @@ public void Play(int theValue) {
 // space = play/pause => icon einblenden?
 // ???
 void keyReleased() {
-  if ('r' == key  || 'R' == key) { doClear = true; }
+  if ('r' == key || 'R' == key) { doClear = true; }
+  if ('s' == key || 'S' == key) { buf.save(timestamp() +".png"); }
   if (' ' == key) { 
     if(player.isPlaying()) {
       player.pause();
