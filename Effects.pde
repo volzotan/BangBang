@@ -36,6 +36,8 @@
 
 // 40,6 - 43,3 :: Muster 1
 // 43,3 - 47,5 :: Ende
+
+
 void castEffect() {
   int pos = player.position();
   
@@ -76,9 +78,10 @@ void castEffect() {
         // 87.5 - 100% // 41.988 - 47.986
       }
     }
-    
   }
 }
+
+
 
 void happyBlackRectangle(int time) {
   if ((player.position() < time + 300) && (player.position() > time - 300)) {
