@@ -14,7 +14,7 @@ int calcMiniMapPosY() {
 
 void drawMiniMap(){
   // rgb stroke black
-  stroke(0,0,0,90);
+  stroke(0,0,0);
   // stroke width 1 pixel
   strokeWeight(1);
   // rgb fill fully transparent
@@ -36,7 +36,7 @@ void drawMiniMap(){
   }
  
   // rgb stroke black
-  stroke(0,0,0); 
+  stroke(0,0,0,0); 
   rect(miniMapPosX, miniMapPosY, 16, 9);
 }
 
@@ -63,6 +63,7 @@ void initCanvas(boolean useBGImage) {
 
 void initGUIImages() {
   pauseImage = loadImage("pause_new.png");
+  playImage = loadImage("play_new.png");
 }  
 
 void initVignette() {

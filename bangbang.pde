@@ -65,7 +65,7 @@ int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 ParticleSystem ps;
 
 // setup
-boolean initialised = false, doClear = false;
+boolean initialised = false, doClear = false, doStart = false;
 
 void setup(){
   size(800, 450, JAVA2D);
@@ -107,10 +107,10 @@ void draw(){
   
   if(!initialised) {
     image(getBufSlice(), 0, 0);
-    drawVignette();
     drawGUI();
   } else {  
     controlP5.hide();
+    doStart = false;
     beat.detect(player.mix);
      
     x = x + (mouseX-x)/verfolgungsDaempfungX;
@@ -142,6 +142,10 @@ void draw(){
       prevOffsetX = copyOffsetX;
       prevOffsetY = copyOffsetY;
     }   
+  }
+  
+  if (doStart) {
+    image(playImage, 0, 0);
   }
 
   println(frameRate + " at " + player.position());
