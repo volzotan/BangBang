@@ -126,7 +126,7 @@ void draw(){
     y = y + (mouseY-y)/verfolgungsDaempfungY;
     drawCounter++;
       
-    if(player.isPlaying()) {
+    if(player.isPlaying() && player.position() < 47986) {
       moveViewport();
       buf.beginDraw();
       if (drawCounter % 1 == 0) {

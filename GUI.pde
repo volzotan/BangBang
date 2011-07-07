@@ -34,7 +34,7 @@ void keyReleased() {
   if (' ' == key) { 
     if(player.isPlaying()) {
       player.pause();
-    } else if(initialised && player.position() < player.length()) {
+    } else if(initialised && player.position() < 47986) {
       player.play();
     }  
   }
