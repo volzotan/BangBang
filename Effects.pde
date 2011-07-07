@@ -48,12 +48,19 @@ void castEffect() {
       // 0 - 25%      
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
-        
+        if((player.position() <  3050) && (player.position() > 1950) ||
+           (player.position() <  6050) && (player.position() > 4950)) 
+        {
+           brushOne(true); 
+        }
         tintenklecks(2300, 8);
         tintenklecks(5200, 6.5);
       } else {
         // 12.5 - 25% // 5.998 - 11.996
-       ps.addParticle(x+copyOffsetX,y+copyOffsetY);
+        if((player.position() < 10550) && (player.position() > 9750)) {
+          brushOne(true);
+        }  
+        ps.addParticle(x+copyOffsetX,y+copyOffsetY);
       }
     } else {
       // 25 - 50%

@@ -129,10 +129,9 @@ void draw(){
     if(player.isPlaying() && player.position() < 47986) {
       moveViewport();
       buf.beginDraw();
-      if (drawCounter % 1 == 0) {
-        brushThree();      
-      }
-      
+      if (drawCounter % 1 == 0) {        
+        brushThree();
+      }      
       directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
       directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;
       
