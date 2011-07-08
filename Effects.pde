@@ -140,7 +140,45 @@ void happyBlackRectangle(int time) {
 void tintenklecks(int time, float size, int pos) {
   if ((pos < time + 41) && (pos > time - 41)) {
     int r = floor(random(0,7.5));
-    buf.image(inkSplatter[r], copyOffsetX + x + 100 * random(-2,+2), copyOffsetY + y + 100 * random(-2,+2), 25*size, 25*size);
+    
+    int p = floor(random(0,3.5));
+    while(p == inkSplatterPos) {
+      p = floor(random(0,3.5));
+    }  
+    
+    float xPos = copyOffsetX + x + 100 * random(-2,+2), yPos = copyOffsetY + y + 100 * random(-2,+2);    
+    
+     // left side :: x position
+    if(1 == p || 2 == p) {
+        if(xPos < copyOffsetX || xPos > (width/2 + copyOffsetX)) {
+           xPos = width/4 + random(-width/6,width/6) + copyOffsetX;
+        }      
+    }  
+
+    // right side :: x position
+    if(0 == p || 3 == p) {        
+        if(xPos < (copyOffsetX+width/2) || xPos > (width + copyOffsetX)) {
+           xPos = (width*3)/4 + random(-width/6,width/6) + copyOffsetX;
+        }      
+    } 
+    
+    // top side :: y position
+    if(1 == p || 0 == p) {
+        if(yPos < copyOffsetY || yPos > (height/2 + copyOffsetY)) {
+           yPos = height/4 + random(-height/6,height/6) + copyOffsetY;
+        }      
+    }  
+    
+    // bottom side :: y position
+    if(2 == p || 3 == p) {        
+        if(yPos < (copyOffsetY+height/2) || yPos > (height + copyOffsetY)) {
+           yPos = (height*3)/4 + random(-height/6,height/6) + copyOffsetY;
+        }      
+    }
+     
+    
+    buf.image(inkSplatter[r], xPos, yPos, 25*size, 25*size);
+    inkSplatterPos = p;
   }
 } 
 

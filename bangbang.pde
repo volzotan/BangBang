@@ -66,6 +66,8 @@ int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 int pos = 0;
 // ink splatter array
 PImage inkSplatter[] = new PImage[8];
+// last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
+int inkSplatterPos = 0;
 // Bird flock
 Flock flock;
 
