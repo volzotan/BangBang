@@ -2,8 +2,6 @@
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
 void brushOne(boolean useOffset, boolean drawHuge) {
-  buf.noStroke();
-  buf.fill(0,0,0,150);
   float extraOffset = 0;
   if(useOffset) {
      if(random(1) < 0.5) {
@@ -17,8 +15,8 @@ void brushOne(boolean useOffset, boolean drawHuge) {
   int alpha1 = 150, alpha2 = 255;
   if(drawHuge) {
     size1 = 250;
-    size2 = 285;
-    spacing = 45;
+    size2 = 325;
+    spacing = 35;
     alpha1 = 50;
     alpha2 = 60;
   }  
@@ -26,15 +24,18 @@ void brushOne(boolean useOffset, boolean drawHuge) {
   buf.noStroke();
   buf.fill(0,0,0,alpha1);  
 
+  buf.noStroke();
+  buf.fill(0,0,0,alpha1);
+
   angle += 10;
   float val = cos(radians(angle)) * 10.0;
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
-    float xoff = cos(radians(a)) * val;
-    float yoff = sin(radians(a)) * val;    
-    buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50+extraOffset, val + player.left.get(0) * 20, val + player.left.get(0) * 20);
+    float xoff = cos(radians(a)) * val * spacing;
+    float yoff = sin(radians(a)) * val * spacing;    
+    buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50+extraOffset, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
   }
-  buf.fill(0,0,0,255);
-  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50+extraOffset, 2 , 2);
+  buf.fill(0,0,0,alpha2);
+  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50+extraOffset, 2 + size2 , 2 + size2);
 
   // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
   if(drawCounter % 1 == 0) {                              

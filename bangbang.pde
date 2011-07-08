@@ -149,8 +149,7 @@ void draw(){
       directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
       directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;
       
-      if (drawCounter % 3 == 0) {
-   
+      if (drawCounter % 2 == 0) {
         castEffect();
       }      
       buf.endDraw();
