@@ -37,14 +37,14 @@ float verfolgungsDaempfungX = 10;
 float verfolgungsDaempfungY = 10;
 
 // Global auto-scrolling value
-float scrollGeschwindigkeit = 10;
+float scrollGeschwindigkeit = 6;
 int autoScrollX = 0;
 int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
 float xRichtungsFaktor = 10, yRichtungsFaktor = 0;
   
-int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
-int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
+int xPosKoord = copyOffsetX + (int) xRichtungsFaktor; // TODO Comment!
+int yPosKoord = copyOffsetY + (int) yRichtungsFaktor; // TODO Comment!
 
 // use this with % to execute functions at every nth draw execution
 int drawCounter = 0;
