@@ -12,6 +12,23 @@ void brushOne(boolean useOffset) {
         extraOffset = 52+30*player.right.get(0);
      }  
   }  
+<<<<<<< HEAD
+=======
+  
+  float size1 = 0, size2 = 0, spacing = 1;
+  int alpha1 = 150, alpha2 = 255;
+  if(drawHuge) {
+    size1 = 250;
+    size2 = 285;
+    spacing = 45;
+    alpha1 = 50;
+    alpha2 = 60;
+  }  
+  
+  buf.noStroke();
+  buf.fill(0,0,0,alpha1);  
+  
+>>>>>>> ink splatter position optimized, large flower pattern optimized
   angle += 10;
   float val = cos(radians(angle)) * 10.0;
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster

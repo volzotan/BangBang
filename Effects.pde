@@ -140,7 +140,7 @@ void happyBlackRectangle(int time) {
 void tintenklecks(int time, float size, int pos) {
   if ((pos < time + 41) && (pos > time - 41)) {
     int r = floor(random(0,7.5));
-    buf.image(inkSplatter[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 25*size, 25*size);
+    buf.image(inkSplatter[r], copyOffsetX + x + 100 * random(-2,+2), copyOffsetY + y + 100 * random(-2,+2), 25*size, 25*size);
   }
 } 
 
