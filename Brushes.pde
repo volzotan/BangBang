@@ -52,7 +52,7 @@ void brushThree() {
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;
   */
   
-  float verhaeltnisSumme = x + copyOffsetX - directionArrayX[drawCounter%10] + abs(y + copyOffsetY - directionArrayY[drawCounter%10]);
+  float verhaeltnisSumme = abs(x + copyOffsetX - directionArrayX[drawCounter%10]) + abs(y + copyOffsetY - directionArrayY[drawCounter%10]);
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;
   
