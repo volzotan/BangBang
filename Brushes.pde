@@ -101,7 +101,7 @@ void brushFour() {
        extraOffsetY = 9+30*player.right.get(0)+5*random(-10,10);
      }
      
-     buf.fill(cR1-tempBrushValue + size + extraOffsetY,cG1-tempBrushValue + size + extraOffsetY,cB1-tempBrushValue + size + extraOffsetY);
+     buf.fill(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
         
      buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);   
    }
