@@ -1,7 +1,9 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
-void brushOne(boolean useOffset, boolean drawHuge) {
+void brushOne(boolean useOffset) {
+  buf.noStroke();
+  buf.fill(0,0,0,150);
   float extraOffset = 0;
   if(useOffset) {
      if(random(1) < 0.5) {
@@ -10,29 +12,15 @@ void brushOne(boolean useOffset, boolean drawHuge) {
         extraOffset = 52+30*player.right.get(0);
      }  
   }  
-  
-  float size1 = 0, size2 = 0, spacing = 1;
-  int alpha1 = 150, alpha2 = 255;
-  if(drawHuge) {
-    size1 = 300;
-    size2 = 200;
-    spacing = 40;
-    alpha1 = 50;
-    alpha2 = 60;
-  }  
-  
-  buf.noStroke();
-  buf.fill(0,0,0,alpha1);  
-  
   angle += 10;
   float val = cos(radians(angle)) * 10.0;
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
-    float xoff = cos(radians(a)) * val * spacing;
-    float yoff = sin(radians(a)) * val * spacing;    
-    buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50+extraOffset, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+    float xoff = cos(radians(a)) * val;
+    float yoff = sin(radians(a)) * val;    
+    buf.ellipse(x + copyOffsetX + xoff, y + copyOffsetY + yoff + player.left.get(0) * 50+extraOffset, val + player.left.get(0) * 20, val + player.left.get(0) * 20);
   }
-  buf.fill(0,0,0,alpha2);
-  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50+extraOffset, 2 + size2 , 2 + size2);
+  buf.fill(0,0,0,255);
+  buf.ellipse(x + copyOffsetX, y + copyOffsetY + player.left.get(0) * 50+extraOffset, 2 , 2);
 
   // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
   if(drawCounter % 1 == 0) {                              
@@ -68,23 +56,17 @@ void brushThree() {
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;
   
-//  println("verhaeltnisX =" + verhaeltnisX);
-//  println("verhaeltnisY =" + verhaeltnisY);
   
   int oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * 100));
   int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
-  
+
+/*  
   if (drawCounter % 10 == 0) {
   buf.stroke(1);
   buf.strokeWeight(1);
   buf.stroke(254,0,0);
-  buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, y + copyOffsetY);
-  }
-  /*
-  if (drawCounter % 10 == 0) {
-    buf.strokeWeight(1); 
-    buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, test);
+  buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, y + copyOffsetY);          // Rote Linie stellt Richtungsvektor dar
   }
  */
   
