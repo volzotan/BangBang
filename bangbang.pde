@@ -72,6 +72,12 @@ Flock flock;
 // Particle System
 // ParticleSystem ps;
 
+// ---- Colors ----
+int cR1 = 100, cR2 = 145, cR3 =   0, cR4 =   0, cR5 =   0;
+int cG1 = 100, cG2 = 145, cG3 =   0, cG4 =   0, cG5 =   0;
+int cB1 = 100, cB2 = 145, cB3 =   0, cB4 =   0, cB5 =   0;
+int cA1 = 255, cA2 = 255, cA3 =   0, cA4 =   0, cA5 =   0;
+
 // EXPERIMENTAL
 int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];

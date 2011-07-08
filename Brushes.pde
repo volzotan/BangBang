@@ -40,10 +40,10 @@ void brushTwo() {
 void brushThree() {
   // 10,5 - 11,8 :: General Pause
   if(pos < 10500 || pos > 11800) {
-    buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
+    buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
     buf.strokeWeight(5+tempBrushValue*0.13); 
   } else {
-    buf.stroke(145,145,145);
+    buf.stroke(cR2,cG2,cB2);
     buf.strokeWeight(4); 
   }  
   /*
