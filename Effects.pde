@@ -95,12 +95,17 @@ void castEffect() {
         tintenklecks(27059,  3  , pos);              // "bang" erstes Wort    
         tintenklecks(27448,  3.5, pos);              // "bang" zweites Wort    
         tintenklecks(28197,  8.5, pos);              //  bang Schlag
+        tintenklecks(29192,  3  , pos);              // "bang" erstes Wort    
+    
       } else {
                                                                           // 62.5 - 75% // 29.991 - 35.989
+        tintenklecks(30301,  3.5, pos);              // "bang" zweites Wort
+        tintenklecks(31047,  8.5, pos);              //  bang Schlag
+        /*
         tintenklecks(30000,  1  , pos);
         tintenklecks(31000, 11  , pos);   
         tintenklecks(33000,  8  , pos);
-        tintenklecks(33900,  6.5, pos);        
+        tintenklecks(33900,  6.5, pos);        */
       }
     } else {
       // 75 - 100%
