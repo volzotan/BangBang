@@ -57,7 +57,7 @@ void castEffect() {
                                                                           // 12.5 - 25% // 5.998 - 11.996
         // 3. part gegenstimme
         if(pos < 10550 && pos > 9750) {
-          if(pos < 10050 && pos > 9950) {
+          if(pos < 10041 && pos > 9959) {
             brushOne(true,true);
           }  
           brushOne(true, false);
