@@ -68,6 +68,13 @@ int pos = 0;
 PImage inkSplatter[] = new PImage[8];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
 int inkSplatterPos = 0;
+boolean
+inkSplatter01Used = false,
+inkSplatter02Used = false,
+inkSplatter03Used = false,
+inkSplatter04Used = false,
+inkSplatter05Used = false,
+inkSplatter06Used = false;
 // Bird flock
 Flock flock;
 
@@ -183,7 +190,7 @@ void draw(){
     lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
   }
-  //println(frameRate + " at " + player.position());
+  println(frameRate + " at " + player.position());
 }
   
 void stop() {                                       // Minim Stop

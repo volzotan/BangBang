@@ -89,23 +89,21 @@ void castEffect() {
       // 50 - 75%
       if (pos < player.length() * 0.625) {
                                                                           // 50 - 62.5% // 23.993 - 29.990
-        tintenklecks(24624,  3  , pos);              // "bang" erstes Wort                                                                  
-        tintenklecks(24624,  3.5, pos);              // "bang" zweites Wort
-        tintenklecks(25345,  8.5, pos);              //  bang Schlag
-        tintenklecks(27059,  3  , pos);              // "bang" erstes Wort    
-        tintenklecks(27448,  3.5, pos);              // "bang" zweites Wort    
-        tintenklecks(28197,  8.5, pos);              //  bang Schlag
-        tintenklecks(29192,  3  , pos);              // "bang" erstes Wort    
+        if(inkSplatter01Used == false) { inkSplatter01Used = tintenklecks(24300,  5.5, pos); }; // "bang" erstes Wort PASST                                                                
+        if(inkSplatter02Used == false) { inkSplatter02Used = tintenklecks(24600,  7.0, pos); }; // "bang" zweites Wort PASST
+        if(inkSplatter03Used == false) { inkSplatter03Used = tintenklecks(27059,  6.0, pos); }; // "bang" erstes Wort PASST
+        if(inkSplatter04Used == false) { inkSplatter04Used = tintenklecks(27448,  8.5, pos); }; // "bang" zweites Wort PASST 
     
       } else {
                                                                           // 62.5 - 75% // 29.991 - 35.989
-        tintenklecks(30301,  3.5, pos);              // "bang" zweites Wort
-        tintenklecks(31047,  8.5, pos);              //  bang Schlag
+        if(inkSplatter05Used == false) { inkSplatter05Used = tintenklecks(30200,  7.0, pos); }; // "bang" erstes Wort FAST
+        if(inkSplatter06Used == false) { inkSplatter06Used = tintenklecks(30450,  7.5, pos); }; // "bang" zweites Wort FAST
         /*
         tintenklecks(30000,  1  , pos);
         tintenklecks(31000, 11  , pos);   
         tintenklecks(33000,  8  , pos);
-        tintenklecks(33900,  6.5, pos);        */
+        tintenklecks(33900,  6.5, pos);
+        */
       }
     } else {
       // 75 - 100%
@@ -137,7 +135,7 @@ void happyBlackRectangle(int time) {
   }
 } 
 
-void tintenklecks(int time, float size, int pos) {
+boolean tintenklecks(int time, float size, int pos) {
   if ((pos < time + 41) && (pos > time - 41)) {
     int r = floor(random(0,7.5));
     
@@ -180,7 +178,10 @@ void tintenklecks(int time, float size, int pos) {
      
     buf.image(inkSplatter[r], xPos, yPos, 25*size, 25*size);
     inkSplatterPos = p;
-  }
+    
+    return true;
+  }  
+  return false;
 } 
 
 void initFlock(int amount) {
