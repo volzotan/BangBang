@@ -9,7 +9,7 @@ void setupGUI(){
   playButton.setColorForeground(color(255,255,255,0));
   playButton.setColorLabel(color(255,255,255,0));
   playButton.setColorValue(color(255,255,255,0));
-  playButton.captionLabel().style().marginLeft = 100;
+  playButton.setLabel("");
 }
 
 // gui zeichnen
