@@ -38,8 +38,14 @@ void brushTwo() {
 }
 
 void brushThree() {
-  buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
-  buf.strokeWeight(5+tempBrushValue*0.13); 
+  // 10,5 - 11,8 :: General Pause
+  if(pos < 10500 || pos > 11800) {
+    buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
+    buf.strokeWeight(5+tempBrushValue*0.13); 
+  } else {
+    buf.stroke(145,145,145);
+    buf.strokeWeight(4); 
+  }  
   /*
   float verhaeltnisSumme = x + copyOffsetX - directionArrayX[drawCounter%10] + y + copyOffsetY - directionArrayY[drawCounter%10];
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;

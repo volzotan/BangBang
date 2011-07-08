@@ -40,7 +40,6 @@
 
 
 void castEffect() {
-  int pos = player.position();
   
   if (pos < player.length() * 0.5) {
     // 0 - 50%
@@ -119,7 +118,7 @@ void castEffect() {
 
 
 void happyBlackRectangle(int time) {
-  if ((player.position() < time + 300) && (player.position() > time - 300)) {
+  if ((pos < time + 300) && (pos > time - 300)) {
     for (int i = 0; i<30; i++) {
       buf.rect(lastMousePosX[i], lastMousePosY[i], 10, 10);
     }
@@ -129,7 +128,7 @@ void happyBlackRectangle(int time) {
 void tintenklecks(int time, float size, int pos) {
   if ((pos < time + 165) && (pos > time - 165)) {
     int r = floor(random(0,7.5));
-    buf.image(inkSplatter[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 50*size, 50*size);
+    buf.image(inkSplatter[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 25*size, 25*size);
   }
 } 
 

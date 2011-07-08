@@ -3,8 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 controlP5;
-PImage playImage, pauseImage, inkSplatter[] = new PImage[8];
-PShape kleckse[] = new PShape[9];
+PImage playImage, pauseImage;
 
 // Minim
 import ddf.minim.*;
@@ -62,11 +61,16 @@ int deltaMouseX = 0;
 int deltaMouseY = 450;
 int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 
-// Particle System
-ParticleSystem ps;
-
+// ---- Effects ----
+// player position
+int pos = 0;
+// ink splatter array
+PImage inkSplatter[] = new PImage[8];
 // Bird flock
 Flock flock;
+
+// Particle System
+// ParticleSystem ps;
 
 // EXPERIMENTAL
 int[] directionArrayX = new int[10];
@@ -128,6 +132,7 @@ void draw(){
     x = x + (mouseX-x)/verfolgungsDaempfungX;
     y = y + (mouseY-y)/verfolgungsDaempfungY;
     drawCounter++;
+    pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
       moveViewport();
