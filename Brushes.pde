@@ -90,7 +90,7 @@ void brushThree() {
 }
 
 void brushFour() {
-   int amount = floor(random(4,15.5));
+   int amount = floor(random(4,30));
    if(random(1) < 0.5) { amount *= -1; }
       
    float extraOffsetX = 0, extraOffsetY = 0;   
@@ -99,15 +99,15 @@ void brushFour() {
      int size = floor(random(2,4));
      
      if(random(1) < 0.5) {
-       extraOffsetX = -6+48*player.left.get(0)+8*random(-10,10);
+       extraOffsetX = -6+48*player.left.get(0)+8*random(-20,20);
      } else {
-       extraOffsetX = 15+30*player.right.get(0)+3*random(-10,10);
+       extraOffsetX = 15+30*player.right.get(0)+3*random(-20,20);
      }   
    
      if(random(1) < 0.5) {
-       extraOffsetY = -24+48*player.left.get(0)+10*random(-10,10);
+       extraOffsetY = -24+48*player.left.get(0)+10*random(-20,20);
      } else {
-       extraOffsetY = 9+30*player.right.get(0)+5*random(-10,10);
+       extraOffsetY = 9+30*player.right.get(0)+5*random(-20,20);
      }
      
      buf.fill(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);

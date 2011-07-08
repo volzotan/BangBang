@@ -146,37 +146,38 @@ void tintenklecks(int time, float size, int pos) {
       p = floor(random(0,3.5));
     }  
     
-    float xPos = copyOffsetX + x + 100 * random(-2,+2), yPos = copyOffsetY + y + 100 * random(-2,+2);    
+    float xPos = copyOffsetX + x + 100 * random(-2,+2)-25*size, yPos = copyOffsetY + y + 100 * random(-2,+2)-25*size;    
     
      // left side :: x position
     if(1 == p || 2 == p) {
-        if(xPos < copyOffsetX || xPos > (width/2 + copyOffsetX)) {
-           xPos = width/4 + random(-width/6,width/6) + copyOffsetX;
-        }      
+        int tries = 0;
+        if((xPos < copyOffsetX || xPos > (width/2 + copyOffsetX))) {
+          xPos = width/4 + random(-width/7,width/7) + copyOffsetX + 25*size;
+        }        
     }  
 
     // right side :: x position
     if(0 == p || 3 == p) {        
-        if(xPos < (copyOffsetX+width/2) || xPos > (width + copyOffsetX)) {
-           xPos = (width*3)/4 + random(-width/6,width/6) + copyOffsetX;
+        int tries = 0;        
+        if((xPos < (copyOffsetX+width/2) || xPos > (width + copyOffsetX))) {
+           xPos = (width*3)/4 + random(-width/7,width/7) + copyOffsetX - 25*size;          
         }      
     } 
     
     // top side :: y position
-    if(1 == p || 0 == p) {
-        if(yPos < copyOffsetY || yPos > (height/2 + copyOffsetY)) {
-           yPos = height/4 + random(-height/6,height/6) + copyOffsetY;
-        }      
+    if(1 == p || 0 == p) {       
+        if((yPos < copyOffsetY || yPos > (height/2 + copyOffsetY))) {
+           yPos = height/4 + random(-height/7,height/7) + copyOffsetY + 25*size;
+        }       
     }  
     
     // bottom side :: y position
-    if(2 == p || 3 == p) {        
-        if(yPos < (copyOffsetY+height/2) || yPos > (height + copyOffsetY)) {
-           yPos = (height*3)/4 + random(-height/6,height/6) + copyOffsetY;
+    if(2 == p || 3 == p) {              
+        if((yPos < (copyOffsetY+height/2) || yPos > (height + copyOffsetY))) {
+           yPos = (height*3)/4 + random(-height/6,height/6) + copyOffsetY - 25*size;     
         }      
     }
      
-    
     buf.image(inkSplatter[r], xPos, yPos, 25*size, 25*size);
     inkSplatterPos = p;
   }
