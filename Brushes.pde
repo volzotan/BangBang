@@ -56,8 +56,8 @@ void brushThree() {
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;
   
-  println("verhaeltnisX =" + verhaeltnisX);
-  println("verhaeltnisY =" + verhaeltnisY);
+//  println("verhaeltnisX =" + verhaeltnisX);
+//  println("verhaeltnisY =" + verhaeltnisY);
   
   int oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * 100));
   int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
@@ -78,4 +78,32 @@ void brushThree() {
   
   deltaMouseX = oldX;
   deltaMouseY = oldY;
+}
+
+void brushFour() {
+   int amount = floor(random(4,15.5));
+   if(random(1) < 0.5) { amount *= -1; }
+      
+   float extraOffsetX = 0, extraOffsetY = 0;   
+   
+   for(int i = 0; i < amount; i++) {   
+     int size = floor(random(2,4));
+     
+     if(random(1) < 0.5) {
+       extraOffsetX = -6+48*player.left.get(0)+8*random(-10,10);
+     } else {
+       extraOffsetX = 15+30*player.right.get(0)+3*random(-10,10);
+     }   
+   
+     if(random(1) < 0.5) {
+       extraOffsetY = -24+48*player.left.get(0)+10*random(-10,10);
+     } else {
+       extraOffsetY = 9+30*player.right.get(0)+5*random(-10,10);
+     }
+     
+     buf.fill(cR1-tempBrushValue + size + extraOffsetY,cG1-tempBrushValue + size + extraOffsetY,cB1-tempBrushValue + size + extraOffsetY);
+        
+     buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);   
+   }
+   
 }

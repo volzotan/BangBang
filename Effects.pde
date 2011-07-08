@@ -51,7 +51,7 @@ void castEffect() {
         if((pos <  3050) && (pos > 1950) ||
            (pos <  6050) && (pos > 4950)) 
         {
-           brushOne(true); 
+           brushOne(true);            
         }
       } else {
         // 12.5 - 25% // 5.998 - 11.996
@@ -110,7 +110,9 @@ void castEffect() {
         // 87.5 - 100% // 41.988 - 47.986
         if((pos < 43350)) {
           brushOne(true);
-        }        
+        } else {
+          brushFour();  
+        }       
       }
     }
   }
