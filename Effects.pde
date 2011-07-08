@@ -46,7 +46,7 @@ void castEffect() {
     if (pos < player.length() * 0.25) {
       // 0 - 25%      
       if (pos < player.length() * 0.125) {
-        // 0 - 12.5% // 0.001 - 5.997
+                                                                          // 0 - 12.5% // 0.001 - 5.997
         // 1. udn 2. part gegenstimme
         if((pos <  3050) && (pos > 1950) ||
            (pos <  6050) && (pos > 4950)) 
@@ -54,7 +54,7 @@ void castEffect() {
            brushOne(true);            
         }
       } else {
-        // 12.5 - 25% // 5.998 - 11.996
+                                                                          // 12.5 - 25% // 5.998 - 11.996
         // 3. part gegenstimme
         if((pos < 10550) && (pos > 9750)) {
           brushOne(true);
@@ -73,11 +73,11 @@ void castEffect() {
       // gesang
       //ps.addParticle(x+copyOffsetX,y+copyOffsetY);       
       if (pos < player.length() * 0.375) {
-        // 25 - 37.5% // 11.997 - 17.994 
+                                                                         // 25 - 37.5% // 11.997 - 17.994 
         
         //initFlock(3);
       } else {
-        // 37.5 - 50% // 17.995 - 23.992
+                                                                         // 37.5 - 50% // 17.995 - 23.992
       }
     }
   } else {
@@ -85,13 +85,15 @@ void castEffect() {
     if (pos < player.length() * 0.75) {
       // 50 - 75%
       if (pos < player.length() * 0.625) {
-        // 50 - 62.5% // 23.993 - 29.990
-        tintenklecks(24000,  8  , pos);
-        tintenklecks(25000,  6.5, pos);
-        tintenklecks(27000,  3  , pos);
-        tintenklecks(28000, 10  , pos);        
+                                                                          // 50 - 62.5% // 23.993 - 29.990
+        tintenklecks(24624,  3  , pos);              // "bang" erstes Wort                                                                  
+        tintenklecks(24624,  3.5, pos);              // "bang" zweites Wort
+        tintenklecks(25345,  8.5, pos);              //  bang Schlag
+        tintenklecks(27059,  3  , pos);              // "bang" erstes Wort    
+        tintenklecks(27448,  3.5, pos);              // "bang" zweites Wort    
+        tintenklecks(28197,  8.5, pos);              //  bang Schlag
       } else {
-        // 62.5 - 75% // 29.991 - 35.989
+                                                                          // 62.5 - 75% // 29.991 - 35.989
         tintenklecks(30000,  1  , pos);
         tintenklecks(31000, 11  , pos);   
         tintenklecks(33000,  8  , pos);
@@ -100,14 +102,14 @@ void castEffect() {
     } else {
       // 75 - 100%
       if (pos < player.length() * 0.875) {
-        // 75 - 87.5% // 35.990 - 41.987
+                                                                          // 75 - 87.5% // 35.990 - 41.987
         tintenklecks(39000,  4  , pos);
         tintenklecks(40000,  7  , pos);
         if((pos > 40550)) {
           brushOne(true);
         }        
       } else {
-        // 87.5 - 100% // 41.988 - 47.986
+                                                                          // 87.5 - 100% // 41.988 - 47.986
         if((pos < 43350)) {
           brushOne(true);
         } else {
@@ -128,7 +130,7 @@ void happyBlackRectangle(int time) {
 } 
 
 void tintenklecks(int time, float size, int pos) {
-  if ((pos < time + 165) && (pos > time - 165)) {
+  if ((pos < time + 41) && (pos > time - 41)) {
     int r = floor(random(0,7.5));
     buf.image(inkSplatter[r], copyOffsetX + 50 + 100 * random(-1,+1), copyOffsetY + 70 * random(-1,+1), 25*size, 25*size);
   }
