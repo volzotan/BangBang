@@ -51,13 +51,16 @@ void castEffect() {
         if((pos <  3050) && (pos > 1950) ||
            (pos <  6050) && (pos > 4950)) 
         {
-           brushOne(true);            
+           brushOne(true, false);            
         }
       } else {
                                                                           // 12.5 - 25% // 5.998 - 11.996
         // 3. part gegenstimme
-        if((pos < 10550) && (pos > 9750)) {
-          brushOne(true);
+        if(pos < 10550 && pos > 9750) {
+          if(pos < 10050 && pos > 9950) {
+            brushOne(true,true);
+          }  
+          brushOne(true, false);
         }
         // general pause  
         if((pos > 11850) && (pos > 10450)) {
@@ -106,12 +109,12 @@ void castEffect() {
         tintenklecks(39000,  4  , pos);
         tintenklecks(40000,  7  , pos);
         if((pos > 40550)) {
-          brushOne(true);
+          brushOne(true, false);
         }        
       } else {
                                                                           // 87.5 - 100% // 41.988 - 47.986
         if((pos < 43350)) {
-          brushOne(true);
+          brushOne(true, false);
         } else {
           brushFour();  
         }       
