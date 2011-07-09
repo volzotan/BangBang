@@ -136,45 +136,44 @@ boolean tintenklecks(int time, float size, int pos) {
   if ((pos < time + 41) && (pos > time - 41)) {
     int r = floor(random(0,inkSplatter.length-0.5));
     
-    int p = floor(random(0,3.5));
-    while(p == inkSplatterPos) {
-      p = floor(random(0,3.5));
-    }  
+        
+    float splatterSize = 25*size;  
     
-    float xPos = copyOffsetX + x + 100 * random(-2,+2)-25*size, yPos = copyOffsetY + y + 100 * random(-2,+2)-25*size;    
-    
-     // left side :: x position
-    if(1 == p || 2 == p) {
-        int tries = 0;
-        if((xPos < copyOffsetX || xPos > (width/2 + copyOffsetX))) {
-          xPos = width/4 + random(-width/7,width/7) + copyOffsetX + 25*size;
-        }        
+    float xPos = copyOffsetX +  width/2 + random(-50,50) * random(-2,+2), 
+	  yPos = copyOffsetY + height/2 + random(-50,50) * random(-2,+2);    
+
+    // left side :: x position
+    if(1 == inkSplatterPos || 2 == inkSplatterPos) {
+	if(!(xPos >= copyOffsetX && xPos <= (copyOffsetX+width/2-splatterSize))) {
+		xPos = copyOffsetX + width/3 + random(-width/6,width/6);
+	}	        
     }  
 
     // right side :: x position
-    if(0 == p || 3 == p) {        
-        int tries = 0;        
-        if((xPos < (copyOffsetX+width/2) || xPos > (width + copyOffsetX))) {
-           xPos = (width*3)/4 + random(-width/7,width/7) + copyOffsetX - 25*size;          
-        }      
+    if(0 == inkSplatterPos || 3 == inkSplatterPos) {        
+	if(!(xPos >= (copyOffsetX+width/2) && xPos <= (copyOffsetX+width-splatterSize))) {
+		xPos = copyOffsetX + (width*2)/3 + random(-width/6,width/6);
+	}
     } 
     
     // top side :: y position
-    if(1 == p || 0 == p) {       
-        if((yPos < copyOffsetY || yPos > (height/2 + copyOffsetY))) {
-           yPos = height/4 + random(-height/7,height/7) + copyOffsetY + 25*size;
+    if(1 == inkSplatterPos || 0 == inkSplatterPos) {       
+        if(!(yPos >= copyOffsetY && yPos <= (copyOffsetY+height/2-splatterSize))) {
+		yPos = copyOffsetY + height/4 + random(-height/8,height/8) - random(10,20);
         }       
     }  
     
     // bottom side :: y position
-    if(2 == p || 3 == p) {              
-        if((yPos < (copyOffsetY+height/2) || yPos > (height + copyOffsetY))) {
-           yPos = (height*3)/4 + random(-height/6,height/6) + copyOffsetY - 25*size;     
+    if(2 == inkSplatterPos || 3 == inkSplatterPos) {              
+        if(!(yPos >= (copyOffsetY+height/2) && yPos <= (copyOffsetY+height-splatterSize))) {
+		yPos = copyOffsetY + (height*3)/4 + random(-height/8,height/8) - random(20,70);
         }      
     }
-     
-    buf.image(inkSplatter[r], xPos, yPos, 25*size, 25*size);
-    inkSplatterPos = p;
+    
+    println(xPos+"\t+\t"+yPos + "\t| InkSplatterPos:"+inkSplatterPos);
+    buf.image(inkSplatter[r], xPos, yPos, splatterSize, splatterSize);
+    inkSplatterPos++;
+    if(inkSplatterPos > 3) { inkSplatterPos = 0; }
     
     return true;
   }  
