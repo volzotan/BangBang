@@ -69,12 +69,16 @@ PImage inkSplatter[] = new PImage[8];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
 int inkSplatterPos = 0;
 boolean
-inkSplatter01Used = false,
-inkSplatter02Used = false,
-inkSplatter03Used = false,
-inkSplatter04Used = false,
-inkSplatter05Used = false,
-inkSplatter06Used = false;
+  inkSplatter01Used = false,
+  inkSplatter02Used = false,
+  inkSplatter03Used = false,
+  inkSplatter04Used = false,
+  inkSplatter05Used = false,
+  inkSplatter06Used = false,
+  inkSplatter07Used = false,
+  inkSplatter08Used = false,
+  inkSplatter09Used = false,
+  inkSplatter10Used = false;
 // Bird flock
 Flock flock;
 

@@ -89,15 +89,27 @@ void castEffect() {
       // 50 - 75%
       if (pos < player.length() * 0.625) {
                                                                           // 50 - 62.5% // 23.993 - 29.990
-        if(inkSplatter01Used == false) { inkSplatter01Used = tintenklecks(24300,  5.5, pos); }; // "bang" erstes Wort PASST                                                                
-        if(inkSplatter02Used == false) { inkSplatter02Used = tintenklecks(24600,  7.0, pos); }; // "bang" zweites Wort PASST
-        if(inkSplatter03Used == false) { inkSplatter03Used = tintenklecks(27059,  6.0, pos); }; // "bang" erstes Wort PASST
-        if(inkSplatter04Used == false) { inkSplatter04Used = tintenklecks(27448,  8.5, pos); }; // "bang" zweites Wort PASST 
+        if(inkSplatter01Used == false) { inkSplatter01Used = tintenklecks(24300,  10.5, pos); }; // "bang" 1. Wort PASST                                                                
+        if(inkSplatter02Used == false) { inkSplatter02Used = tintenklecks(24600,  11.0, pos); }; // "bang" 2. Wort PASST
+        if(inkSplatter03Used == false) { inkSplatter03Used = tintenklecks(27059,   8.5, pos); }; // "bang" 1. Wort PASST
+        if(inkSplatter04Used == false) { inkSplatter04Used = tintenklecks(27448,  12.0, pos); }; // "bang" 2. Wort PASST
+        // 2. Abfrage
+        if(inkSplatter01Used == false) { inkSplatter01Used = tintenklecks(24300,  10.5, pos); }; // "bang" 1. Wort                                                              
+        if(inkSplatter02Used == false) { inkSplatter02Used = tintenklecks(24600,  11.0, pos); }; // "bang" 2. Wort 
+        if(inkSplatter03Used == false) { inkSplatter03Used = tintenklecks(27059,   8.5, pos); }; // "bang" 1. Wort
+        if(inkSplatter04Used == false) { inkSplatter04Used = tintenklecks(27448,  12.0, pos); }; // "bang" 2. Wort 
     
       } else {
                                                                           // 62.5 - 75% // 29.991 - 35.989
-        if(inkSplatter05Used == false) { inkSplatter05Used = tintenklecks(30200,  7.0, pos); }; // "bang" erstes Wort FAST
-        if(inkSplatter06Used == false) { inkSplatter06Used = tintenklecks(30450,  7.5, pos); }; // "bang" zweites Wort FAST
+        if(inkSplatter05Used == false) { inkSplatter05Used = tintenklecks(30100,   9.8, pos); }; // "bang" 1. Wort PASST
+        if(inkSplatter06Used == false) { inkSplatter06Used = tintenklecks(30400,  10.5, pos); }; // "bang" 2. Wort PASST
+        if(inkSplatter07Used == false) { inkSplatter07Used = tintenklecks(33000,   8.0, pos); }; // "bang" 1. Wort PASST
+        if(inkSplatter08Used == false) { inkSplatter08Used = tintenklecks(33300,  10.5, pos); }; // "bang" 2. Wort PASST
+        // 2. Abfrage
+        if(inkSplatter05Used == false) { inkSplatter05Used = tintenklecks(30100,   9.8, pos); }; // "bang" 1. Wort 
+        if(inkSplatter06Used == false) { inkSplatter06Used = tintenklecks(30400,  10.5, pos); }; // "bang" 2. Wort 
+        if(inkSplatter07Used == false) { inkSplatter07Used = tintenklecks(33000,   8.0, pos); }; // "bang" 1. Wort 
+        if(inkSplatter08Used == false) { inkSplatter08Used = tintenklecks(33300,  10.5, pos); }; // "bang" 2. Wort 
         /*
         tintenklecks(30000,  1  , pos);
         tintenklecks(31000, 11  , pos);   
@@ -109,8 +121,11 @@ void castEffect() {
       // 75 - 100%
       if (pos < player.length() * 0.875) {
                                                                           // 75 - 87.5% // 35.990 - 41.987
-        tintenklecks(39000,  4  , pos);
-        tintenklecks(40000,  7  , pos);
+        if(inkSplatter09Used == false) { inkSplatter09Used = tintenklecks(38950,  10.5, pos); }; // "bang" 1. Wort PASST
+        if(inkSplatter10Used == false) { inkSplatter10Used = tintenklecks(39250,  14.5, pos); }; // "bang" 2. Wort PASST
+        // 2. Abfrage
+        if(inkSplatter09Used == false) { inkSplatter09Used = tintenklecks(38950,  10.5, pos); }; // "bang" 1. Wort 
+        if(inkSplatter10Used == false) { inkSplatter10Used = tintenklecks(39250,  14.5, pos); }; // "bang" 2. Wort 
         if((pos > 40550)) {
           brushOne(true, false);
         }        
