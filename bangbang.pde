@@ -134,6 +134,19 @@ void draw(){
     initCanvas(true);
     doClear = false;
     initialised = false;
+    
+    // Reset inkSplatter
+    inkSplatter01Used = false;
+    inkSplatter02Used = false;
+    inkSplatter03Used = false;
+    inkSplatter04Used = false;
+    inkSplatter05Used = false;
+    inkSplatter06Used = false;
+    inkSplatter07Used = false;
+    inkSplatter08Used = false;
+    inkSplatter09Used = false;
+    inkSplatter10Used = false;
+  
     player.pause();
     player.rewind();
   }
