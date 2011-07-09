@@ -174,7 +174,7 @@ boolean tintenklecks(int time, float size, int pos) {
         }      
     }
     
-    println(xPos+"\t+\t"+yPos + "\t| InkSplatterPos:"+inkSplatterPos);
+    //println(xPos+"\t+\t"+yPos + "\t| InkSplatterPos:"+inkSplatterPos);
     buf.image(inkSplatter[r], xPos, yPos, splatterSize, splatterSize);
     inkSplatterPos++;
     if(inkSplatterPos > 3) { inkSplatterPos = 0; }
