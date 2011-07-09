@@ -65,7 +65,7 @@ int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 // player position
 int pos = 0;
 // ink splatter array
-PImage inkSplatter[] = new PImage[8];
+PImage inkSplatter[] = new PImage[10];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
 int inkSplatterPos = 0;
 boolean
