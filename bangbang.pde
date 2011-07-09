@@ -181,7 +181,8 @@ void draw(){
         //drawVignette();
         //drawMiniMap();
         image(getBufSlice(), 0, 0);        
-        image(replayImage, 0, 0);         
+        image(replayImage, 0, 0);    
+        endGUI();     
       }     
     }  
   
