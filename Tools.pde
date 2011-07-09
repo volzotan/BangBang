@@ -66,7 +66,7 @@ void initImages() {
   playImage = loadImage("play_overlay_33_100_white.png");
   replayImage = loadImage("replay_overlay_33_100_white.png");  
   for(int i = 0; i < inkSplatter.length; i++) {
-    inkSplatter[i] = loadImage("klecks_"+i+".png");
+    inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
   }  
 }  
 

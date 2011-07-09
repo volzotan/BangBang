@@ -131,11 +131,13 @@ void setup(){
 
 void draw(){
   if(doClear) {
+    player.pause();
+    player.rewind();
     initCanvas(true);
     doClear = false;
     initialised = false;
-    
-    // Reset inkSplatter
+        
+    //Rreset inkSplatter
     inkSplatter01Used = false;
     inkSplatter02Used = false;
     inkSplatter03Used = false;
@@ -146,9 +148,10 @@ void draw(){
     inkSplatter08Used = false;
     inkSplatter09Used = false;
     inkSplatter10Used = false;
-  
-    player.pause();
-    player.rewind();
+    
+    // Viewport back to startposition
+    copyOffsetX = 0;
+    copyOffsetY = (buf.height - height) / 2;
   }
   
   if(!initialised) {
