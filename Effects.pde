@@ -116,7 +116,7 @@ void castEffect() {
         if((pos < 43350)) {
           brushOne(true, false);
         } else {
-          brushFour();  
+          brushFour(4,50);  
         }       
       }
     }

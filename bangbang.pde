@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 controlP5;
-PImage playImage, pauseImage;
+PImage playImage, pauseImage, replayImage;
 
 // Minim
 import ddf.minim.*;
@@ -177,9 +177,10 @@ void draw(){
         image(getBufSlice(), 0, 0);
         image(pauseImage, 0, 0);    
       } else {
-        moveViewport();
-        drawVignette();
-        drawMiniMap();
+        //moveViewport();
+        //drawVignette();
+        //drawMiniMap();
+        image(replayImage, 0, 0);         
       }     
     }  
   

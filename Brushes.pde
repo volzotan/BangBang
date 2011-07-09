@@ -89,8 +89,8 @@ void brushThree() {
   deltaMouseY = oldY;
 }
 
-void brushFour() {
-   int amount = floor(random(4,30));
+void brushFour(int minAmount, int maxAmount) {
+   int amount = floor(random(minAmount,maxAmount));
    if(random(1) < 0.5) { amount *= -1; }
       
    float extraOffsetX = 0, extraOffsetY = 0;   
@@ -99,15 +99,15 @@ void brushFour() {
      int size = floor(random(2,4));
      
      if(random(1) < 0.5) {
-       extraOffsetX = -6+48*player.left.get(0)+8*random(-20,20);
+       extraOffsetX = -6+48*player.left.get(0)+8*random(-10,50);
      } else {
-       extraOffsetX = 15+30*player.right.get(0)+3*random(-20,20);
+       extraOffsetX = 15+30*player.right.get(0)+3*random(-10,50);
      }   
    
      if(random(1) < 0.5) {
-       extraOffsetY = -24+48*player.left.get(0)+10*random(-20,20);
+       extraOffsetY = -24+48*player.left.get(0)+10*random(-50,50);
      } else {
-       extraOffsetY = 9+30*player.right.get(0)+5*random(-20,20);
+       extraOffsetY = 9+30*player.right.get(0)+5*random(-50,50);
      }
      
      buf.fill(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
