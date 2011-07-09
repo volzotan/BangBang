@@ -145,28 +145,32 @@ boolean tintenklecks(int time, float size, int pos) {
     // left side :: x position
     if(1 == inkSplatterPos || 2 == inkSplatterPos) {
 	if(!(xPos >= copyOffsetX && xPos <= (copyOffsetX+width/2-splatterSize))) {
-		xPos = copyOffsetX + width/3 + random(-width/6,width/6);
+	  xPos = copyOffsetX + width/3 + random(-width/6,width/6);
 	}	        
     }  
 
     // right side :: x position
     if(0 == inkSplatterPos || 3 == inkSplatterPos) {        
 	if(!(xPos >= (copyOffsetX+width/2) && xPos <= (copyOffsetX+width-splatterSize))) {
-		xPos = copyOffsetX + (width*2)/3 + random(-width/6,width/6);
+          xPos = copyOffsetX + (width*2)/3 + random(-width/6,width/6);
 	}
     } 
     
     // top side :: y position
     if(1 == inkSplatterPos || 0 == inkSplatterPos) {       
         if(!(yPos >= copyOffsetY && yPos <= (copyOffsetY+height/2-splatterSize))) {
-		yPos = copyOffsetY + height/4 + random(-height/8,height/8) - random(10,20);
+	  yPos = copyOffsetY + height/4 + random(-height/8,height/8) - random(0,20);
+          if(yPos < copyOffsetY) { yPos = copyOffsetY - random(-10,10); }
+          if(yPos > (copyOffsetY+height/2)) { yPos = copyOffsetY + height/2 - random(10,40); }
         }       
     }  
     
     // bottom side :: y position
     if(2 == inkSplatterPos || 3 == inkSplatterPos) {              
         if(!(yPos >= (copyOffsetY+height/2) && yPos <= (copyOffsetY+height-splatterSize))) {
-		yPos = copyOffsetY + (height*3)/4 + random(-height/8,height/8) - random(20,70);
+	  yPos = copyOffsetY + (height*3)/4 + random(-height/8,height/8) - random(0,50);
+          if(yPos < (copyOffsetY+height/2)) { yPos = copyOffsetY + height/2 + random(10,splatterSize/3); }
+          if(yPos > (copyOffsetY+height)) { yPos = copyOffsetY + height - random(splatterSize/2,splatterSize); }
         }      
     }
     
