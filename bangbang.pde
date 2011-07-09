@@ -92,7 +92,7 @@ int cG1 = 100, cG2 = 145, cG3 =   0, cG4 =   0, cG5 =   0;
 int cB1 = 100, cB2 = 145, cB3 =   0, cB4 =   0, cB5 =   0;
 int cA1 = 255, cA2 = 255, cA3 =   0, cA4 =   0, cA5 =   0;
 
-// EXPERIMENTAL
+// direction sensitive drawing
 int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];
 
@@ -152,6 +152,18 @@ void draw(){
     // Viewport back to startposition
     copyOffsetX = 0;
     copyOffsetY = (buf.height - height) / 2;
+    
+    for (int i=0; i< directionArrayX.length; i++) {
+      directionArrayX[0] = 0;
+      directionArrayY[0] = 0;
+    } 
+    for (int i=0; i< lastMousePosX.length; i++) {
+      lastMousePosX[0] = 0;
+      lastMousePosY[0] = 0;
+    } 
+    
+    deltaMouseX = 470;
+    deltaMouseY = 450;
   }
   
   if(!initialised) {
