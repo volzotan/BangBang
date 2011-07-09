@@ -152,7 +152,7 @@ void happyBlackRectangle(int time) {
 
 boolean tintenklecks(int time, float size, int pos) {
   if ((pos < time + 41) && (pos > time - 41)) {
-    int r = floor(random(0,7.5));
+    int r = floor(random(0,inkSplatter.length-0.5));
     
     int p = floor(random(0,3.5));
     while(p == inkSplatterPos) {
