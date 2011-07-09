@@ -11,18 +11,6 @@ void setupGUI(){
   playButton.setLabel("");
 }
 
-void endGUI(){
-  controlP5 = new ControlP5(this);
-  Button replayButton = controlP5.addButton("Replay",0,(int) width/2-100,(int) height/2-100,200,200);
-  
-  // settings replaybutton
-  replayButton.setColorActive(color(255,255,255,0));
-  replayButton.setColorBackground(color(255,255,255,0));
-  replayButton.setColorForeground(color(255,255,255,0));
-  replayButton.setColorValue(color(255,255,255,0));
-  replayButton.setLabel("");
-}
-
 // gui zeichnen
 void drawGUI(){
   controlP5.show();
@@ -31,12 +19,14 @@ void drawGUI(){
 
 //  initial funktion für start am anfang
 public void Play(int theValue) {
-  initialised = true;
-  player.play();
-}
-
-public void Replay(int theValue) {
-  doClear = true;
+  if(usePlay) {
+    initialised = true;
+    player.play();
+    usePlay = false;
+  } else {
+    doClear = true;
+    usePlay = true;
+  }  
 }  
 
 // tastatur befehle

@@ -4,6 +4,7 @@ import controlP5.*;
 // GUI
 ControlP5 controlP5;
 PImage playImage, pauseImage, replayImage;
+boolean usePlay = true;
 
 // Minim
 import ddf.minim.*;
@@ -182,7 +183,7 @@ void draw(){
         //drawMiniMap();
         image(getBufSlice(), 0, 0);        
         image(replayImage, 0, 0);    
-        endGUI();     
+        drawGUI();     
       }     
     }  
   
