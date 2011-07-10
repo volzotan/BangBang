@@ -43,8 +43,10 @@ void drawMiniMap(boolean toggle){
   }
 }
 
-void drawVignette(){
-  image(vignette, 0, 0);
+void drawVignette(boolean doDraw){
+  if(doDraw) {
+    image(vignette, 0, 0);
+  }
 }
 
 PImage getBufSlice() {
@@ -72,6 +74,7 @@ void initImages() {
   saveButtonImage = loadImage("buttons/SaveMask.png");
   mapDButtonImage = loadImage("buttons/MapDMask.png");
   mapEButtonImage = loadImage("buttons/MapEMask.png");
+  savingImage = loadImage("SavingOverlay.png");  
   overlayImage = loadImage("MenuOverlay.png");
   cursorImage = loadImage("cursor.png");
   for(int i = 0; i < inkSplatter.length; i++) {

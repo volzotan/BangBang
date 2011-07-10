@@ -169,7 +169,15 @@ public void Exit(int theValue) {
 }
 
 public void Save(int theValue) {
-  buf.save(dataPath("shots/"+timestamp() +".png"));
+  if(theValue == 1 && initialised && player.position() < 47986) {
+    player.pause();
+  }  
+  if(initialised) {  
+    buf.save(dataPath("shots/"+timestamp() +".png"));   
+  }
+  if(theValue == 1 && initialised && player.position() < 47986) {
+    player.play();
+  } 
 }
 
 // tastatur befehle
@@ -177,8 +185,12 @@ public void Save(int theValue) {
 // space = play/pause => icon einblenden?
 // ???
 void keyReleased() {
+  if (ESC == key) { exit(); }
+  if ('m' == key || 'M' == key) { EnableMap(0); }
   if ('r' == key || 'R' == key) { Replay(0); }
-  if ('s' == key || 'S' == key) { Save(0); }
+  if ('s' == key || 'S' == key) { 
+    Save((player.isPlaying()) ? 1 : 0); 
+  }
   if (' ' == key) { 
     if(player.isPlaying()) {
       player.pause();

@@ -3,9 +3,9 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, overlayImage, cursorImage;
+PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage;
 boolean usePlay = true;
-boolean mapEnabled = true;
+boolean mapEnabled = false;
 
 // Minim
 import ddf.minim.*;
@@ -141,7 +141,7 @@ void setup(){
   deltaMouseY = 450;
 }
 
-void draw(){
+void draw(){  
   if(!initialised) {
     switchCursor(2);
     image(getBufSlice(), 0, 0);
@@ -174,9 +174,9 @@ void draw(){
       }      
       buf.endDraw();
     
-      drawVignette();
+      drawVignette(true);
       drawMiniMap(mapEnabled);       
-      tempBrushValue *= 0.95;      
+      tempBrushValue *= 0.95;     
     } else {
       switchCursor(2);
       if (player.position() < 47986) {
@@ -188,7 +188,7 @@ void draw(){
         image(overlayImage, 0, 0);
         drawGUI(3);     
       }     
-    }  
+    }    
   
     if (drawCounter % 3 == 0) {
       prevOffsetX = copyOffsetX;
