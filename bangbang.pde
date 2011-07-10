@@ -92,6 +92,10 @@ int cA1 = 255, cA2 = 255, cA3 =   0, cA4 =   0, cA5 =   0;
 int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];
 
+// EXPERIMENTAL
+boolean drawSaveOverlay = false;
+int saveReady = 0;
+
 // setup
 boolean initialised = false, doClear = false;
 int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
@@ -202,6 +206,29 @@ void draw(){
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
   }
   //println(frameRate + " at " + player.position());
+  
+  if (saveReady == 2) {
+    if(initialised) {  
+      buf.save(dataPath("shots/"+timestamp() +".png"));   
+     } 
+    if(initialised && player.position() < 47986) {
+      player.play(); 
+    }
+    saveReady = 0;
+  }
+  
+  if(drawSaveOverlay){
+    image(getBufSlice(), 0, 0);
+    image(savingImage, 0, 0);
+    
+    if (saveReady == 0) {
+      saveReady = 1;
+    } else if (saveReady == 1) {
+      saveReady = 2;
+      drawSaveOverlay = false;
+    }
+  }
+ 
 }
   
 void stop() {                                       // Minim Stop
