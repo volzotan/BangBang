@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, overlayImage;
+PImage mainButtonImage, menuButtonImage, overlayImage, cursorImage;
 boolean usePlay = true;
 
 // Minim
@@ -98,6 +98,7 @@ int[] directionArrayY = new int[10];
 
 // setup
 boolean initialised = false, doClear = false;
+int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
 
 void setup(){
   size(800, 450, JAVA2D);
@@ -166,6 +167,7 @@ void draw(){
     deltaMouseY = 450;
   }
   if(!initialised) {
+    switchCursor(2);
     image(getBufSlice(), 0, 0);
     image(overlayImage, 0, 0);
     drawGUI(1);
@@ -182,6 +184,7 @@ void draw(){
     pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
+      switchCursor(1);
       moveViewport();
       buf.beginDraw();
       if (drawCounter % 1 == 0) {        
@@ -201,6 +204,7 @@ void draw(){
       drawMiniMap();       
       tempBrushValue *= 0.95;      
     } else {
+      switchCursor(2);
       if (player.position() < 47986) {
         image(getBufSlice(), 0, 0);
         image(overlayImage, 0, 0);

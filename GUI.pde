@@ -91,7 +91,7 @@ public void Exit(int theValue) {
 }
 
 public void Save(int theValue) {
-  buf.save(timestamp() +".png");
+  buf.save(dataPath("shots/"+timestamp() +".png"));
 }
 
 // tastatur befehle
@@ -100,7 +100,7 @@ public void Save(int theValue) {
 // ???
 void keyReleased() {
   if ('r' == key || 'R' == key) { doClear = true; }
-  if ('s' == key || 'S' == key) { buf.save(timestamp() +".png"); }
+  if ('s' == key || 'S' == key) { Save(0); }
   if (' ' == key) { 
     if(player.isPlaying()) {
       player.pause();
