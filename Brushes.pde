@@ -101,9 +101,9 @@ void brushFour(int minAmount, int maxAmount) {
      }   
    
      if(random(1) < 0.5) {
-       extraOffsetY = -24+48*player.left.get(0)+10*random(-50,50);
+       extraOffsetY = -44+48*player.left.get(0)+10*random(-50,0);
      } else {
-       extraOffsetY = 9+30*player.right.get(0)+5*random(-50,50);
+       extraOffsetY = 47+30*player.right.get(0)+5*random(0,50);
      }
      
      if(random(0,1) < 0.6) {
