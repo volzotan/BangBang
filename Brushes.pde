@@ -15,15 +15,16 @@ void brushOne(boolean useOffset, boolean drawHuge) {
     size1 = 250;
     size2 = 325;
     spacing = 35;
-    alpha1 = 50;
+    alpha1 = 90;
     alpha2 = 60;
-    val = (val > 9.5) ? random(6,9) : val;
+    val = (val > 9.5 || val < 5) ? random(6,9) : val;
+    buf.fill(80,22,28,alpha1);
   } else {
     val += random(0,1)*20;
+    buf.fill(0,0,0,alpha1);
   }  
   
   buf.noStroke();
-  buf.fill(0,0,0,alpha1);
 
   angle += 10;
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
