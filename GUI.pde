@@ -4,7 +4,7 @@ void setupGUI(){
   endP5 = new ControlP5(this);
  
   // STARTUP MENU (1)
-  ControllerSprite playSprite = new ControllerSprite(setupP5,loadImage("buttons/PlayButton.png"),220,220);
+  ControllerSprite playSprite = new ControllerSprite(setupP5,mainButtonImage,220,220);
   playSprite.setMask(loadImage("buttons/PlayMask.png"));
   playSprite.enableMask();
 
@@ -12,7 +12,7 @@ void setupGUI(){
   playButton.setSprite(playSprite);
 
   // BREAK MENU (2)
-  ControllerSprite breakSprite = new ControllerSprite(breakP5,loadImage("buttons/BreakButton.png"),220,220);
+  ControllerSprite breakSprite = new ControllerSprite(breakP5,mainButtonImage,220,220);
   breakSprite.setMask(loadImage("buttons/BreakMask.png"));
   breakSprite.enableMask();
 
@@ -20,7 +20,7 @@ void setupGUI(){
   breakButton.setSprite(breakSprite);
   
   // END MENU (3)
-  ControllerSprite replaySprite = new ControllerSprite(endP5,loadImage("buttons/ReplayButton.png"),220,220);
+  ControllerSprite replaySprite = new ControllerSprite(endP5,mainButtonImage,220,220);
   replaySprite.setMask(loadImage("buttons/ReplayMask.png"));
   replaySprite.enableMask();
   

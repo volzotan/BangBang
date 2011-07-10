@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage overlay33Image, overlay66Image, pauseImage;
+PImage mainButtonImage, overlayImage;
 boolean usePlay = true;
 
 // Minim
@@ -167,7 +167,7 @@ void draw(){
   }
   if(!initialised) {
     image(getBufSlice(), 0, 0);
-    image(overlay33Image, 0, 0);
+    image(overlayImage, 0, 0);
     drawGUI(1);
   } else {  
     closeGUI(1);
@@ -203,14 +203,14 @@ void draw(){
     } else {
       if (player.position() < 47986) {
         image(getBufSlice(), 0, 0);
-        image(overlay33Image, 0, 0);
+        image(overlayImage, 0, 0);
         drawGUI(2); 
       } else {
         //moveViewport();
         //drawVignette();
         //drawMiniMap();
         image(getBufSlice(), 0, 0);        
-        image(overlay66Image, 0, 0);
+        image(overlayImage, 0, 0);
         drawGUI(3);     
       }     
     }  

@@ -62,8 +62,8 @@ void initCanvas(boolean useBGImage) {
 }
 
 void initImages() {
-  overlay33Image = loadImage("overlay_33.png");
-  overlay66Image = loadImage("overlay_66.png");
+  mainButtonImage = loadImage("buttons/MainButton.png");
+  overlayImage = loadImage("MenuOverlay.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
   }  
