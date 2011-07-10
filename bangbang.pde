@@ -2,8 +2,8 @@
 import controlP5.*;
 
 // GUI
-ControlP5 controlP5;
-PImage playImage, pauseImage, replayImage;
+ControlP5 setupP5, breakP5, endP5;
+PImage overlay33Image, overlay66Image, pauseImage;
 boolean usePlay = true;
 
 // Minim
@@ -165,13 +165,12 @@ void draw(){
     deltaMouseX = 470;
     deltaMouseY = 450;
   }
-  
   if(!initialised) {
     image(getBufSlice(), 0, 0);
-    image(playImage, 0, 0);
-    drawGUI();
+    image(overlay33Image, 0, 0);
+    drawGUI(1);
   } else {  
-    controlP5.hide();
+    closeGUI(1);
     beat.detect(player.mix);
     if(beat.isOnset()) {
        tempBrushValue = 80; 
@@ -204,14 +203,15 @@ void draw(){
     } else {
       if (player.position() < 47986) {
         image(getBufSlice(), 0, 0);
-        image(pauseImage, 0, 0);    
+        image(overlay33Image, 0, 0);
+        drawGUI(2); 
       } else {
         //moveViewport();
         //drawVignette();
         //drawMiniMap();
         image(getBufSlice(), 0, 0);        
-        image(replayImage, 0, 0);    
-        drawGUI();     
+        image(overlay66Image, 0, 0);
+        drawGUI(3);     
       }     
     }  
   
