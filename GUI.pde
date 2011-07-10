@@ -18,7 +18,15 @@ void setupGUI(){
   setupDemoSprite.enableMask();
   
   Button setupDemoButton = setupP5.addButton("Demo",0,20,105,250,120);
-  setupDemoButton.setSprite(setupDemoSprite);  
+  setupDemoButton.setSprite(setupDemoSprite);
+  
+  // -> left bottom (exit)
+  ControllerSprite setupExitSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
+  setupExitSprite.setMask(exitButtonImage);
+  setupExitSprite.enableMask();
+  
+  Button setupExitButton = setupP5.addButton("Exit",0,20,225,250,120);
+  setupExitButton.setSprite(setupExitSprite);
 
   // BREAK MENU (2)
   // -> main (break)
