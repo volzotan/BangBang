@@ -4,10 +4,11 @@
 void brushOne(boolean useOffset, boolean drawHuge) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   if(useOffset) {
-     extraOffsetY = (random(1) < 0.5) ? -37+60*player.left.get(0)*random(-1,1) : 52+70*player.right.get(0)*random(-1,1);
+     extraOffsetY = (random(1) < 0.5) ? -74+60*player.left.get(0)*random(-1,1) : 87+70*player.right.get(0)*random(-1,1);
      extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(0)*random(-1,1) : 52+70*player.right.get(0)*random(-1,1);
   }  
   
+  float val = cos(radians(angle)) * 10.0;
   float size1 = 0, size2 = random(0,10), spacing = 1;
   int alpha1 = 150, alpha2 = 255;
   if(drawHuge) {
@@ -15,7 +16,9 @@ void brushOne(boolean useOffset, boolean drawHuge) {
     size2 = 325;
     spacing = 35;
     alpha1 = 50;
-    alpha2 = 60;
+    alpha2 = 60;    
+  } else {
+    val += random(0,1)*20;
   }  
   
   buf.noStroke();
@@ -25,7 +28,6 @@ void brushOne(boolean useOffset, boolean drawHuge) {
   buf.fill(0,0,0,alpha1);
 
   angle += 10;
-  float val = cos(radians(angle)) * 10.0 + random(0,1)*20;
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
     float xoff = cos(radians(a)) * val * spacing;
     float yoff = sin(radians(a)) * val * spacing;    
