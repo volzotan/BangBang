@@ -46,20 +46,20 @@ void castEffect() {
     if (pos < player.length() * 0.25) {
       // 0 - 25%      
       if (pos < player.length() * 0.125) {
-                                                                          // 0 - 12.5% // 0.001 - 5.997
-        // 1. udn 2. part gegenstimme
-        if((pos <  3050) && (pos > 1950) ||
-           (pos <  6050) && (pos > 4950)) 
+        // 0 - 12.5% // 0.001 - 5.997
+        // 1. und 2. part gegenstimme
+        if((pos <  3090) && (pos > 2300) || // 2 bis 3
+           (pos <  6000) && (pos > 5200))   // 5 bis 6
         {
            brushOne(true, false);            
         }
       } else {
-                                                                          // 12.5 - 25% // 5.998 - 11.996
+        // 12.5 - 25% // 5.998 - 11.996
         // 3. part gegenstimme
-        if(pos < 10550 && pos > 9750) {
-          if(pos < 10041 && pos > 9959) {
-            brushOne(true,true);
-          }  
+        if(pos < 8900 && pos > 8150) { 
+          brushOne(true, false);
+        }
+        if(pos < 10550 && pos > 9950) { 
           brushOne(true, false);
         }
         // general pause  
@@ -74,11 +74,10 @@ void castEffect() {
       // 25 - 50%
       // gesang      
       if (pos < player.length() * 0.375) {
-                                                                         // 25 - 37.5% // 11.997 - 17.994 
+         // 25 - 37.5% // 11.997 - 17.994 
         
-        //initFlock(3);
       } else {
-                                                                         // 37.5 - 50% // 17.995 - 23.992
+         // 37.5 - 50% // 17.995 - 23.992
       }
     }
   } else {
