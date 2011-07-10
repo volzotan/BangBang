@@ -48,15 +48,15 @@ void castEffect() {
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
         // 1. und 2. part gegenstimme
-        if((pos <  3090) && (pos > 2300) || // 2 bis 3
-           (pos <  6000) && (pos > 5200))   // 5 bis 6
+        if((pos <  3090) && (pos > 2390) || // 2 bis 3
+           (pos <  5900) && (pos > 5200))   // 5 bis 6
         {
            brushOne(true, false);            
         }
       } else {
         // 12.5 - 25% // 5.998 - 11.996
         // 3. part gegenstimme
-        if(pos < 8900 && pos > 8150) { 
+        if(pos < 8800 && pos > 8150) { 
           brushOne(true, false);
         }
         if(pos < 10550 && pos > 9950) { 
@@ -112,14 +112,9 @@ void castEffect() {
         }        
         if(inkSplatter09Used == false) { inkSplatter09Used = tintenklecks(38950,  10.5, pos); }; // "bang" 1. Wort PASST
         if(inkSplatter10Used == false) { inkSplatter10Used = tintenklecks(39250,  14.5, pos); }; // "bang" 2. Wort PASST        
-        if((pos > 40550)) {
-          brushOne(true, false);
-        }        
-      } else {
-                                                                          // 87.5 - 100% // 41.988 - 47.986
-        if((pos < 43350)) {
-          brushOne(true, false);
-        } else {
+        
+      } else {                                                                          // 87.5 - 100% // 41.988 - 47.986
+        if((pos > 43350)) {
           brushFour(4,50);  
         }       
       }
