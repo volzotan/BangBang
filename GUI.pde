@@ -4,7 +4,7 @@ void setupGUI(){
   endP5 = new ControlP5(this);
  
   // STARTUP MENU (1)
-  // -> main
+  // -> main (initial play)
   ControllerSprite playSprite = new ControllerSprite(setupP5,mainButtonImage,220,220);
   playSprite.setMask(loadImage("buttons/PlayMask.png"));
   playSprite.enableMask();
@@ -13,7 +13,7 @@ void setupGUI(){
   playButton.setSprite(playSprite);
 
   // BREAK MENU (2)
-  // -> main
+  // -> main (break)
   ControllerSprite breakSprite = new ControllerSprite(breakP5,mainButtonImage,220,220);
   breakSprite.setMask(loadImage("buttons/BreakMask.png"));
   breakSprite.enableMask();
@@ -21,30 +21,46 @@ void setupGUI(){
   Button breakButton = breakP5.addButton("Break",0,(int) width/2-110,(int) height/2-110,220,220);
   breakButton.setSprite(breakSprite);
   
+  // -> left bottom (exit)
+  ControllerSprite breakExitSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
+  breakExitSprite.setMask(exitButtonImage);
+  breakExitSprite.enableMask();
+  
+  Button breakExitButton = breakP5.addButton("Exit",0,20,225,250,120);
+  breakExitButton.setSprite(breakExitSprite);
+  
+  // -> right bottom (save)
+  ControllerSprite breakSaveSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
+  breakSaveSprite.setMask(saveButtonImage);
+  breakSaveSprite.enableMask();
+  
+  Button breakSaveButton = breakP5.addButton("Save",0,530,225,250,120);
+  breakSaveButton.setSprite(breakSaveSprite);
+  
   // END MENU (3)
-  // -> main
+  // -> main (replay)
   ControllerSprite replaySprite = new ControllerSprite(endP5,mainButtonImage,220,220);
   replaySprite.setMask(loadImage("buttons/ReplayMask.png"));
   replaySprite.enableMask();
   
-  Button replayButton = endP5.addButton("Play",0,(int) width/2-110,(int) height/2-110,220,220);
+  Button replayButton = endP5.addButton("Replay",0,(int) width/2-110,(int) height/2-110,220,220);
   replayButton.setSprite(replaySprite);
   
-  // -> left bottom
-  ControllerSprite exitSprite = new ControllerSprite(endP5,menuButtonImage,250,120);
-  exitSprite.setMask(loadImage("buttons/ExitMask.png"));
-  exitSprite.enableMask();
+  // -> left bottom (exit)
+  ControllerSprite endExitSprite = new ControllerSprite(endP5,menuButtonImage,250,120);
+  endExitSprite.setMask(exitButtonImage);
+  endExitSprite.enableMask();
   
-  Button exitButton = endP5.addButton("Exit",0,20,225,250,120);
-  exitButton.setSprite(exitSprite);
+  Button endExitButton = endP5.addButton("Exit",0,20,225,250,120);
+  endExitButton.setSprite(endExitSprite);
   
-  // -> right bottom
-  ControllerSprite saveSprite = new ControllerSprite(endP5,menuButtonImage,250,120);
-  saveSprite.setMask(loadImage("buttons/SaveMask.png"));
-  saveSprite.enableMask();
+  // -> right bottom (save)
+  ControllerSprite endSaveSprite = new ControllerSprite(endP5,menuButtonImage,250,120);
+  endSaveSprite.setMask(saveButtonImage);
+  endSaveSprite.enableMask();
   
-  Button saveButton = endP5.addButton("Save",0,530,225,250,120);
-  saveButton.setSprite(saveSprite);
+  Button endSaveButton = endP5.addButton("Save",0,530,225,250,120);
+  endSaveButton.setSprite(endSaveSprite);
 }
 
 // DRAW GUI
@@ -62,19 +78,21 @@ void closeGUI(int closeMenu){
     case 1 : setupP5.hide(); break;
     case 2 : breakP5.hide(); break;
     case 3 : endP5.hide(); break;
+    case 4 : setupP5.hide(); breakP5.hide(); endP5.hide();
   }
 }
 
 //  initial funktion für start am anfang
 public void Play(int theValue) {
-  if(usePlay) {
     initialised = true;
     player.play();
     usePlay = false;
-  } else {
-    doClear = true;
-    usePlay = true;
-  }
+}
+
+public void Replay(int theValue) {
+  closeGUI(4);
+  doClear = true;
+  setup();
 }
 
 public void Break(int theValue) {
@@ -99,7 +117,7 @@ public void Save(int theValue) {
 // space = play/pause => icon einblenden?
 // ???
 void keyReleased() {
-  if ('r' == key || 'R' == key) { doClear = true; }
+  if ('r' == key || 'R' == key) { Replay(0); }
   if ('s' == key || 'S' == key) { Save(0); }
   if (' ' == key) { 
     if(player.isPlaying()) {

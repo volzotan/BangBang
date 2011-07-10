@@ -68,13 +68,11 @@ void castEffect() {
         }
         // gesang
         if(pos > 11850) {
-          //ps.addParticle(x+copyOffsetX,y+copyOffsetY);
         }        
       }
     } else {
       // 25 - 50%
-      // gesang
-      //ps.addParticle(x+copyOffsetX,y+copyOffsetY);       
+      // gesang      
       if (pos < player.length() * 0.375) {
                                                                          // 25 - 37.5% // 11.997 - 17.994 
         
@@ -159,18 +157,18 @@ boolean tintenklecks(int time, float size, int pos) {
     // top side :: y position
     if(1 == inkSplatterPos || 0 == inkSplatterPos) {       
         if(!(yPos >= copyOffsetY && yPos <= (copyOffsetY+height/2-splatterSize))) {
-	  yPos = copyOffsetY + height/4 + random(-height/8,height/8) - random(0,20);
-          if(yPos < copyOffsetY) { yPos = copyOffsetY - random(-10,10); }
-          if(yPos > (copyOffsetY+height/2)) { yPos = copyOffsetY + height/2 - random(10,40); }
+	  yPos = copyOffsetY + height/4 + random(-height/8,height/8) - random(0,10);
+          if(yPos < copyOffsetY) { yPos = copyOffsetY - random(0,10); }
+          if(yPos > (copyOffsetY+height/2)) { yPos = copyOffsetY + height/2 - random(10,20); }
         }       
     }  
     
     // bottom side :: y position
     if(2 == inkSplatterPos || 3 == inkSplatterPos) {              
         if(!(yPos >= (copyOffsetY+height/2) && yPos <= (copyOffsetY+height-splatterSize))) {
-	  yPos = copyOffsetY + (height*3)/4 + random(-height/8,height/8) - random(0,50);
-          if(yPos < (copyOffsetY+height/2)) { yPos = copyOffsetY + height/2 + random(10,splatterSize/3); }
-          if(yPos > (copyOffsetY+height)) { yPos = copyOffsetY + height - random(splatterSize/2,splatterSize); }
+	  yPos = copyOffsetY + (height*3)/4 + random(-height/8,height/8) - random(20,100);
+          if(yPos < (copyOffsetY+height/2)) { yPos = copyOffsetY + height/2 + random(30,splatterSize/3); }
+          if(yPos > (copyOffsetY+height)) { yPos = copyOffsetY + height - random((splatterSize*3/4),splatterSize); }
         }      
     }
     
@@ -183,11 +181,3 @@ boolean tintenklecks(int time, float size, int pos) {
   }  
   return false;
 } 
-
-void initFlock(int amount) {
-  for (int j = 0; j < 10; j++) {
-    for (int i = 0; i < amount; i++) {
-      flock.addBoid(new Boid(new PVector(lastMousePosX[j*3], lastMousePosY[j*3]), 3.0, 0.05));
-    }  
-  }
-}  

@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, overlayImage, cursorImage;
+PImage mainButtonImage, menuButtonImage, exitButtonImage, saveButtonImage, overlayImage, cursorImage;
 boolean usePlay = true;
 
 // Minim
@@ -80,11 +80,6 @@ boolean
   inkSplatter08Used = false,
   inkSplatter09Used = false,
   inkSplatter10Used = false;
-// Bird flock
-Flock flock;
-
-// Particle System
-// ParticleSystem ps;
 
 // ---- Colors ----
 int cR1 = 100, cR2 = 145, cR3 =   0, cR4 =   0, cR5 =   0;
@@ -104,6 +99,25 @@ void setup(){
   size(800, 450, JAVA2D);
   frameRate(30);
 
+  if(doClear) {
+    player.pause();
+    player.rewind();
+    doClear = false;
+    initialised = false;
+        
+    // reset inkSplatter
+    inkSplatter01Used = false;
+    inkSplatter02Used = false;
+    inkSplatter03Used = false;
+    inkSplatter04Used = false;
+    inkSplatter05Used = false;
+    inkSplatter06Used = false;
+    inkSplatter07Used = false;
+    inkSplatter08Used = false;
+    inkSplatter09Used = false;
+    inkSplatter10Used = false;
+  }
+
   initCanvas(true);
   initVignette();
   initImages();
@@ -122,50 +136,11 @@ void setup(){
   scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
   scaledMiniMap.resize(0, 18);                // resize-Wert ist buf.height/50
   
-  //ps = new ParticleSystem(0, new PVector(width/2,height/2,0));
-  flock = new Flock();
-  boolean initFlock = false;
-  
   deltaMouseX = 470;
   deltaMouseY = 450;
 }
 
 void draw(){
-  if(doClear) {
-    player.pause();
-    player.rewind();
-    initCanvas(true);
-    doClear = false;
-    initialised = false;
-        
-    //Rreset inkSplatter
-    inkSplatter01Used = false;
-    inkSplatter02Used = false;
-    inkSplatter03Used = false;
-    inkSplatter04Used = false;
-    inkSplatter05Used = false;
-    inkSplatter06Used = false;
-    inkSplatter07Used = false;
-    inkSplatter08Used = false;
-    inkSplatter09Used = false;
-    inkSplatter10Used = false;
-    
-    // Viewport back to startposition
-    copyOffsetX = 0;
-    copyOffsetY = (buf.height - height) / 2;
-    
-    for (int i=0; i< directionArrayX.length; i++) {
-      directionArrayX[0] = 0;
-      directionArrayY[0] = 0;
-    } 
-    for (int i=0; i< lastMousePosX.length; i++) {
-      lastMousePosX[0] = 0;
-      lastMousePosY[0] = 0;
-    } 
-    
-    deltaMouseX = 470;
-    deltaMouseY = 450;
-  }
   if(!initialised) {
     switchCursor(2);
     image(getBufSlice(), 0, 0);
@@ -198,8 +173,6 @@ void draw(){
       }      
       buf.endDraw();
     
-      //ps.run();
-      flock.run();
       drawVignette();
       drawMiniMap();       
       tempBrushValue *= 0.95;      
@@ -210,9 +183,6 @@ void draw(){
         image(overlayImage, 0, 0);
         drawGUI(2); 
       } else {
-        //moveViewport();
-        //drawVignette();
-        //drawMiniMap();
         image(getBufSlice(), 0, 0);        
         image(overlayImage, 0, 0);
         drawGUI(3);     

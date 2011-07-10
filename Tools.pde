@@ -64,6 +64,8 @@ void initCanvas(boolean useBGImage) {
 void initImages() {
   mainButtonImage = loadImage("buttons/MainButton.png");
   menuButtonImage = loadImage("buttons/MenuButton.png");
+  exitButtonImage = loadImage("buttons/ExitMask.png");
+  saveButtonImage = loadImage("buttons/SaveMask.png");
   overlayImage = loadImage("MenuOverlay.png");
   cursorImage = loadImage("cursor.png");
   for(int i = 0; i < inkSplatter.length; i++) {
