@@ -59,10 +59,10 @@ void castEffect() {
         if(pos < 8800 && pos > 8150) { 
           brushOne(true, false);
         }
-        if(pos < 10550 && pos > 9950) { 
+        if(pos < 10550 && pos > 10050) { 
           brushOne(true, false);
           // large one
-          if(pos < 10360 && pos > 10340) { 
+          if(pos < 10365 && pos > 10335) { 
             brushOne(false, true);
           }          
         }

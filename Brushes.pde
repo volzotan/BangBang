@@ -9,7 +9,7 @@ void brushOne(boolean useOffset, boolean drawHuge) {
   }  
   
   float val = cos(radians(angle)) * 10.0;
-  float size1 = 0, size2 = random(0,10), spacing = 1;
+  float size1 = 3, size2 = random(3,10), spacing = 1;
   int alpha1 = 150, alpha2 = 255;
   if(drawHuge) {
     size1 = 250;
