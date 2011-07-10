@@ -109,13 +109,13 @@ void brushFour(int minAmount, int maxAmount) {
        extraOffsetY = 9+30*player.right.get(0)+5*random(-50,50);
      }
      
-     if(random(0,1) < 0,33) {
+     if(random(0,1) < 0.33) {
        buf.fill(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
      } else {
-        float rand = random(0,3);
-        if(rand < 0,3) {
+        float rand = random(0.3);
+        if(rand < 0.3) {
           buf.fill(80,22,28); // red
-        } else if(rand > 0,6) {
+        } else if(rand > 0.6) {
           buf.fill(13,36,98); // blue
         } else {
           buf.fill(22,90,59); // green
