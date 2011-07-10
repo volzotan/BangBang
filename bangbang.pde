@@ -201,7 +201,7 @@ void draw(){
     lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
   }
-  println(frameRate + " at " + player.position());
+  //println(frameRate + " at " + player.position());
 }
   
 void stop() {                                       // Minim Stop
