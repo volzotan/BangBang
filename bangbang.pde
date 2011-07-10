@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, overlayImage, cursorImage;
+PImage mainButtonImage, menuButtonImage, overlayImage;
 boolean usePlay = true;
 
 // Minim
@@ -98,7 +98,6 @@ int[] directionArrayY = new int[10];
 
 // setup
 boolean initialised = false, doClear = false;
-int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
 
 void setup(){
   size(800, 450, JAVA2D);
@@ -166,13 +165,11 @@ void draw(){
     deltaMouseX = 470;
     deltaMouseY = 450;
   }
-    
   if(!initialised) {
-    switchCursor(2);
     image(getBufSlice(), 0, 0);
     image(overlayImage, 0, 0);
     drawGUI(1);
-  } else {      
+  } else {  
     closeGUI(1);
     beat.detect(player.mix);
     if(beat.isOnset()) {
@@ -185,7 +182,6 @@ void draw(){
     pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
-      switchCursor(1);
       moveViewport();
       buf.beginDraw();
       if (drawCounter % 1 == 0) {        
@@ -206,7 +202,6 @@ void draw(){
       tempBrushValue *= 0.95;      
     } else {
       if (player.position() < 47986) {
-        switchCursor(2);
         image(getBufSlice(), 0, 0);
         image(overlayImage, 0, 0);
         drawGUI(2); 
@@ -214,7 +209,6 @@ void draw(){
         //moveViewport();
         //drawVignette();
         //drawMiniMap();
-        switchCursor(2);        
         image(getBufSlice(), 0, 0);        
         image(overlayImage, 0, 0);
         drawGUI(3);     
