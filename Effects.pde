@@ -48,7 +48,7 @@ void castEffect() {
       if (pos < player.length() * 0.125) {
         // 0 - 12.5% // 0.001 - 5.997
         // 1. und 2. part gegenstimme
-        if((pos <  3060) && (pos > 2390) || // 2 bis 3
+        if((pos <  3020) && (pos > 2390) || // 2 bis 3
            (pos <  5850) && (pos > 5200))   // 5 bis 6
         {
            brushOne(true, false);            
@@ -62,7 +62,7 @@ void castEffect() {
         if(pos < 10550 && pos > 10100) { 
           brushOne(true, false);
           // large one
-          if(pos < 10365 && pos > 10330) { 
+          if(pos < 10370 && pos > 10330) { 
             brushOne(false, true);
           }          
         }
@@ -107,7 +107,7 @@ void castEffect() {
       // 75 - 100%
       if (pos < player.length() * 0.875) {
         // 75 - 87.5% // 35.990 - 41.987
-        if(pos < 37700 && pos > 36900) { 
+        if(pos < 37700 && pos > 36950) { 
           brushOne(true, false);
         }        
         if(inkSplatter09Used == false) { inkSplatter09Used = tintenklecks(38950,  10.5, pos); }; // "bang" 1. Wort PASST
