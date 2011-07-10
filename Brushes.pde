@@ -8,7 +8,7 @@ void brushOne(boolean useOffset, boolean drawHuge) {
      extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(0)*random(-1,1) : 52+70*player.right.get(0)*random(-1,1);
   }  
   
-  float val = cos(radians(angle)) * 10.0 + 3;
+  float val = cos(radians(angle)) * 10.0 + 4;
   float size1 = 9, size2 = random(8,25), spacing = 1;
   int alpha1 = 150, alpha2 = 255;
   if(drawHuge) {
@@ -113,7 +113,7 @@ void brushFour(int minAmount, int maxAmount) {
        buf.fill(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
        buf.stroke(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
      } else {
-        float rand = random(0.3);
+        float rand = random(0,1);
         if(rand < 0.3) {
           buf.fill(80,22,28); // red
           buf.stroke(80,22,28); // red          
