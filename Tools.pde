@@ -64,6 +64,7 @@ void initCanvas(boolean useBGImage) {
 void initImages() {
   mainButtonImage = loadImage("buttons/MainButton.png");
   overlayImage = loadImage("MenuOverlay.png");
+  cursorImage = loadImage("cursor.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
   }  
@@ -111,6 +112,15 @@ void moveViewport(){
   copyOffsetX = xPosKoord;
   copyOffsetY = yPosKoord;
 }
+
+void switchCursor(int kind) {
+  if(switchCursor != kind) {
+    switch(kind) {
+      case 1: cursor(cursorImage); switchCursor = kind; break;
+      case 2: cursor(ARROW); switchCursor = kind;   
+    }  
+  }  
+}  
 
 boolean testOnCanvasX(int xPosCoord) {
     if(xPosKoord > buf.width - width) {
