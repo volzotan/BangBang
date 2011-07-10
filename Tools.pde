@@ -12,32 +12,35 @@ int calcMiniMapPosY() {
   return (int) verschiebungY;
 }
 
-void drawMiniMap(){
-  // rgb stroke black
-  stroke(0,0,0);
-  // stroke width 1 pixel
-  strokeWeight(1);
-  // rgb fill fully transparent
-  fill(0,0,0,50);
-  // minimap window position
-  // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2  
-  rect(629,9,161,19);
- 
-  if (drawCounter % 5 == 0) {
-    scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-    // resize-Wert ist buf.height/50    
-    scaledMiniMap.resize(0, 18);
+void drawMiniMap(boolean toggle){  
+  if(toggle){
+    
+    // rgb stroke black
+    stroke(0,0,0);
+    // stroke width 1 pixel
+    strokeWeight(1);
+    // rgb fill fully transparent
+    fill(0,0,0,50);
+    // minimap window position
+    // breite und höhe sind buf.width/50+2 bzw. buf.height/50+2  
+    rect(629,9,161,19);
+   
+    if (drawCounter % 5 == 0) {
+      scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
+      // resize-Wert ist buf.height/50    
+      scaledMiniMap.resize(0, 18);
+    }
+    image(scaledMiniMap, 630, 10);                    
+   
+    if (drawCounter % 3 == 0) {
+      miniMapPosX = calcMiniMapPosX() + 630;
+      miniMapPosY = calcMiniMapPosY() + 10;
+    }
+   
+    // rgb stroke black
+    stroke(0,0,0,0); 
+    rect(miniMapPosX, miniMapPosY, 16, 9);
   }
-  image(scaledMiniMap, 630, 10);                    
- 
-  if (drawCounter % 3 == 0) {
-    miniMapPosX = calcMiniMapPosX() + 630;
-    miniMapPosY = calcMiniMapPosY() + 10;
-  }
- 
-  // rgb stroke black
-  stroke(0,0,0,0); 
-  rect(miniMapPosX, miniMapPosY, 16, 9);
 }
 
 void drawVignette(){
@@ -67,6 +70,8 @@ void initImages() {
   demoButtonImage = loadImage("buttons/DemoMask.png");
   exitButtonImage = loadImage("buttons/ExitMask.png");
   saveButtonImage = loadImage("buttons/SaveMask.png");
+  mapDButtonImage = loadImage("buttons/MapDMask.png");
+  mapEButtonImage = loadImage("buttons/MapEMask.png");
   overlayImage = loadImage("MenuOverlay.png");
   cursorImage = loadImage("cursor.png");
   for(int i = 0; i < inkSplatter.length; i++) {

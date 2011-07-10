@@ -3,8 +3,9 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, overlayImage, cursorImage;
+PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, overlayImage, cursorImage;
 boolean usePlay = true;
+boolean mapEnabled = true;
 
 // Minim
 import ddf.minim.*;
@@ -174,7 +175,7 @@ void draw(){
       buf.endDraw();
     
       drawVignette();
-      drawMiniMap();       
+      drawMiniMap(mapEnabled);       
       tempBrushValue *= 0.95;      
     } else {
       switchCursor(2);

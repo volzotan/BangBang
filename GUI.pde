@@ -1,3 +1,6 @@
+ControllerSprite setupMapDisSprite, setupMapEnSprite, breakMapDisSprite, breakMapEnSprite;
+Button setupMapToggleButton, breakMapToggleButton;
+
 void setupGUI(){
   setupP5 = new ControlP5(this);
   breakP5 = new ControlP5(this);
@@ -11,6 +14,21 @@ void setupGUI(){
 
   Button playButton = setupP5.addButton("Play",0,(int) width/2-110,(int) height/2-110,220,220);
   playButton.setSprite(playSprite);
+  
+  // -> right top
+  setupMapDisSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
+  setupMapDisSprite.setMask(mapDButtonImage);
+  setupMapDisSprite.enableMask();
+  setupMapToggleButton = setupP5.addButton("EnableMap",0,530,105,250,120);
+  
+  setupMapEnSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
+  setupMapEnSprite.setMask(mapEButtonImage);
+  setupMapEnSprite.enableMask();
+  if(!mapEnabled) {   
+    setupMapToggleButton.setSprite(setupMapDisSprite);
+  } else {        
+    setupMapToggleButton.setSprite(setupMapEnSprite);
+  }  
   
   // -> left top
   ControllerSprite setupDemoSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
@@ -36,6 +54,21 @@ void setupGUI(){
 
   Button breakButton = breakP5.addButton("Break",0,(int) width/2-110,(int) height/2-110,220,220);
   breakButton.setSprite(breakSprite);
+  
+  // -> right top
+  breakMapDisSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
+  breakMapDisSprite.setMask(mapDButtonImage);
+  breakMapDisSprite.enableMask();
+  breakMapToggleButton = breakP5.addButton("EnableMap",0,530,105,250,120);
+  
+  breakMapEnSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
+  breakMapEnSprite.setMask(mapEButtonImage);
+  breakMapEnSprite.enableMask();
+  if(!mapEnabled) {   
+    breakMapToggleButton.setSprite(breakMapDisSprite);
+  } else {        
+    breakMapToggleButton.setSprite(breakMapEnSprite);
+  }  
   
   // -> left bottom (exit)
   ControllerSprite breakExitSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
@@ -118,6 +151,17 @@ public void Break(int theValue) {
   } else if(!initialised) {
     Play(0);
   }
+}
+
+public void EnableMap(int theValue) {
+  mapEnabled = (mapEnabled) ? false : true;
+  if(!mapEnabled) {   
+    setupMapToggleButton.setSprite(setupMapDisSprite);
+    breakMapToggleButton.setSprite(breakMapDisSprite);
+  } else {        
+    setupMapToggleButton.setSprite(setupMapEnSprite);
+    breakMapToggleButton.setSprite(breakMapEnSprite);
+  }  
 }
 
 public void Exit(int theValue) {
