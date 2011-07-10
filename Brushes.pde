@@ -16,7 +16,8 @@ void brushOne(boolean useOffset, boolean drawHuge) {
     size2 = 325;
     spacing = 35;
     alpha1 = 50;
-    alpha2 = 60;    
+    alpha2 = 60;
+    println(val);    
   } else {
     val += random(0,1)*20;
   }  
@@ -107,8 +108,8 @@ void brushFour(int minAmount, int maxAmount) {
      }
      
      if(random(0,1) < 0.6) {
-       buf.fill(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
-       buf.stroke(cR2-tempBrushValue - size - extraOffsetY - amount, cG2-tempBrushValue - size - extraOffsetY - amount, cB2-tempBrushValue - size - extraOffsetY - amount);
+       buf.fill(cR2 - tempBrushValue - size + extraOffsetY - amount, cG2 - tempBrushValue - size + extraOffsetY - amount, cB2 - tempBrushValue - size + extraOffsetY - amount);
+       buf.stroke(cR2 - tempBrushValue - size + extraOffsetY - amount, cG2 - tempBrushValue - size + extraOffsetY - amount, cB2 - tempBrushValue - size + extraOffsetY - amount);
      } else {
         float rand = random(0,1);
         if(rand < 0.3) {
