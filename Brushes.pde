@@ -2,7 +2,7 @@
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
 void brushOne(boolean useOffset, boolean drawHuge) {
-  float extraOffsetY = 0  float extraOffsetX = 0;
+  float extraOffsetY = 0;  float extraOffsetX = 0;
   if(useOffset) {
      extraOffsetY = (random(1) < 0.5) ? -37+60*player.left.get(0)*random(-1,1) : 52+70*player.right.get(0)*random(-1,1);
      extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(0)*random(-1,1) : 52+70*player.right.get(0)*random(-1,1);
