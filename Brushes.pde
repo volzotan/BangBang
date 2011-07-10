@@ -17,7 +17,7 @@ void brushOne(boolean useOffset, boolean drawHuge) {
     spacing = 35;
     alpha1 = 50;
     alpha2 = 60;
-    println(val);    
+    val = (val > 9.5) ? random(6,9) : val;
   } else {
     val += random(0,1)*20;
   }  
