@@ -3,7 +3,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, exitButtonImage, saveButtonImage, overlayImage, cursorImage;
+PImage mainButtonImage, menuButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, overlayImage, cursorImage;
 boolean usePlay = true;
 
 // Minim

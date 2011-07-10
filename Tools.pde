@@ -64,6 +64,7 @@ void initCanvas(boolean useBGImage) {
 void initImages() {
   mainButtonImage = loadImage("buttons/MainButton.png");
   menuButtonImage = loadImage("buttons/MenuButton.png");
+  demoButtonImage = loadImage("buttons/DemoMask.png");
   exitButtonImage = loadImage("buttons/ExitMask.png");
   saveButtonImage = loadImage("buttons/SaveMask.png");
   overlayImage = loadImage("MenuOverlay.png");

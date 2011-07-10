@@ -11,6 +11,14 @@ void setupGUI(){
 
   Button playButton = setupP5.addButton("Play",0,(int) width/2-110,(int) height/2-110,220,220);
   playButton.setSprite(playSprite);
+  
+  // -> left top
+  ControllerSprite setupDemoSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
+  setupDemoSprite.setMask(demoButtonImage);
+  setupDemoSprite.enableMask();
+  
+  Button setupDemoButton = setupP5.addButton("Demo",0,20,105,250,120);
+  setupDemoButton.setSprite(setupDemoSprite);  
 
   // BREAK MENU (2)
   // -> main (break)
