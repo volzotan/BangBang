@@ -4,9 +4,6 @@
   *   eine Koordinate die vollgezeichnet werden soll sich auf der Zeichenflaeche befindet
   * + lastMousePosX[0-29] gibt vorherige absolute Mausposition aus
   *
-  *  bei einer Mindestframerate von 24 wird durchschnittliche alle 42ms ein draw gezeichnet
-  *  bei jedem zweiten draw ein brush() bedeutet eine Ausführung alle 82ms. Zur Sicherheit
-  *  das doppelte Intervall bei der Positionsüberprüfung berücksichtigen
   */
   
   
@@ -78,6 +75,16 @@ void pauseAllScheduledEvents() {
 void startAllScheduledEvents() {
   scheduleSplatterEvents();
   scheduleBrushFourEvents();
+  
+  scheduleGhostBrush();
+}
+
+void scheduleGhostBrush() {
+   timer.schedule(new TimerTask() {
+      public void run() {
+        drawGhostBrush();
+      }
+    }, 12500);              // GhostBrush Start time
 }
 
 void scheduleSingleSplatterEvent(int delay, int size) {

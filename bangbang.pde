@@ -92,6 +92,8 @@ int[] directionArrayY = new int[10];
 boolean drawSaveOverlay = false;
 int saveReady = 0;
 
+boolean ghostBrush = false;
+
 // setup
 boolean initialised = false, doClear = false;
 int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
@@ -172,6 +174,9 @@ void draw(){
       buf.beginDraw();
       if (drawCounter % 1 == 0) {        
         brushThree();
+        if (ghostBrush) {
+          ghostBrush();
+        }
       }      
       directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
       directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;
@@ -188,6 +193,8 @@ void draw(){
         image(overlayImage, 0, 0);
         drawGUI(2); 
       } else if (!drawSaveOverlay) {
+        pauseAllScheduledEvents();
+        
         image(getBufSlice(), 0, 0);        
         image(overlayImage, 0, 0);
         drawGUI(3);     

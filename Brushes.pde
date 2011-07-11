@@ -130,5 +130,10 @@ void brushFour(int minAmount, int maxAmount) {
    
 }
 
+void ghostBrush() {
+  println("...");
+  
+}
+
 
 
