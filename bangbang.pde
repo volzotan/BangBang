@@ -113,6 +113,11 @@ void setup(){
   initEventArrays();
   elapsedTime = 0;
   mainBrushActive = true;
+  
+  oldX = 400;
+  oldY = 225;
+  
+  
   size(800, 450, JAVA2D);
   frameRate(30);
 
