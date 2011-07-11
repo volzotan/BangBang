@@ -1,3 +1,10 @@
+// Event Handling Ressources
+import java.util.Timer;
+import java.util.TimerTask;
+
+Timer timer = new Timer();
+int elapsedTime = 0;
+
 // controlP5
 import controlP5.*;
 
@@ -70,17 +77,6 @@ int pos = 0;
 PImage inkSplatter[] = new PImage[10];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
 int inkSplatterPos = 0;
-boolean
-  inkSplatter01Used = false,
-  inkSplatter02Used = false,
-  inkSplatter03Used = false,
-  inkSplatter04Used = false,
-  inkSplatter05Used = false,
-  inkSplatter06Used = false,
-  inkSplatter07Used = false,
-  inkSplatter08Used = false,
-  inkSplatter09Used = false,
-  inkSplatter10Used = false;
 
 // ---- Colors ----
 int cR1 = 100, cR2 = 145, cR3 =   0, cR4 =   0, cR5 =   0;
@@ -102,6 +98,9 @@ int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
 int wasGUI = 0;
 
 void setup(){
+  initEventArrays();
+  elapsedTime = 0;
+  
   size(800, 450, JAVA2D);
   frameRate(30);
 
@@ -112,17 +111,6 @@ void setup(){
     initialised = false;
     wasGUI = 0;
         
-    // reset inkSplatter
-    inkSplatter01Used = false;
-    inkSplatter02Used = false;
-    inkSplatter03Used = false;
-    inkSplatter04Used = false;
-    inkSplatter05Used = false;
-    inkSplatter06Used = false;
-    inkSplatter07Used = false;
-    inkSplatter08Used = false;
-    inkSplatter09Used = false;
-    inkSplatter10Used = false;
   }
 
   initCanvas(true);
@@ -154,6 +142,7 @@ void draw(){
     } 
     if(initialised && player.position() < 47986 && wasGUI == 0) {
       player.play(); 
+      startAllScheduledEvents();
     } else {
       wasGUI = 0;
     }
@@ -186,10 +175,7 @@ void draw(){
       }      
       directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
       directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;
-      
-      if (drawCounter % 2 == 0) {
-        castEffect();
-      }      
+           
       buf.endDraw();
     
       drawVignette(true);

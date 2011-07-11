@@ -39,100 +39,106 @@
 // 43,3 - 47,5 :: Ende
 
 
-void castEffect() {
+int[][] splatterEventArray = new int[7][2];        // 0 = delay, 1 = size
+int[][] brushFourEventArray = new int[2][3];       // 0 = delay, 1 = continuousFlag, 2 = Intervall[ms]
+
+final int MAXAMOUNT =  4; 
+final int MINAMOUNT = 50;
+
+
+void initEventArrays() {
   
-  if (pos < player.length() * 0.5) {
-    // 0 - 50%
-    if (pos < player.length() * 0.25) {
-      // 0 - 25%      
-      if (pos < player.length() * 0.125) {
-        // 0 - 12.5% // 0.001 - 5.997
-        // 1. und 2. part gegenstimme
-        if((pos <  3020) && (pos > 2390) || // 2 bis 3
-           (pos <  5850) && (pos > 5200))   // 5 bis 6
-        {
-           brushOne(true, false);            
-        }
-      } else {
-        // 12.5 - 25% // 5.998 - 11.996
-        // 3. part gegenstimme
-        if(pos < 8800 && pos > 8150) { 
-          brushOne(true, false);
-        }
-        if(pos < 10550 && pos > 10100) { 
-          brushOne(true, false);
-          // large one
-          if(pos < 10370 && pos > 10330) { 
-            brushOne(false, true);
-          }          
-        }
-        // general pause  
-        if((pos > 11850) && (pos > 10450)) {
+  splatterEventArray[0][0] =  1000;     splatterEventArray[0][1] = 3;
+  splatterEventArray[1][0] =  2000;     splatterEventArray[1][1] = 5;
+  splatterEventArray[2][0] =  3000;     splatterEventArray[2][1] = 5;
+  splatterEventArray[3][0] =  4500;     splatterEventArray[3][1] = 7;
+  splatterEventArray[4][0] =  9000;     splatterEventArray[4][1] = 9;
+  splatterEventArray[5][0] = 11000;     splatterEventArray[5][1] = 5;
+  splatterEventArray[6][0] = 14000;     splatterEventArray[6][1] = 3;
+  
+  brushFourEventArray[0][0] =  2500;    brushFourEventArray[0][1] = 0;
+  brushFourEventArray[1][0] = 15000;    brushFourEventArray[1][1] = 1;    brushFourEventArray[1][2] = 80;
+  
+}
 
-        }
-        // gesang
-        if(pos > 11850) {
-        }        
+void savePauseTime() {
+  elapsedTime = player.position();
+}
+
+void killAllScheduledEvents() {
+  timer.cancel();                      // .purge() problematisch
+}
+
+void pauseAllScheduledEvents() {
+  savePauseTime();
+  killAllScheduledEvents();
+  timer = new Timer();
+}
+
+void startAllScheduledEvents() {
+  scheduleSplatterEvents();
+  scheduleBrushFourEvents();
+}
+
+void scheduleSingleSplatterEvent(int delay, int size) {
+  if (size == 3) {
+    timer.schedule(new TimerTask() {
+      public void run() {
+        tintenklecks(3, pos);
       }
-    } else {
-      // 25 - 50%
-      // gesang      
-      if (pos < player.length() * 0.375) {
-         // 25 - 37.5% // 11.997 - 17.994 
-        
-      } else {
-         // 37.5 - 50% // 17.995 - 23.992
+    }, delay);
+  } else if (size == 5) {
+    timer.schedule(new TimerTask() {
+      public void run() {
+        tintenklecks(5, pos);
       }
+    }, delay);
+  } else if (size == 7) {
+    timer.schedule(new TimerTask() {
+      public void run() {
+        tintenklecks(7, pos);
+      }
+    }, delay);
+  } else if (size == 9) {
+    timer.schedule(new TimerTask() {
+      public void run() {
+        tintenklecks(9, pos);
+      }
+    }, delay);
+  }
+}
+
+void scheduleSplatterEvents() {
+  for (int i=0; i < splatterEventArray.length; i++) {
+    if (splatterEventArray[i][0] - elapsedTime >= 0) {
+      scheduleSingleSplatterEvent(splatterEventArray[i][0] - elapsedTime, splatterEventArray[i][1]);
     }
-  } else {
-    // 50 - 100%
-    if (pos < player.length() * 0.75) {
-      // 50 - 75%
-      if (pos < player.length() * 0.625) {
-        // 50 - 62.5% // 23.993 - 29.990
-        if(inkSplatter01Used == false) { inkSplatter01Used = tintenklecks(24300,  10.5, pos); }; // "bang" 1. Wort PASST                                                                
-        if(inkSplatter02Used == false) { inkSplatter02Used = tintenklecks(24600,  11.0, pos); }; // "bang" 2. Wort PASST
-        if(inkSplatter03Used == false) { inkSplatter03Used = tintenklecks(27059,   8.5, pos); }; // "bang" 1. Wort PASST
-        if(inkSplatter04Used == false) { inkSplatter04Used = tintenklecks(27448,  12.0, pos); }; // "bang" 2. Wort PASST
-    
-      } else {
-        // 62.5 - 75% // 29.991 - 35.989
-        if(inkSplatter05Used == false) { inkSplatter05Used = tintenklecks(30100,   9.8, pos); }; // "bang" 1. Wort PASST
-        if(inkSplatter06Used == false) { inkSplatter06Used = tintenklecks(30400,  10.5, pos); }; // "bang" 2. Wort PASST
-        if(inkSplatter07Used == false) { inkSplatter07Used = tintenklecks(33000,   8.0, pos); }; // "bang" 1. Wort PASST
-        if(inkSplatter08Used == false) { inkSplatter08Used = tintenklecks(33300,  10.5, pos); }; // "bang" 2. Wort PASST
+  }
+}
 
-      }
-    } else {
-      // 75 - 100%
-      if (pos < player.length() * 0.875) {
-        // 75 - 87.5% // 35.990 - 41.987
-        if(pos < 37700 && pos > 36950) { 
-          brushOne(true, false);
-        }        
-        if(inkSplatter09Used == false) { inkSplatter09Used = tintenklecks(38950,  10.5, pos); }; // "bang" 1. Wort PASST
-        if(inkSplatter10Used == false) { inkSplatter10Used = tintenklecks(39250,  14.5, pos); }; // "bang" 2. Wort PASST        
-        
-      } else {                                                                          // 87.5 - 100% // 41.988 - 47.986
-        if((pos > 43350)) {
-          brushFour(4,50);  
-        }       
+void scheduleBrushFourEvents() {
+  for (int i=0; i < brushFourEventArray.length; i++) {
+    if (brushFourEventArray[i][0] - elapsedTime >= 0) {      
+      if (brushFourEventArray[i][1] == 0) {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushFour(MINAMOUNT, MAXAMOUNT);
+          }
+        }, brushFourEventArray[i][0] - elapsedTime);
+      } else {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushFour(MINAMOUNT, MAXAMOUNT);
+          }
+        }, brushFourEventArray[i][0] - elapsedTime, brushFourEventArray[i][2]);
       }
     }
   }
 }
 
 
-void happyBlackRectangle(int time) {
-  if ((pos < time + 300) && (pos > time - 300)) {
-    for (int i = 0; i<30; i++) {
-      buf.rect(lastMousePosX[i], lastMousePosY[i], 10, 10);
-    }
-  }
-} 
-
-boolean tintenklecks(int time, float size, int pos) {
-  if ((pos < time + 41) && (pos > time - 41)) {
+void tintenklecks(float size, int pos) {
+  
     int r = floor(random(0,inkSplatter.length-0.5));
     
         
@@ -177,8 +183,5 @@ boolean tintenklecks(int time, float size, int pos) {
     buf.image(inkSplatter[r], xPos, yPos, splatterSize, splatterSize);
     inkSplatterPos++;
     if(inkSplatterPos > 3) { inkSplatterPos = 0; }
-    
-    return true;
-  }  
-  return false;
+
 } 

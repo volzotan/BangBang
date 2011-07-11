@@ -135,12 +135,18 @@ void closeGUI(int closeMenu){
 public void Play(int theValue) {
   initialised = true;
   player.play();
+  
+  startAllScheduledEvents();
+  
   usePlay = false;
 }
 
 public void Replay(int theValue) {
   closeGUI(4);
   doClear = true;
+  
+  pauseAllScheduledEvents();
+  
   setup();
 }
 
@@ -183,14 +189,20 @@ void keyReleased() {
   if ('m' == key || 'M' == key) { EnableMap(0); }
   if ('r' == key || 'R' == key) { Replay(0); }
   if ('s' == key || 'S' == key) { 
+    pauseAllScheduledEvents();
     Save((player.isPlaying()) ? 1 : 0); 
   }
   if (' ' == key) { 
     if(player.isPlaying()) {
+      
+      pauseAllScheduledEvents();
+      
       player.pause();
     } else if(initialised && player.position() < 47986) {
       closeGUI(2);
       player.play();
+      
+      startAllScheduledEvents();
     } else if(!initialised) {
       Play(0);
     }  
