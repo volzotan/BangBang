@@ -116,7 +116,8 @@ void setup(){
   
   oldX = 400;
   oldY = 225;
-  
+  amp = 200;
+  xPlus = 0;
   
   size(800, 450, JAVA2D);
   frameRate(30);
