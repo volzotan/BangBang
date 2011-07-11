@@ -45,13 +45,13 @@ final int MINAMOUNT = 50;
 
 void initEventArrays() {
   
-  splatterEventArray[0][0] =  1000;     splatterEventArray[0][1] = 3;
-  splatterEventArray[1][0] =  2000;     splatterEventArray[1][1] = 5;
-  splatterEventArray[2][0] =  3000;     splatterEventArray[2][1] = 5;
-  splatterEventArray[3][0] =  4500;     splatterEventArray[3][1] = 7;
-  splatterEventArray[4][0] =  9000;     splatterEventArray[4][1] = 9;
-  splatterEventArray[5][0] = 11000;     splatterEventArray[5][1] = 5;
-  splatterEventArray[6][0] = 14000;     splatterEventArray[6][1] = 3;
+  splatterEventArray[0][0] =  1000;     splatterEventArray[0][1] = 1;
+  splatterEventArray[1][0] =  2000;     splatterEventArray[1][1] = 2;
+  splatterEventArray[2][0] =  3000;     splatterEventArray[2][1] = 3;
+  splatterEventArray[3][0] =  4500;     splatterEventArray[3][1] = 4;
+  splatterEventArray[4][0] =  9000;     splatterEventArray[4][1] = 5;
+  splatterEventArray[5][0] = 11000;     splatterEventArray[5][1] = 1;
+  splatterEventArray[6][0] = 14000;     splatterEventArray[6][1] = 2;
   
   brushFourEventArray[0][0] =  2500;    brushFourEventArray[0][1] = 0;
   brushFourEventArray[1][0] = 15000;    brushFourEventArray[1][1] = 1;    brushFourEventArray[1][2] = 80;
@@ -88,36 +88,48 @@ void scheduleGhostBrush() {
 }
 
 void scheduleSingleSplatterEvent(int delay, int size) {
-  if (size == 3) {
-    timer.schedule(new TimerTask() {
-      public void run() {
-        tintenklecks(3, pos);
+      switch(size) {
+        case 1: 
+            timer.schedule(new TimerTask() {
+              public void run() {
+                tintenklecks(7);
+              }
+            }, delay);
+          break;
+        case 2: 
+            timer.schedule(new TimerTask() {
+              public void run() {
+                tintenklecks(8);
+              }
+            }, delay);        
+          break;
+        case 3: 
+            timer.schedule(new TimerTask() {
+              public void run() {
+                tintenklecks(9);
+              }
+            }, delay);        
+          break;
+        case 4: 
+            timer.schedule(new TimerTask() {
+              public void run() {
+                tintenklecks(11);
+              }
+            }, delay);        
+          break;
+        case 5: 
+            timer.schedule(new TimerTask() {
+              public void run() {
+                tintenklecks(15);
+              }
+            }, delay);        
+          break;
       }
-    }, delay);
-  } else if (size == 5) {
-    timer.schedule(new TimerTask() {
-      public void run() {
-        tintenklecks(5, pos);
-      }
-    }, delay);
-  } else if (size == 7) {
-    timer.schedule(new TimerTask() {
-      public void run() {
-        tintenklecks(7, pos);
-      }
-    }, delay);
-  } else if (size == 9) {
-    timer.schedule(new TimerTask() {
-      public void run() {
-        tintenklecks(9, pos);
-      }
-    }, delay);
-  }
 }
 
 void scheduleSplatterEvents() {
   for (int i=0; i < splatterEventArray.length; i++) {
-    if (splatterEventArray[i][0] - elapsedTime >= 0) {
+    if (splatterEventArray[i][0] - elapsedTime >= 0) {      
       scheduleSingleSplatterEvent(splatterEventArray[i][0] - elapsedTime, splatterEventArray[i][1]);
     }
   }
@@ -144,7 +156,7 @@ void scheduleBrushFourEvents() {
 }
 
 
-void tintenklecks(float size, int pos) {
+void tintenklecks(float size) {
   
     int r = floor(random(0,inkSplatter.length-0.5));
     
