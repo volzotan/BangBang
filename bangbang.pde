@@ -118,6 +118,9 @@ void setup(){
   oldY = 225;
   amp = 200;
   xPlus = 0;
+  firstRun = true;
+  
+  Timer timer = new Timer();
   
   size(800, 450, JAVA2D);
   frameRate(30);
