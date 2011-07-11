@@ -4,58 +4,43 @@
   *   eine Koordinate die vollgezeichnet werden soll sich auf der Zeichenflaeche befindet
   * + lastMousePosX[0-29] gibt vorherige absolute Mausposition aus
   *
-  */
-  
-  
-// Effect ranges
+  */  
+// EFFECT RANGES
 //
-// 00,0 - 02,0 :: 1. Stimme
-// 02,0 - 03,0 :: 2. Stimme
-// 03,0 - 05,0 :: 1. Stimme
-// 05,0 - 06,0 :: 2. Stimme
-// 06,0 - 09,8 :: 1. Stimme
-// 09,8 - 10,5 :: 2. Stimme
+// Große Blume     @ 10.200 sec
+// Mittlere Blume  @ 25.350 sec
+// Mittlere Blume  @ 28.200 sec
+// Mittlere Blume  @ 31.050 sec
+// Mittlere Blume  @ 39.850 sec
+// Mittlere Blume  @ 42.120 sec
+// Kleine Blumen   @ 10.150 sec - 10.450 sec
+//
+// Kleine Blumen   @  2.340 sec -  2.930 sec
+// Kleine Blumen   @  5.200 sec -  5.800 sec
+// Kleine Blumen   @  8.100 sec -  8.680 sec
+// Kleine Blumen   @ 36.860 sec - 37.400 sec
 
-// 10,5 - 11,8 :: General Pause
-
-// 11,8 - 24,0 :: Gesang
-// 24,0 - 25,0 :: BangBang
-// 25,0 - 25,2 :: Pause
-// 25,2 - 27,0 :: Gesang
-// 27,0 - 28,0 :: BangBang
-// 28,0 - 28,2 :: Pause
-// 28,2 - 30,2 :: Gesang
-// 30,2 - 31,0 :: BangBang
-// 31,0 - 33,0 :: Gesang
-// 33,0 - 33,9 :: BangBang
-// 33,9 - 39,0 :: Gesang
-// 39,0 - 40,1 :: BangBang
-// 40,1 - 40,6 :: Pause
-
-// 40,6 - 43,3 :: Muster 1
-// 43,3 - 47,5 :: Ende
-
-
-int[][] splatterEventArray = new int[7][2];        // 0 = delay, 1 = size
+int[][] splatterEventArray = new int[10][2];       // 0 = delay, 1 = size
 int[][] brushFourEventArray = new int[2][3];       // 0 = delay, 1 = continuousFlag, 2 = Intervall[ms]
+int[][] brushOneEventArray = new int[5][3];
 
 final int MAXAMOUNT =  4; 
 final int MINAMOUNT = 50;
 
-
 void initEventArrays() {
   
-  splatterEventArray[0][0] =  1000;     splatterEventArray[0][1] = 1;
-  splatterEventArray[1][0] =  2000;     splatterEventArray[1][1] = 2;
-  splatterEventArray[2][0] =  3000;     splatterEventArray[2][1] = 3;
-  splatterEventArray[3][0] =  4500;     splatterEventArray[3][1] = 4;
-  splatterEventArray[4][0] =  9000;     splatterEventArray[4][1] = 5;
-  splatterEventArray[5][0] = 11000;     splatterEventArray[5][1] = 1;
-  splatterEventArray[6][0] = 14000;     splatterEventArray[6][1] = 2;
+  splatterEventArray[0][0] =  24240;    splatterEventArray[0][1] = 1;
+  splatterEventArray[1][0] =  24628;    splatterEventArray[1][1] = 3;
+  splatterEventArray[2][0] =  27000;    splatterEventArray[2][1] = 2;
+  splatterEventArray[3][0] =  27450;    splatterEventArray[3][1] = 4;
+  splatterEventArray[4][0] =  29890;    splatterEventArray[4][1] = 2;
+  splatterEventArray[5][0] =  30280;    splatterEventArray[5][1] = 4;
+  splatterEventArray[6][0] =  32770;    splatterEventArray[6][1] = 1;
+  splatterEventArray[7][0] =  33200;    splatterEventArray[7][1] = 2;
+  splatterEventArray[8][0] =  38690;    splatterEventArray[8][1] = 4;
+  splatterEventArray[9][0] =  39050;    splatterEventArray[9][1] = 5;
   
-  brushFourEventArray[0][0] =  2500;    brushFourEventArray[0][1] = 0;
-  brushFourEventArray[1][0] = 15000;    brushFourEventArray[1][1] = 1;    brushFourEventArray[1][2] = 80;
-  
+  brushFourEventArray[1][0] = 43300;    brushFourEventArray[1][1] = 1;    brushFourEventArray[1][2] = 100;
 }
 
 void savePauseTime() {
