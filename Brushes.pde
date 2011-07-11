@@ -22,9 +22,9 @@ void brushOne(boolean useOffset, int drawSize) {
   float size1 = 9, size2 = random(8,20), spacing = 1;
   int alpha2 = 255;
   if(2 == drawSize) { // large
-    size1 = 250;
-    size2 = 325;
-    spacing = 35;
+    size1 = 275;
+    size2 = 230;
+    spacing = 32;
     alpha2 = 60;
     val = (val > 9.5 || val < 5) ? random(6,9) : val;
     buf.fill(80,22,28,160);
@@ -56,7 +56,6 @@ void brushOne(boolean useOffset, int drawSize) {
     lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY + (int) (player.left.get(0) * 50);
   }
-
 }
 
 // kontinuierliche linie
@@ -83,22 +82,21 @@ void brushThree() {
   
   float verhaeltnisSumme = abs(x + copyOffsetX - directionArrayX[drawCounter%10]) + abs(y + copyOffsetY - directionArrayY[drawCounter%10]);
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
-  float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;
-  
+  float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;  
   
   int oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * 100));
   int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
   buf.noStroke();
 
-/*  
+  /*  
   if (drawCounter % 10 == 0) {
-  buf.stroke(1);
-  buf.strokeWeight(1);
-  buf.stroke(254,0,0);
-  buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, y + copyOffsetY);          // Rote Linie stellt Richtungsvektor dar
+    buf.stroke(1);
+    buf.strokeWeight(1);
+    buf.stroke(254,0,0);
+    buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, y + copyOffsetY);          // Rote Linie stellt Richtungsvektor dar
   }
- */
+  */
   
   deltaMouseX = oldX;
   deltaMouseY = oldY;
@@ -143,13 +141,11 @@ void brushFour(int minAmount, int maxAmount) {
      }  
         
      buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);   
-   }
-   
+   }   
 }
 
 void ghostBrush() {
-  println("...");
-  
+  println("...");  
 }
 
 

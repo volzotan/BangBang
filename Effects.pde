@@ -30,14 +30,14 @@ final int MINAMOUNT = 50;
 
 void initEventArrays() {
   
-  splatterEventArray[0][0] =  24240;    splatterEventArray[0][1] = 1;
-  splatterEventArray[1][0] =  24628;    splatterEventArray[1][1] = 3;
-  splatterEventArray[2][0] =  27000;    splatterEventArray[2][1] = 2;
-  splatterEventArray[3][0] =  27450;    splatterEventArray[3][1] = 4;
+  splatterEventArray[0][0] =  24240;    splatterEventArray[0][1] = 3;
+  splatterEventArray[1][0] =  24628;    splatterEventArray[1][1] = 1;
+  splatterEventArray[2][0] =  27000;    splatterEventArray[2][1] = 4;
+  splatterEventArray[3][0] =  27450;    splatterEventArray[3][1] = 3;
   splatterEventArray[4][0] =  29890;    splatterEventArray[4][1] = 2;
   splatterEventArray[5][0] =  30280;    splatterEventArray[5][1] = 4;
-  splatterEventArray[6][0] =  32770;    splatterEventArray[6][1] = 1;
-  splatterEventArray[7][0] =  33200;    splatterEventArray[7][1] = 2;
+  splatterEventArray[6][0] =  32770;    splatterEventArray[6][1] = 2;
+  splatterEventArray[7][0] =  33200;    splatterEventArray[7][1] = 3;
   splatterEventArray[8][0] =  38690;    splatterEventArray[8][1] = 4;
   splatterEventArray[9][0] =  39050;    splatterEventArray[9][1] = 5;
   
@@ -109,35 +109,35 @@ void scheduleSingleSplatterEvent(int delay, int size) {
         case 1: 
             timer.schedule(new TimerTask() {
               public void run() {
-                tintenklecks(7);
+                tintenklecks(8);
               }
             }, delay);
           break;
         case 2: 
             timer.schedule(new TimerTask() {
               public void run() {
-                tintenklecks(8);
+                tintenklecks(9);
               }
             }, delay);        
           break;
         case 3: 
             timer.schedule(new TimerTask() {
               public void run() {
-                tintenklecks(9);
+                tintenklecks(10);
               }
             }, delay);        
           break;
         case 4: 
             timer.schedule(new TimerTask() {
               public void run() {
-                tintenklecks(11);
+                tintenklecks(12);
               }
             }, delay);        
           break;
         case 5: 
             timer.schedule(new TimerTask() {
               public void run() {
-                tintenklecks(15);
+                tintenklecks(14);
               }
             }, delay);        
           break;

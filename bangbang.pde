@@ -111,8 +111,7 @@ void setup(){
     player.rewind();
     doClear = false;
     initialised = false;
-    wasGUI = 0;
-        
+    wasGUI = 0;        
   }
 
   initCanvas(true);
