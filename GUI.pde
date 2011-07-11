@@ -115,14 +115,15 @@ void setupGUI(){
 // DRAW GUI
 void drawGUI(int openMenu){
   switch(openMenu){
-    case 1 : closeGUI(2); closeGUI(3); setupP5.show(); setupP5.draw(); break;
-    case 2 : closeGUI(1); closeGUI(3); breakP5.show(); breakP5.draw(); break;
-    case 3 : closeGUI(1); closeGUI(2); endP5.show(); endP5.draw(); break;
+    case 1 : closeGUI(2); closeGUI(3); setupP5.show(); setupP5.draw(); wasGUI = 1; break;
+    case 2 : closeGUI(1); closeGUI(3); breakP5.show(); breakP5.draw(); wasGUI = 2; break;
+    case 3 : closeGUI(1); closeGUI(2); endP5.show();   endP5.draw();   wasGUI = 3;
   }
 }
 
 // CLOSE GUI
 void closeGUI(int closeMenu){
+  wasGUI = 0;
   switch(closeMenu){
     case 1 : setupP5.hide(); break;
     case 2 : breakP5.hide(); break;
@@ -133,9 +134,9 @@ void closeGUI(int closeMenu){
 
 //  initial funktion für start am anfang
 public void Play(int theValue) {
-    initialised = true;
-    player.play();
-    usePlay = false;
+  initialised = true;
+  player.play();
+  usePlay = false;
 }
 
 public void Replay(int theValue) {
@@ -172,7 +173,7 @@ public void Save(int theValue) {
   if(theValue == 1 && initialised && player.position() < 47986) {
     drawSaveOverlay = true;
     player.pause();
-    closeGUI(2);
+    closeGUI(4);
   } else {
     buf.save(dataPath("shots/"+timestamp() +".png"));
   }

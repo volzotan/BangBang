@@ -99,6 +99,7 @@ int saveReady = 0;
 // setup
 boolean initialised = false, doClear = false;
 int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
+int wasGUI = 0;
 
 void setup(){
   size(800, 450, JAVA2D);
@@ -109,6 +110,7 @@ void setup(){
     player.rewind();
     doClear = false;
     initialised = false;
+    wasGUI = 0;
         
     // reset inkSplatter
     inkSplatter01Used = false;
@@ -149,10 +151,10 @@ void draw(){
   if (saveReady == 2) {
     if(initialised) {  
       buf.save(dataPath("shots/"+timestamp() +".png"));   
-     } 
-    if(initialised && player.position() < 47986) {
+    } 
+    if(initialised && player.position() < 47986 && wasGUI > 0) {
       player.play(); 
-    }
+    } 
     saveReady = 0;
   }
   
