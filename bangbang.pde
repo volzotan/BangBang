@@ -95,7 +95,7 @@ int saveReady = 0;
 boolean ghostBrush = false;
 
 // setup
-boolean initialised = false, doClear = false;
+boolean initialised = false, doClear = false, doInvert = false;
 int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
 int wasGUI = 0;
 

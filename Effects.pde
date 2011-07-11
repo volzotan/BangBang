@@ -120,6 +120,26 @@ void scheduleSplatterEvents() {
   }
 }
 
+void scheduleBrushOneEvents() {
+  for (int i=0; i < brushOneEventArray.length; i++) {
+    if (brushOneEventArray[i][0] - elapsedTime >= 0) {      
+      if (brushOneEventArray[i][1] == 0) {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushOne(MINAMOUNT, MAXAMOUNT);
+          }
+        }, brushOneEventArray[i][0] - elapsedTime);
+      } else {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushOne(MINAMOUNT, MAXAMOUNT);
+          }
+        }, brushOneEventArray[i][0] - elapsedTime, brushOneEventArray[i][2]);
+      }
+    }
+  }
+}
+
 void scheduleBrushFourEvents() {
   for (int i=0; i < brushFourEventArray.length; i++) {
     if (brushFourEventArray[i][0] - elapsedTime >= 0) {      

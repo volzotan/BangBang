@@ -50,7 +50,11 @@ void drawVignette(boolean doDraw){
 }
 
 PImage getBufSlice() {
-  return buf.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
+  PImage temp = buf.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
+  if(doInvert) {
+    temp.filter(INVERT); 
+  }
+  return temp;
 }
 
 void initCanvas(boolean useBGImage) {
