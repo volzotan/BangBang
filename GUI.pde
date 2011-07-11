@@ -134,19 +134,15 @@ void closeGUI(int closeMenu){
 //  initial funktion für start am anfang
 public void Play(int theValue) {
   initialised = true;
-  player.play();
-  
-  startAllScheduledEvents();
-  
+  player.play();  
+  startAllScheduledEvents();  
   usePlay = false;
 }
 
 public void Replay(int theValue) {
   closeGUI(4);
-  doClear = true;
-  
-  pauseAllScheduledEvents();
-  
+  doClear = true;  
+  pauseAllScheduledEvents();  
   setup();
 }
 
@@ -154,6 +150,7 @@ public void Break(int theValue) {
   if(initialised && player.position() < 47986) {
     closeGUI(2);
     player.play();
+    startAllScheduledEvents();
   } else if(!initialised) {
     Play(0);
   }
@@ -193,15 +190,12 @@ void keyReleased() {
     Save((player.isPlaying()) ? 1 : 0); 
   }
   if (' ' == key) { 
-    if(player.isPlaying()) {
-      
-      pauseAllScheduledEvents();
-      
+    if(player.isPlaying()) {      
+      pauseAllScheduledEvents();      
       player.pause();
     } else if(initialised && player.position() < 47986) {
       closeGUI(2);
-      player.play();
-      
+      player.play();      
       startAllScheduledEvents();
     } else if(!initialised) {
       Play(0);
