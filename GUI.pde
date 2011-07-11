@@ -170,14 +170,9 @@ public void Exit(int theValue) {
 }
 
 public void Save(int theValue) {
-  if(theValue == 1 && initialised && player.position() < 47986) {
     drawSaveOverlay = true;
     player.pause();
     closeGUI(4);
-  } else {
-    buf.save(dataPath("shots/"+timestamp() +".png"));
-  }
-
 }
 
 // tastatur befehle

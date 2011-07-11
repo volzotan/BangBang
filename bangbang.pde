@@ -152,7 +152,7 @@ void draw(){
     if(initialised) {  
       buf.save(dataPath("shots/"+timestamp() +".png"));   
     } 
-    if(initialised && player.position() < 47986 && wasGUI > 0) {
+    if(initialised && player.position() < 47986 && wasGUI == 0) {
       player.play(); 
     } 
     saveReady = 0;
