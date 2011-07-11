@@ -1,7 +1,7 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
-void brushOne(boolean useOffset, boolean drawHuge) {
+void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   if(useOffset) {
      extraOffsetY = (random(1) < 0.5) ? -74+60*player.left.get(0)*random(-1,1) : 87+70*player.right.get(0)*random(-1,1);
@@ -11,7 +11,7 @@ void brushOne(boolean useOffset, boolean drawHuge) {
   float val = cos(radians(angle)) * 10.0 + 4;
   float size1 = 9, size2 = random(8,20), spacing = 1;
   int alpha1 = 150, alpha2 = 255;
-  if(drawHuge) {
+  if(2 == drawSize) {
     size1 = 250;
     size2 = 325;
     spacing = 35;
@@ -19,6 +19,14 @@ void brushOne(boolean useOffset, boolean drawHuge) {
     alpha2 = 60;
     val = (val > 9.5 || val < 5) ? random(6,9) : val;
     buf.fill(80,22,28,alpha1);
+  } else if (1 == drawSize) {
+    size1 = 125;
+    size2 = 250;
+    spacing = 26;
+    alpha1 = 0;
+    alpha2 = 60;
+    val = (val > 9.5 || val < 5) ? random(6,9) : val;
+    buf.fill(13,36,98); // blue
   } else {
     val += random(0,1)*20;
     buf.fill(0,0,0,alpha1);

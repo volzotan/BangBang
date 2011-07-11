@@ -20,9 +20,9 @@
 // Kleine Blumen   @  8.100 sec -  8.680 sec
 // Kleine Blumen   @ 36.860 sec - 37.400 sec
 
-int[][] splatterEventArray = new int[10][2];       // 0 = delay, 1 = size
-int[][] brushFourEventArray = new int[2][3];       // 0 = delay, 1 = continuousFlag, 2 = Intervall[ms]
-int[][] brushOneEventArray = new int[5][3];
+int[][] splatterEventArray  = new int[10][2];       // 0 = delay, 1 = size
+int[][] brushFourEventArray = new int[ 1][3];       // 0 = delay, 1 = continuousFlag      , 2 = Intervall[ms]
+int[][] brushOneEventArray  = new int[11][3];       // 0 = delay, 1 = huge/continuous Flag, 3 = Intervall[ms]
 
 final int MAXAMOUNT =  4; 
 final int MINAMOUNT = 50;
@@ -39,8 +39,22 @@ void initEventArrays() {
   splatterEventArray[7][0] =  33200;    splatterEventArray[7][1] = 2;
   splatterEventArray[8][0] =  38690;    splatterEventArray[8][1] = 4;
   splatterEventArray[9][0] =  39050;    splatterEventArray[9][1] = 5;
+ 
+  brushOneEventArray[0][0] =  2340;    brushOneEventArray[0][1] = 0;    brushOneEventArray[0][2] = 590;
+  brushOneEventArray[1][0] =  5200;    brushOneEventArray[1][1] = 0;    brushOneEventArray[1][2] = 600;
+  brushOneEventArray[2][0] =  8100;    brushOneEventArray[2][1] = 0;    brushOneEventArray[2][2] = 570;
+  brushOneEventArray[3][0] = 10150;    brushOneEventArray[3][1] = 0;    brushOneEventArray[3][2] = 300;
+  brushOneEventArray[4][0] = 36860;    brushOneEventArray[4][1] = 0;    brushOneEventArray[4][2] = 540;
   
-  brushFourEventArray[1][0] = 43300;    brushFourEventArray[1][1] = 1;    brushFourEventArray[1][2] = 100;
+  brushOneEventArray[5][0] = 25350;    brushOneEventArray[5][1] = 1;    brushOneEventArray[5][2] = 0;
+  brushOneEventArray[6][0] = 28200;    brushOneEventArray[6][1] = 1;    brushOneEventArray[6][2] = 0;
+  brushOneEventArray[7][0] = 31050;    brushOneEventArray[7][1] = 1;    brushOneEventArray[7][2] = 0;
+  brushOneEventArray[8][0] = 39850;    brushOneEventArray[8][1] = 1;    brushOneEventArray[8][2] = 0;
+  brushOneEventArray[9][0] = 42120;    brushOneEventArray[9][1] = 1;    brushOneEventArray[9][2] = 0;
+  
+  brushOneEventArray[10][0] = 10200;   brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;  
+  
+  brushFourEventArray[0][0] = 43300;    brushFourEventArray[0][1] = 1;    brushFourEventArray[0][2] = 100;
 }
 
 void savePauseTime() {
@@ -59,6 +73,7 @@ void pauseAllScheduledEvents() {
 
 void startAllScheduledEvents() {
   scheduleSplatterEvents();
+  scheduleBrushOneEvents();
   scheduleBrushFourEvents();
   
   scheduleGhostBrush();
@@ -123,16 +138,22 @@ void scheduleSplatterEvents() {
 void scheduleBrushOneEvents() {
   for (int i=0; i < brushOneEventArray.length; i++) {
     if (brushOneEventArray[i][0] - elapsedTime >= 0) {      
-      if (brushOneEventArray[i][1] == 0) {
+      if (brushOneEventArray[i][1] == 1) {
         timer.schedule(new TimerTask() {
           public void run() {
-            brushOne(MINAMOUNT, MAXAMOUNT);
+            brushOne(false, 1);
+          }
+        }, brushOneEventArray[i][0] - elapsedTime);
+      } else if (brushOneEventArray[i][1] == 1) {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushOne(false, 2);
           }
         }, brushOneEventArray[i][0] - elapsedTime);
       } else {
         timer.schedule(new TimerTask() {
           public void run() {
-            brushOne(MINAMOUNT, MAXAMOUNT);
+            brushOne(true, 0);
           }
         }, brushOneEventArray[i][0] - elapsedTime, brushOneEventArray[i][2]);
       }
