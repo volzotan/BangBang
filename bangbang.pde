@@ -154,7 +154,9 @@ void draw(){
     } 
     if(initialised && player.position() < 47986 && wasGUI == 0) {
       player.play(); 
-    } 
+    } else {
+      wasGUI = 0;
+    }
     saveReady = 0;
   }
   

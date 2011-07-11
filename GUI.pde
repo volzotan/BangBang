@@ -123,8 +123,7 @@ void drawGUI(int openMenu){
 
 // CLOSE GUI
 void closeGUI(int closeMenu){
-  wasGUI = 0;
-  switch(closeMenu){
+  switch(closeMenu) {
     case 1 : setupP5.hide(); break;
     case 2 : breakP5.hide(); break;
     case 3 : endP5.hide(); break;
