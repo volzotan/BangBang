@@ -58,7 +58,7 @@ void initEventArrays() {
   
   brushOneEventArray[10][0] = 10200;   brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;
   
-  brushFourEventArray[0][0] = 43300;    brushFourEventArray[0][1] = 1;    brushFourEventArray[0][2] = 100;
+  brushFourEventArray[0][0] = 43300;   brushFourEventArray[0][1] = 1;   brushFourEventArray[0][2] = 100;
 }
 
 void savePauseTime() {
@@ -191,7 +191,8 @@ void scheduleBrushFourEvents() {
       } else {
         timer.schedule(new TimerTask() {
           public void run() {
-            brushFour(MINAMOUNT, MAXAMOUNT);
+            //brushFour(MINAMOUNT, MAXAMOUNT);
+            crescendo();
           }
         }, brushFourEventArray[i][0] - elapsedTime, brushFourEventArray[i][2]);
       }
@@ -248,3 +249,33 @@ void tintenklecks(float size) {
     if(inkSplatterPos > 3) { inkSplatterPos = 0; }
 
 } 
+
+void crescendo() {
+  if (firstRun) {
+    oldDeltaX = oldX;
+    oldDeltaY = oldY;
+              
+    mainBrushActive = false;
+    firstRun = false;
+  }
+            
+  if(pos < 10500 || pos > 11800) {
+              buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
+              buf.strokeWeight(5+tempBrushValue*0.13); 
+  } else {
+              buf.stroke(cR2,cG2,cB2);
+              buf.strokeWeight(4); 
+  }  
+            
+  tempX = (int) (deltaMouseX + xPlus + random(-1,1) * 8);
+  tempY = (int) (deltaMouseY + random(-1,1) * 15 + invsVar * (-1) * amp);
+            
+  buf.line(oldDeltaX, oldDeltaY, tempX, tempY);
+        
+  oldDeltaX = tempX;
+  oldDeltaY = tempY;
+            
+  amp = amp - 5;
+  xPlus = xPlus + 6;
+  invsVar = invsVar * (-1);
+}

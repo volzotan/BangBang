@@ -80,7 +80,8 @@ void initImages() {
   mapEButtonImage = loadImage("buttons/MapEMask.png");
   savingImage = loadImage("SavingOverlay.png");  
   overlayImage = loadImage("MenuOverlay.png");
-  cursorImage = loadImage("cursor.png");
+  cursorImage_blank = loadImage("cursor.png");
+  cursorImage_circle = loadImage("cursor_circle.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
   }  
@@ -132,8 +133,9 @@ void moveViewport(){
 void switchCursor(int kind) {
   if(switchCursor != kind) {
     switch(kind) {
-      case 1: cursor(cursorImage); switchCursor = kind; break;
-      case 2: cursor(ARROW); switchCursor = kind;   
+      case 1: cursor(ARROW); switchCursor = kind; break;
+      case 2: cursor(cursorImage_blank); switchCursor = kind; break;   
+      case 3: cursor(cursorImage_circle); switchCursor = kind;
     }  
   }  
 }  

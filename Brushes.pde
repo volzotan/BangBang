@@ -84,8 +84,8 @@ void brushThree() {
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;  
   
-  int oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * 100));
-  int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
+  oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * brushThreeSkalierungAusschlag));
+  oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
   buf.noStroke();
 
@@ -101,6 +101,13 @@ void brushThree() {
   deltaMouseX = oldX;
   deltaMouseY = oldY;
 }
+
+
+void ghostBrush() {
+  //buf.line(oldX, oldY, deltaMouseX - 100, deltaMouseY + 50);
+}
+
+
 
 void brushFour(int minAmount, int maxAmount) {
    int amount = floor(random(minAmount,maxAmount));
@@ -143,10 +150,5 @@ void brushFour(int minAmount, int maxAmount) {
      buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);   
    }   
 }
-
-void ghostBrush() {
-  println("...");  
-}
-
 
 

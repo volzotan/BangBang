@@ -10,7 +10,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage;
+PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle;
 boolean usePlay = true;
 boolean mapEnabled = false;
 
@@ -92,11 +92,21 @@ int[] directionArrayY = new int[10];
 boolean drawSaveOverlay = false;
 int saveReady = 0;
 
+int brushThreeSkalierungAusschlag = 100;
+int invsVar = 1;
+int amp = 200;
+float xPlus = 0;
 boolean ghostBrush = false;
+int oldX, oldDeltaX;
+int oldY, oldDeltaY;
+boolean firstRun = true;
+boolean mainBrushActive = true;
+
+int tempX, tempY;
 
 // setup
 boolean initialised = false, doClear = false, doInvert = false;
-int switchCursor = 0; //1 = blank/hidden, 2 = regular arrow, else do nothing
+int switchCursor = 0; //1 = pfeil, 2 = leer, 3 = kreis, else do nothing
 int wasGUI = 0;
 
 void setup(){
@@ -151,7 +161,7 @@ void draw(){
   }
   
   if(!initialised) {
-    switchCursor(2);
+    switchCursor(1);
     image(getBufSlice(), 0, 0);
     image(overlayImage, 0, 0);
     drawGUI(1);
@@ -168,10 +178,10 @@ void draw(){
     pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
-      switchCursor(1);
+      switchCursor(3);
       moveViewport();
       buf.beginDraw();
-      if (drawCounter % 1 == 0) {        
+      if (mainBrushActive) {        
         brushThree();
         if (ghostBrush) {
           ghostBrush();
@@ -186,7 +196,7 @@ void draw(){
       drawMiniMap(mapEnabled);       
       tempBrushValue *= 0.95;     
     } else {
-      switchCursor(2);
+      switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
         image(overlayImage, 0, 0);
