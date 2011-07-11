@@ -115,7 +115,7 @@ void setupGUI(){
 // DRAW GUI
 void drawGUI(int openMenu){
   switch(openMenu){
-    case 1 : closeGUI(2); closeGUI(3); setupP5.show(); setupP5.draw(); wasGUI = 1; break;
+    case 1 : closeGUI(2); closeGUI(3); setupP5.show(); setupP5.draw(); break;
     case 2 : closeGUI(1); closeGUI(3); breakP5.show(); breakP5.draw(); wasGUI = 2; break;
     case 3 : closeGUI(1); closeGUI(2); endP5.show();   endP5.draw();   wasGUI = 3;
   }
