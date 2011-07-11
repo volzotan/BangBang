@@ -21,8 +21,9 @@
 // Kleine Blumen   @ 36.860 sec - 37.400 sec
 
 int[][] splatterEventArray  = new int[10][2];       // 0 = delay, 1 = size
-int[][] brushFourEventArray = new int[ 1][3];       // 0 = delay, 1 = continuousFlag      , 2 = Intervall[ms]
-int[][] brushOneEventArray  = new int[11][3];       // 0 = delay, 1 = huge/continuous Flag, 3 = Intervall[ms]
+int[][] brushFourEventArray = new int[ 1][3];       // 0 = delay, 1 = continuousFlag      , 2 = Repeat Intervall[ms]
+int[][] brushOneEventArray  = new int[11][3];       // 0 = delay, 1 = huge/continuous Flag, 3 = Repeat Intervall[ms]
+int[][] invertEventArray    = new int[ 2][1];       // 0 = delay
 
 final int MAXAMOUNT =  4; 
 final int MINAMOUNT = 50;
@@ -39,6 +40,9 @@ void initEventArrays() {
   splatterEventArray[7][0] =  33200;    splatterEventArray[7][1] = 2;
   splatterEventArray[8][0] =  38690;    splatterEventArray[8][1] = 4;
   splatterEventArray[9][0] =  39050;    splatterEventArray[9][1] = 5;
+  
+  invertEventArray[1][0] =  39850;
+  invertEventArray[0][0] =  42120;
  
   brushOneEventArray[0][0] =  2340;    brushOneEventArray[0][1] = 0;    brushOneEventArray[0][2] = 590;
   brushOneEventArray[1][0] =  5200;    brushOneEventArray[1][1] = 0;    brushOneEventArray[1][2] = 600;
@@ -52,7 +56,7 @@ void initEventArrays() {
   brushOneEventArray[8][0] = 39850;    brushOneEventArray[8][1] = 1;    brushOneEventArray[8][2] = 0;
   brushOneEventArray[9][0] = 42120;    brushOneEventArray[9][1] = 1;    brushOneEventArray[9][2] = 0;
   
-  brushOneEventArray[10][0] = 10200;   brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;  
+  brushOneEventArray[10][0] = 10200;   brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;
   
   brushFourEventArray[0][0] = 43300;    brushFourEventArray[0][1] = 1;    brushFourEventArray[0][2] = 100;
 }
@@ -75,8 +79,21 @@ void startAllScheduledEvents() {
   scheduleSplatterEvents();
   scheduleBrushOneEvents();
   scheduleBrushFourEvents();
+  scheduleInvertEvent();
   
   scheduleGhostBrush();
+}
+
+void scheduleInvertEvent() {
+  for (int i=0; i < invertEventArray.length; i++) {
+    if (invertEventArray[i][0] - elapsedTime >= 0) { 
+      timer.schedule(new TimerTask() {
+        public void run() {
+          doInvert = !doInvert;
+        }
+      }, invertEventArray[i][0] - elapsedTime);
+    }
+  }  
 }
 
 void scheduleGhostBrush() {
@@ -138,25 +155,26 @@ void scheduleSplatterEvents() {
 void scheduleBrushOneEvents() {
   for (int i=0; i < brushOneEventArray.length; i++) {
     if (brushOneEventArray[i][0] - elapsedTime >= 0) {      
-      if (brushOneEventArray[i][1] == 1) {
+      if (brushOneEventArray[i][1] == 1) {       // medium flower
         timer.schedule(new TimerTask() {
           public void run() {
-            brushOne(false, 1);
+            brushOne(true, 1);
           }
         }, brushOneEventArray[i][0] - elapsedTime);
-      } else if (brushOneEventArray[i][1] == 1) {
+      } else if (brushOneEventArray[i][1] == 2) { // large flower
         timer.schedule(new TimerTask() {
           public void run() {
-            brushOne(false, 2);
+            brushOne(true, 2);
           }
         }, brushOneEventArray[i][0] - elapsedTime);
-      } else {
+      }/* else {                                   // regular/small flower
+        // TODO STOP AFTER SET INTERVAL
         timer.schedule(new TimerTask() {
           public void run() {
             brushOne(true, 0);
           }
         }, brushOneEventArray[i][0] - elapsedTime, brushOneEventArray[i][2]);
-      }
+      }*/
     }
   }
 }

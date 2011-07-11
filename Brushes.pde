@@ -4,43 +4,51 @@
 void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   if(useOffset) {
-     extraOffsetY = (random(1) < 0.5) ? -74+60*player.left.get(0)*random(-1,1) : 87+70*player.right.get(0)*random(-1,1);
-     extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(0)*random(-1,1) : 52+70*player.right.get(0)*random(-1,1);
+    switch(drawSize) {
+       case 1 : 
+         extraOffsetY = (random(1) < 0.5) ? -74+60*random(-1,1) : 87+70*random(-1,1);
+         extraOffsetX = (random(1) < 0.5) ? -37+60*random(-1,1) : 52+70*random(-1,1);       
+         break;
+       case 2 : 
+         extraOffsetY = random(-50,50);     
+         break;         
+       default:
+         extraOffsetY = (random(1) < 0.5) ? -74+60*player.left.get(1)*random(-1,1) : 87+70*player.right.get(1)*random(-1,1);
+         extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(1)*random(-1,1) : 52+70*player.right.get(1)*random(-1,1);       
+     }  
   }  
   
   float val = cos(radians(angle)) * 10.0 + 4;
   float size1 = 9, size2 = random(8,20), spacing = 1;
-  int alpha1 = 150, alpha2 = 255;
-  if(2 == drawSize) {
+  int alpha2 = 255;
+  if(2 == drawSize) { // large
     size1 = 250;
     size2 = 325;
     spacing = 35;
-    alpha1 = 160;
     alpha2 = 60;
     val = (val > 9.5 || val < 5) ? random(6,9) : val;
-    buf.fill(80,22,28,alpha1);
-  } else if (1 == drawSize) {
-    size1 = 125;
-    size2 = 250;
-    spacing = 26;
-    alpha1 = 0;
+    buf.fill(80,22,28,160);
+  } else if (1 == drawSize) { // medium
+    size1 = 95;
+    size2 = 85;
+    spacing = 13;
     alpha2 = 60;
-    val = (val > 9.5 || val < 5) ? random(6,9) : val;
-    buf.fill(13,36,98); // blue
-  } else {
+    val = (val > 8 || val < 5) ? random(5,7.5) : val;
+    buf.fill(13,36,98,100); // blue
+  } else {          // small
     val += random(0,1)*20;
-    buf.fill(0,0,0,alpha1);
+    buf.fill(0,0,0,150);
   }  
   
-  buf.noStroke();
-
   angle += 10;
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
     float xoff = cos(radians(a)) * val * spacing;
     float yoff = sin(radians(a)) * val * spacing;    
+    buf.noStroke();
     buf.ellipse(x + copyOffsetX + xoff + extraOffsetX, y + copyOffsetY + yoff + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
   }
   buf.fill(0,0,0,alpha2);
+  buf.noStroke();
   buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
 
   // Mittelpunkt des Pinsels abgreifen zur Verwendung für Effekte
@@ -81,6 +89,7 @@ void brushThree() {
   int oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * 100));
   int oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
+  buf.noStroke();
 
 /*  
   if (drawCounter % 10 == 0) {
