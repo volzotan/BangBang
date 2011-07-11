@@ -146,6 +146,16 @@ void setup(){
 }
 
 void draw(){  
+  if (saveReady == 2) {
+    if(initialised) {  
+      buf.save(dataPath("shots/"+timestamp() +".png"));   
+     } 
+    if(initialised && player.position() < 47986) {
+      player.play(); 
+    }
+    saveReady = 0;
+  }
+  
   if(!initialised) {
     switchCursor(2);
     image(getBufSlice(), 0, 0);
@@ -183,11 +193,11 @@ void draw(){
       tempBrushValue *= 0.95;     
     } else {
       switchCursor(2);
-      if (player.position() < 47986) {
+      if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
         image(overlayImage, 0, 0);
         drawGUI(2); 
-      } else {
+      } else if (!drawSaveOverlay) {
         image(getBufSlice(), 0, 0);        
         image(overlayImage, 0, 0);
         drawGUI(3);     
@@ -207,15 +217,6 @@ void draw(){
   }
   //println(frameRate + " at " + player.position());
   
-  if (saveReady == 2) {
-    if(initialised) {  
-      buf.save(dataPath("shots/"+timestamp() +".png"));   
-     } 
-    if(initialised && player.position() < 47986) {
-      player.play(); 
-    }
-    saveReady = 0;
-  }
   
   if(drawSaveOverlay){
     image(getBufSlice(), 0, 0);
