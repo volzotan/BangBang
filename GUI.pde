@@ -171,6 +171,14 @@ public void Exit(int theValue) {
   exit();
 }
 
+public void ToggleCursor() {
+  if(cursorEnabled) {
+    cursorEnabled = false;
+  } else {
+    cursorEnabled = true;
+  }
+}
+
 public void Save(int theValue) {
     drawSaveOverlay = true;
     player.pause();
@@ -184,8 +192,9 @@ public void Save(int theValue) {
 void keyReleased() {
   if (ESC == key) { exit(); }
   if ('m' == key || 'M' == key) { EnableMap(0); }
+  if ('p' == key || 'P' == key) { ToggleCursor(); }
   if ('r' == key || 'R' == key) { Replay(0); }
-  if ('s' == key || 'S' == key) { 
+  if ('s' == key || 'S' == key) {
     pauseAllScheduledEvents();
     Save((player.isPlaying()) ? 1 : 0); 
   }

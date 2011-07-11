@@ -11,8 +11,7 @@ import controlP5.*;
 // GUI
 ControlP5 setupP5, breakP5, endP5;
 PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle;
-boolean usePlay = true;
-boolean mapEnabled = false;
+boolean usePlay = true, mapEnabled = false, cursorEnabled = true;
 
 // Minim
 import ddf.minim.*;
@@ -106,7 +105,7 @@ int tempX, tempY;
 
 // setup
 boolean initialised = false, doClear = false, doInvert = false;
-int switchCursor = 0; //1 = pfeil, 2 = leer, 3 = kreis, else do nothing
+int switchCursor = 0; //1 = pfeil, 2 = leer, 3 = custom, else do nothing
 int wasGUI = 0;
 
 void setup(){
@@ -187,7 +186,7 @@ void draw(){
     pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
-      switchCursor(3);
+      switchCursor(cursorEnabled ? 3 : 2);
       moveViewport();
       buf.beginDraw();
       if (mainBrushActive) {        

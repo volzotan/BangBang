@@ -7,7 +7,7 @@
   */  
 // EFFECT RANGES
 //
-// Große Blume     @ 10.200 sec
+// Große Blume     @ 10.300 sec
 // Mittlere Blume  @ 25.350 sec
 // Mittlere Blume  @ 28.200 sec
 // Mittlere Blume  @ 31.050 sec
@@ -56,7 +56,7 @@ void initEventArrays() {
   brushOneEventArray[8][0] = 39850;    brushOneEventArray[8][1] = 1;    brushOneEventArray[8][2] = 0;
   brushOneEventArray[9][0] = 42120;    brushOneEventArray[9][1] = 1;    brushOneEventArray[9][2] = 0;
   
-  brushOneEventArray[10][0] = 10200;   brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;
+  brushOneEventArray[10][0] =10300;    brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;
   
   brushFourEventArray[0][0] = 43300;   brushFourEventArray[0][1] = 1;   brushFourEventArray[0][2] = 100;
 }
