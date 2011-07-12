@@ -135,10 +135,10 @@ void moveViewport(){
 void switchCursor(int kind) {
   if(switchCursor != kind || useNyancat) {
     switch(kind) {
-      case 1: cursor(ARROW); switchCursor = kind; useNyancat = false; break;
-      case 2: cursor(cursorImage_blank); switchCursor = kind; useNyancat = false; break;   
-      case 3: cursor(cursorImage_circle); switchCursor = kind; useNyancat = false; break;
-      case 4: cursor(cursorImage_nyancat); useNyancat = true; break;
+      case 1: cursor(ARROW); switchCursor = kind; break;
+      case 2: cursor(cursorImage_blank); switchCursor = kind; break;   
+      case 3: cursor(cursorImage_circle); switchCursor = kind; break;
+      case 4: cursor(cursorImage_nyancat); switchCursor = kind; break;
     }  
   }  
 }  

@@ -171,7 +171,7 @@ void draw(){
   }
   
   if(!initialised) {
-    if(!useNyancat) { switchCursor(1); }
+    switchCursor(1);
     image(getBufSlice(), 0, 0);
     //filter(BLUR, 1);
     image(overlayImage, 0, 0);
@@ -189,7 +189,7 @@ void draw(){
     pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
-      if(!useNyancat) { switchCursor(cursorEnabled ? 3 : 2); }
+      switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
       moveViewport();
       buf.beginDraw();
       if (mainBrushActive) {        
@@ -207,7 +207,7 @@ void draw(){
       drawMiniMap(mapEnabled);       
       tempBrushValue *= 0.95;     
     } else {
-      if(!useNyancat) { switchCursor(1); }
+      switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
         filter(BLUR, 3);
