@@ -83,7 +83,7 @@ void initImages() {
   overlayImage = loadImage("MenuOverlay.png");
   cursorImage_blank = loadImage("cursor.png");
   cursorImage_circle = loadImage("cursor_circle.png");
-  cursorImage_nyancat = loadImage("cursor_nyan_medium.png");
+  cursorImage_nyancat = loadImage("cursor_nyan.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
   }  
