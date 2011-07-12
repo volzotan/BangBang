@@ -19,7 +19,7 @@ void brushOne(boolean useOffset, int drawSize) {
   }  
   
   float val = cos(radians(angle)) * 10.0 + 4;
-  float size1 = 9, size2 = random(8,20), spacing = 1;
+  float size1 = 9, size2 = random(8,20), spacing = 1.1;
   int alpha2 = 255;
   if(2 == drawSize) { // large
     size1 = 275;
@@ -36,7 +36,7 @@ void brushOne(boolean useOffset, int drawSize) {
     val = (val > 8 || val < 5) ? random(5,7.5) : val;
     buf.fill(13,36,98,100); // blue
   } else {          // small
-    val += random(0,1)*20;
+    val = random(10,22);
     buf.fill(0,0,0,150);
   }  
   

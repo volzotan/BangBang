@@ -14,17 +14,17 @@
 // Mittlere Blume  @ 31.050 sec
 // Mittlere Blume  @ 39.850 sec
 // Mittlere Blume  @ 42.120 sec
-// Kleine Blumen   @ 10.150 sec - 10.450 sec
 //
-// Kleine Blumen   @  2.340 sec -  2.930 sec ( 2.340,  2.460,  2.520,  2.625,  2.690,  2.970)
-// Kleine Blumen   @  5.200 sec -  5.800 sec ()
-// Kleine Blumen   @  8.100 sec -  8.680 sec ()
-// Kleine Blumen   @ 36.860 sec - 37.400 sec ()
+// Kleine Blumen   @  2.340 sec -  2.930 sec ( 2.340,  2.460,  2.520,  2.625,  2.690)
+// Kleine Blumen   @  5.200 sec -  5.800 sec ( 5.200,  5.330,  5.410,  5.480,  5.580)
+// Kleine Blumen   @  8.100 sec -  8.680 sec ( 8.100,  8.180,  8.270,  8.330,  8.440)
+// Kleine Blumen   @ 33.200 sec - 34.035 sec (33.200, 33.430, 33.830, 34.035)
+// Kleine Blumen   @ 36.860 sec - 37.400 sec (36.860, 37.030, 37.170, 37.210, 37.330)
 
 // INK SPLATTERS
 int[][] splatterEventArray  = new int[10][2];       // 0 = delay, 1 = size
 // FLOWER EFFECT
-int[][] brushOneEventArray  = new int[11][3];       // 0 = delay, 1 = huge/continuous Flag, 2 = Repeat Intervall[ms]
+int[][] brushOneEventArray  = new int[30][3];       // 0 = delay, 1 = huge/continuous Flag, 2 = Repeat Intervall[ms]
 // SPREAD EFFECT
 int[][] brushFourEventArray = new int[ 3][4];       // 0 = delay, 1 = continuousFlag      , 2 = Repeat Intervall[ms], 3 = alive 
 // INVERT FILTER
@@ -49,20 +49,49 @@ void initEventArrays() {
   invertEventArray[1][0] =  39850;
   invertEventArray[0][0] =  42120;
  
+  // little flowers 1. sequenze
   brushOneEventArray[0][0] =  2340;    brushOneEventArray[0][1] = 0;    brushOneEventArray[0][2] = 0;
   brushOneEventArray[1][0] =  2460;    brushOneEventArray[1][1] = 0;    brushOneEventArray[1][2] = 0;
   brushOneEventArray[2][0] =  2520;    brushOneEventArray[2][1] = 0;    brushOneEventArray[2][2] = 0;
   brushOneEventArray[3][0] =  2625;    brushOneEventArray[3][1] = 0;    brushOneEventArray[3][2] = 0;
   brushOneEventArray[4][0] =  2690;    brushOneEventArray[4][1] = 0;    brushOneEventArray[4][2] = 0;
-  brushOneEventArray[4][0] =  2970;    brushOneEventArray[4][1] = 0;    brushOneEventArray[4][2] = 0;
   
-  brushOneEventArray[5][0] = 25350;    brushOneEventArray[5][1] = 1;    brushOneEventArray[5][2] = 0;
-  brushOneEventArray[6][0] = 28200;    brushOneEventArray[6][1] = 1;    brushOneEventArray[6][2] = 0;
-  brushOneEventArray[7][0] = 31050;    brushOneEventArray[7][1] = 1;    brushOneEventArray[7][2] = 0;
-  brushOneEventArray[8][0] = 39850;    brushOneEventArray[8][1] = 1;    brushOneEventArray[8][2] = 0;
-  brushOneEventArray[9][0] = 42120;    brushOneEventArray[9][1] = 1;    brushOneEventArray[9][2] = 0;
+  // little flowers 2. sequenze
+  brushOneEventArray[5][0] =  5200;    brushOneEventArray[5][1] = 0;    brushOneEventArray[5][2] = 0;
+  brushOneEventArray[6][0] =  5330;    brushOneEventArray[6][1] = 0;    brushOneEventArray[6][2] = 0;
+  brushOneEventArray[7][0] =  5410;    brushOneEventArray[7][1] = 0;    brushOneEventArray[7][2] = 0;
+  brushOneEventArray[8][0] =  5480;    brushOneEventArray[8][1] = 0;    brushOneEventArray[8][2] = 0;
+  brushOneEventArray[9][0] =  5580;    brushOneEventArray[9][1] = 0;    brushOneEventArray[9][2] = 0;
   
-  brushOneEventArray[10][0] =10300;    brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;
+  // little flowers 3. sequenze
+  brushOneEventArray[10][0] =  8100;    brushOneEventArray[10][1] = 0;    brushOneEventArray[10][2] = 0;
+  brushOneEventArray[11][0] =  8180;    brushOneEventArray[11][1] = 0;    brushOneEventArray[11][2] = 0;
+  brushOneEventArray[12][0] =  8270;    brushOneEventArray[12][1] = 0;    brushOneEventArray[12][2] = 0;
+  brushOneEventArray[13][0] =  8330;    brushOneEventArray[13][1] = 0;    brushOneEventArray[13][2] = 0;
+  brushOneEventArray[14][0] =  8440;    brushOneEventArray[14][1] = 0;    brushOneEventArray[14][2] = 0;
+  
+  // little flowers 4. sequenze
+  brushOneEventArray[15][0] = 33200;    brushOneEventArray[15][1] = 0;    brushOneEventArray[15][2] = 0;
+  brushOneEventArray[16][0] = 33430;    brushOneEventArray[16][1] = 0;    brushOneEventArray[16][2] = 0;
+  brushOneEventArray[17][0] = 33830;    brushOneEventArray[17][1] = 0;    brushOneEventArray[17][2] = 0;
+  brushOneEventArray[18][0] = 34035;    brushOneEventArray[18][1] = 0;    brushOneEventArray[18][2] = 0;
+  
+  // little flowers 5. sequenze 36.860, 37.030, 37.170, 37.210, 37.330
+  brushOneEventArray[19][0] = 36860;    brushOneEventArray[19][1] = 0;    brushOneEventArray[19][2] = 0;
+  brushOneEventArray[20][0] = 37030;    brushOneEventArray[20][1] = 0;    brushOneEventArray[20][2] = 0;
+  brushOneEventArray[21][0] = 37170;    brushOneEventArray[21][1] = 0;    brushOneEventArray[21][2] = 0;
+  brushOneEventArray[22][0] = 37210;    brushOneEventArray[22][1] = 0;    brushOneEventArray[22][2] = 0;
+  brushOneEventArray[23][0] = 37330;    brushOneEventArray[23][1] = 0;    brushOneEventArray[23][2] = 0;
+  
+  // middle flowers
+  brushOneEventArray[24][0] = 25350;    brushOneEventArray[24][1] = 1;    brushOneEventArray[24][2] = 0;
+  brushOneEventArray[25][0] = 28200;    brushOneEventArray[25][1] = 1;    brushOneEventArray[25][2] = 0;
+  brushOneEventArray[26][0] = 31050;    brushOneEventArray[26][1] = 1;    brushOneEventArray[26][2] = 0;
+  brushOneEventArray[27][0] = 39850;    brushOneEventArray[27][1] = 1;    brushOneEventArray[27][2] = 0;
+  brushOneEventArray[28][0] = 42120;    brushOneEventArray[28][1] = 1;    brushOneEventArray[28][2] = 0;
+  
+  // big flower
+  brushOneEventArray[29][0] = 10300;    brushOneEventArray[29][1] = 2;    brushOneEventArray[29][2] = 0;
   
   brushFourEventArray[0][0] = 43300;   brushFourEventArray[0][1] = 1;   brushFourEventArray[0][2] = 100;    brushFourEventArray[0][3] = 1;    
   //brushFourEventArray[1][0] = 10000;   brushFourEventArray[1][1] = 1;   brushFourEventArray[1][2] = 100;    brushFourEventArray[1][3] = 1;      // beispiel
