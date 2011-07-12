@@ -171,6 +171,7 @@ void draw(){
   if(!initialised) {
     switchCursor(1);
     image(getBufSlice(), 0, 0);
+    //filter(BLUR, 1);
     image(overlayImage, 0, 0);
     drawGUI(1);
   } else {  
@@ -207,12 +208,13 @@ void draw(){
       switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
+        filter(BLUR, 4);
         image(overlayImage, 0, 0);
         drawGUI(2); 
       } else if (!drawSaveOverlay) {
-        pauseAllScheduledEvents();
-        
-        image(getBufSlice(), 0, 0);        
+        pauseAllScheduledEvents();        
+        image(getBufSlice(), 0, 0); 
+        filter(BLUR, 4);       
         image(overlayImage, 0, 0);
         drawGUI(3);     
       }     
@@ -234,6 +236,7 @@ void draw(){
   
   if(drawSaveOverlay){
     image(getBufSlice(), 0, 0);
+    filter(BLUR, 4);
     image(savingImage, 0, 0);
     
     if (saveReady == 0) {
