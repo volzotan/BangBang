@@ -10,8 +10,8 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle;
-boolean usePlay = true, mapEnabled = false, cursorEnabled = true;
+PImage mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
+boolean usePlay = true, mapEnabled = false, cursorEnabled = true, useNyancat = false;
 
 // Minim
 import ddf.minim.*;
@@ -189,7 +189,7 @@ void draw(){
     pos = player.position();
       
     if(player.isPlaying() && player.position() < 47986) {
-      switchCursor(cursorEnabled ? 3 : 2);
+      if(!useNyancat) { switchCursor(cursorEnabled ? 3 : 2); }
       moveViewport();
       buf.beginDraw();
       if (mainBrushActive) {        

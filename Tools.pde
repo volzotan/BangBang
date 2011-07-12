@@ -83,6 +83,7 @@ void initImages() {
   overlayImage = loadImage("MenuOverlay.png");
   cursorImage_blank = loadImage("cursor.png");
   cursorImage_circle = loadImage("cursor_circle.png");
+  cursorImage_nyancat = loadImage("cursor_nyan_medium.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
   }  
@@ -132,11 +133,12 @@ void moveViewport(){
 }
 
 void switchCursor(int kind) {
-  if(switchCursor != kind) {
+  if(switchCursor != kind || useNyancat) {
     switch(kind) {
-      case 1: cursor(ARROW); switchCursor = kind; break;
-      case 2: cursor(cursorImage_blank); switchCursor = kind; break;   
-      case 3: cursor(cursorImage_circle); switchCursor = kind;
+      case 1: cursor(ARROW); switchCursor = kind; useNyancat = false; break;
+      case 2: cursor(cursorImage_blank); switchCursor = kind; useNyancat = false; break;   
+      case 3: cursor(cursorImage_circle); switchCursor = kind; useNyancat = false; break;
+      case 4: cursor(cursorImage_nyancat); useNyancat = true; break;
     }  
   }  
 }  
