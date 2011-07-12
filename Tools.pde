@@ -78,6 +78,7 @@ void initImages() {
   saveButtonImage = loadImage("buttons/SaveMask.png");
   mapDButtonImage = loadImage("buttons/MapDMask.png");
   mapEButtonImage = loadImage("buttons/MapEMask.png");
+  resetButtonImage = loadImage("buttons/ResetMask.png");
   savingImage = loadImage("SavingOverlay.png");  
   overlayImage = loadImage("MenuOverlay.png");
   cursorImage_blank = loadImage("cursor.png");

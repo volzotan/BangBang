@@ -10,7 +10,7 @@ import controlP5.*;
 
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle;
+PImage mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle;
 boolean usePlay = true, mapEnabled = false, cursorEnabled = true;
 
 // Minim
@@ -210,13 +210,13 @@ void draw(){
       switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
-        filter(BLUR, 4);
+        filter(BLUR, 3);
         image(overlayImage, 0, 0);
         drawGUI(2); 
       } else if (!drawSaveOverlay) {
         pauseAllScheduledEvents();        
         image(getBufSlice(), 0, 0); 
-        filter(BLUR, 4);       
+        filter(BLUR, 3);       
         image(overlayImage, 0, 0);
         drawGUI(3);     
       }     
@@ -238,7 +238,7 @@ void draw(){
   
   if(drawSaveOverlay){
     image(getBufSlice(), 0, 0);
-    filter(BLUR, 4);
+    filter(BLUR, 3);
     image(savingImage, 0, 0);
     
     if (saveReady == 0) {

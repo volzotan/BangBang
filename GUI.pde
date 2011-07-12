@@ -68,7 +68,15 @@ void setupGUI(){
     breakMapToggleButton.setSprite(breakMapDisSprite);
   } else {        
     breakMapToggleButton.setSprite(breakMapEnSprite);
-  }  
+  }
+  
+  // -> left top (reset)
+  ControllerSprite breakResetSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
+  breakResetSprite.setMask(resetButtonImage);
+  breakResetSprite.enableMask();
+  
+  Button breakResetButton = breakP5.addButton("Replay",0,20,105,250,120);
+  breakResetButton.setSprite(breakResetSprite);
   
   // -> left bottom (exit)
   ControllerSprite breakExitSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
