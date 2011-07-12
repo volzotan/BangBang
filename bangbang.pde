@@ -45,7 +45,8 @@ float verfolgungsDaempfungX = 10;
 float verfolgungsDaempfungY = 10;
 
 // Global auto-scrolling value
-float scrollGeschwindigkeit = 6;
+final float scrollGeschwindigkeit = 6;
+float tempScrollGeschwindigkeit = scrollGeschwindigkeit;
 int autoScrollX = 0;
 int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
@@ -118,6 +119,7 @@ void setup(){
   amp = 200;
   xPlus = 0;
   firstRun = true;
+  tempScrollGeschwindigkeit = scrollGeschwindigkeit;
   
   Timer timer = new Timer();
   

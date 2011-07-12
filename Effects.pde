@@ -5,6 +5,7 @@
   * + lastMousePosX[0-29] gibt vorherige absolute Mausposition aus
   *
   */  
+  
 // EFFECT RANGES
 //
 // Große Blume     @ 10.300 sec
@@ -21,8 +22,8 @@
 // Kleine Blumen   @ 36.860 sec - 37.400 sec
 
 int[][] splatterEventArray  = new int[10][2];       // 0 = delay, 1 = size
-int[][] brushFourEventArray = new int[ 1][3];       // 0 = delay, 1 = continuousFlag      , 2 = Repeat Intervall[ms]
-int[][] brushOneEventArray  = new int[11][3];       // 0 = delay, 1 = huge/continuous Flag, 3 = Repeat Intervall[ms]
+int[][] brushOneEventArray  = new int[11][3];       // 0 = delay, 1 = huge/continuous Flag, 2 = Repeat Intervall[ms]
+int[][] brushFourEventArray = new int[ 3][4];       // 0 = delay, 1 = continuousFlag      , 2 = Repeat Intervall[ms], 3 = alive 
 int[][] invertEventArray    = new int[ 2][1];       // 0 = delay
 
 final int MAXAMOUNT =  4; 
@@ -58,7 +59,9 @@ void initEventArrays() {
   
   brushOneEventArray[10][0] =10300;    brushOneEventArray[10][1] = 2;   brushOneEventArray[10][2] = 0;
   
-  brushFourEventArray[0][0] = 43300;   brushFourEventArray[0][1] = 1;   brushFourEventArray[0][2] = 100;
+  brushFourEventArray[0][0] = 43300;   brushFourEventArray[0][1] = 1;   brushFourEventArray[0][2] = 100;    brushFourEventArray[0][3] = 1;    
+  //brushFourEventArray[1][0] = 10000;   brushFourEventArray[1][1] = 1;   brushFourEventArray[1][2] = 100;    brushFourEventArray[1][3] = 1;      // beispiel
+  //brushFourEventArray[2][0] = 15000;   brushFourEventArray[2][1] = 1;   brushFourEventArray[2][2] = 100;    brushFourEventArray[2][3] = 1;      // beispiel
 }
 
 void savePauseTime() {
@@ -81,7 +84,36 @@ void startAllScheduledEvents() {
   scheduleBrushFourEvents();
   scheduleInvertEvent();
   
+  scheduleKillEvent();
+  
   scheduleGhostBrush();
+}
+
+void scheduleKillEvent() {
+  int killTime = 12000;
+  /* Beispielcode | laeuft ohne Arrays weil das zu umständlich wird bei nur wenigen Events die abgebrochen werden muessen
+  if (killTime - elapsedTime >= 0) {
+    timer.schedule(new TimerTask() {
+      public void run() {
+        brushFourEventArray[1][3] = 0;
+        pauseAllScheduledEvents();
+        startAllScheduledEvents();
+      }
+    }, killTime - elapsedTime);
+  }
+  
+  killTime = 18000;
+  if (killTime - elapsedTime >= 0) {
+    timer.schedule(new TimerTask() {
+      public void run() {
+        brushFourEventArray[2][3] = 0;
+        pauseAllScheduledEvents();
+        startAllScheduledEvents();
+      }
+    }, killTime - elapsedTime);
+  }
+  
+  */
 }
 
 void scheduleInvertEvent() {
@@ -181,7 +213,7 @@ void scheduleBrushOneEvents() {
 
 void scheduleBrushFourEvents() {
   for (int i=0; i < brushFourEventArray.length; i++) {
-    if (brushFourEventArray[i][0] - elapsedTime >= 0) {      
+    if (brushFourEventArray[i][0] - elapsedTime >= 0 && brushFourEventArray[i][3] == 1) {      
       if (brushFourEventArray[i][1] == 0) {
         timer.schedule(new TimerTask() {
           public void run() {
@@ -255,6 +287,8 @@ void crescendo() {
     oldDeltaX = oldX;
     oldDeltaY = oldY;
               
+    tempScrollGeschwindigkeit = 15;
+              
     mainBrushActive = false;
     firstRun = false;
   }
@@ -278,4 +312,7 @@ void crescendo() {
   amp = amp - 5;
   xPlus = xPlus + 6;
   invsVar = invsVar * (-1);
+  
+  tempScrollGeschwindigkeit = tempScrollGeschwindigkeit + (scrollGeschwindigkeit - tempScrollGeschwindigkeit)/tempScrollGeschwindigkeit;
+  println(tempScrollGeschwindigkeit);
 }
