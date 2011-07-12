@@ -196,7 +196,7 @@ public void Save(int theValue) {
 void keyReleased() {
   if (ESC == key) { exit(); }
   if ('m' == key || 'M' == key) { EnableMap(0); }
-  if ('n' == key || 'N' == key) { switchCursor(useNyancat ? switchCursor : 4); }    
+  if ('n' == key || 'N' == key) { if(cursorEnabled) { switchCursor(useNyancat ? switchCursor : 4); } }    
   if ('p' == key || 'P' == key) { ToggleCursor(); }
   if ('r' == key || 'R' == key) { Replay(0); }
   if ('s' == key || 'S' == key) {

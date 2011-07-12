@@ -171,7 +171,7 @@ void draw(){
   }
   
   if(!initialised) {
-    switchCursor(1);
+    if(!useNyancat) { switchCursor(1); }
     image(getBufSlice(), 0, 0);
     //filter(BLUR, 1);
     image(overlayImage, 0, 0);
@@ -207,7 +207,7 @@ void draw(){
       drawMiniMap(mapEnabled);       
       tempBrushValue *= 0.95;     
     } else {
-      switchCursor(1);
+      if(!useNyancat) { switchCursor(1); }
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
         filter(BLUR, 3);
