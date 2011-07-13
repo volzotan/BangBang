@@ -127,6 +127,7 @@ int tempX, tempY;
 boolean initialised = false, doClear = false, doInvert = false;
 int switchCursor = 0; //1 = pfeil, 2 = leer, 3 = custom, else do nothing
 int wasGUI = 0;
+String savePath = "";
 
 void setup(){
   initEventArrays();
@@ -179,7 +180,12 @@ void setup(){
 void draw(){  
   if (saveReady == 2) {
     if(initialised) {  
-      buf.save(dataPath("shots/"+timestamp() +".png"));   
+      try {
+        buf.save(savePath);    // dataPath("shots/"+timestamp() +".png")
+      } catch(Exception e) {
+        
+      }  
+      savePath = "";      
     } 
     if(initialised && player.position() < 47986 && wasGUI == 0) {
       player.play(); 

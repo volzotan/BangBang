@@ -184,9 +184,15 @@ public void ToggleCursor() {
 }
 
 public void Save(int theValue) {
-    drawSaveOverlay = true;
-    player.pause();
-    closeGUI(4);
+    savePath = selectOutput("Save Canvas to:");
+    if(savePath != null && savePath != "") {
+      if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+        savePath += ".jpg";
+      } 
+      drawSaveOverlay = true;
+      player.pause();
+      closeGUI(4);
+    }  
 }
 
 // tastatur befehle
