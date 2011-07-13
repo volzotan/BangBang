@@ -41,8 +41,8 @@ int groesseSchutzzoneX = 0;
 int groesseSchutzzoneY = 0;
 
 // dampen mouse movements for brush following
-float verfolgungsDaempfungX = 20;
-float verfolgungsDaempfungY = 20;
+float verfolgungsDaempfungX = 9;
+float verfolgungsDaempfungY = 9;
 
 // Global auto-scrolling value
 final float scrollGeschwindigkeit = 6;
@@ -91,15 +91,6 @@ color nyan3 = color( 50, 233,   3);
 color nyan4 = color(  2, 162, 255);
 color nyan5 = color(119,  85, 255);
 color nyanColor = nyan0;
-
-/*
-color nyanA = lerpColor(nyan0, nyan1, .50);
-color nyanB = lerpColor(nyan1, nyan2, .50);
-color nyanC = lerpColor(nyan2, nyan3, .50);
-color nyanD = lerpColor(nyan3, nyan4, .50);
-color nyanE = lerpColor(nyan4, nyan5, .50);
-color nyanF = lerpColor(nyan5, nyan6, .50);
-*/
 
 // direction sensitive drawing
 int[] directionArrayX = new int[10];
@@ -236,13 +227,13 @@ void draw(){
       switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getBufSlice(), 0, 0);
-        filter(BLUR, 3);
+        //filter(BLUR, 1);
         image(overlayImage, 0, 0);
         drawGUI(2); 
       } else if (!drawSaveOverlay) {
         pauseAllScheduledEvents();        
         image(getBufSlice(), 0, 0); 
-        filter(BLUR, 3);       
+        //filter(BLUR, 1);       
         image(overlayImage, 0, 0);
         drawGUI(3);     
       }     
@@ -264,7 +255,7 @@ void draw(){
   
   if(drawSaveOverlay){
     image(getBufSlice(), 0, 0);
-    filter(BLUR, 3);
+    //filter(BLUR, 1);
     image(savingImage, 0, 0);
     
     if (saveReady == 0) {
@@ -273,8 +264,7 @@ void draw(){
       saveReady = 2;
       drawSaveOverlay = false;
     }
-  }
- 
+  } 
 }
   
 void stop() {                                       // Minim Stop
