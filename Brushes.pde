@@ -64,6 +64,7 @@ void brushTwo() {
   buf.stroke(0,0,0);
   buf.strokeWeight(5);     
   buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pmouseX + prevOffsetX, pmouseY + prevOffsetY);
+  buf.noStroke();
 }
 
 void brushThree() {
@@ -166,6 +167,7 @@ void brushFour(int minAmount, int maxAmount) {
      }  
         
      buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);   
+     buf.noStroke();
    }   
 }
 
