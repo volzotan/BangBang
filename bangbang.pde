@@ -11,7 +11,8 @@ import controlP5.*;
 // GUI
 ControlP5 setupP5, breakP5, endP5;
 PImage mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
-boolean usePlay = true, mapEnabled = false, cursorEnabled = true, useNyancat = false;
+PImage tempMenuBG;
+boolean usePlay = true, mapEnabled = false, cursorEnabled = true, useNyancat = false, doCapture = true, emptyMenuBG = true;
 
 // Minim
 import ddf.minim.*;
@@ -168,7 +169,7 @@ void setup(){
   deltaMouseY = 450;
 }
 
-void draw(){  
+void draw(){
   if (saveReady == 2) {
     if(initialised) {  
       try {
@@ -190,7 +191,6 @@ void draw(){
   if(!initialised) {
     switchCursor(1);
     image(getBufSlice(), 0, 0);
-    //filter(BLUR, 1);
     image(overlayImage, 0, 0);
     drawGUI(1);
   } else {  
@@ -226,15 +226,13 @@ void draw(){
     } else {
       switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
-        image(getBufSlice(), 0, 0);
-        //filter(BLUR, 1);
-        image(overlayImage, 0, 0);
+        println("doCapture = "+doCapture+" / emptyMenuBG = "+emptyMenuBG);
+        image(getTempMenuBG(), 0, 0);
         drawGUI(2); 
       } else if (!drawSaveOverlay) {
-        pauseAllScheduledEvents();        
-        image(getBufSlice(), 0, 0); 
-        //filter(BLUR, 1);       
-        image(overlayImage, 0, 0);
+        pauseAllScheduledEvents();
+        println("doCapture = "+doCapture+" / emptyMenuBG = "+emptyMenuBG);
+        image(getTempMenuBG(), 0, 0);
         drawGUI(3);     
       }     
     }    
@@ -250,14 +248,12 @@ void draw(){
     lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
     lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
   }
-  //println(frameRate + " at " + player.position());
-  
+  //println(frameRate + " at " + player.position());  
   
   if(drawSaveOverlay){
-    image(getBufSlice(), 0, 0);
-    //filter(BLUR, 1);
-    image(savingImage, 0, 0);
-    
+    println("doCapture = "+doCapture+" / emptyMenuBG = "+emptyMenuBG);
+    image(getTempMenuBG(), 0, 0);
+    image(savingImage, 0, 0);    
     if (saveReady == 0) {
       saveReady = 1;
     } else if (saveReady == 1) {

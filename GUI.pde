@@ -125,18 +125,32 @@ void drawGUI(int openMenu){
   switch(openMenu){
     case 1 : closeGUI(2); closeGUI(3); setupP5.show(); setupP5.draw(); break;
     case 2 : closeGUI(1); closeGUI(3); breakP5.show(); breakP5.draw(); wasGUI = 2; break;
-    case 3 : closeGUI(1); closeGUI(2); endP5.show();   endP5.draw();   wasGUI = 3;
+    case 3 : closeGUI(1); closeGUI(2); endP5.show();   endP5.draw();   wasGUI = 3; 
   }
 }
 
 // CLOSE GUI
 void closeGUI(int closeMenu){
   switch(closeMenu) {
-    case 1 : setupP5.hide(); break;
-    case 2 : breakP5.hide(); break;
-    case 3 : endP5.hide(); break;
-    case 4 : setupP5.hide(); breakP5.hide(); endP5.hide();
+    case 1 : setupP5.hide();  emptyMenuBG = true; break;
+    case 2 : breakP5.hide();  emptyMenuBG = true; break;
+    case 3 : endP5.hide();    emptyMenuBG = true; break;
+    case 4 : setupP5.hide(); breakP5.hide(); endP5.hide(); emptyMenuBG = true;
   }
+}
+
+public PImage getTempMenuBG() {
+  if((doCapture == true) && (emptyMenuBG == true)) {
+    menuBGCaptured();
+    tempMenuBG = getBufSlice();
+    tempMenuBG.filter(BLUR, 3);
+  }  
+  return tempMenuBG;
+}
+
+public void menuBGCaptured() {
+  doCapture = false;
+  emptyMenuBG = false;
 }
 
 //  initial funktion für start am anfang
@@ -212,8 +226,8 @@ void keyReleased() {
     pauseAllScheduledEvents();
     Save((player.isPlaying()) ? 1 : 0); 
   }
-  if (' ' == key) { 
-    if(player.isPlaying()) {      
+  if (' ' == key) {
+    if(player.isPlaying()) {
       pauseAllScheduledEvents();      
       player.pause();
     } else if(initialised && player.position() < 47986) {
