@@ -84,12 +84,31 @@ int cG1 = 100, cG2 = 145, cG3 =   0, cG4 =   0, cG5 =   0;
 int cB1 = 100, cB2 = 145, cB3 =   0, cB4 =   0, cB5 =   0;
 int cA1 = 255, cA2 = 255, cA3 =   0, cA4 =   0, cA5 =   0;
 
+color nyan0 = color(255,  42,  12);
+color nyan1 = color(255, 164,   9);
+color nyan2 = color(255, 246,   0);
+color nyan3 = color( 50, 233,   3);
+color nyan4 = color(  2, 162, 255);
+color nyan5 = color(119,  85, 255);
+color nyanColor = nyan0;
+
+/*
+color nyanA = lerpColor(nyan0, nyan1, .50);
+color nyanB = lerpColor(nyan1, nyan2, .50);
+color nyanC = lerpColor(nyan2, nyan3, .50);
+color nyanD = lerpColor(nyan3, nyan4, .50);
+color nyanE = lerpColor(nyan4, nyan5, .50);
+color nyanF = lerpColor(nyan5, nyan6, .50);
+*/
+
 // direction sensitive drawing
 int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];
 
 // EXPERIMENTAL
 boolean drawSaveOverlay = false;
+int tempNyanPos = 0;
+int tempNyanCol = 0;
 int saveReady = 0;
 
 int brushThreeSkalierungAusschlag = 100;
@@ -113,6 +132,7 @@ void setup(){
   initEventArrays();
   elapsedTime = 0;
   mainBrushActive = true;
+  tempNyanPos = 0;
   
   oldX = 400;
   oldY = 225;

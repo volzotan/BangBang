@@ -1,6 +1,7 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
+
 void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   if(useOffset) {
@@ -67,13 +68,30 @@ void brushTwo() {
 
 void brushThree() {
   // 10,5 - 11,8 :: General Pause
-  if(pos < 10500 || pos > 11800) {
-    buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
-    buf.strokeWeight(5+tempBrushValue*0.13); 
-  } else {
-    buf.stroke(cR2,cG2,cB2);
-    buf.strokeWeight(4); 
-  }  
+  if(!useNyancat) {
+    if(pos < 10500 || pos > 11800) {
+      buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
+      buf.strokeWeight(5+tempBrushValue*0.13);
+    } else {
+      buf.stroke(cR2, cG2, cB2);
+      buf.strokeWeight(4);
+    }
+  } else {  
+    if(tempNyanPos+250 < pos) {
+      switch(tempNyanCol) {
+        case 0 : nyanColor = nyan0; tempNyanCol++; break;
+        case 1 : nyanColor = nyan1; tempNyanCol++; break;
+        case 2 : nyanColor = nyan2; tempNyanCol++; break;
+        case 3 : nyanColor = nyan3; tempNyanCol++; break;
+        case 4 : nyanColor = nyan4; tempNyanCol++; break;
+        case 5 : nyanColor = nyan5; tempNyanCol = 0; break;
+      }        
+      tempNyanPos = pos;
+      }
+      buf.stroke(nyanColor);  
+      buf.strokeWeight(5+tempBrushValue*0.13);
+  }
+  
   /*
   float verhaeltnisSumme = x + copyOffsetX - directionArrayX[drawCounter%10] + y + copyOffsetY - directionArrayY[drawCounter%10];
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
