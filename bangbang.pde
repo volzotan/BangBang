@@ -41,13 +41,13 @@ int groesseSchutzzoneX = 0;
 int groesseSchutzzoneY = 0;
 
 // dampen mouse movements for brush following
-float verfolgungsDaempfungX = 10;
-float verfolgungsDaempfungY = 10;
+float verfolgungsDaempfungX = 30;
+float verfolgungsDaempfungY = 30;
 
 // Global auto-scrolling value
 final float scrollGeschwindigkeit = 6;
 float tempScrollGeschwindigkeit = scrollGeschwindigkeit;
-int autoScrollX = 0;
+int autoScrollX = (int) scrollGeschwindigkeit;
 int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
 float xRichtungsFaktor = 10, yRichtungsFaktor = 0;

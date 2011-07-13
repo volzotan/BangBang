@@ -110,7 +110,7 @@ void moveViewport(){
     }
   }
 
-  float xBeschleunigungsFaktor = abs(xRichtungsFaktor) * tempScrollGeschwindigkeit + autoScrollX;    // AutoScrolling unabhängig vom Beschleunigungsfaktor              // ABS() ENTFERNEN ZUM SCROLLEN IN BEL. RICHTUNGEN
+  float xBeschleunigungsFaktor = /*abs(xRichtungsFaktor) * tempScrollGeschwindigkeit*/ + autoScrollX;    // AutoScrolling unabhängig vom Beschleunigungsfaktor              // ABS() ENTFERNEN ZUM SCROLLEN IN BEL. RICHTUNGEN
   float yBeschleunigungsFaktor = yRichtungsFaktor * tempScrollGeschwindigkeit + autoScrollY;
   
   xPosKoord = copyOffsetX + (int) xBeschleunigungsFaktor;

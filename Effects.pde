@@ -321,19 +321,15 @@ void crescendo() {
     oldDeltaX = oldX;
     oldDeltaY = oldY;
               
-    tempScrollGeschwindigkeit = 15;
+    tempScrollGeschwindigkeit = 13;
               
     mainBrushActive = false;
     firstRun = false;
   }
             
-  if(pos < 10500 || pos > 11800) {
-              buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
-              buf.strokeWeight(5+tempBrushValue*0.13); 
-  } else {
-              buf.stroke(cR2,cG2,cB2);
-              buf.strokeWeight(4); 
-  }  
+  buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
+  buf.strokeWeight(5+tempBrushValue*0.13); 
+ 
             
   tempX = (int) (deltaMouseX + xPlus + random(-1,1) * 8);
   tempY = (int) (deltaMouseY + random(-1,1) * 15 + invsVar * (-1) * abs(amp));
@@ -343,10 +339,10 @@ void crescendo() {
   oldDeltaX = tempX;
   oldDeltaY = tempY;
             
-  amp = amp - 5;
+  amp = amp + (0 - amp)/15;
   xPlus = xPlus + 6;
   invsVar = invsVar * (-1);
   
-  tempScrollGeschwindigkeit = tempScrollGeschwindigkeit + (scrollGeschwindigkeit - tempScrollGeschwindigkeit)/tempScrollGeschwindigkeit;
+  tempScrollGeschwindigkeit = tempScrollGeschwindigkeit + (0 - tempScrollGeschwindigkeit)/18;
   println(tempScrollGeschwindigkeit);
 }
