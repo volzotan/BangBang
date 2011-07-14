@@ -49,10 +49,6 @@ void drawVignette(boolean doDraw){
   }
 }
 
-public void getTempBufSlice() {
-  tempBufSlice = getBufSlice();
-}
-
 PImage getBufSlice() {
   PImage temp = buf.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
   if(doInvert) {

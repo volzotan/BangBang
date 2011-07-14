@@ -140,14 +140,14 @@ void closeGUI(int closeMenu){
 }
 
 public PImage getMenuBG(int b, int m) {
-  if(doCapture || !doCapture && drawSaveOverlay) {
-    println(doCapture);
-    doCapture = false;
+  if(emptyMenuBG || !emptyMenuBG && drawSaveOverlay) {
+    emptyMenuBG = false;
     tempMenuBG = getBufSlice();
     tempMenuBG.filter(BLUR, b);
     switch(m) {
-      case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); println("overlay"); break;
-      case 2 : tempMenuBG.blend(savingImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); println("saving"); break;
+      case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); break;
+      case 2 : tempMenuBG.blend(overlayImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+               tempMenuBG.blend(savingImage, 0, 0, width, height, 290, 115, 220, 220, LIGHTEST); break;
     }
   }
   return tempMenuBG;
@@ -155,7 +155,7 @@ public PImage getMenuBG(int b, int m) {
 
 //  initial funktion für start am anfang
 public void Play(int theValue) {
-  doCapture = true;
+  emptyMenuBG = true;
   initialised = true;
   player.play();  
   startAllScheduledEvents();  
@@ -171,7 +171,7 @@ public void Replay(int theValue) {
 public void Break(int theValue) {
   if(initialised && player.position() < 47986) {
     closeGUI(2);
-    doCapture = true;
+    emptyMenuBG = true;
     player.play();
     startAllScheduledEvents();
   } else if(!initialised) {
@@ -223,14 +223,14 @@ void keyReleased() {
   }    
   if ('p' == key || 'P' == key) { ToggleCursor(); }
   if ('r' == key || 'R' == key) { Replay(0); }
-  if ('s' == key || 'S' == key) { pauseAllScheduledEvents(); Save(0); }
+  if ('s' == key || 'S' == key) { println("pressed key: S"); pauseAllScheduledEvents(); Save(0); }
   if (' ' == key) {
     if(player.isPlaying()) {
       pauseAllScheduledEvents();      
       player.pause();
     } else if(initialised && player.position() < 47986) {
       closeGUI(2);
-      doCapture = true;
+      emptyMenuBG = true;
       player.play();      
       startAllScheduledEvents();
     } else if(!initialised) {

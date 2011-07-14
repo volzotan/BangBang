@@ -9,9 +9,8 @@ int elapsedTime = 0;
 import controlP5.*;
 // GUI
 ControlP5 setupP5, breakP5, endP5;
-PImage mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
-PImage tempMenuBG, tempBufSlice;
-boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, doCapture; // doCapture = still photo flag
+PImage tempMenuBG, mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
+boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
 
 // Minim
 import ddf.minim.*;
@@ -111,7 +110,7 @@ void setup(){
   
   savePath = "";
   
-  doCapture = true;  
+  emptyMenuBG = true;  
   wasGUI = 0;
   
   inkSplatterPos = 0;
@@ -170,7 +169,7 @@ void draw() {
     if(initialised && player.position() < 47986 && wasGUI == 0) {
       player.play(); 
       startAllScheduledEvents();
-      doCapture = true;
+      emptyMenuBG = true;
     } else {
       wasGUI = 0;
     }
@@ -243,7 +242,7 @@ void draw() {
     } else if (saveReady == 1) {
       saveReady = 2;
       drawSaveOverlay = false;
-      doCapture = true;
+      emptyMenuBG = true;
     }
   } 
 }
