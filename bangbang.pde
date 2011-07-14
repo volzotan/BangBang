@@ -2,7 +2,7 @@
 import java.util.Timer;
 import java.util.TimerTask;
 // timer
-Timer timer = new Timer();
+Timer timer;
 int elapsedTime = 0;
 
 // controlP5
@@ -123,7 +123,7 @@ void setup(){
   firstRun = true;
   tempScrollGeschwindigkeit = scrollGeschwindigkeit;
   
-  Timer timer = new Timer(); // warum wird hier der globale Timer überschrieben?
+  timer = new Timer(); // (re)set Timer
   
   size(800, 450, JAVA2D);
   frameRate(30);
