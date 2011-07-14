@@ -179,7 +179,7 @@ void draw() {
   
   if(!initialised) {
     switchCursor(1);
-    image(getMenuBG(0), 0, 0); 
+    image(getMenuBG(0, 1), 0, 0); 
     drawGUI(1);
   } else {  
     closeGUI(1);
@@ -214,11 +214,11 @@ void draw() {
     } else {
       switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
-        image(getMenuBG(2), 0, 0);
+        image(getMenuBG(2, 1), 0, 0);
         drawGUI(2); 
       } else if (!drawSaveOverlay) {
         pauseAllScheduledEvents();
-        image(getMenuBG(2), 0, 0);
+        image(getMenuBG(2, 1), 0, 0);
         drawGUI(3);     
       }     
     }    
@@ -237,12 +237,13 @@ void draw() {
   //println(frameRate + " at " + player.position());  
   
   if(drawSaveOverlay){
-    image(getMenuBG(2), 0, 0); 
+    image(getMenuBG(2, 2), 0, 0); 
     if (saveReady == 0) {
       saveReady = 1;
     } else if (saveReady == 1) {
       saveReady = 2;
       drawSaveOverlay = false;
+      doCapture = true;
     }
   } 
 }

@@ -139,24 +139,16 @@ void closeGUI(int closeMenu){
   }
 }
 
-public PImage getMenuBG(int b) {
-  if(doCapture && drawSaveOverlay) {
+public PImage getMenuBG(int b, int m) {
+  if(doCapture || !doCapture && drawSaveOverlay) {
+    println(doCapture);
     doCapture = false;
-    getTempBufSlice();
-    tempMenuBG = tempBufSlice;
+    tempMenuBG = getBufSlice();
     tempMenuBG.filter(BLUR, b);
-    tempBufSlice = tempMenuBG;
-    tempMenuBG.blend(savingImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
-  } else if (doCapture && !drawSaveOverlay) {
-    doCapture = false;
-    getTempBufSlice();
-    tempMenuBG = tempBufSlice;
-    tempMenuBG.filter(BLUR, b);
-    tempBufSlice = tempMenuBG;
-    tempMenuBG.blend(overlayImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
-  } else if (!doCapture && drawSaveOverlay) {
-    tempMenuBG = tempBufSlice;
-    tempMenuBG.blend(savingImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+    switch(m) {
+      case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); println("overlay"); break;
+      case 2 : tempMenuBG.blend(savingImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); println("saving"); break;
+    }
   }
   return tempMenuBG;
 }
