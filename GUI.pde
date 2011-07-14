@@ -199,15 +199,9 @@ public void ToggleCursor() {
 }
 
 public void Save(int theValue) {
-  drawSaveOverlay = true;
   player.pause();
+  drawSaveOverlay = true;
   closeGUI(4);
-  savePath = selectOutput("Save Canvas to:");
-  if(savePath != null && savePath != "") {
-    if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
-      savePath += ".jpg";
-    }
-  }
 }
 
 // tastatur befehle
@@ -223,7 +217,7 @@ void keyReleased() {
   }    
   if ('p' == key || 'P' == key) { ToggleCursor(); }
   if ('r' == key || 'R' == key) { Replay(0); }
-  if ('s' == key || 'S' == key) { println("pressed key: S"); pauseAllScheduledEvents(); Save(0); }
+  if ('s' == key || 'S' == key) { pauseAllScheduledEvents(); Save(0); }
   if (' ' == key) {
     if(player.isPlaying()) {
       pauseAllScheduledEvents();      

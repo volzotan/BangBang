@@ -158,12 +158,18 @@ void setup(){
 
 void draw() {
   if (saveReady == 2) {
-    if(initialised) {  
+    if(initialised) {
+      savePath = selectOutput("Save Canvas to:");
+      if(savePath != null && savePath != "") {
+        if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+          savePath += ".jpg";
+        }
+      } 
       try {
         buf.save(savePath);    // dataPath("shots/"+timestamp() +".png")
       } catch(Exception e) {
         
-      }  
+      }
       savePath = "";      
     } 
     if(initialised && player.position() < 47986 && wasGUI == 0) {
