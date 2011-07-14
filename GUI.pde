@@ -167,7 +167,6 @@ public void Play(int theValue) {
   initialised = true;
   player.play();  
   startAllScheduledEvents();  
-  usePlay = false;
 }
 
 public void Replay(int theValue) {

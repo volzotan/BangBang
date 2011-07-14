@@ -1,25 +1,23 @@
 // Event Handling Ressources
 import java.util.Timer;
 import java.util.TimerTask;
-
+// timer
 Timer timer = new Timer();
 int elapsedTime = 0;
 
 // controlP5
 import controlP5.*;
-
 // GUI
 ControlP5 setupP5, breakP5, endP5;
 PImage mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
 PImage tempMenuBG, tempBufSlice;
-boolean usePlay = true, mapEnabled = false, cursorEnabled = true, useNyancat = false, doCapture;
+boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, doCapture; // doCapture = still photo flag
 
 // Minim
 import ddf.minim.*;
 import ddf.minim.signals.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*; 
- 
 // Audio Player, Beat detection
 Minim minim;
 AudioPlayer player;
@@ -29,22 +27,17 @@ BeatDetect beat;
 PImage bufSlice;
 PGraphics buf;
 int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
-
 // Vignette / Background image 
 PImage vignette, bgCanvas;
- 
 // Viewport-Initialisierung / Viewport-Bewegungsvariablen
 float x = 400;
 float y = 225;          // Legt Position des Viewports bei Initialisierung fest
-
 // Protected zone (rectangle) around the relative center in which scrolling doesn't happen, 0 = no such zone
 int groesseSchutzzoneX = 0; 
 int groesseSchutzzoneY = 0;
-
 // dampen mouse movements for brush following
 float verfolgungsDaempfungX = 9;
 float verfolgungsDaempfungY = 9;
-
 // Global auto-scrolling value
 final float scrollGeschwindigkeit = 6;
 float tempScrollGeschwindigkeit = scrollGeschwindigkeit;
@@ -52,12 +45,9 @@ int autoScrollX = (int) (scrollGeschwindigkeit/2);
 int autoScrollY = 0;
 // Direction; constant scrolling in any direction without any mouse movements
 float xRichtungsFaktor = 10, yRichtungsFaktor = 0;
-  
-int xPosKoord = copyOffsetX + (int) xRichtungsFaktor; // TODO Comment!
-int yPosKoord = copyOffsetY + (int) yRichtungsFaktor; // TODO Comment!
-
-// use this with % to execute functions at every nth draw execution
-int drawCounter = 0;
+// WHAT DO THESE DO? 
+int xPosKoord = copyOffsetX + (int) xRichtungsFaktor;
+int yPosKoord = copyOffsetY + (int) yRichtungsFaktor;
 
 // MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben  
 int miniMapPosX = 0, miniMapPosY = 0;
@@ -65,7 +55,6 @@ PImage scaledMiniMap;
 
 // Brush
 int angle = 0, tempBrushValue;
-
 // Variablen zur Kontrolle des Brushes
 int deltaMouseX = 0;
 int deltaMouseY = 450;
@@ -77,31 +66,19 @@ int pos = 0;
 // ink splatter array
 PImage inkSplatter[] = new PImage[10];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
-int inkSplatterPos = 0;
+int inkSplatterPos;
 
-// ---- Colors ----
-int cR1 = 100, cR2 = 145, cR3 =   0, cR4 =   0, cR5 =   0;
-int cG1 = 100, cG2 = 145, cG3 =   0, cG4 =   0, cG5 =   0;
-int cB1 = 100, cB2 = 145, cB3 =   0, cB4 =   0, cB5 =   0;
-int cA1 = 255, cA2 = 255, cA3 =   0, cA4 =   0, cA5 =   0;
-
-color nyan0 = color(255,  42,  12);
-color nyan1 = color(255, 164,   9);
-color nyan2 = color(255, 246,   0);
-color nyan3 = color( 50, 233,   3);
-color nyan4 = color(  2, 162, 255);
-color nyan5 = color(119,  85, 255);
-color nyanColor = nyan0;
+// ---- Nyancat
+color nyanColor = color(255,  42,  12);
+int tempNyanPos, tempNyanCol;
 
 // direction sensitive drawing
 int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];
 
-// EXPERIMENTAL
-boolean drawSaveOverlay = false;
-int tempNyanPos = 0;
-int tempNyanCol = 0;
+// ---- Save Overlay
 int saveReady = 0;
+boolean drawSaveOverlay = false;
 
 int brushThreeSkalierungAusschlag = 100;
 int invsVar = 1;
@@ -110,23 +87,35 @@ float xPlus = 0;
 boolean ghostBrush = false;
 int oldX, oldDeltaX;
 int oldY, oldDeltaY;
-boolean firstRun = true;
-boolean mainBrushActive = true;
+boolean firstRun;
+boolean mainBrushActive;
 
 int tempX, tempY;
 
 // setup
-boolean initialised = false, doClear = false, doInvert = false;
-int switchCursor = 0; //1 = pfeil, 2 = leer, 3 = custom, else do nothing
-int wasGUI = 0;
-String savePath = "";
+boolean initialised, doClear = false, doInvert = false;
+// switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; wasGUI: previous GUI number
+int switchCursor, wasGUI;
+String savePath;
+// use this with % to execute functions at every nth draw execution
+int drawCounter = 0;
 
 void setup(){
   initEventArrays();
   elapsedTime = 0;
+  
   mainBrushActive = true;
   tempNyanPos = 0;
-  doCapture = true;
+
+  switchCursor = 0;
+  
+  savePath = "";
+  
+  doCapture = true;  
+  wasGUI = 0;
+  
+  inkSplatterPos = 0;
+  initialised = false;
   
   oldX = 400;
   oldY = 225;
@@ -135,7 +124,7 @@ void setup(){
   firstRun = true;
   tempScrollGeschwindigkeit = scrollGeschwindigkeit;
   
-  Timer timer = new Timer();
+  Timer timer = new Timer(); // warum wird hier der globale Timer überschrieben?
   
   size(800, 450, JAVA2D);
   frameRate(30);
@@ -143,9 +132,7 @@ void setup(){
   if(doClear) {
     player.pause();
     player.rewind();
-    doClear = false;
-    initialised = false;
-    wasGUI = 0;        
+    doClear = false;        
   }
 
   initCanvas(true);

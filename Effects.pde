@@ -327,7 +327,7 @@ void crescendo() {
     firstRun = false;
   }
             
-  buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
+  buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
   buf.strokeWeight(5+tempBrushValue*0.13); 
  
             

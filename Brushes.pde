@@ -71,26 +71,26 @@ void brushThree() {
   // 10,5 - 11,8 :: General Pause
   if(!useNyancat) {
     if(pos < 10500 || pos > 11800) {
-      buf.stroke(cR1-tempBrushValue,cG1-tempBrushValue,cB1-tempBrushValue);
+      buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
       buf.strokeWeight(5+tempBrushValue*0.13);
     } else {
-      buf.stroke(cR2, cG2, cB2);
+      buf.stroke(145, 145, 145);
       buf.strokeWeight(4);
     }
   } else {  
     if(tempNyanPos+250 < pos) {
       switch(tempNyanCol) {
-        case 0 : nyanColor = nyan0; tempNyanCol++; break;
-        case 1 : nyanColor = nyan1; tempNyanCol++; break;
-        case 2 : nyanColor = nyan2; tempNyanCol++; break;
-        case 3 : nyanColor = nyan3; tempNyanCol++; break;
-        case 4 : nyanColor = nyan4; tempNyanCol++; break;
-        case 5 : nyanColor = nyan5; tempNyanCol = 0; break;
+        case 0 : nyanColor = color(255,  42,  12); tempNyanCol++; break;
+        case 1 : nyanColor = color(255, 164,   9); tempNyanCol++; break;
+        case 2 : nyanColor = color(255, 246,   0); tempNyanCol++; break;
+        case 3 : nyanColor = color( 50, 233,   3); tempNyanCol++; break;
+        case 4 : nyanColor = color(  2, 162, 255); tempNyanCol++; break;
+        case 5 : nyanColor = color(119,  85, 255); tempNyanCol=0; break;
       }        
       tempNyanPos = pos;
-      }
-      buf.stroke(nyanColor);  
-      buf.strokeWeight(5+tempBrushValue*0.13);
+    }
+    buf.stroke(nyanColor);  
+    buf.strokeWeight(5+tempBrushValue*0.13);
   }
   
   /*
@@ -150,8 +150,8 @@ void brushFour(int minAmount, int maxAmount) {
      }
      
      if(random(0,1) < 0.6) {
-       buf.fill(cR2 - tempBrushValue - size + extraOffsetY - amount, cG2 - tempBrushValue - size + extraOffsetY - amount, cB2 - tempBrushValue - size + extraOffsetY - amount);
-       buf.stroke(cR2 - tempBrushValue - size + extraOffsetY - amount, cG2 - tempBrushValue - size + extraOffsetY - amount, cB2 - tempBrushValue - size + extraOffsetY - amount);
+       buf.fill(145 - tempBrushValue - size + extraOffsetY - amount, 145 - tempBrushValue - size + extraOffsetY - amount, 145 - tempBrushValue - size + extraOffsetY - amount);
+       buf.stroke(145 - tempBrushValue - size + extraOffsetY - amount, 145 - tempBrushValue - size + extraOffsetY - amount, 145 - tempBrushValue - size + extraOffsetY - amount);
      } else {
         float rand = random(0,1);
         if(rand < 0.3) {
