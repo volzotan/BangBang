@@ -91,7 +91,7 @@ void setupGUI(){
   breakSaveSprite.setMask(saveButtonImage);
   breakSaveSprite.enableMask();
   
-  Button breakSaveButton = breakP5.addButton("Save",0,530,225,250,120);
+  Button breakSaveButton = breakP5.addButton("Save",1,530,225,250,120);
   breakSaveButton.setSprite(breakSaveSprite);
   
   // END MENU (3)
@@ -116,7 +116,7 @@ void setupGUI(){
   endSaveSprite.setMask(saveButtonImage);
   endSaveSprite.enableMask();
   
-  Button endSaveButton = endP5.addButton("Save",0,530,225,250,120);
+  Button endSaveButton = endP5.addButton("Save",1,530,225,250,120);
   endSaveButton.setSprite(endSaveSprite);
 }
 
@@ -132,29 +132,38 @@ void drawGUI(int openMenu){
 // CLOSE GUI
 void closeGUI(int closeMenu){
   switch(closeMenu) {
-    case 1 : setupP5.hide();  emptyMenuBG = true; break;
-    case 2 : breakP5.hide();  emptyMenuBG = true; break;
-    case 3 : endP5.hide();    emptyMenuBG = true; break;
-    case 4 : setupP5.hide(); breakP5.hide(); endP5.hide(); emptyMenuBG = true;
+    case 1 : setupP5.hide(); break;
+    case 2 : breakP5.hide(); break;
+    case 3 : endP5.hide(); break;
+    case 4 : setupP5.hide(); breakP5.hide(); endP5.hide();
   }
 }
 
-public PImage getTempMenuBG() {
-  if((doCapture == true) && (emptyMenuBG == true)) {
-    menuBGCaptured();
-    tempMenuBG = getBufSlice();
-    tempMenuBG.filter(BLUR, 3);
-  }  
+public PImage getMenuBG(int b) {
+  if(doCapture && drawSaveOverlay) {
+    doCapture = false;
+    getTempBufSlice();
+    tempMenuBG = tempBufSlice;
+    tempMenuBG.filter(BLUR, b);
+    tempBufSlice = tempMenuBG;
+    tempMenuBG.blend(savingImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+  } else if (doCapture && !drawSaveOverlay) {
+    doCapture = false;
+    getTempBufSlice();
+    tempMenuBG = tempBufSlice;
+    tempMenuBG.filter(BLUR, b);
+    tempBufSlice = tempMenuBG;
+    tempMenuBG.blend(overlayImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+  } else if (!doCapture && drawSaveOverlay) {
+    tempMenuBG = tempBufSlice;
+    tempMenuBG.blend(savingImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+  }
   return tempMenuBG;
-}
-
-public void menuBGCaptured() {
-  doCapture = false;
-  emptyMenuBG = false;
 }
 
 //  initial funktion für start am anfang
 public void Play(int theValue) {
+  doCapture = true;
   initialised = true;
   player.play();  
   startAllScheduledEvents();  
@@ -171,6 +180,7 @@ public void Replay(int theValue) {
 public void Break(int theValue) {
   if(initialised && player.position() < 47986) {
     closeGUI(2);
+    doCapture = true;
     player.play();
     startAllScheduledEvents();
   } else if(!initialised) {
@@ -198,15 +208,15 @@ public void ToggleCursor() {
 }
 
 public void Save(int theValue) {
-    savePath = selectOutput("Save Canvas to:");
-    if(savePath != null && savePath != "") {
-      if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
-        savePath += ".jpg";
-      } 
-      drawSaveOverlay = true;
-      player.pause();
-      closeGUI(4);
-    }  
+  drawSaveOverlay = true;
+  player.pause();
+  closeGUI(4);
+  savePath = selectOutput("Save Canvas to:");
+  if(savePath != null && savePath != "") {
+    if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+      savePath += ".jpg";
+    }
+  }
 }
 
 // tastatur befehle
@@ -222,16 +232,14 @@ void keyReleased() {
   }    
   if ('p' == key || 'P' == key) { ToggleCursor(); }
   if ('r' == key || 'R' == key) { Replay(0); }
-  if ('s' == key || 'S' == key) {
-    pauseAllScheduledEvents();
-    Save((player.isPlaying()) ? 1 : 0); 
-  }
+  if ('s' == key || 'S' == key) { pauseAllScheduledEvents(); Save(0); }
   if (' ' == key) {
     if(player.isPlaying()) {
       pauseAllScheduledEvents();      
       player.pause();
     } else if(initialised && player.position() < 47986) {
       closeGUI(2);
+      doCapture = true;
       player.play();      
       startAllScheduledEvents();
     } else if(!initialised) {
