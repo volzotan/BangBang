@@ -14,7 +14,6 @@ int calcMiniMapPosY() {
 
 void drawMiniMap(boolean toggle){  
   if(toggle){
-    
     // rgb stroke black
     stroke(0,0,0);
     // stroke width 1 pixel
@@ -71,26 +70,23 @@ void initCanvas(boolean useBGImage) {
 }
 
 void initImages() {
-  mainButtonImage = loadImage("buttons/MainButton.png");
-  menuButtonImage = loadImage("buttons/MenuButton.png");
-  demoButtonImage = loadImage("buttons/DemoMask.png");
-  exitButtonImage = loadImage("buttons/ExitMask.png");
-  saveButtonImage = loadImage("buttons/SaveMask.png");
-  mapDButtonImage = loadImage("buttons/MapDMask.png");
-  mapEButtonImage = loadImage("buttons/MapEMask.png");
-  resetButtonImage = loadImage("buttons/ResetMask.png");
-  savingImage = loadImage("SavingOverlay.png");  
-  overlayImage = loadImage("MenuOverlay.png");
-  cursorImage_blank = loadImage("cursor.png");
-  cursorImage_circle = loadImage("cursor_circle.png");
+  mainButtonImage     = loadImage("buttons/MainButton.png");
+  menuButtonImage     = loadImage("buttons/MenuButton.png");
+  demoButtonImage     = loadImage("buttons/DemoMask.png");
+  exitButtonImage     = loadImage("buttons/ExitMask.png");
+  saveButtonImage     = loadImage("buttons/SaveMask.png");
+  mapDButtonImage     = loadImage("buttons/MapDMask.png");
+  mapEButtonImage     = loadImage("buttons/MapEMask.png");
+  resetButtonImage    = loadImage("buttons/ResetMask.png");
+  savingImage         = loadImage("SavingOverlay.png");  
+  overlayImage        = loadImage("MenuOverlay.png");
+  cursorImage_blank   = loadImage("cursor.png");
+  cursorImage_circle  = loadImage("cursor_circle.png");
   cursorImage_nyancat = loadImage("cursor_nyan.png");
+  vignette = loadImage("vignette.png");
   for(int i = 0; i < inkSplatter.length; i++) {
-    inkSplatter[i] = loadImage("inkSplatter/klecks_"+i+".png");
+    inkSplatter[i]    = loadImage("inkSplatter/klecks_"+i+".png");
   }  
-}  
-
-void initVignette() {
-  vignette = loadImage("vignette.png");  
 }  
 
 void moveViewport(){ 

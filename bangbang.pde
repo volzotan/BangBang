@@ -76,8 +76,8 @@ int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];
 
 // ---- Save Overlay
-int saveReady = 0;
-boolean drawSaveOverlay = false;
+int saveReady = 0;              // says whether the application may now save the canvas to file
+boolean drawSaveOverlay = false;// says whether the overlay should be drawn
 
 int brushThreeSkalierungAusschlag = 100;
 int invsVar = 1;
@@ -135,7 +135,6 @@ void setup(){
   }
 
   initCanvas(true);
-  initVignette();
   initImages();
   setupGUI();
  
@@ -168,7 +167,7 @@ void draw() {
       try {
         buf.save(savePath);    // dataPath("shots/"+timestamp() +".png")
       } catch(Exception e) {
-        
+        // TODO make work accordingly ? can't seem to catch any exception here
       }
       savePath = "";      
     } 

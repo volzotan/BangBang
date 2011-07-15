@@ -1,7 +1,6 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
-
 void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   if(useOffset) {
@@ -60,13 +59,6 @@ void brushOne(boolean useOffset, int drawSize) {
 }
 
 // kontinuierliche linie
-void brushTwo() {
-  buf.stroke(0,0,0);
-  buf.strokeWeight(5);     
-  buf.line(mouseX + copyOffsetX, mouseY + copyOffsetY, pmouseX + prevOffsetX, pmouseY + prevOffsetY);
-  buf.noStroke();
-}
-
 void brushThree() {
   // 10,5 - 11,8 :: General Pause
   if(!useNyancat) {
@@ -93,12 +85,6 @@ void brushThree() {
     buf.strokeWeight(5+tempBrushValue*0.13);
   }
   
-  /*
-  float verhaeltnisSumme = x + copyOffsetX - directionArrayX[drawCounter%10] + y + copyOffsetY - directionArrayY[drawCounter%10];
-  float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
-  float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;
-  */
-  
   float verhaeltnisSumme = abs(x + copyOffsetX - directionArrayX[drawCounter%10]) + abs(y + copyOffsetY - directionArrayY[drawCounter%10]);
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;  
@@ -107,15 +93,6 @@ void brushThree() {
   oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
   buf.noStroke();
-
-  /*  
-  if (drawCounter % 10 == 0) {
-    buf.stroke(1);
-    buf.strokeWeight(1);
-    buf.stroke(254,0,0);
-    buf.line(directionArrayX[drawCounter%10], directionArrayY[drawCounter%10], x + copyOffsetX, y + copyOffsetY);          // Rote Linie stellt Richtungsvektor dar
-  }
-  */
   
   deltaMouseX = oldX;
   deltaMouseY = oldY;
@@ -127,7 +104,7 @@ void ghostBrush() {
 }
 
 
-
+// random circles and dots
 void brushFour(int minAmount, int maxAmount) {
    int amount = floor(random(minAmount,maxAmount));
    if(random(1) < 0.5) { amount *= -1; }
