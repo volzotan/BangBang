@@ -72,12 +72,12 @@ void brushThree() {
   } else {  
     if(tempNyanPos+250 < pos) {
       switch(tempNyanCol) {
-        case 0 : nyanColor = color(255,  42,  12); tempNyanCol++; break;
-        case 1 : nyanColor = color(255, 164,   9); tempNyanCol++; break;
-        case 2 : nyanColor = color(255, 246,   0); tempNyanCol++; break;
-        case 3 : nyanColor = color( 50, 233,   3); tempNyanCol++; break;
-        case 4 : nyanColor = color(  2, 162, 255); tempNyanCol++; break;
-        case 5 : nyanColor = color(119,  85, 255); tempNyanCol=0; break;
+        case 0 : nyanColor = color(255,  42,  12); tempNyanCol++; break; // Red
+        case 1 : nyanColor = color(255, 164,   9); tempNyanCol++; break; // Orange
+        case 2 : nyanColor = color(255, 246,   0); tempNyanCol++; break; // Yellow
+        case 3 : nyanColor = color( 50, 233,   3); tempNyanCol++; break; // Green
+        case 4 : nyanColor = color(  2, 162, 255); tempNyanCol++; break; // Blue
+        case 5 : nyanColor = color(119,  85, 255); tempNyanCol=0; break; // Purple
       }        
       tempNyanPos = pos;
     }
