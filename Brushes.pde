@@ -43,20 +43,24 @@ void brushOne(boolean useOffset, int drawSize) {
 		val = random(10,22);
 		
 	}	
-		
-	buf.beginDraw();
-	buf.noStroke();
-	for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
-		float offX = cos(radians(a)) * val * spacing;
-		float offY = sin(radians(a)) * val * spacing;		
+	
+	boolean effect = true;
+		while(effect) {
+		buf.beginDraw();
 		buf.noStroke();
-		buf.fill(r,g,b,o);
-		buf.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+		for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
+			float offX = cos(radians(a)) * val * spacing;
+			float offY = sin(radians(a)) * val * spacing;		
+			buf.noStroke();
+			buf.fill(r,g,b,o);
+			buf.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+		}
+		buf.noStroke();
+		buf.fill(0,0,0,alpha2);		
+		buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
+		buf.endDraw();	
+		effect = false;
 	}
-	buf.noStroke();
-	buf.fill(0,0,0,alpha2);		
-	buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
-	buf.endDraw();
 
 	// Grab mouse position for use in effects and brushes
 	// TODO WHAT DOES THIS DO HERE? IT IS CALLED IN DRAW() WITHOUT THE + X in Y coordinate
