@@ -53,36 +53,23 @@ void drawVignette(boolean doDraw){
 	if(doDraw) { image(vignette, 0, 0); }
 }
 
-PImage getBufSlice(int layer) {
+PImage getBufSlice() {
 	PImage temp;
-	switch(layer) {
-		// effects 1
-		case 1:
-			temp = layerA.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
-			break;
-		// effects 2
-		case 2:
-			temp = layerB.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
-			break;			
-		// regular bg
-		default:
-			temp = bg.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
-			if(doInvert) { temp.filter(INVERT); }
-	}
+	temp = bg.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
+	if(doInvert) { temp.filter(INVERT); }
 	return temp;
 }
 
 void initCanvas(boolean useBGImage) {
 	bg = createGraphics(8000, 900, JAVA2D);
-	bg.hint(DISABLE_DEPTH_TEST);
-	bg.beginDraw();
-	bg.smooth();
+	bg.beginDraw();	
+	bg.smooth();	
 	if(useBGImage) {		
 		bg.background(bgCanvas);		
 	} else {
 		bg.background(160);
 	}	
-	bg.endDraw();	
+	bg.endDraw();
 }
 
 void initImages() {
@@ -107,19 +94,18 @@ void initImages() {
 }	
 
 void moveViewport(){ 
-	image(getBufSlice(0), 0, 0);
+	image(getBufSlice(), 0, 0);
 
-	float xPos = mouseX-width/2;	// xPos,yPos sind Koordinaten relativ zum Mittelpunkt
-	float yPos = mouseY-height/2;
+	float posX = mouseX-width/2;	// posX,posY sind Koordinaten relativ zum Mittelpunkt
+	float posY = mouseY-height/2;
 	
 	if (drawCounter % 2 == 0) {
-		if ((abs(xPos) >	scrollProtectionX ) || (abs(yPos) >	scrollProtectionY )) {					// Schutzzone
+		if ((abs(posX) >	scrollProtectionX ) || (abs(posY) >	scrollProtectionY )) {					// Schutzzone
+			// "normalisiert" den Richtungsvektor den posY darstellt
+			posY = posY * 1.7;				
 			
-			yPos = yPos * 1.7;				// "normalisiert" den Richtungsvektor den yPos darstellt
-			
-			directionFactorX = (xPos / (abs(xPos) + abs(yPos)));
-			directionFactorY = (yPos / (abs(xPos) + abs(yPos)));
-			
+			directionFactorX = (posX / (abs(posX) + abs(posY)));
+			directionFactorY = (posY / (abs(posX) + abs(posY)));
 		}
 	}
 
@@ -156,7 +142,7 @@ void switchCursor(int kind) {
 	}	
 }	
 
-boolean testOnCanvasX(int xPosCoord) {
+boolean testOnCanvasX(int posXCoord) {
 	if(positionCoordX > bg.width - width) {
 		return false;
 	} else if(positionCoordX < 0) {
@@ -166,7 +152,7 @@ boolean testOnCanvasX(int xPosCoord) {
 	 return true;
 }
 
-boolean testOnCanvasY(int yPosCoord) {
+boolean testOnCanvasY(int posYCoord) {
 	if(positionCoordY > bg.height - height) {
 		return false;
 	} else if(positionCoordY < 0) {

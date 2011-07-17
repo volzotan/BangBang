@@ -281,6 +281,37 @@ void scheduleSplatterEvents() {
 	}
 }
 
+void crescendo() {
+	if (firstRun) {
+		oldDeltaX = oldX;
+		oldDeltaY = oldY;
+							
+		tempScrollSpeed = 13;
+							
+		mainBrushActive = false;
+		firstRun = false;
+	}
+												
+	tempX = (int) (deltaMouseX + xPlus + random(-1,1) * 8);
+	tempY = (int) (deltaMouseY + random(-1,1) * 15 + invsVar * (-1) * abs(amp));
+	
+	bg.beginDraw();
+	bg.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
+	bg.strokeWeight(5+tempBrushValue*0.13);	
+	bg.line(oldDeltaX, oldDeltaY, tempX, tempY);
+	bg.endDraw();
+				
+	oldDeltaX = tempX;
+	oldDeltaY = tempY;
+						
+	amp = amp + (0 - amp)/15;
+	xPlus = xPlus + 6;
+	invsVar = invsVar * (-1);
+	
+	tempScrollSpeed = tempScrollSpeed + (0 - tempScrollSpeed)/18;
+	println(tempScrollSpeed);
+}
+
 void tintenklecks(float size) {
 	int r = floor(random(0,inkSplatter.length-0.5));
 	float splatterSize = 25*size;	
@@ -325,34 +356,3 @@ void tintenklecks(float size) {
 	bg.endDraw();
 	inkSplatterPos = (inkSplatterPos+1) % 4;
 } 
-
-void crescendo() {
-	if (firstRun) {
-		oldDeltaX = oldX;
-		oldDeltaY = oldY;
-							
-		tempScrollSpeed = 13;
-							
-		mainBrushActive = false;
-		firstRun = false;
-	}
-												
-	tempX = (int) (deltaMouseX + xPlus + random(-1,1) * 8);
-	tempY = (int) (deltaMouseY + random(-1,1) * 15 + invsVar * (-1) * abs(amp));
-	
-	bg.beginDraw();
-	bg.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
-	bg.strokeWeight(5+tempBrushValue*0.13);	
-	bg.line(oldDeltaX, oldDeltaY, tempX, tempY);
-	bg.endDraw();
-				
-	oldDeltaX = tempX;
-	oldDeltaY = tempY;
-						
-	amp = amp + (0 - amp)/15;
-	xPlus = xPlus + 6;
-	invsVar = invsVar * (-1);
-	
-	tempScrollSpeed = tempScrollSpeed + (0 - tempScrollSpeed)/18;
-	println(tempScrollSpeed);
-}

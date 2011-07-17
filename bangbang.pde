@@ -25,10 +25,10 @@ AudioPlayer player;
 BeatDetect beat;
 
 // ---- Canvas setup ----
-PGraphics bg, layerA, layerB;
+PGraphics bg;
 int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
 // Vignette / Background image 
-PImage vignette, bgCanvas;
+PImage vignette, bgCanvas, bgTransparent;
 // Viewport-Initialisierung / Viewport-Movement variables
 float x = 400; // these two describe
 float y = 225; // describe initial viewport positioning
@@ -107,6 +107,7 @@ int drawCounter = 0;
 void setup(){
 	// Create Applet Window and set maximum frame rate
 	size(800, 450, JAVA2D);
+	background(150,0,0);
 	frameRate(30);
 	
 
@@ -213,13 +214,13 @@ void draw() {
 		}		
 		
 		// close startup gui
-		closeGUI(1);
+		closeGUI(1); // TODO move to a single call, not continous
 		// get dampened mouse position			 
 		x = x + (mouseX-x)/mouseDampeningX;
 		y = y + (mouseY-y)/mouseDampeningY;
 
 		// TODO should this really happen in here?
-		drawCounter++;
+		drawCounter = (drawCounter+1) % 30;
 		pos = player.position();
 			
 		if(player.isPlaying() && player.position() < 47986) {

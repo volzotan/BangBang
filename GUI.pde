@@ -142,7 +142,7 @@ void closeGUI(int closeMenu){
 public PImage getMenuBG(int b, int m) {
 	if(emptyMenuBG || (!emptyMenuBG && drawSaveOverlay)) {
 		emptyMenuBG = false;
-		tempMenuBG = getBufSlice(0);
+		tempMenuBG = getBufSlice();
 		tempMenuBG.filter(BLUR, b);
 		switch(m) {
 			case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY); break;
