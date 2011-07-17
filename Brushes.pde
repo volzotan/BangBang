@@ -152,4 +152,3 @@ void brushFour(int minAmount, int maxAmount) {
 	}	
 }
 
-
