@@ -44,18 +44,17 @@ void brushOne(boolean useOffset, int drawSize) {
 		
 	}	
 	
-	buf.beginDraw();
-	buf.noStroke();
-	buf.fill(r,g,b,o);
+	bg.beginDraw();
+	bg.noStroke();
+	bg.fill(r,g,b,o);
 	for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
 		float offX = cos(radians(a)) * val * spacing;
 		float offY = sin(radians(a)) * val * spacing;					
-		buf.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+		bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
 	}
-	buf.noStroke();
-	buf.fill(0,0,0,alpha2);		
-	buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
-	buf.endDraw();	
+	bg.fill(0,0,0,alpha2);		
+	bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
+	bg.endDraw();	
 
 	// Grab mouse position for use in effects and brushes
 	// TODO WHAT DOES THIS DO HERE? IT IS CALLED IN DRAW() WITHOUT THE + X in Y coordinate
@@ -100,11 +99,11 @@ void brushThree() {
 	oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * brushThreeDeflectionScale));
 	oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
 	
-	buf.beginDraw();
-	buf.stroke(c);
-	buf.strokeWeight(w);
-	buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
-	buf.endDraw();
+	bg.beginDraw();
+	bg.stroke(c);
+	bg.strokeWeight(w);
+	bg.line(oldX, oldY, deltaMouseX, deltaMouseY);
+	bg.endDraw();
 	
 	deltaMouseX = oldX;
 	deltaMouseY = oldY;
@@ -112,9 +111,9 @@ void brushThree() {
 
 
 void ghostBrush() {
-	//buf.beginDraw();
-	//buf.line(oldX, oldY, deltaMouseX - 100, deltaMouseY + 50);
-	//buf.endDraw();
+	//bg.beginDraw();
+	//bg.line(oldX, oldY, deltaMouseX - 100, deltaMouseY + 50);
+	//bg.endDraw();
 }
 
 // random circles and dots
@@ -134,7 +133,7 @@ void brushFour(int minAmount, int maxAmount) {
 		if(random(0,1) < 0.6) {
 			c = color(145 - tempBrushValue - size + extraOffsetY - amount, 145 - tempBrushValue - size + extraOffsetY - amount, 145 - tempBrushValue - size + extraOffsetY - amount);
 		} else {
-			float rand = random(0,1);
+			float rand = random(0,1);			
 			if(rand < 0.3) {
 				c = color(80,22,28); // red
 			} else if(rand > 0.6) {
@@ -144,11 +143,10 @@ void brushFour(int minAmount, int maxAmount) {
 			}	
 		}	
 		
-		buf.beginDraw();
-		buf.fill(c);
-		buf.stroke(c);
-		buf.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);	
-		buf.endDraw();
+		bg.beginDraw();
+		bg.fill(c);
+		bg.stroke(c);
+		bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + extraOffsetY,size,size);	
+		bg.endDraw();
 	}	
 }
-

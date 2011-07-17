@@ -25,8 +25,7 @@ AudioPlayer player;
 BeatDetect beat;
 
 // ---- Canvas setup ----
-PImage bufSlice;
-PGraphics buf;
+PGraphics bg;
 int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
 // Vignette / Background image 
 PImage vignette, bgCanvas;
@@ -112,8 +111,8 @@ void setup(){
 	
 
 	// initialize Canvas, Images and GUI
-	initCanvas(true);
 	initImages();
+	initCanvas(true);
 	setupGUI();	
 	
 	
@@ -148,7 +147,7 @@ void setup(){
 	tempScrollSpeed = scrollSpeed;
 	// start on the far left in the middle of the canvas
 	copyOffsetX = 0;
-	copyOffsetY = (buf.height - height) / 2;
+	copyOffsetY = (bg.height - height) / 2;
 	// TODO copy applet width and height what for?
 	copyWidth = width;
 	copyHeight = height; 
@@ -171,8 +170,8 @@ void setup(){
 
 
 	// create minimap
-	scaledMiniMap = buf.get(0, 0, buf.width, buf.height);
-	// resize value is buf.height/50 || where else would this need to be changed in case of canvas size changes?
+	scaledMiniMap = bg.get(0, 0, bg.width, bg.height);
+	// resize value is bg.height/50 || where else would this need to be changed in case of canvas size changes?
 	scaledMiniMap.resize(0, 18);
 }
 
@@ -197,7 +196,7 @@ void draw() {
 					}
 				} 
 				try {
-					buf.save(savePath);		// dataPath("shots/"+timestamp() +".png")
+					bg.save(savePath);		// dataPath("shots/"+timestamp() +".png")
 				} catch(Exception e) {
 					// TODO make work accordingly ? can't seem to catch any exception here
 				}

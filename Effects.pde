@@ -320,9 +320,9 @@ void tintenklecks(float size) {
 	}
 	
 	//println(posX+"\t+\t"+posY + "\t| InkSplatterPos:"+inkSplatterPos);
-	buf.beginDraw();
-	buf.image(inkSplatter[r], posX, posY, splatterSize, splatterSize);
-	buf.endDraw();
+	bg.beginDraw();
+	bg.image(inkSplatter[r], posX, posY, splatterSize, splatterSize);
+	bg.endDraw();
 	inkSplatterPos = (inkSplatterPos+1) % 4;
 } 
 
@@ -340,11 +340,11 @@ void crescendo() {
 	tempX = (int) (deltaMouseX + xPlus + random(-1,1) * 8);
 	tempY = (int) (deltaMouseY + random(-1,1) * 15 + invsVar * (-1) * abs(amp));
 	
-	buf.beginDraw();
-	buf.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
-	buf.strokeWeight(5+tempBrushValue*0.13);	
-	buf.line(oldDeltaX, oldDeltaY, tempX, tempY);
-	buf.endDraw();
+	bg.beginDraw();
+	bg.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
+	bg.strokeWeight(5+tempBrushValue*0.13);	
+	bg.line(oldDeltaX, oldDeltaY, tempX, tempY);
+	bg.endDraw();
 				
 	oldDeltaX = tempX;
 	oldDeltaY = tempY;
