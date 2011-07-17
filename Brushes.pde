@@ -44,15 +44,14 @@ void brushOne(boolean useOffset, int drawSize) {
 		
 	}	
 	
-	boolean effect = true;
-		while(effect) {
+	effect = true;
+	while(effect) {
 		buf.beginDraw();
 		buf.noStroke();
+		buf.fill(r,g,b,o);
 		for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
 			float offX = cos(radians(a)) * val * spacing;
-			float offY = sin(radians(a)) * val * spacing;		
-			buf.noStroke();
-			buf.fill(r,g,b,o);
+			float offY = sin(radians(a)) * val * spacing;					
 			buf.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
 		}
 		buf.noStroke();

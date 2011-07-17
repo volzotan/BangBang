@@ -104,6 +104,7 @@ boolean initialised, doClear = false, doInvert = false;
 String savePath;
 // use this with % to execute functions at every nth draw execution
 int drawCounter = 0;
+boolean effect = false; // temporary test for effects drawing
 
 void setup(){
 	// Create Applet Window and set maximum frame rate
@@ -233,7 +234,7 @@ void draw() {
 			
 			switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
 			moveViewport();
-			if (mainBrushActive) {				
+			if (mainBrushActive && !effect) {				
 				brushThree();
 				if (ghostBrush) {
 					ghostBrush();
