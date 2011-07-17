@@ -18,7 +18,7 @@ int switchCursor, wasGUI;
 import ddf.minim.*;
 import ddf.minim.signals.*;
 import ddf.minim.analysis.*;
-import ddf.minim.effects.*; 
+import ddf.minim.effects.*;
 // ---- Audio player & beat detection ----
 Minim minim;
 AudioPlayer player;
@@ -104,7 +104,6 @@ boolean initialised, doClear = false, doInvert = false;
 String savePath;
 // use this with % to execute functions at every nth draw execution
 int drawCounter = 0;
-boolean effect = false; // temporary test for effects drawing
 
 void setup(){
 	// Create Applet Window and set maximum frame rate
@@ -177,34 +176,7 @@ void setup(){
 	scaledMiniMap.resize(0, 18);
 }
 
-void draw() {
-	// Save Canvas as image part 2: save image
-	if (saveReady == 2) {
-		if(initialised) {
-			savePath = selectOutput("Save Canvas to:");
-			if(savePath != null && savePath != "") {
-				if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
-					savePath += ".jpg";
-				}
-			} 
-			try {
-				buf.save(savePath);		// dataPath("shots/"+timestamp() +".png")
-			} catch(Exception e) {
-				// TODO make work accordingly ? can't seem to catch any exception here
-			}
-			savePath = "";			
-		} 
-		if(initialised && player.position() < 47986 && wasGUI == 0) {
-			player.play(); 
-			startAllScheduledEvents();
-			emptyMenuBG = true;
-		} else {
-			wasGUI = 0;
-		}
-		saveReady = 0;
-	}
-	
-	
+void draw() {	
 	// Startup GUI
 	if(!initialised) {
 		// use regular Cursor
@@ -215,6 +187,32 @@ void draw() {
 		drawGUI(1);
 	// Playing, Pausing, End
 	} else {	
+		// Save Canvas as image part 2: save image
+		if (saveReady == 2) {
+			if(initialised) {
+				savePath = selectOutput("Save Canvas to:");
+				if(savePath != null && savePath != "") {
+					if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+						savePath += ".jpg";
+					}
+				} 
+				try {
+					buf.save(savePath);		// dataPath("shots/"+timestamp() +".png")
+				} catch(Exception e) {
+					// TODO make work accordingly ? can't seem to catch any exception here
+				}
+				savePath = "";			
+			} 
+			if(initialised && player.position() < 47986 && wasGUI == 0) {
+				player.play(); 
+				startAllScheduledEvents();
+				emptyMenuBG = true;
+			} else {
+				wasGUI = 0;
+			}
+			saveReady = 0;
+		}		
+		
 		// close startup gui
 		closeGUI(1);
 		// get dampened mouse position			 
@@ -234,7 +232,7 @@ void draw() {
 			
 			switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
 			moveViewport();
-			if (mainBrushActive && !effect) {				
+			if (mainBrushActive) {				
 				brushThree();
 				if (ghostBrush) {
 					ghostBrush();
@@ -268,19 +266,18 @@ void draw() {
 			prevOffsetX = copyOffsetX;
 			prevOffsetY = copyOffsetY;
 		}	 
-	}
-	
-	// Save image as canvas part one: draw overlay
-	if(drawSaveOverlay){
-		image(getMenuBG(2, 2), 0, 0); 
-		switch(saveReady) {
-			case 0: saveReady++; break;
-			case 1: saveReady++;
-					drawSaveOverlay = false;
-					emptyMenuBG = true;
-		}
-	}
-	
+		
+		// Save image as canvas part one: draw overlay
+		if(drawSaveOverlay){
+			image(getMenuBG(2, 2), 0, 0); 
+			switch(saveReady) {
+				case 0: saveReady++; break;
+				case 1: saveReady++;
+						drawSaveOverlay = false;
+						emptyMenuBG = true;
+			}
+		}		
+	}	
 	// ---- Debug Info ----
 	//println(frameRate + " at " + player.position()); 
 }
