@@ -14,6 +14,11 @@ int calcMiniMapPosY() {
 	return (int) verschiebungY;
 }
 
+void drawGhostBrush() {
+	println("buhu!");
+	ghostBrush = true;
+}
+
 void drawMiniMap(boolean toggle){	
 	if(toggle){
 		// rgb stroke black
@@ -45,15 +50,24 @@ void drawMiniMap(boolean toggle){
 }
 
 void drawVignette(boolean doDraw){
-	if(doDraw) {
-		image(vignette, 0, 0);
-	}
+	if(doDraw) { image(vignette, 0, 0); }
 }
 
-PImage getBufSlice() {
-	PImage temp = bg.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
-	if(doInvert) {
-		temp.filter(INVERT); 
+PImage getBufSlice(int layer) {
+	PImage temp;
+	switch(layer) {
+		// effects 1
+		case 1:
+			temp = layerA.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
+			break;
+		// effects 2
+		case 2:
+			temp = layerB.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
+			break;			
+		// regular bg
+		default:
+			temp = bg.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
+			if(doInvert) { temp.filter(INVERT); }
 	}
 	return temp;
 }
@@ -72,7 +86,7 @@ void initCanvas(boolean useBGImage) {
 }
 
 void initImages() {
-	bgCanvas = loadImage("bg_leinwand.jpg");
+	bgCanvas 			= loadImage("bg_leinwand.jpg");
 	cursorImage_blank	= loadImage("cursor.png");
 	cursorImage_circle	= loadImage("cursor_circle.png");
 	cursorImage_nyancat = loadImage("cursor_nyan.png");	
@@ -93,7 +107,7 @@ void initImages() {
 }	
 
 void moveViewport(){ 
-	image(getBufSlice(), 0, 0);
+	image(getBufSlice(0), 0, 0);
 
 	float xPos = mouseX-width/2;	// xPos,yPos sind Koordinaten relativ zum Mittelpunkt
 	float yPos = mouseY-height/2;
@@ -143,11 +157,11 @@ void switchCursor(int kind) {
 }	
 
 boolean testOnCanvasX(int xPosCoord) {
-		if(positionCoordX > bg.width - width) {
-			return false;
-		} else if(positionCoordX < 0) {
-			return false;
-	 }
+	if(positionCoordX > bg.width - width) {
+		return false;
+	} else if(positionCoordX < 0) {
+		return false;
+	}
 	 
 	 return true;
 }
@@ -164,9 +178,4 @@ boolean testOnCanvasY(int yPosCoord) {
 
 String timestamp() {
 	return String.format("%1$ty%1$tm%1$td_%1$tH%1$tM%1$tS", Calendar.getInstance());
-}
-
-void drawGhostBrush() {
-	println("buhu!");
-	ghostBrush = true;
 }

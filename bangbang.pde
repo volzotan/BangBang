@@ -25,7 +25,7 @@ AudioPlayer player;
 BeatDetect beat;
 
 // ---- Canvas setup ----
-PGraphics bg;
+PGraphics bg, layerA, layerB;
 int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
 // Vignette / Background image 
 PImage vignette, bgCanvas;
