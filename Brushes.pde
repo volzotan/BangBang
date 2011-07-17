@@ -89,7 +89,7 @@ void brushThree() {
   float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
   float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;  
   
-  oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * brushThreeSkalierungAusschlag));
+  oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * brushThreeDeflectionScale));
   oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   buf.line(oldX, oldY, deltaMouseX, deltaMouseY);
   buf.noStroke();

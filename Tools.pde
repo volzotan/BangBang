@@ -96,36 +96,36 @@ void moveViewport(){
   float yPos = mouseY-height/2;
   
   if (drawCounter % 2 == 0) {
-    if ((abs(xPos) >  groesseSchutzzoneX ) || (abs(yPos) >  groesseSchutzzoneY )) {          // Schutzzone
+    if ((abs(xPos) >  scrollProtectionX ) || (abs(yPos) >  scrollProtectionY )) {          // Schutzzone
       
       yPos = yPos * 1.7;        // "normalisiert" den Richtungsvektor den yPos darstellt
       
-      xRichtungsFaktor = (xPos / (abs(xPos) + abs(yPos)));
-      yRichtungsFaktor = (yPos / (abs(xPos) + abs(yPos)));
+      directionFactorX = (xPos / (abs(xPos) + abs(yPos)));
+      directionFactorY = (yPos / (abs(xPos) + abs(yPos)));
       
     }
   }
 
-  float xBeschleunigungsFaktor = (abs(xRichtungsFaktor) * tempScrollGeschwindigkeit)/2 + autoScrollX;    // AutoScrolling unabhängig vom Beschleunigungsfaktor              // ABS() ENTFERNEN ZUM SCROLLEN IN BEL. RICHTUNGEN
-  float yBeschleunigungsFaktor = yRichtungsFaktor * tempScrollGeschwindigkeit + autoScrollY;
+  float xBeschleunigungsFaktor = (abs(directionFactorX) * tempScrollSpeed)/2 + autoScrollX;    // AutoScrolling unabhängig vom Beschleunigungsfaktor              // ABS() ENTFERNEN ZUM SCROLLEN IN BEL. RICHTUNGEN
+  float yBeschleunigungsFaktor = directionFactorY * tempScrollSpeed + autoScrollY;
   
-  xPosKoord = copyOffsetX + (int) xBeschleunigungsFaktor;
-  yPosKoord = copyOffsetY + (int) yBeschleunigungsFaktor;
+  positionCoordX = copyOffsetX + (int) xBeschleunigungsFaktor;
+  positionCoordY = copyOffsetY + (int) yBeschleunigungsFaktor;
   
-  if(xPosKoord > buf.width - width) {
-      xPosKoord = buf.width - width;
-    } else if(xPosKoord < 0) {
-      xPosKoord = 0;
-   }
+ if(positionCoordX > buf.width - width) {
+    positionCoordX = buf.width - width;
+  } else if(positionCoordX < 0) {
+    positionCoordX = 0;
+  }
+   
+  if(positionCoordY > buf.height - height) {
+    positionCoordY = buf.height - height;
+  } else if(positionCoordY < 0) {
+    positionCoordY = 0;
+  }
   
-   if(yPosKoord > buf.height - height) {
-      yPosKoord = buf.height - height;
-    } else if(yPosKoord < 0) {
-      yPosKoord = 0;
-   }
-  
-  copyOffsetX = xPosKoord;
-  copyOffsetY = yPosKoord;
+  copyOffsetX = positionCoordX;
+  copyOffsetY = positionCoordY;
 }
 
 void switchCursor(int kind) {
@@ -140,9 +140,9 @@ void switchCursor(int kind) {
 }  
 
 boolean testOnCanvasX(int xPosCoord) {
-    if(xPosKoord > buf.width - width) {
+    if(positionCoordX > buf.width - width) {
       return false;
-    } else if(xPosKoord < 0) {
+    } else if(positionCoordX < 0) {
       return false;
    }
    
@@ -150,9 +150,9 @@ boolean testOnCanvasX(int xPosCoord) {
 }
 
 boolean testOnCanvasY(int yPosCoord) {
-  if(yPosKoord > buf.height - height) {
+  if(positionCoordY > buf.height - height) {
     return false;
-  } else if(yPosKoord < 0) {
+  } else if(positionCoordY < 0) {
     return false;
   }
    

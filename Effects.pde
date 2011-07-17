@@ -321,7 +321,7 @@ void crescendo() {
     oldDeltaX = oldX;
     oldDeltaY = oldY;
               
-    tempScrollGeschwindigkeit = 13;
+    tempScrollSpeed = 13;
               
     mainBrushActive = false;
     firstRun = false;
@@ -343,6 +343,6 @@ void crescendo() {
   xPlus = xPlus + 6;
   invsVar = invsVar * (-1);
   
-  tempScrollGeschwindigkeit = tempScrollGeschwindigkeit + (0 - tempScrollGeschwindigkeit)/18;
-  println(tempScrollGeschwindigkeit);
+  tempScrollSpeed = tempScrollSpeed + (0 - tempScrollSpeed)/18;
+  println(tempScrollSpeed);
 }
