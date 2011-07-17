@@ -58,6 +58,7 @@ PImage getBufSlice() {
 
 void initCanvas(boolean useBGImage) {
   buf = createGraphics(8000, 900, JAVA2D);
+  buf.hint(DISABLE_DEPTH_TEST);
   buf.beginDraw();
   buf.smooth();
   if(useBGImage) {

@@ -57,6 +57,7 @@ int miniMapPosX = 0, miniMapPosY = 0;
 PImage scaledMiniMap;
 
 // ---- Brush settings ----
+// angle = flower pattern petal repeater angle
 int angle = 0, tempBrushValue;
 // Variables controlling the brush TODO IN WHAT WAY
 int deltaMouseX = 0;
@@ -232,14 +233,12 @@ void draw() {
 			
 			switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
 			moveViewport();
-			buf.beginDraw();
 			if (mainBrushActive) {				
 				brushThree();
 				if (ghostBrush) {
 					ghostBrush();
 				}
 			}								 
-			buf.endDraw();
 			
 			directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
 			directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;			
