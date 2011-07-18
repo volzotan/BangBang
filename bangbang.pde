@@ -68,6 +68,14 @@ int brushThreeDeflectionScale = 100;
 boolean ghostBrush = false;
 // use main brush ?
 boolean mainBrushActive;
+// brushThree ressources
+float verhaeltnisSumme = 0;
+float verhaeltnisX = 0;
+float verhaeltnisY = 0;  
+int oldX, oldDeltaX;
+int oldY, oldDeltaY;
+boolean firstRun;
+int tempX, tempY;  
 
 // ---- Effects ----
 // player position in milliseconds
@@ -89,14 +97,20 @@ int[] directionArrayY = new int[10];
 int saveReady = 0;              // says whether the application may now save the canvas to file
 boolean drawSaveOverlay = false;// says whether the overlay should be drawn
 
-// TODO WHERE DO THESE BELONG, WHAT DO THESE DO?
+// Crescendo - Effect
 int invsVar = 1;
 int amp = 200;
 float xPlus = 0;
-int oldX, oldDeltaX;
-int oldY, oldDeltaY;
-boolean firstRun;
-int tempX, tempY;
+
+// EXPERIMENTAL GhostBrush
+float theta = 0.0;
+int amplitude = 10;
+int deltaHeight = 70;
+int deltaWidth = 30;
+float newGhostPosX;
+float newGhostPosY;
+int ghostOldX = 0;
+int ghostOldY = 0;
 
 // ---- Generic ----
 boolean initialised, doClear = false, doInvert = false;

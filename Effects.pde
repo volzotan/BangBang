@@ -216,9 +216,9 @@ void scheduleCrescendoEvent() {
 void scheduleGhostBrush() {
   timer.schedule(new TimerTask() {
     public void run() {
-      drawGhostBrush();
+      startGhostBrush();
     }
-  }, 12500);  // GhostBrush Start time
+  }, 2500);  // GhostBrush Start time
 }
 
 void scheduleInvertEvent() {

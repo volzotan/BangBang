@@ -14,8 +14,10 @@ int calcMiniMapPosY() {
   return (int) verschiebungY;
 }
 
-void drawGhostBrush() {
+void startGhostBrush() {
   println("buhu!");
+  ghostOldX = (int) directionArrayX[drawCounter%10] - deltaWidth;
+  ghostOldY = (int) directionArrayY[drawCounter%10] ;
   ghostBrush = true;
 }
 

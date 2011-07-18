@@ -92,17 +92,17 @@ void brushThree() {
     w += tempBrushValue*0.13;
   }
   
-  float verhaeltnisSumme = abs(x + copyOffsetX - directionArrayX[drawCounter%10]) + abs(y + copyOffsetY - directionArrayY[drawCounter%10]);
-  float verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
-  float verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;  
+  verhaeltnisSumme = abs(x + copyOffsetX - directionArrayX[drawCounter%10]) + abs(y + copyOffsetY - directionArrayY[drawCounter%10]);
+  verhaeltnisX = (x + copyOffsetX - directionArrayX[drawCounter%10]) / verhaeltnisSumme;
+  verhaeltnisY = (y + copyOffsetY - directionArrayY[drawCounter%10]) / verhaeltnisSumme;  
   
   oldX = (int) (x + copyOffsetX + verhaeltnisY * (player.left.get(0) * brushThreeDeflectionScale));
   oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   
   bg.beginDraw();
-  bg.stroke(c);
-  bg.strokeWeight(w);
-  bg.line(oldX, oldY, deltaMouseX, deltaMouseY);
+    bg.stroke(c);
+    bg.strokeWeight(w);
+    bg.line(oldX, oldY, deltaMouseX, deltaMouseY);
   bg.endDraw();
   
   deltaMouseX = oldX;
@@ -111,9 +111,40 @@ void brushThree() {
 
 
 void ghostBrush() {
-  //bg.beginDraw();
-  //bg.line(oldX, oldY, deltaMouseX - 100, deltaMouseY + 50);
-  //bg.endDraw();
+  bg.beginDraw();
+  
+    color c = color(145,145,145);
+    switch(tempNyanCol) {
+        case 0 : nyanColor = color(255,  42,  12); tempNyanCol++; break; // Red
+        case 1 : nyanColor = color(255, 164,   9); tempNyanCol++; break; // Orange
+        case 2 : nyanColor = color(255, 246,   0); tempNyanCol++; break; // Yellow
+        case 3 : nyanColor = color( 50, 233,   3); tempNyanCol++; break; // Green
+        case 4 : nyanColor = color(  2, 162, 255); tempNyanCol++; break; // Blue
+        case 5 : nyanColor = color(119,  85, 255); tempNyanCol=0; break; // Purple
+      }        
+      tempNyanPos = pos;
+  
+      c = nyanColor;
+    
+    bg.stroke(c);
+    bg.strokeWeight(5);
+    /*
+    newGhostPosX = x + copyOffsetX - deltaWidth;
+    newGhostPosY = y + copyOffsetY - deltaHeight + sin(theta) * amplitude;
+    */
+    newGhostPosX = directionArrayX[drawCounter%10] - deltaWidth;
+    newGhostPosY = directionArrayY[drawCounter%10] - deltaHeight + sin(theta) * amplitude;
+    
+    bg.line(ghostOldX, ghostOldY,  newGhostPosX, newGhostPosY);
+  bg.endDraw();
+
+  ghostOldX = (int) ( newGhostPosX );
+  ghostOldY = (int) ( newGhostPosY );
+  
+  deltaHeight = (int) ( (y - 225) );
+  deltaWidth = (int) ( (x - 400) );
+  theta += 0.2;
+  
 }
 
 // random circles and dots
