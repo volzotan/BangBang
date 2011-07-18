@@ -51,7 +51,7 @@ int positionCoordX = copyOffsetX + (int) directionFactorX; // xPosKoord
 int positionCoordY = copyOffsetY + (int) directionFactorY; // yPosKoord
 
 // ---- Minimap ----
-// MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben	
+// MiniMap; Initialpositionierung des Viewport-Rechtecks (abhängig von x,y in Z. 17) wird aber sofort bei Programmstart überschrieben  
 int miniMapPosX = 0, miniMapPosY = 0;
 PImage scaledMiniMap;
 
@@ -78,7 +78,7 @@ PImage inkSplatter[] = new PImage[10];
 int inkSplatterPos;
 
 // ---- Nyancat
-color nyanColor = color(255,	42,	12);
+color nyanColor = color(255,  42,  12);
 int tempNyanPos, tempNyanCol;
 
 // direction sensitive drawing
@@ -86,7 +86,7 @@ int[] directionArrayX = new int[10];
 int[] directionArrayY = new int[10];
 
 // ---- Save Overlay
-int saveReady = 0;							// says whether the application may now save the canvas to file
+int saveReady = 0;              // says whether the application may now save the canvas to file
 boolean drawSaveOverlay = false;// says whether the overlay should be drawn
 
 // TODO WHERE DO THESE BELONG, WHAT DO THESE DO?
@@ -105,185 +105,185 @@ String savePath;
 int drawCounter = 0;
 
 void setup(){
-	// Create Applet Window and set maximum frame rate
-	size(800, 450, JAVA2D);
-	background(150,0,0);
-	frameRate(30);
-	
+  // Create Applet Window and set maximum frame rate
+  size(800, 450, JAVA2D);
+  background(150,0,0);
+  frameRate(30);
+  
 
-	// initialize Canvas, Images and GUI
-	initImages();
-	initCanvas(true);
-	setupGUI();	
-	
-	
-	// create Timer and Events
-	initEventArrays();
-	elapsedTime = 0;
-	inkSplatterPos = 0;
-	timer = new Timer(); // (re)set Timer
-	
-	
-	// Brush initialization
-	mainBrushActive = true;
-	tempNyanPos = 0;
-	switchCursor = 0; // cursor kind
-	
-	
-	// GUI/Menu settings
-	emptyMenuBG = true;	
-	wasGUI = 0;
-	// make sure start up GUI window is shown
-	initialised = false;
-	// clear/set save image path	
-	savePath = "";
-	
-	
-	// TODO CREATE COMMENTS
-	oldX = 400;
-	oldY = 225;
-	amp = 200;
-	xPlus = 0;
-	firstRun = true;
-	tempScrollSpeed = scrollSpeed;
-	// start on the far left in the middle of the canvas
-	copyOffsetX = 0;
-	copyOffsetY = (bg.height - height) / 2;
-	// TODO copy applet width and height what for?
-	copyWidth = width;
-	copyHeight = height; 
-	deltaMouseX = 470;
-	deltaMouseY = 450;	
-	
-	
-	// Restart: make song start from very beginning
-	if(doClear) {
-		player.pause();
-		player.rewind();
-		doClear = false;				
-	}
-	
+  // initialize Canvas, Images and GUI
+  initImages();
+  initCanvas(true);
+  setupGUI();  
+  
+  
+  // create Timer and Events
+  initEventArrays();
+  elapsedTime = 0;
+  inkSplatterPos = 0;
+  timer = new Timer(); // (re)set Timer
+  
+  
+  // Brush initialization
+  mainBrushActive = true;
+  tempNyanPos = 0;
+  switchCursor = 0; // cursor kind
+  
+  
+  // GUI/Menu settings
+  emptyMenuBG = true;  
+  wasGUI = 0;
+  // make sure start up GUI window is shown
+  initialised = false;
+  // clear/set save image path  
+  savePath = "";
+  
+  
+  // TODO CREATE COMMENTS
+  oldX = 400;
+  oldY = 225;
+  amp = 200;
+  xPlus = 0;
+  firstRun = true;
+  tempScrollSpeed = scrollSpeed;
+  // start on the far left in the middle of the canvas
+  copyOffsetX = 0;
+  copyOffsetY = (bg.height - height) / 2;
+  // TODO copy applet width and height what for?
+  copyWidth = width;
+  copyHeight = height; 
+  deltaMouseX = 470;
+  deltaMouseY = 450;  
+  
+  
+  // Restart: make song start from very beginning
+  if(doClear) {
+    player.pause();
+    player.rewind();
+    doClear = false;        
+  }
+  
 
-	// load and instantiate audio player
-	minim = new Minim(this);
-	player = minim.loadFile("BettyChungBangBang.mp3");
-	beat = new BeatDetect();
+  // load and instantiate audio player
+  minim = new Minim(this);
+  player = minim.loadFile("BettyChungBangBang.mp3");
+  beat = new BeatDetect();
 
 
-	// create minimap
-	scaledMiniMap = bg.get(0, 0, bg.width, bg.height);
-	// resize value is bg.height/50 || where else would this need to be changed in case of canvas size changes?
-	scaledMiniMap.resize(0, 18);
+  // create minimap
+  scaledMiniMap = bg.get(0, 0, bg.width, bg.height);
+  // resize value is bg.height/50 || where else would this need to be changed in case of canvas size changes?
+  scaledMiniMap.resize(0, 18);
 }
 
-void draw() {	
-	// Startup GUI
-	if(!initialised) {
-		// use regular Cursor
-		switchCursor(1);
-		// get static background image
-		image(getMenuBG(0, 1), 0, 0); 
-		// draw GUI
-		drawGUI(1);
-	// Playing, Pausing, End
-	} else {	
-		// Save Canvas as image part 2: save image
-		if (saveReady == 2) {
-			if(initialised) {
-				savePath = selectOutput("Save Canvas to:");
-				if(savePath != null && savePath != "") {
-					if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
-						savePath += ".jpg";
-					}
-				} 
-				try {
-					bg.save(savePath);		// dataPath("shots/"+timestamp() +".png")
-				} catch(Exception e) {
-					// TODO make work accordingly ? can't seem to catch any exception here
-				}
-				savePath = "";			
-			} 
-			if(initialised && player.position() < 47986 && wasGUI == 0) {
-				player.play(); 
-				startAllScheduledEvents();
-				emptyMenuBG = true;
-			} else {
-				wasGUI = 0;
-			}
-			saveReady = 0;
-		}		
-		
-		// close startup gui
-		closeGUI(1); // TODO move to a single call, not continous
-		// get dampened mouse position			 
-		x = x + (mouseX-x)/mouseDampeningX;
-		y = y + (mouseY-y)/mouseDampeningY;
+void draw() {  
+  // Startup GUI
+  if(!initialised) {
+    // use regular Cursor
+    switchCursor(1);
+    // get static background image
+    image(getMenuBG(0, 1), 0, 0); 
+    // draw GUI
+    drawGUI(1);
+  // Playing, Pausing, End
+  } else {  
+    // Save Canvas as image part 2: save image
+    if (saveReady == 2) {
+      if(initialised) {
+        savePath = selectOutput("Save Canvas to:");
+        if(savePath != null && savePath != "") {
+          if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+            savePath += ".jpg";
+          }
+        } 
+        try {
+          bg.save(savePath);    // dataPath("shots/"+timestamp() +".png")
+        } catch(Exception e) {
+          // TODO make work accordingly ? can't seem to catch any exception here
+        }
+        savePath = "";      
+      } 
+      if(initialised && player.position() < 47986 && wasGUI == 0) {
+        player.play(); 
+        startAllScheduledEvents();
+        emptyMenuBG = true;
+      } else {
+        wasGUI = 0;
+      }
+      saveReady = 0;
+    }    
+    
+    // close startup gui
+    closeGUI(1); // TODO move to a single call, not continous
+    // get dampened mouse position       
+    x = x + (mouseX-x)/mouseDampeningX;
+    y = y + (mouseY-y)/mouseDampeningY;
 
-		// TODO should this really happen in here?
-		drawCounter = (drawCounter+1) % 30;
-		pos = player.position();
-			
-		if(player.isPlaying() && player.position() < 47986) {
-			// get beat from playing song
-			beat.detect(player.mix);
-			if(beat.isOnset()) {
-				 tempBrushValue = 80; 
-			}
-			
-			switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
-			moveViewport();
-			if (mainBrushActive) {				
-				brushThree();
-				if (ghostBrush) {
-					ghostBrush();
-				}
-			}								 
-			
-			directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
-			directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;			
-		
-			drawVignette(true);
-			drawMiniMap(mapEnabled);			 
-			tempBrushValue *= 0.95;
-		 	// Grab mouse position for use in effects and brushes
-		 	if(drawCounter % 1 == 0) {															
-				lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
-				lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
-			}			
-		} else {
-			switchCursor(1);
-			if (player.position() < 47986 && !drawSaveOverlay) {
-				image(getMenuBG(2, 1), 0, 0);
-				drawGUI(2); 
-			} else if (!drawSaveOverlay) {
-				pauseAllScheduledEvents();
-				image(getMenuBG(2, 1), 0, 0);
-				drawGUI(3);		 
-			}		 
-		}		
-	
-		if (drawCounter % 3 == 0) {
-			prevOffsetX = copyOffsetX;
-			prevOffsetY = copyOffsetY;
-		}	 
-		
-		// Save image as canvas part one: draw overlay
-		if(drawSaveOverlay){
-			image(getMenuBG(2, 2), 0, 0); 
-			switch(saveReady) {
-				case 0: saveReady++; break;
-				case 1: saveReady++;
-						drawSaveOverlay = false;
-						emptyMenuBG = true;
-			}
-		}		
-	}	
-	// ---- Debug Info ----
-	//println(frameRate + " at " + player.position()); 
+    // TODO should this really happen in here?
+    drawCounter = (drawCounter+1) % 30;
+    pos = player.position();
+      
+    if(player.isPlaying() && player.position() < 47986) {
+      // get beat from playing song
+      beat.detect(player.mix);
+      if(beat.isOnset()) {
+         tempBrushValue = 80; 
+      }
+      
+      switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
+      moveViewport();
+      if (mainBrushActive) {        
+        brushThree();
+        if (ghostBrush) {
+          ghostBrush();
+        }
+      }                 
+      
+      directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
+      directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;      
+    
+      drawVignette(true);
+      drawMiniMap(mapEnabled);       
+      tempBrushValue *= 0.95;
+       // Grab mouse position for use in effects and brushes
+       if(drawCounter % 1 == 0) {                              
+        lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
+        lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
+      }      
+    } else {
+      switchCursor(1);
+      if (player.position() < 47986 && !drawSaveOverlay) {
+        image(getMenuBG(2, 1), 0, 0);
+        drawGUI(2); 
+      } else if (!drawSaveOverlay) {
+        pauseAllScheduledEvents();
+        image(getMenuBG(2, 1), 0, 0);
+        drawGUI(3);     
+      }     
+    }    
+  
+    if (drawCounter % 3 == 0) {
+      prevOffsetX = copyOffsetX;
+      prevOffsetY = copyOffsetY;
+    }   
+    
+    // Save image as canvas part one: draw overlay
+    if(drawSaveOverlay){
+      image(getMenuBG(2, 2), 0, 0); 
+      switch(saveReady) {
+        case 0: saveReady++; break;
+        case 1: saveReady++;
+            drawSaveOverlay = false;
+            emptyMenuBG = true;
+      }
+    }    
+  }  
+  // ---- Debug Info ----
+  //println(frameRate + " at " + player.position()); 
 }
-	
+  
 void stop() {
-	player.close();
-	minim.stop();
-	super.stop();
+  player.close();
+  minim.stop();
+  super.stop();
 }
