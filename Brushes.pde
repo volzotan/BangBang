@@ -1,7 +1,7 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
-void brushOne(boolean useOffset, int drawSize) {
+public synchronized void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   // depending on the draw Size (2 = large, 1 = medium, 0 = small
   // a random offset in Y (and X) direction is calculated
@@ -65,7 +65,7 @@ void brushOne(boolean useOffset, int drawSize) {
 }
 
 // continuous line
-void brushThree() {
+synchronized void brushThree() {
   color c = color(145,145,145);
   int w = 5;
   // 10,5 - 11,8 :: General Pause  
