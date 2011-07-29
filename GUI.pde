@@ -1,129 +1,129 @@
-ControllerSprite setupMapDisSprite, setupMapEnSprite, breakMapDisSprite, breakMapEnSprite;
-Button setupMapToggleButton, breakMapToggleButton;
+ControllerSprite startSpriteMapON, startSpriteMapOFF, breakSpriteMapOFF, breakSpriteMapON, breakSpritePause;
+Button startButtonMap, breakButtonMap;
 
 void setupGUI(){
-  setupP5 = new ControlP5(this);
+  startP5 = new ControlP5(this);
   breakP5 = new ControlP5(this);
   endP5 = new ControlP5(this);
  
   // STARTUP MENU (1)
-  // -> main (initial play)
-  ControllerSprite playSprite = new ControllerSprite(setupP5,mainButtonImage,220,220);
-  playSprite.setMask(loadImage("buttons/PlayMask.png"));
-  playSprite.enableMask();
-
-  Button playButton = setupP5.addButton("Play",0,(int) width/2-110,(int) height/2-110,220,220);
-  playButton.setSprite(playSprite);
+  // --> Exit
+  ControllerSprite startSpriteExit = new ControllerSprite(startP5,buttonHoverImage,100,100);
+  startSpriteExit.setMask(buttonExitImage);
+  startSpriteExit.enableMask();
+  Button startButtonExit = startP5.addButton("Exit",0,25,325,100,100);
+  startButtonExit.setSprite(startSpriteExit);
   
-  // -> right top
-  setupMapDisSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
-  setupMapDisSprite.setMask(mapDButtonImage);
-  setupMapDisSprite.enableMask();
-  setupMapToggleButton = setupP5.addButton("EnableMap",0,530,105,250,120);
+  // --> Demo
+  ControllerSprite startSpriteDemo = new ControllerSprite(startP5,buttonHoverImage,100,100);
+  startSpriteDemo.setMask(buttonDemoImage);
+  startSpriteDemo.enableMask();
+  Button startButtonDemo = startP5.addButton("",0,225,325,100,100);
+  startButtonDemo.setSprite(startSpriteDemo);
   
-  setupMapEnSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
-  setupMapEnSprite.setMask(mapEButtonImage);
-  setupMapEnSprite.enableMask();
+  // --> Play
+  ControllerSprite startSpritePlay = new ControllerSprite(startP5,buttonHoverImage,100,100);
+  startSpritePlay.setMask(buttonPlayImage);
+  startSpritePlay.enableMask();
+  Button startButtonPlay = startP5.addButton("Play",0,(int) width/2-50,325,100,100);
+  startButtonPlay.setSprite(startSpritePlay);  
+  
+  // --> MapToggle
+  startSpriteMapOFF = new ControllerSprite(startP5,buttonHoverImage,100,100);
+  startSpriteMapOFF.setMask(buttonMapOFFImage);
+  startSpriteMapOFF.enableMask();
+  
+  startSpriteMapON = new ControllerSprite(startP5,buttonHoverImage,100,100);
+  startSpriteMapON.setMask(buttonMapONImage);
+  startSpriteMapON.enableMask();
+  startButtonMap = startP5.addButton("EnableMap",0,475,325,100,100);
   if(!mapEnabled) {   
-    setupMapToggleButton.setSprite(setupMapDisSprite);
+    startButtonMap.setSprite(startSpriteMapOFF);
   } else {        
-    setupMapToggleButton.setSprite(setupMapEnSprite);
-  }  
+    startButtonMap.setSprite(startSpriteMapON);
+  }
   
-  // -> left top
-  ControllerSprite setupDemoSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
+  /*
+  ControllerSprite setupDemoSprite = new ControllerSprite(setupP5,buttonHoverImage,250,120);
   setupDemoSprite.setMask(demoButtonImage);
   setupDemoSprite.enableMask();
   
   Button setupDemoButton = setupP5.addButton("Demo",0,20,105,250,120);
-  setupDemoButton.setSprite(setupDemoSprite);
-  
-  // -> left bottom (exit)
-  ControllerSprite setupExitSprite = new ControllerSprite(setupP5,menuButtonImage,250,120);
-  setupExitSprite.setMask(exitButtonImage);
-  setupExitSprite.enableMask();
-  
-  Button setupExitButton = setupP5.addButton("Exit",0,20,225,250,120);
-  setupExitButton.setSprite(setupExitSprite);
+  setupDemoButton.setSprite(setupDemoSprite);  
+  */
 
-  // BREAK MENU (2)
-  // -> main (break)
-  ControllerSprite breakSprite = new ControllerSprite(breakP5,mainButtonImage,220,220);
-  breakSprite.setMask(loadImage("buttons/BreakMask.png"));
-  breakSprite.enableMask();
-
-  Button breakButton = breakP5.addButton("Break",0,(int) width/2-110,(int) height/2-110,220,220);
-  breakButton.setSprite(breakSprite);
+  // PAUSE MENU (2)
+  // --> Exit
+  ControllerSprite breakSpriteExit = new ControllerSprite(breakP5,buttonHoverImage,100,100);
+  breakSpriteExit.setMask(buttonExitImage);
+  breakSpriteExit.enableMask();
+  Button breakButtonExit = breakP5.addButton("Exit",0,25,325,100,100);
+  breakButtonExit.setSprite(breakSpriteExit);
   
-  // -> right top
-  breakMapDisSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
-  breakMapDisSprite.setMask(mapDButtonImage);
-  breakMapDisSprite.enableMask();
-  breakMapToggleButton = breakP5.addButton("EnableMap",0,530,105,250,120);
+  // --> Pause
+  breakSpritePause = new ControllerSprite(breakP5,buttonHoverImage,100,100);  
+  breakSpritePause.setMask(buttonPauseImage);  
+  breakSpritePause.enableMask();
+  Button breakButtonPause = breakP5.addButton("Break",0,(int) width/2-50,325,100,100);
+  breakButtonPause.setSprite(breakSpritePause);
   
-  breakMapEnSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
-  breakMapEnSprite.setMask(mapEButtonImage);
-  breakMapEnSprite.enableMask();
+  // --> MapToggle
+  breakSpriteMapOFF = new ControllerSprite(breakP5,buttonHoverImage,100,100);
+  breakSpriteMapOFF.setMask(buttonMapOFFImage);
+  breakSpriteMapOFF.enableMask();
+  
+  breakSpriteMapON = new ControllerSprite(breakP5,buttonHoverImage,100,100);
+  breakSpriteMapON.setMask(buttonMapONImage);
+  breakSpriteMapON.enableMask();
+  
+  breakButtonMap = breakP5.addButton("EnableMap",0,475,325,100,100);
   if(!mapEnabled) {   
-    breakMapToggleButton.setSprite(breakMapDisSprite);
+    breakButtonMap.setSprite(breakSpriteMapOFF);
   } else {        
-    breakMapToggleButton.setSprite(breakMapEnSprite);
+    breakButtonMap.setSprite(breakSpriteMapON);
   }
   
-  // -> left top (reset)
-  ControllerSprite breakResetSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
-  breakResetSprite.setMask(resetButtonImage);
-  breakResetSprite.enableMask();
+  // --> Replay
+  ControllerSprite breakSpriteReplay = new ControllerSprite(breakP5,buttonHoverImage,100,100);
+  breakSpriteReplay.setMask(buttonReplayImage);
+  breakSpriteReplay.enableMask();
+  Button breakButtonReplay = breakP5.addButton("Replay",0,225,325,100,100);
+  breakButtonReplay.setSprite(breakSpriteReplay);
   
-  Button breakResetButton = breakP5.addButton("Replay",0,20,105,250,120);
-  breakResetButton.setSprite(breakResetSprite);
-  
-  // -> left bottom (exit)
-  ControllerSprite breakExitSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
-  breakExitSprite.setMask(exitButtonImage);
-  breakExitSprite.enableMask();
-  
-  Button breakExitButton = breakP5.addButton("Exit",0,20,225,250,120);
-  breakExitButton.setSprite(breakExitSprite);
-  
-  // -> right bottom (save)
-  ControllerSprite breakSaveSprite = new ControllerSprite(breakP5,menuButtonImage,250,120);
-  breakSaveSprite.setMask(saveButtonImage);
-  breakSaveSprite.enableMask();
-  
-  Button breakSaveButton = breakP5.addButton("Save",1,530,225,250,120);
-  breakSaveButton.setSprite(breakSaveSprite);
+  // --> Save
+  ControllerSprite breakSpriteSave = new ControllerSprite(breakP5,buttonHoverImage,100,100);
+  breakSpriteSave.setMask(buttonSaveImage);
+  breakSpriteSave.enableMask();
+  Button breakButtonSave = breakP5.addButton("Save",0,675,325,100,100);
+  breakButtonSave.setSprite(breakSpriteSave);
   
   // END MENU (3)
-  // -> main (replay)
-  ControllerSprite replaySprite = new ControllerSprite(endP5,mainButtonImage,220,220);
-  replaySprite.setMask(loadImage("buttons/ReplayMask.png"));
-  replaySprite.enableMask();
+  // --> Exit
+  ControllerSprite endSpriteExit = new ControllerSprite(endP5,buttonHoverImage,100,100);
+  endSpriteExit.setMask(buttonExitImage);
+  endSpriteExit.enableMask();
+  Button endButtonExit = endP5.addButton("Exit",0,25,325,100,100);
+  endButtonExit.setSprite(endSpriteExit);
   
-  Button replayButton = endP5.addButton("Replay",0,(int) width/2-110,(int) height/2-110,220,220);
-  replayButton.setSprite(replaySprite);
+  // --> Replay
+  ControllerSprite endSpriteReplay = new ControllerSprite(endP5,buttonHoverImage,100,100);
+  endSpriteReplay.setMask(buttonReplayImage);
+  endSpriteReplay.enableMask();
+  Button endButtonReplay = endP5.addButton("Replay",0,350,325,100,100);
+  endButtonReplay.setSprite(endSpriteReplay);
   
-  // -> left bottom (exit)
-  ControllerSprite endExitSprite = new ControllerSprite(endP5,menuButtonImage,250,120);
-  endExitSprite.setMask(exitButtonImage);
-  endExitSprite.enableMask();
-  
-  Button endExitButton = endP5.addButton("Exit",0,20,225,250,120);
-  endExitButton.setSprite(endExitSprite);
-  
-  // -> right bottom (save)
-  ControllerSprite endSaveSprite = new ControllerSprite(endP5,menuButtonImage,250,120);
-  endSaveSprite.setMask(saveButtonImage);
-  endSaveSprite.enableMask();
-  
-  Button endSaveButton = endP5.addButton("Save",1,530,225,250,120);
-  endSaveButton.setSprite(endSaveSprite);
+  // --> Save
+  ControllerSprite endSpriteSave = new ControllerSprite(endP5,buttonHoverImage,100,100);
+  endSpriteSave.setMask(buttonSaveImage);
+  endSpriteSave.enableMask();
+  Button endButtonSave = endP5.addButton("Save",0,675,325,100,100);
+  endButtonSave.setSprite(endSpriteSave);
 }
 
 // DRAW GUI
 void drawGUI(int openMenu){
   switch(openMenu){
-    case 1 : closeGUI(2); closeGUI(3); setupP5.show(); setupP5.draw();             break;
+    case 1 : closeGUI(2); closeGUI(3); startP5.show(); startP5.draw();             break;
     case 2 : closeGUI(1); closeGUI(3); breakP5.show(); breakP5.draw(); wasGUI = 2; break;
     case 3 : closeGUI(1); closeGUI(2); endP5.show();   endP5.draw();   wasGUI = 3; 
   }
@@ -132,10 +132,10 @@ void drawGUI(int openMenu){
 // CLOSE GUI
 void closeGUI(int closeMenu){
   switch(closeMenu) {
-    case 1 : setupP5.hide(); break;
+    case 1 : startP5.hide(); break;
     case 2 : breakP5.hide(); break;
     case 3 : endP5.hide();   break;
-    case 4 : setupP5.hide(); breakP5.hide(); endP5.hide();
+    case 4 : startP5.hide(); breakP5.hide(); endP5.hide();
   }
 }
 
@@ -182,11 +182,11 @@ public void Break(int theValue) {
 public void EnableMap(int theValue) {
   mapEnabled = (mapEnabled) ? false : true;
   if(!mapEnabled) {   
-    setupMapToggleButton.setSprite(setupMapDisSprite);
-    breakMapToggleButton.setSprite(breakMapDisSprite);
+    startButtonMap.setSprite(startSpriteMapOFF);
+    breakButtonMap.setSprite(breakSpriteMapOFF);
   } else {        
-    setupMapToggleButton.setSprite(setupMapEnSprite);
-    breakMapToggleButton.setSprite(breakMapEnSprite);
+    startButtonMap.setSprite(startSpriteMapON);
+    breakButtonMap.setSprite(breakSpriteMapON);
   }  
 }
 

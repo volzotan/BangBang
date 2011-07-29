@@ -8,8 +8,8 @@ int elapsedTime = 0;
 // ---- import GUI ----
 import controlP5.*;
 // GUI
-ControlP5 setupP5, breakP5, endP5;
-PImage tempMenuBG, mainButtonImage, menuButtonImage, resetButtonImage, mapEButtonImage, mapDButtonImage, exitButtonImage, demoButtonImage, saveButtonImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
+ControlP5 startP5, breakP5, endP5;
+PImage tempMenuBG, buttonHoverImage, buttonExitImage, buttonReplayImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, buttonSaveImage, buttonMapONImage, buttonMapOFFImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
 boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
 // switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; wasGUI: previous GUI number
 int switchCursor, wasGUI;
@@ -190,7 +190,7 @@ void setup(){
   scaledMiniMap.resize(0, 18);
 }
 
-void draw() {  
+void draw() {
   // Startup GUI
   if(!initialised) {
     // use regular Cursor
@@ -268,7 +268,12 @@ void draw() {
       switchCursor(1);
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getMenuBG(2, 1), 0, 0);
-        drawGUI(2); 
+        drawGUI(2);
+        if(mouseX > 350 && mouseX < 450 && mouseY > 325 && mouseY < 425) {
+          breakSpritePause.setMask(buttonPlayImage);
+        } else {
+          breakSpritePause.setMask(buttonPauseImage);
+        }
       } else if (!drawSaveOverlay) {
         pauseAllScheduledEvents();
         image(getMenuBG(2, 1), 0, 0);
