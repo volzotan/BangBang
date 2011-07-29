@@ -89,6 +89,7 @@ void initImages() {
   buttonMapOFFImage   = loadImage("buttons/MaskMapOFF.png");
   buttonSaveImage     = loadImage("buttons/MaskSave.png");
   overlayImage        = loadImage("OverlayMenu.png");
+  savingOverlayImage  = loadImage("OverlaySave.png");
   savingImage         = loadImage("OverlaySaving.png");    
   vignette            = loadImage("vignette.png");
   for(int i = 0; i < inkSplatter.length; i++) {

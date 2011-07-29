@@ -9,7 +9,7 @@ int elapsedTime = 0;
 import controlP5.*;
 // GUI
 ControlP5 startP5, breakP5, endP5;
-PImage tempMenuBG, buttonHoverImage, buttonExitImage, buttonReplayImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, buttonSaveImage, buttonMapONImage, buttonMapOFFImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
+PImage tempMenuBG, buttonHoverImage, buttonExitImage, buttonReplayImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, buttonSaveImage, buttonMapONImage, buttonMapOFFImage, savingImage, savingOverlayImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
 boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
 // switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; wasGUI: previous GUI number
 int switchCursor, wasGUI;

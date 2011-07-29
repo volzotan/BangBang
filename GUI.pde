@@ -146,7 +146,7 @@ public PImage getMenuBG(int b, int m) {
     tempMenuBG.filter(BLUR, b);
     switch(m) {
       case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY); break;
-      case 2 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY);
+      case 2 : tempMenuBG.blend(savingOverlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY);
                tempMenuBG.blend(savingImage , 0, 0, width, height, 290, 115,   220,    220, LIGHTEST); break;
     }
   }
