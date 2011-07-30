@@ -11,21 +11,21 @@ void setupGUI(){
   ControllerSprite startSpriteExit = new ControllerSprite(startP5,buttonHoverImage,100,100);
   startSpriteExit.setMask(buttonExitImage);
   startSpriteExit.enableMask();
-  Button startButtonExit = startP5.addButton("Exit",0,25,325,100,100);
+  Button startButtonExit = startP5.addButton("Exit",0,40,(int) height/2-50,100,100);
   startButtonExit.setSprite(startSpriteExit);
   
   // --> Demo
   ControllerSprite startSpriteDemo = new ControllerSprite(startP5,buttonHoverImage,100,100);
   startSpriteDemo.setMask(buttonDemoImage);
   startSpriteDemo.enableMask();
-  Button startButtonDemo = startP5.addButton("",0,225,325,100,100);
+  Button startButtonDemo = startP5.addButton("",0,165,(int) height/2-50,100,100);
   startButtonDemo.setSprite(startSpriteDemo);
   
   // --> Play
-  ControllerSprite startSpritePlay = new ControllerSprite(startP5,buttonHoverImage,100,100);
+  ControllerSprite startSpritePlay = new ControllerSprite(startP5,buttonHoverBigImage,220,220);
   startSpritePlay.setMask(buttonPlayImage);
   startSpritePlay.enableMask();
-  Button startButtonPlay = startP5.addButton("Play",0,(int) width/2-50,325,100,100);
+  Button startButtonPlay = startP5.addButton("Play",0,(int) width/2-110,(int) height/2-110,220,220);
   startButtonPlay.setSprite(startSpritePlay);  
   
   // --> MapToggle
@@ -36,35 +36,26 @@ void setupGUI(){
   startSpriteMapON = new ControllerSprite(startP5,buttonHoverImage,100,100);
   startSpriteMapON.setMask(buttonMapONImage);
   startSpriteMapON.enableMask();
-  startButtonMap = startP5.addButton("EnableMap",0,475,325,100,100);
+  startButtonMap = startP5.addButton("EnableMap",0,535,(int) height/2-50,100,100);
   if(!mapEnabled) {   
     startButtonMap.setSprite(startSpriteMapOFF);
   } else {        
     startButtonMap.setSprite(startSpriteMapON);
   }
-  
-  /*
-  ControllerSprite setupDemoSprite = new ControllerSprite(setupP5,buttonHoverImage,250,120);
-  setupDemoSprite.setMask(demoButtonImage);
-  setupDemoSprite.enableMask();
-  
-  Button setupDemoButton = setupP5.addButton("Demo",0,20,105,250,120);
-  setupDemoButton.setSprite(setupDemoSprite);  
-  */
 
   // PAUSE MENU (2)
   // --> Exit
   ControllerSprite breakSpriteExit = new ControllerSprite(breakP5,buttonHoverImage,100,100);
   breakSpriteExit.setMask(buttonExitImage);
   breakSpriteExit.enableMask();
-  Button breakButtonExit = breakP5.addButton("Exit",0,25,325,100,100);
+  Button breakButtonExit = breakP5.addButton("Exit",0,40,(int) height/2-50,100,100);
   breakButtonExit.setSprite(breakSpriteExit);
   
   // --> Pause
-  breakSpritePause = new ControllerSprite(breakP5,buttonHoverImage,100,100);  
+  breakSpritePause = new ControllerSprite(breakP5,buttonHoverBigImage,220,220);  
   breakSpritePause.setMask(buttonPauseImage);  
   breakSpritePause.enableMask();
-  Button breakButtonPause = breakP5.addButton("Break",0,(int) width/2-50,325,100,100);
+  Button breakButtonPause = breakP5.addButton("Break",0,(int) width/2-110,(int) height/2-110,220,220);
   breakButtonPause.setSprite(breakSpritePause);
   
   // --> MapToggle
@@ -76,7 +67,7 @@ void setupGUI(){
   breakSpriteMapON.setMask(buttonMapONImage);
   breakSpriteMapON.enableMask();
   
-  breakButtonMap = breakP5.addButton("EnableMap",0,475,325,100,100);
+  breakButtonMap = breakP5.addButton("EnableMap",0,535,(int) height/2-50,100,100);
   if(!mapEnabled) {   
     breakButtonMap.setSprite(breakSpriteMapOFF);
   } else {        
@@ -87,14 +78,14 @@ void setupGUI(){
   ControllerSprite breakSpriteReplay = new ControllerSprite(breakP5,buttonHoverImage,100,100);
   breakSpriteReplay.setMask(buttonReplayImage);
   breakSpriteReplay.enableMask();
-  Button breakButtonReplay = breakP5.addButton("Replay",0,225,325,100,100);
+  Button breakButtonReplay = breakP5.addButton("Replay",0,165,(int) height/2-50,100,100);
   breakButtonReplay.setSprite(breakSpriteReplay);
   
   // --> Save
   ControllerSprite breakSpriteSave = new ControllerSprite(breakP5,buttonHoverImage,100,100);
   breakSpriteSave.setMask(buttonSaveImage);
   breakSpriteSave.enableMask();
-  Button breakButtonSave = breakP5.addButton("Save",0,675,325,100,100);
+  Button breakButtonSave = breakP5.addButton("Save",0,660,(int) height/2-50,100,100);
   breakButtonSave.setSprite(breakSpriteSave);
   
   // END MENU (3)
@@ -102,21 +93,21 @@ void setupGUI(){
   ControllerSprite endSpriteExit = new ControllerSprite(endP5,buttonHoverImage,100,100);
   endSpriteExit.setMask(buttonExitImage);
   endSpriteExit.enableMask();
-  Button endButtonExit = endP5.addButton("Exit",0,25,325,100,100);
+  Button endButtonExit = endP5.addButton("Exit",0,40,(int) height/2-50,100,100);
   endButtonExit.setSprite(endSpriteExit);
   
   // --> Replay
-  ControllerSprite endSpriteReplay = new ControllerSprite(endP5,buttonHoverImage,100,100);
-  endSpriteReplay.setMask(buttonReplayImage);
+  ControllerSprite endSpriteReplay = new ControllerSprite(endP5,buttonHoverBigImage,220,220);
+  endSpriteReplay.setMask(buttonReplayBigImage);
   endSpriteReplay.enableMask();
-  Button endButtonReplay = endP5.addButton("Replay",0,350,325,100,100);
+  Button endButtonReplay = endP5.addButton("Replay",0,(int) width/2-110,(int) height/2-110,220,220);
   endButtonReplay.setSprite(endSpriteReplay);
   
   // --> Save
   ControllerSprite endSpriteSave = new ControllerSprite(endP5,buttonHoverImage,100,100);
   endSpriteSave.setMask(buttonSaveImage);
   endSpriteSave.enableMask();
-  Button endButtonSave = endP5.addButton("Save",0,675,325,100,100);
+  Button endButtonSave = endP5.addButton("Save",0,660,(int) height/2-50,100,100);
   endButtonSave.setSprite(endSpriteSave);
 }
 
@@ -146,7 +137,7 @@ public PImage getMenuBG(int b, int m) {
     tempMenuBG.filter(BLUR, b);
     switch(m) {
       case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY); break;
-      case 2 : tempMenuBG.blend(savingOverlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY);
+      case 2 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY);
                tempMenuBG.blend(savingImage , 0, 0, width, height, 290, 115,   220,    220, LIGHTEST); break;
     }
   }

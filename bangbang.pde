@@ -9,7 +9,7 @@ int elapsedTime = 0;
 import controlP5.*;
 // GUI
 ControlP5 startP5, breakP5, endP5;
-PImage tempMenuBG, buttonHoverImage, buttonExitImage, buttonReplayImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, buttonSaveImage, buttonMapONImage, buttonMapOFFImage, savingImage, savingOverlayImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
+PImage tempMenuBG, buttonHoverImage, buttonHoverBigImage, buttonExitImage, buttonReplayImage, buttonReplayBigImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, buttonSaveImage, buttonMapONImage, buttonMapOFFImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
 boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
 // switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; wasGUI: previous GUI number
 int switchCursor, wasGUI;
@@ -269,7 +269,7 @@ void draw() {
       if (player.position() < 47986 && !drawSaveOverlay) {
         image(getMenuBG(2, 1), 0, 0);
         drawGUI(2);
-        if(mouseX > 350 && mouseX < 450 && mouseY > 325 && mouseY < 425) {
+        if(mouseX > 290 && mouseX < 510 && mouseY > 115 && mouseY < 335) {
           breakSpritePause.setMask(buttonPlayImage);
         } else {
           breakSpritePause.setMask(buttonPauseImage);
