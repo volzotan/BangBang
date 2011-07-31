@@ -121,7 +121,6 @@ int drawCounter = 0;
 void setup(){
   // Create Applet Window and set maximum frame rate
   size(800, 450, JAVA2D);
-  background(150,0,0);
   frameRate(30);
   
 
