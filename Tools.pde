@@ -14,13 +14,6 @@ int calcMiniMapPosY() {
   return (int) verschiebungY;
 }
 
-void startGhostBrush() {
-  println("buhu!");
-  ghostOldX = (int) directionArrayX[drawCounter%10] - deltaWidth;
-  ghostOldY = (int) directionArrayY[drawCounter%10] ;
-  ghostBrush = true;
-}
-
 void drawMiniMap(boolean toggle){  
   if(toggle){
     // rgb stroke black
@@ -134,17 +127,6 @@ void moveViewport(){
   
   copyOffsetX = positionCoordX;
   copyOffsetY = positionCoordY;
-}
-
-void switchCursor(int kind) {
-  if(switchCursor != kind || useNyancat) {
-    switch(kind) {
-      case 1: cursor(ARROW); switchCursor = kind; break;
-      case 2: cursor(cursorImage_blank); switchCursor = kind; break;   
-      case 3: cursor(cursorImage_circle); switchCursor = kind; break;
-      case 4: cursor(cursorImage_nyancat); switchCursor = kind; break;
-    }  
-  }  
 }  
 
 boolean testOnCanvasX(int posXCoord) {

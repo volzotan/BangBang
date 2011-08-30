@@ -8,11 +8,24 @@ int elapsedTime = 0;
 // ---- import GUI ----
 import controlP5.*;
 // GUI
-ControlP5 startP5, breakP5, endP5;
-PImage tempMenuBG, buttonHoverImage, buttonHoverBigImage, buttonExitImage, buttonReplayImage, buttonReplayBigImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, buttonSaveImage, buttonMapONImage, buttonMapOFFImage, savingImage, overlayImage, cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
-boolean mapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
-// switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; wasGUI: previous GUI number
-int switchCursor, wasGUI;
+ControlP5 controlP5;
+ControllerSprite spriteSmall, spritePause, spritePlay, spriteRestart, spriteMinimapE, spriteMinimapD;
+controlP5.Button demo;
+controlP5.Button minimap;
+controlP5.Button play;
+controlP5.Button quit;
+controlP5.Button replay;
+controlP5.Button screenshot;
+// Button, Menu background, cursor images
+PImage buttonHoverImage, buttonHoverBigImage, buttonExitImage, buttonReplayImage, 
+       buttonReplayBigImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, 
+       buttonSaveImage, buttonMapONImage, buttonMapOFFImage, 
+       savingImage, overlayImage, tempMenuBG,
+       cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
+// minimap, cursor, screenshot status flags
+boolean minimapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
+// switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; menu: current menu layout
+int switchCursor, menu;
 
 // ---- import Audio player ----
 import ddf.minim.*;
@@ -145,7 +158,7 @@ void setup(){
   
   // GUI/Menu settings
   emptyMenuBG = true;  
-  wasGUI = 0;
+  menu = 0;
   // make sure start up GUI window is shown
   initialised = false;
   // clear/set save image path  
@@ -197,52 +210,51 @@ void draw() {
     // get static background image
     image(getMenuBG(0, 1), 0, 0); 
     // draw GUI
-    drawGUI(1);
+    drawGUI();
   // Playing, Pausing, End
   } else {  
     // Save Canvas as image part 2: save image
     if (saveReady == 2) {
-      if(initialised) {
-        savePath = selectOutput("Save Canvas to:");
-        if(savePath != null && savePath != "") {
-          if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
-            savePath += ".jpg";
-          }
-        } 
+      savePath = selectOutput("Save Canvas to:");
+      if(savePath != null && savePath != "") {
+        if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+          savePath += ".jpg";
+        }
         try {
           bg.save(savePath);    // dataPath("shots/"+timestamp() +".png")
         } catch(Exception e) {
           // TODO make work accordingly ? can't seem to catch any exception here
-        }
-        savePath = "";      
+        }        
       } 
-      if(initialised && player.position() < 47986 && wasGUI == 0) {
+      savePath = "";
+      // TODO call play instead and have that handle this      
+      if(player.position() < 47986 && menu == 1) {
         player.play(); 
         startAllScheduledEvents();
         emptyMenuBG = true;
-      } else {
-        wasGUI = 0;
       }
       saveReady = 0;
     }    
     
-    // close startup gui
-    closeGUI(1); // TODO move to a single call, not continous
     // get dampened mouse position       
     x = x + (mouseX-x)/mouseDampeningX;
     y = y + (mouseY-y)/mouseDampeningY;
 
     // TODO should this really happen in here?
     drawCounter = (drawCounter+1) % 30;
-    pos = player.position();
-      
-    if(player.isPlaying() && player.position() < 47986) {
+    
+    // is playing  
+    if(player.isPlaying() && player.position() < 47986 && !drawSaveOverlay) {
+      // get current song position
+      pos = player.position();
       // get beat from playing song
       beat.detect(player.mix);
+      
       if(beat.isOnset()) {
          tempBrushValue = 80; 
       }
       
+      // TODO switch cursor shouldn't be happening here?!
       switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
       moveViewport();
       if (mainBrushActive) {        
@@ -256,27 +268,24 @@ void draw() {
       directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;      
     
       drawVignette(true);
-      drawMiniMap(mapEnabled);       
+      drawMiniMap(minimapEnabled);       
       tempBrushValue *= 0.95;
-       // Grab mouse position for use in effects and brushes
-       if(drawCounter % 1 == 0) {                              
+      // Grab mouse position for use in effects and brushes
+      if(drawCounter % 1 == 0) {                              
         lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
         lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
-      }      
-    } else {
+      } 
+    // paused / finished     
+    } else if(!drawSaveOverlay) {
       switchCursor(1);
-      if (player.position() < 47986 && !drawSaveOverlay) {
+      // paused
+      if (player.position() < 47986) {
         image(getMenuBG(2, 1), 0, 0);
-        drawGUI(2);
-        if(mouseX > 290 && mouseX < 510 && mouseY > 115 && mouseY < 335) {
-          breakSpritePause.setMask(buttonPlayImage);
-        } else {
-          breakSpritePause.setMask(buttonPauseImage);
-        }
-      } else if (!drawSaveOverlay) {
+      // finished  
+      } else {
         pauseAllScheduledEvents();
         image(getMenuBG(2, 1), 0, 0);
-        drawGUI(3);     
+        menu = 2;
       }     
     }    
   
@@ -286,7 +295,7 @@ void draw() {
     }   
     
     // Save image as canvas part one: draw overlay
-    if(drawSaveOverlay){
+    if(drawSaveOverlay) {
       image(getMenuBG(2, 2), 0, 0); 
       switch(saveReady) {
         case 0: saveReady++; break;
@@ -294,6 +303,8 @@ void draw() {
             drawSaveOverlay = false;
             emptyMenuBG = true;
       }
+    } else {
+      drawGUI();
     }    
   }  
   // ---- Debug Info ----

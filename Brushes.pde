@@ -109,6 +109,11 @@ synchronized void brushThree() {
   deltaMouseY = oldY;
 }
 
+void startGhostBrush() {
+  ghostOldX = (int) directionArrayX[drawCounter%10] - deltaWidth;
+  ghostOldY = (int) directionArrayY[drawCounter%10] ;
+  ghostBrush = true;
+}
 
 void ghostBrush() {
   bg.beginDraw();

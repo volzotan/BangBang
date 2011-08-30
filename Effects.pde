@@ -119,7 +119,7 @@ void startAllScheduledEvents() {
   scheduleBrushOneEvents();
   //scheduleBrushFourEvents();
   scheduleCrescendoEvent();
-  scheduleInvertEvent();
+  //scheduleInvertEvent();
   scheduleSplatterEvents();  
   
   //scheduleKillEvent();
@@ -309,7 +309,6 @@ void crescendo() {
   invsVar = invsVar * (-1);
   
   tempScrollSpeed = tempScrollSpeed + (0 - tempScrollSpeed)/18;
-  println(tempScrollSpeed);
 }
 
 void tintenklecks(float size) {
