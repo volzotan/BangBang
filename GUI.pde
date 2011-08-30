@@ -145,16 +145,6 @@ public void replay(int theValue) {
   setup();
 }
 
-public void Break(int theValue) {
-  if(initialised && player.position() < 47986) {
-    emptyMenuBG = true;
-    player.play();
-    startAllScheduledEvents();
-  } else if(!initialised) {
-    play(0);
-  }
-}
-
 public void minimap(int theValue) {
   minimapEnabled = !minimapEnabled;
   // minimap button status
@@ -185,7 +175,6 @@ public void ToggleCursor() {
 }
 
 public void screenshot(int theValue) {
-  // TODO remove pause() and call play() instead
   controlP5.hide();
   player.pause();
   drawSaveOverlay = true;
