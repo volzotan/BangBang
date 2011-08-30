@@ -202,113 +202,108 @@ void setup(){
   scaledMiniMap.resize(0, 18);
 }
 
-void draw() {
-  // Startup GUI
+void draw() {  
   if(!initialised) {
-    // use regular Cursor
+    // draw regular OS cursor
     switchCursor(1);
     // get static background image
-    image(getMenuBG(0, 1), 0, 0); 
-    // draw GUI
-    drawGUI();
-  // Playing, Pausing, End
-  } else {  
-    // Save Canvas as image part 2: save image
-    if (saveReady == 2) {
+    image(getMenuBG(0, 1), 0, 0);  
+  } else {
+    // part two of screenshot phase
+    if(2 == saveReady) {
       savePath = selectOutput("Save Canvas to:");
       if(savePath != null && savePath != "") {
-        if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) {
+        if(!savePath.endsWith(".png") && !savePath.endsWith(".jpg") && 
+           !savePath.endsWith(".jpeg") && !savePath.endsWith(".tif") && 
+           !savePath.endsWith(".tga") && !savePath.endsWith(".tiff")) 
+        {
           savePath += ".jpg";
         }
         try {
           bg.save(savePath);    // dataPath("shots/"+timestamp() +".png")
         } catch(Exception e) {
           // TODO make work accordingly ? can't seem to catch any exception here
-        }        
-      } 
-      savePath = "";
-      // TODO call play instead and have that handle this      
+        }
+      }
       if(player.position() < 47986 && menu == 1) {
         player.play(); 
         startAllScheduledEvents();
         emptyMenuBG = true;
       }
       saveReady = 0;
-    }    
+    }
     
-    // get dampened mouse position       
-    x = x + (mouseX-x)/mouseDampeningX;
-    y = y + (mouseY-y)/mouseDampeningY;
+    // play/pause/finished states
+    if(!drawSaveOverlay) { 
+      // is playing  
+      if(player.isPlaying() && player.position() < 47986) {
+        // get dampened mouse position       
+        x = x + (mouseX-x)/mouseDampeningX;
+        y = y + (mouseY-y)/mouseDampeningY;
 
-    // TODO should this really happen in here?
-    drawCounter = (drawCounter+1) % 30;
-    
-    // is playing  
-    if(player.isPlaying() && player.position() < 47986 && !drawSaveOverlay) {
-      // get current song position
-      pos = player.position();
-      // get beat from playing song
-      beat.detect(player.mix);
+        // TODO should this really happen in here?
+        drawCounter = (drawCounter+1) % 30;
       
-      if(beat.isOnset()) {
-         tempBrushValue = 80; 
-      }
-      
-      // TODO switch cursor shouldn't be happening here?!
-      switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);
-      moveViewport();
-      if (mainBrushActive) {        
-        brushThree();
-        if (ghostBrush) {
-          ghostBrush();
+        // get current song position
+        pos = player.position();
+        // get beat from playing song
+        beat.detect(player.mix);
+        // set brush modifier based on beat
+        if(beat.isOnset()) { tempBrushValue = 80; }
+        
+        // move the canvas
+        moveViewport();
+        
+        // draw main and support brush
+        if (mainBrushActive) {        
+          brushThree();
+          if (ghostBrush) { ghostBrush(); }
         }
-      }                 
+        
+        // TODO what does this do?
+        directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
+        directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;
+        
+        drawVignette(true);
+        drawMiniMap(minimapEnabled);       
+        tempBrushValue *= 0.95;
       
-      directionArrayX[drawCounter % 10] = (int) x + copyOffsetX;
-      directionArrayY[drawCounter % 10] = (int) y + copyOffsetY;      
-    
-      drawVignette(true);
-      drawMiniMap(minimapEnabled);       
-      tempBrushValue *= 0.95;
-      // Grab mouse position for use in effects and brushes
-      if(drawCounter % 1 == 0) {                              
-        lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
-        lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
-      } 
-    // paused / finished     
-    } else if(!drawSaveOverlay) {
-      switchCursor(1);
-      // paused
-      if (player.position() < 47986) {
-        image(getMenuBG(2, 1), 0, 0);
-      // finished  
+        // Grab mouse position for use in effects and brushes
+        if(drawCounter % 1 == 0) {                              
+          lastMousePosX[drawCounter%30] = (int) x + copyOffsetX;
+          lastMousePosY[drawCounter%30] = (int) y + copyOffsetY;
+        }
+        
+        if (drawCounter % 3 == 0) {
+          prevOffsetX = copyOffsetX;
+          prevOffsetY = copyOffsetY;
+        }
+        // draw correct cursor
+        switchCursor(cursorEnabled ? (useNyancat ? 4 : 3) : 2);        
+      // pause / finished  
       } else {
-        pauseAllScheduledEvents();
+        // draw regular OS cursor
+        switchCursor(1);
         image(getMenuBG(2, 1), 0, 0);
-        menu = 2;
-      }     
-    }    
-  
-    if (drawCounter % 3 == 0) {
-      prevOffsetX = copyOffsetX;
-      prevOffsetY = copyOffsetY;
-    }   
-    
-    // Save image as canvas part one: draw overlay
-    if(drawSaveOverlay) {
+        // finished, load correct menu
+        if(47986 <= player.position() && 2 != menu)
+          menu = 2;
+      }
+    // phase one of screenshot phase        
+    } else {
       image(getMenuBG(2, 2), 0, 0); 
       switch(saveReady) {
         case 0: saveReady++; break;
         case 1: saveReady++;
             drawSaveOverlay = false;
             emptyMenuBG = true;
-      }
-    } else {
-      drawGUI();
+      }    
     }    
-  }  
+  }
+  // drawGUI (assuming it is visible)
+  drawGUI();
   // ---- Debug Info ----
-  //println(frameRate + " at " + player.position()); 
+  //println(frameRate + " at " + player.position());  
 }
   
 void stop() {
