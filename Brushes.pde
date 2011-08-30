@@ -1,3 +1,10 @@
+// COLORS (in rgb)
+// blue/green:     5, 136, 138
+// white/yellow: 240, 236, 202
+// light orange: 227, 168,  47
+// dark orange:  213,  77,  27  
+// brown:         81,  61,  46
+
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
