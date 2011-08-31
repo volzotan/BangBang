@@ -257,7 +257,7 @@ void draw() {
         // draw main and support brush
         if (mainBrushActive) {        
           mainBrush();
-          //brushFive();
+          brushFive();
           if (ghostBrush) { ghostBrush(); }
         }
         

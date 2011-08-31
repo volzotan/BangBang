@@ -196,7 +196,7 @@ void brushFour(int minAmount, int maxAmount) {
 
 // splatters around main brush
 void brushFive() {
-  int amount = floor(random(5, 10));
+  int amount = floor(random(0, 3));
 
   for(int i = 0; i < amount; i++) {
     int splatterRadius = floor(random(2,4));
@@ -220,8 +220,8 @@ void brushFive() {
     } else {
       bg.noFill();
       bg.stroke(c);     
-    }  
-      bg.ellipse(x + copyOffsetX + random(-10,10), y + copyOffsetY + random(-10,10), splatterRadius, splatterRadius);  
+    }   
+      bg.ellipse(x + copyOffsetX + random(-20,20), y + copyOffsetY + random(-70,70), splatterRadius, splatterRadius);  
     bg.endDraw();    
     
   }  
