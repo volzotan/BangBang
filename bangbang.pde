@@ -76,12 +76,12 @@ int deltaMouseX = 0;
 int deltaMouseY = 450;
 int[] lastMousePosX = new int[30], lastMousePosY = new int[30];
 // Used for the very last effect to create a "triangle"
-int brushThreeDeflectionScale = 100;
+int mainBrushDeflectionScale = 100;
 // use ghost brush?
 boolean ghostBrush = false;
 // use main brush ?
 boolean mainBrushActive;
-// brushThree ressources
+// mainBrush resources
 float verhaeltnisSumme = 0;
 float verhaeltnisX = 0;
 float verhaeltnisY = 0;  
@@ -256,7 +256,8 @@ void draw() {
         
         // draw main and support brush
         if (mainBrushActive) {        
-          brushThree();
+          mainBrush();
+          //brushFive();
           if (ghostBrush) { ghostBrush(); }
         }
         
