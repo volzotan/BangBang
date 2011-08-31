@@ -94,7 +94,7 @@ int tempX, tempY;
 // player position in milliseconds
 int pos = 0;
 // ink splatter array containing the loaded images
-PImage inkSplatter[] = new PImage[10];
+PImage inkSplatter[] = new PImage[18];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
 int inkSplatterPos;
 
@@ -258,7 +258,7 @@ void draw() {
         if (mainBrushActive) {        
           mainBrush();
           brushFive();
-          if (ghostBrush) { ghostBrush(); }
+          //if (ghostBrush) { ghostBrush(); }
         }
         
         // TODO what does this do?

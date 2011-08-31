@@ -88,7 +88,7 @@ void initImages() {
   vignette            = loadImage("vignette.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     //inkSplatter[i]    = loadImage("inkSplatter/klecks_"+i+".png");
-    inkSplatter[i]    = loadImage("flowers/f"+i+".png");    
+    inkSplatter[i]    = loadImage("flowers/"+i+".png");    
   }  
 }  
 
