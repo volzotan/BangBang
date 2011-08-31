@@ -98,7 +98,7 @@ void drawGUI() {
       quit.show();
       replay.hide();
       screenshot.show();
-      controlP5.show();      
+      if(!drawSaveOverlay) { controlP5.show(); }
   }  
 }
 
