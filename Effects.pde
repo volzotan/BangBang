@@ -27,10 +27,12 @@ int[][] splatterEventArray  = new int[10][2];  // 0 = delay, 1 = size
 int[][] brushOneEventArray  = new int[30][3];  // 0 = delay, 1 = size Flag, 2 = Repeat Intervall[ms]
 // SPREAD EFFECT
 int[][] brushFourEventArray = new int[ 3][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
+// circles and dots
+int[][] brushFiveEventArray = new int[ 1][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 // INVERT FILTER
-int[][] invertEventArray  = new int[ 2][1];  // 0 = delay
+int[][] invertEventArray    = new int[ 2][1];  // 0 = delay
 // CRESCENDO EFFECT
-int[][] crescendoEventArray  = new int[ 1][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
+int[][] crescendoEventArray = new int[ 1][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 
 // brush for circle amounts
 final int MAXAMOUNT =  4; 
@@ -99,6 +101,8 @@ void initEventArrays() {
   brushOneEventArray[29][0] = 10300;  brushOneEventArray[29][1] = 2;  brushOneEventArray[29][2] = 0;
   
   brushFourEventArray[0][0] = 43300;  brushFourEventArray[0][1] = 1;  brushFourEventArray[0][2] = 100;
+
+  brushFiveEventArray[0][0] = 12300;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 1;  
 }
 
 void savePauseTime() {
@@ -118,6 +122,7 @@ void pauseAllScheduledEvents() {
 void startAllScheduledEvents() {
   scheduleBrushOneEvents();
   //scheduleBrushFourEvents();
+  scheduleBrushFiveEvents();
   scheduleCrescendoEvent();
   //scheduleInvertEvent();
   scheduleSplatterEvents();  
@@ -196,6 +201,26 @@ void scheduleBrushFourEvents() {
             brushFour(MINAMOUNT, MAXAMOUNT);
           }
         }, brushFourEventArray[i][0] - elapsedTime, brushFourEventArray[i][2]);
+      }
+    }
+  }
+}
+
+void scheduleBrushFiveEvents() {
+  for (int i=0; i < brushFiveEventArray.length; i++) {
+    if (brushFiveEventArray[i][0] - elapsedTime >= 0) {      
+      if (brushFiveEventArray[i][1] == 0) {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushFive();
+          }
+        }, brushFiveEventArray[i][0] - elapsedTime);
+      } else {
+        timer.schedule(new TimerTask() {
+          public void run() {
+            brushFive();
+          }
+        }, brushFiveEventArray[i][0] - elapsedTime, brushFiveEventArray[i][2]);
       }
     }
   }
