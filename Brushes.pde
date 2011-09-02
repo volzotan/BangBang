@@ -38,7 +38,7 @@ public synchronized void brushOne(boolean useOffset, int drawSize) {
     spacing = 32;
     alpha2 = 60;
     val = (val > 9.5 || val < 5) ? random(6,9) : val;
-    r = 5; g = 136; b = 138; o = 160; // blue
+    r = 240; g = 236; b = 202; o = 160; // white/yellow
   } else if (1 == drawSize) { // medium
     size1 = 95;
     size2 = 85;
@@ -53,14 +53,16 @@ public synchronized void brushOne(boolean useOffset, int drawSize) {
   
   bg.beginDraw();
     bg.noStroke();
-    bg.fill(r,g,b,o);
+    bg.fill(r,g,b);
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
     float offX = cos(radians(a)) * val * spacing;
     float offY = sin(radians(a)) * val * spacing;          
     bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
   }
-    bg.fill(0,0,0,alpha2);    
-    bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
+    if(0 == drawSize) {
+      bg.fill(0,0,0,alpha2);    
+      bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
+    }
   bg.endDraw();  
 
   // Grab mouse position for use in effects and brushes
