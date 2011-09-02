@@ -99,6 +99,7 @@ void drawGUI() {
       replay.hide();
       screenshot.show();
       if(!drawSaveOverlay) { controlP5.show(); }
+      else { controlP5.hide(); }
   }  
 }
 
@@ -114,6 +115,26 @@ public PImage getMenuBG(int b, int m) {
     }
   }
   return tempMenuBG;
+}
+
+public void demo(int theValue) {
+  isDemo = !isDemo;
+  if(isDemo) {
+    robo = new RoboMouse(frame.getLocation().x/2+width /2,
+                         frame.getLocation().y/2+height/2, 5, 0, 0);
+    bot = new Bot(random(50 , width - 50), random(50, width - 50),
+                   random(5, 20), random(.5, 5), random(.5, 5));                         
+  }    
+}  
+
+public void minimap(int theValue) {
+  minimapEnabled = !minimapEnabled;
+  // minimap button status
+  if(minimapEnabled) {
+    minimap.setSprite(spriteMinimapE);   
+  } else {
+    minimap.setSprite(spriteMinimapD);    
+  }   
 }
 
 //  initial funktion für start am anfang
@@ -138,6 +159,10 @@ public void play(int theValue) {
   }  
 }
 
+public void quit(int theValue) {
+  exit();
+}
+
 public void replay(int theValue) {
   doClear = true;  
   pauseAllScheduledEvents();  
@@ -145,18 +170,10 @@ public void replay(int theValue) {
   setup();
 }
 
-public void minimap(int theValue) {
-  minimapEnabled = !minimapEnabled;
-  // minimap button status
-  if(minimapEnabled) {
-    minimap.setSprite(spriteMinimapE);   
-  } else {
-    minimap.setSprite(spriteMinimapD);    
-  }   
-}
-
-public void quit(int theValue) {
-  exit();
+public void screenshot(int theValue) {
+  controlP5.hide();
+  player.pause();
+  drawSaveOverlay = true;
 }
 
 void switchCursor(int kind) {
@@ -174,18 +191,13 @@ public void ToggleCursor() {
   cursorEnabled = !cursorEnabled;
 }
 
-public void screenshot(int theValue) {
-  controlP5.hide();
-  player.pause();
-  drawSaveOverlay = true;
-}
-
 // tastatur befehle
 // r = reset
 // space = play/pause => icon einblenden?
 // ???
 void keyReleased() {
   if (ESC == key) { exit(); }
+  if ('d' == key || 'D' == key) { demo(0); }
   if ('m' == key || 'M' == key) { minimap(0); }
   if ('n' == key || 'N' == key) {
     switchCursor(useNyancat ? switchCursor : 4);

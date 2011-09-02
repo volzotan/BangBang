@@ -27,6 +27,17 @@ boolean minimapEnabled = false, cursorEnabled = true, useNyancat = false, emptyM
 // switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; menu: current menu layout
 int switchCursor, menu;
 
+// ---- Robot Class for Demo ----
+import java.awt.AWTException;
+import java.awt.Robot;
+RoboMouse robo;
+Bot bot;
+float roboTempX = 0;
+float roboTempY = 0;
+float roboSpringSpeed = .002;
+float roboDamping = .985;
+boolean isDemo = false;
+
 // ---- import Audio player ----
 import ddf.minim.*;
 import ddf.minim.signals.*;
@@ -238,6 +249,22 @@ void draw() {
       // is playing  
       if(player.isPlaying() && player.position() < 47986) {
         // get dampened mouse position       
+        if(isDemo) {
+          robo.move();
+          robo.checkBoundaries();
+          
+          bot.create();
+          bot.move();
+          bot.checkBoundaries();          
+          float dx = (bot.x+8-robo.x)*roboSpringSpeed;
+          float dy = (bot.y+8-robo.y)*roboSpringSpeed;
+          roboTempX += dx;
+          roboTempY += dy;
+          robo.x += roboTempX;
+          robo.y += roboTempY;
+          roboTempX *= roboDamping;
+          roboTempY *= roboDamping;          
+        }  
         x = x + (mouseX-x)/mouseDampeningX;
         y = y + (mouseY-y)/mouseDampeningY;
 
@@ -302,9 +329,9 @@ void draw() {
     }    
   }
   // drawGUI (assuming it is visible)
-  drawGUI();
+  if(!drawSaveOverlay && 0 == saveReady) { drawGUI(); }  
   // ---- Debug Info ----
-  //println(frameRate + " at " + player.position());  
+  // println(frameRate + " at " + player.position());  
 }
   
 void stop() {
