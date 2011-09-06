@@ -116,6 +116,8 @@ PImage inkSplatter[] = new PImage[18];
 // last used quadrant: 0 (top right), 1 (top left), 2 (bottom left), 3 (bottom right)
 int inkSplatterPos;
 
+PImage combs[] = new PImage[5];
+
 // ---- Nyancat
 color nyanColor = color(255,  42,  12);
 int tempNyanPos, tempNyanCol;

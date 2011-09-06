@@ -10,6 +10,7 @@
  */
 public synchronized void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
+  int rand = 0, rand2 = 0;  
   // depending on the draw Size (2 = large, 1 = medium, 0 = small
   // a random offset in Y (and X) direction is calculated
   if(useOffset) {
@@ -38,7 +39,7 @@ public synchronized void brushOne(boolean useOffset, int drawSize) {
     spacing = 32;
     alpha2 = 60;
     val = (val > 9.5 || val < 5) ? random(6,9) : val;
-    r = 240; g = 236; b = 202; o = 160; // white/yellow
+    r = 240; g = 236; b = 202; o = 160; // white/yellow 
   } else if (1 == drawSize) { // medium
     size1 = 95;
     size2 = 85;
@@ -46,22 +47,28 @@ public synchronized void brushOne(boolean useOffset, int drawSize) {
     alpha2 = 60;
     val = (val > 8 || val < 5) ? random(5,7.5) : val;
     r = 213; g = 77; b = 27; o = 100; // dark orange
+    rand = 1;
   } else {          // small
     val = random(10,22);
-    
+    rand = (int) floor(random(2.0,4.1));
+    rand2 = (int) floor(random(0,2.1)) + 2;
+   
+    if(rand2 == rand) { rand2--; } 
   }  
   
   bg.beginDraw();
-    bg.noStroke();
-    bg.fill(r,g,b);
+//    bg.noStroke();
+//    bg.fill(r,g,b);
   for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
     float offX = cos(radians(a)) * val * spacing;
     float offY = sin(radians(a)) * val * spacing;          
-    bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+//    bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+      bg.image(combs[rand], x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
   }
     if(0 == drawSize) {
-      bg.fill(0,0,0,alpha2);    
-      bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
+//      bg.fill(0,0,0,alpha2);    
+//      bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
+      bg.image(combs[rand2], x + copyOffsetX + extraOffsetX,  y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2, 2 + size2);  
     }
   bg.endDraw();  
 
