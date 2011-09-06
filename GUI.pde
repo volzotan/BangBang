@@ -31,6 +31,21 @@ void setupGUI(){
   minimap = controlP5.addButton("minimap",0,535,(int) height/2-50,100,100);
   minimap.setSprite(spriteMinimapD);  
    
+  // mouse dampening button
+  // used in: settings
+//  mouseDampening = controlP5.addButton("mouseDampening",0,535,(int) height/2-50,100,100); // TODO POS
+//  mouseDampening.setSprite(spriteMouseDampening0); 
+  
+  // mouse dampening button
+  // used in: settings
+//  mousePointer = controlP5.addButton("mousePointer",0,535,(int) height/2-50,100,100); // TODO POS
+//  mousePointer.setSprite(spriteMousePointer0);   
+
+  // filter button
+  // used in: settings   
+//  overlayFilter = controlP5.addButton("overlayFilter",0,535,(int) height/2-50,100,100); // TODO POS
+//  overlayFilter.setSprite(spriteFilter0);   
+   
   // play button (doubles as pause and large restart button)
   // used in: start (play); playing/paused (pause/play); finished (restart)
   play = controlP5.addButton("play",0,(int) width/2-110,(int) height/2-110,220,220);

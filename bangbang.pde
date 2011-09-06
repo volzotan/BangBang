@@ -9,9 +9,16 @@ int elapsedTime = 0;
 import controlP5.*;
 // GUI
 ControlP5 controlP5;
-ControllerSprite spriteSmall, spritePause, spritePlay, spriteRestart, spriteMinimapE, spriteMinimapD;
+ControllerSprite spriteSmall, spritePause, spritePlay, 
+                 spriteRestart, spriteMinimapE, spriteMinimapD,
+                 spriteMouseDampening0, spriteMouseDampening1, spriteMouseDampening2,
+                 spriteMousePointer0, spriteMousePointer1, spriteMousePointer2,
+                 spriteFilter0, spriteFilter1, spriteFilter2, spriteFilter3;
 controlP5.Button demo;
 controlP5.Button minimap;
+controlP5.Button mouseDampening;
+controlP5.Button mousePointer;
+controlP5.Button overlayFilter;
 controlP5.Button play;
 controlP5.Button quit;
 controlP5.Button replay;
