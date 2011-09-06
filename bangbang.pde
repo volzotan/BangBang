@@ -25,7 +25,7 @@ PImage buttonHoverImage, buttonHoverBigImage, buttonExitImage, buttonReplayImage
 // minimap, cursor, screenshot status flags
 boolean minimapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
 // switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; menu: current menu layout
-int switchCursor, menu;
+int switchCursor, menu, doFilter = 0;
 
 // ---- Robot Class for Demo ----
 import java.awt.AWTException;
@@ -137,7 +137,7 @@ int ghostOldX = 0;
 int ghostOldY = 0;
 
 // ---- Generic ----
-boolean initialised, doClear = false, doInvert = false;
+boolean initialised, doClear = false;
 String savePath;
 // use this with % to execute functions at every nth draw execution
 int drawCounter = 0;
@@ -174,6 +174,7 @@ void setup(){
   initialised = false;
   // clear/set save image path  
   savePath = "";
+  doFilter = 0;
   
   
   // TODO CREATE COMMENTS

@@ -51,7 +51,12 @@ void drawVignette(boolean doDraw){
 PImage getBufSlice() {
   PImage temp;
   temp = bg.get(copyOffsetX, copyOffsetY, copyWidth, copyHeight);
-  if(doInvert) { temp.filter(INVERT); }
+  switch(doFilter) {
+    case 1: temp.filter(GRAY); break;
+    case 2: temp.filter(INVERT); break;
+    case 3: temp.filter(BLUR, 3); break;
+    default:
+  }    
   return temp;
 }
 

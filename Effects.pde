@@ -29,8 +29,6 @@ int[][] brushOneEventArray  = new int[30][3];  // 0 = delay, 1 = size Flag, 2 = 
 int[][] brushFourEventArray = new int[ 3][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 // circles and dots
 int[][] brushFiveEventArray = new int[ 2][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
-// INVERT FILTER
-int[][] invertEventArray    = new int[ 2][1];  // 0 = delay
 // CRESCENDO EFFECT
 int[][] crescendoEventArray = new int[ 1][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 
@@ -50,9 +48,6 @@ void initEventArrays() {
   splatterEventArray[7][0]  = 33200;  splatterEventArray[7][1]  = 3;
   splatterEventArray[8][0]  = 38690;  splatterEventArray[8][1]  = 4;
   splatterEventArray[9][0]  = 39050;  splatterEventArray[9][1]  = 5;
-  
-  invertEventArray[0][0]    = 39850;
-  invertEventArray[1][0]    = 42120;
   
   crescendoEventArray[0][0] = 43300;  crescendoEventArray[0][1] = 1;  crescendoEventArray[0][2] = 100;
  
@@ -125,7 +120,6 @@ void startAllScheduledEvents() {
   //scheduleBrushFourEvents();
   scheduleBrushFiveEvents();
   scheduleCrescendoEvent();
-  //scheduleInvertEvent();
   scheduleSplatterEvents();  
   
   scheduleKillEvent();
@@ -248,18 +242,6 @@ void scheduleGhostBrush() {
       startGhostBrush();
     }
   }, 2500);  // GhostBrush Start time
-}
-
-void scheduleInvertEvent() {
-  for (int i=0; i < invertEventArray.length; i++) {
-    if (invertEventArray[i][0] - elapsedTime >= 0) { 
-      timer.schedule(new TimerTask() {
-        public void run() {
-          doInvert = !doInvert;
-        }
-      }, invertEventArray[i][0] - elapsedTime);
-    }
-  }  
 }
 
 void scheduleSingleSplatterEvent(int delay, int size) {

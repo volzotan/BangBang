@@ -198,6 +198,7 @@ public void ToggleCursor() {
 void keyReleased() {
   if (ESC == key) { exit(); }
   if ('d' == key || 'D' == key) { demo(0); }
+  if ('f' == key || 'F' == key) { doFilter = (doFilter+1) % 4; println(doFilter); }  
   if ('m' == key || 'M' == key) { minimap(0); }
   if ('n' == key || 'N' == key) {
     switchCursor(useNyancat ? switchCursor : 4);
