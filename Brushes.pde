@@ -8,7 +8,7 @@
 /** 
  * "Stempel" mit 5 Ellipsen im Umkreis
  */
-public synchronized void brushOne(boolean useOffset, int drawSize) {
+public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   int rand = 0, rand2 = 0;  
   // depending on the draw Size (2 = large, 1 = medium, 0 = small
@@ -16,14 +16,14 @@ public synchronized void brushOne(boolean useOffset, int drawSize) {
   if(useOffset) {
     switch(drawSize) {
       case 1 : 
-        extraOffsetY = (random(1) < 0.5) ? -74+60*random(-1,1) : 87+70*random(-1,1);
+        extraOffsetY = (random(1) < 0.5) ? -74+60*random(-1,1)+30*random(-1,1) : 47+70*random(-1,1)+30*random(-1,1);
         extraOffsetX = (random(1) < 0.5) ? -37+60*random(-1,1) : 52+70*random(-1,1);      
         break;
       case 2 : 
-        extraOffsetY = random(-50,50);    
+        extraOffsetY = random(-40,40);    
         break;        
       default:
-        extraOffsetY = (random(1) < 0.5) ? -74+60*player.left.get(1)*random(-1,1) : 87+70*player.right.get(1)*random(-1,1);
+        extraOffsetY = (random(1) < 0.5) ? -64+40*player.left.get(1)*random(-1,1)+30*random(-1,1) : 87+60*player.right.get(1)*random(-1,1)+30*random(-1,1);
         extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(1)*random(-1,1) : 52+70*player.right.get(1)*random(-1,1);      
     }  
   }  
@@ -81,7 +81,7 @@ public synchronized void brushOne(boolean useOffset, int drawSize) {
 }
 
 // continuous line
-synchronized void mainBrush() {
+/*synchronized*/ void mainBrush() {
   color c = color(145,145,145);
   int w = 5;
   // 10,5 - 11,8 :: General Pause  
@@ -119,7 +119,6 @@ synchronized void mainBrush() {
     bg.stroke(c);
     bg.strokeWeight(w);
     bg.line(oldX-25, oldY, deltaMouseX-25, deltaMouseY);
-    println("X:"+deltaMouseX+";Y:"+deltaMouseY);
   bg.endDraw();
   
   deltaMouseX = oldX;
