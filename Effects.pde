@@ -294,7 +294,7 @@ void scheduleSplatterEvents() {
 
 void crescendo() {
   if (firstRun) {
-    oldDeltaX = oldX;
+    oldDeltaX = oldX-25;
     oldDeltaY = oldY;
               
     tempScrollSpeed = 13;

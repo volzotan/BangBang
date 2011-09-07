@@ -118,7 +118,8 @@ synchronized void mainBrush() {
   bg.beginDraw();
     bg.stroke(c);
     bg.strokeWeight(w);
-    bg.line(oldX, oldY, deltaMouseX, deltaMouseY);
+    bg.line(oldX-25, oldY, deltaMouseX-25, deltaMouseY);
+    println("X:"+deltaMouseX+";Y:"+deltaMouseY);
   bg.endDraw();
   
   deltaMouseX = oldX;
