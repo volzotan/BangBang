@@ -93,11 +93,9 @@ void initImages() {
   savingImage             = loadImage("OverlaySaving.png");    
   vignette                = loadImage("vignette.png");
   for(int i = 0; i < inkSplatter.length; i++) {
-    //inkSplatter[i]    = loadImage("inkSplatter/klecks_"+i+".png");
     inkSplatter[i]    = loadImage("flowers/"+i+"_100.png");    
   }
   for(int i = 0; i < combs.length; i++) {
-    //inkSplatter[i]    = loadImage("inkSplatter/klecks_"+i+".png");
     combs[i]    = loadImage("combs/"+i+".png");    
   }  
 }  

@@ -9,7 +9,8 @@ int elapsedTime = 0;
 import controlP5.*;
 // GUI
 ControlP5 controlP5;
-ControllerSprite spriteSmall, spritePause, spritePlay, 
+ControllerSprite spriteSmall, spritePause, spritePlay,
+                 spriteDemo, spriteInteractive,
                  spriteRestart, spriteMinimapE, spriteMinimapD,
                  spriteMouseDampening0, spriteMouseDampening1, spriteMouseDampening2,
                  spriteMousePointer0, spriteMousePointer1, spriteMousePointer2,
