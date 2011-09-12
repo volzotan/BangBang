@@ -23,12 +23,19 @@ void setupGUI(){
   // used in: start; finished
   spriteSmall.setMask(buttonDemoImage);
   spriteSmall.enableMask();
-  demo = controlP5.addButton("demo",0,165,(int) height/2-50,100,100);
-  demo.setSprite(spriteSmall.clone());  
+  demo = controlP5.addButton("demo",0,425,80,175,175);
+  demo.setSprite(spriteSmall.clone());
+
+  // demo button
+  // used in: start; finished
+  spriteSmall.setMask(buttonDemoImage);
+  spriteSmall.enableMask();
+  interactive = controlP5.addButton("interactive",0, 200,80,175,175);
+  interactive.setSprite(spriteSmall.clone());   
   
   // minimap button
   // used in: start; playing/paused;   
-  minimap = controlP5.addButton("minimap",0,535,(int) height/2-50,100,100);
+  minimap = controlP5.addButton("minimap",0,345,290,110,110);
   minimap.setSprite(spriteMinimapD);  
    
   // mouse dampening button
@@ -48,28 +55,28 @@ void setupGUI(){
    
   // play button (doubles as pause and large restart button)
   // used in: start (play); playing/paused (pause/play); finished (restart)
-  play = controlP5.addButton("play",0,(int) width/2-110,(int) height/2-110,220,220);
+  play = controlP5.addButton("play",0,312,80,175,175);
   play.setSprite(spritePlay);
  
   // exit button
   // used in: start; playing/paused; finished
   spriteSmall.setMask(buttonExitImage);
   spriteSmall.enableMask();
-  quit = controlP5.addButton("quit",0,40,(int) height/2-50,100,100);
+  quit = controlP5.addButton("quit",0,30,30,50,50);
   quit.setSprite(spriteSmall.clone()); 
 
   // replay button
   // used in: playing/paused; finished
   spriteSmall.setMask(buttonReplayImage);
   spriteSmall.enableMask();
-  replay = controlP5.addButton("replay",0,165,(int) height/2-50,100,100);
+  replay = controlP5.addButton("replay",0,480,290,110,110);
   replay.setSprite(spriteSmall.clone()); 
 
   // save button
   // used in: playing/paused; finished
   spriteSmall.setMask(buttonSaveImage);
   spriteSmall.enableMask();
-  screenshot = controlP5.addButton("screenshot",0,660,(int) height/2-50,100,100);
+  screenshot = controlP5.addButton("screenshot",0,210,290,110,110);
   screenshot.setSprite(spriteSmall.clone()); 
 }
 
@@ -80,10 +87,11 @@ void drawGUI() {
     // start 535
     case 0:
       demo.show();
+      interactive.show();
       minimap.show();
       // make sure correct play sprite is set
       play.setSprite(spritePlay);
-      play.show();
+      play.hide();
       quit.show();
       replay.hide();
       screenshot.hide();
@@ -91,6 +99,7 @@ void drawGUI() {
     // playing
     case 1: 
       demo.hide();
+      interactive.hide();
       minimap.show();
       // alternate between play/pause if the button is highlighted
       if(mouseX > 290 && mouseX < 510 && mouseY > 115 && mouseY < 335) {
@@ -106,6 +115,7 @@ void drawGUI() {
     // finished
     case 2: 
       demo.hide();
+      interactive.hide();
       minimap.hide();
       // set replay sprite
       play.setSprite(spriteRestart);
@@ -121,26 +131,32 @@ void drawGUI() {
 public PImage getMenuBG(int b, int m) {
   if(emptyMenuBG || (!emptyMenuBG && drawSaveOverlay)) {
     emptyMenuBG = false;
-    tempMenuBG = getBufSlice();
+    tempMenuBG = loadImage("gui/bg.png");//getBufSlice();
     tempMenuBG.filter(BLUR, b);
-    switch(m) {
+    /*switch(m) {
       case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY); break;
       case 2 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY);
                tempMenuBG.blend(savingImage , 0, 0, width, height, 290, 115,   220,    220, LIGHTEST); break;
-    }
+    }*/
   }
   return tempMenuBG;
 }
 
 public void demo(int theValue) {
-  isDemo = !isDemo;
+  isDemo = true;
   if(isDemo) {
     robo = new RoboMouse(frame.getLocation().x/2+width /2,
                          frame.getLocation().y/2+height/2, 5, 0, 0);
     bot = new Bot(random(50 , width - 50), random(50, width - 50),
                    random(5, 20), random(.5, 5), random(.5, 5));                         
-  }    
-}  
+  }
+  play(0);  
+}
+
+public void interactive(int theValue) {
+  isDemo = false;
+  play(0);  
+}
 
 public void minimap(int theValue) {
   minimapEnabled = !minimapEnabled;

@@ -15,6 +15,7 @@ ControllerSprite spriteSmall, spritePause, spritePlay,
                  spriteMousePointer0, spriteMousePointer1, spriteMousePointer2,
                  spriteFilter0, spriteFilter1, spriteFilter2, spriteFilter3;
 controlP5.Button demo;
+controlP5.Button interactive;
 controlP5.Button minimap;
 controlP5.Button mouseDampening;
 controlP5.Button mousePointer;
