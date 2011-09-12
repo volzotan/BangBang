@@ -21,11 +21,11 @@ controlP5.Button mouseDampening;
 controlP5.Button mousePointer;
 controlP5.Button overlayFilter;
 controlP5.Button play;
-controlP5.Button quit;
+//controlP5.Button quit;
 controlP5.Button replay;
 controlP5.Button screenshot;
 // Button, Menu background, cursor images
-PImage buttonHoverImage, buttonHoverBigImage, buttonExitImage, buttonReplayImage, 
+PImage buttonHoverImage, buttonHoverBigImage, buttonReplayImage, buttonInteractiveImage, 
        buttonReplayBigImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, 
        buttonSaveImage, buttonMapONImage, buttonMapOFFImage, 
        savingImage, overlayImage, tempMenuBG,

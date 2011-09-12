@@ -2,33 +2,38 @@ void setupGUI(){
   controlP5 = new ControlP5(this);
   
   // sprites
-  spritePause   = new ControllerSprite(controlP5,buttonHoverBigImage,220,220,3);
+  spritePause   = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
   spritePause.setMask(buttonPauseImage);
   spritePause.enableMask();    
-  spritePlay    = new ControllerSprite(controlP5,buttonHoverBigImage,220,220,3);
+  
+  spritePlay    = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
   spritePlay.setMask(buttonPlayImage);
   spritePlay.enableMask();  
-  spriteRestart = new ControllerSprite(controlP5,buttonHoverBigImage,220,220,3);
+  
+  spriteRestart = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
   spriteRestart.setMask(buttonReplayBigImage);
   spriteRestart.enableMask();  
-  spriteSmall   = new ControllerSprite(controlP5,buttonHoverImage,100,100,3);
-  spriteMinimapE= new ControllerSprite(controlP5,buttonHoverImage,100,100,3);
+  
+  spriteSmall   = new ControllerSprite(controlP5,buttonHoverImage,110,330,3);
+  
+  spriteMinimapE= new ControllerSprite(controlP5,buttonHoverImage,110,330,3);
   spriteMinimapE.setMask(buttonMapONImage);
   spriteMinimapE.enableMask();   
-  spriteMinimapD= new ControllerSprite(controlP5,buttonHoverImage,100,100,3);
+  
+  spriteMinimapD= new ControllerSprite(controlP5,buttonHoverImage,110,330,3);
   spriteMinimapD.setMask(buttonMapOFFImage);
-  spriteMinimapD.enableMask();  
+  spriteMinimapD.enableMask();
   
   // demo button
-  // used in: start; finished
+  // used in: start
   spriteSmall.setMask(buttonDemoImage);
   spriteSmall.enableMask();
   demo = controlP5.addButton("demo",0,425,80,175,175);
   demo.setSprite(spriteSmall.clone());
 
-  // demo button
-  // used in: start; finished
-  spriteSmall.setMask(buttonDemoImage);
+  // interactive button
+  // used in: start
+  spriteSmall.setMask(buttonInteractiveImage);
   spriteSmall.enableMask();
   interactive = controlP5.addButton("interactive",0, 200,80,175,175);
   interactive.setSprite(spriteSmall.clone());   
@@ -60,10 +65,10 @@ void setupGUI(){
  
   // exit button
   // used in: start; playing/paused; finished
-  spriteSmall.setMask(buttonExitImage);
-  spriteSmall.enableMask();
-  quit = controlP5.addButton("quit",0,30,30,50,50);
-  quit.setSprite(spriteSmall.clone()); 
+//  spriteSmall.setMask(buttonExitImage);
+//  spriteSmall.enableMask();
+//  quit = controlP5.addButton("quit",0,30,30,50,50);
+//  quit.setSprite(spriteSmall.clone()); 
 
   // replay button
   // used in: playing/paused; finished
@@ -92,7 +97,6 @@ void drawGUI() {
       // make sure correct play sprite is set
       play.setSprite(spritePlay);
       play.hide();
-      quit.show();
       replay.hide();
       screenshot.hide();
       break;    
@@ -108,7 +112,6 @@ void drawGUI() {
         play.setSprite(spritePause);      
       }
       play.show(); 
-      quit.show();
       replay.show();
       screenshot.show();
       break;
@@ -120,7 +123,6 @@ void drawGUI() {
       // set replay sprite
       play.setSprite(spriteRestart);
       play.show();
-      quit.show();
       replay.hide();
       screenshot.show();
       if(!drawSaveOverlay) { controlP5.show(); }

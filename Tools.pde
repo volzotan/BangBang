@@ -73,24 +73,25 @@ void initCanvas(boolean useBGImage) {
 }
 
 void initImages() {
-  bgCanvas            = loadImage("bg_leinwand.jpg");
-  cursorImage_blank   = loadImage("cursor.png");
-  cursorImage_circle  = loadImage("cursor_circle.png");
-  cursorImage_nyancat = loadImage("cursor_nyan.png");
-  buttonHoverImage    = loadImage("buttons/ButtonHover.png");  
-  buttonHoverBigImage = loadImage("buttons/ButtonHoverBig.png");  
-  buttonExitImage     = loadImage("buttons/MaskExit.png");
-  buttonDemoImage     = loadImage("buttons/MaskDemo.png");
-  buttonPlayImage     = loadImage("buttons/MaskPlay.png");
-  buttonReplayImage   = loadImage("buttons/MaskReplay.png");
-  buttonReplayBigImage= loadImage("buttons/MaskReplayBig.png");
-  buttonPauseImage    = loadImage("buttons/MaskPause.png");
-  buttonMapONImage    = loadImage("buttons/MaskMapON.png");
-  buttonMapOFFImage   = loadImage("buttons/MaskMapOFF.png");
-  buttonSaveImage     = loadImage("buttons/MaskSave.png");
-  overlayImage        = loadImage("OverlayMenu.png");
-  savingImage         = loadImage("OverlaySaving.png");    
-  vignette            = loadImage("vignette.png");
+  bgCanvas                = loadImage("bg_leinwand.jpg");
+  cursorImage_blank       = loadImage("cursor.png");
+  cursorImage_circle      = loadImage("cursor_circle.png");
+  cursorImage_nyancat     = loadImage("cursor_nyan.png");
+  buttonHoverImage        = loadImage("gui/ButtonHover.png");  
+  buttonHoverBigImage     = loadImage("gui/ButtonHoverBig.png");  
+//buttonExitImage         = loadImage("gui/MaskExit.png");
+  buttonDemoImage         = loadImage("gui/MaskDemo.png");
+  buttonInteractiveImage  = loadImage("gui/MaskInteractive.png");
+  buttonPlayImage         = loadImage("gui/MaskPlay.png");
+  buttonReplayImage       = loadImage("gui/MaskReplay.png");
+  buttonReplayBigImage    = loadImage("gui/MaskReplayBig.png");
+  buttonPauseImage        = loadImage("gui/MaskPause.png");
+  buttonMapONImage        = loadImage("gui/MaskMapON.png");
+  buttonMapOFFImage       = loadImage("gui/MaskMapOFF.png");
+  buttonSaveImage         = loadImage("gui/MaskSave.png");
+  overlayImage            = loadImage("OverlayMenu.png");
+  savingImage             = loadImage("OverlaySaving.png");    
+  vignette                = loadImage("vignette.png");
   for(int i = 0; i < inkSplatter.length; i++) {
     //inkSplatter[i]    = loadImage("inkSplatter/klecks_"+i+".png");
     inkSplatter[i]    = loadImage("flowers/"+i+"_100.png");    
