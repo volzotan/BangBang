@@ -2,48 +2,48 @@ void setupGUI(){
   controlP5 = new ControlP5(this);
   
   // sprites
-  spritePause   = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
+  spritePause   = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
   spritePause.setMask(buttonPauseImage);
   spritePause.enableMask();    
   
-  spritePlay    = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
+  spritePlay    = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
   spritePlay.setMask(buttonPlayImage);
   spritePlay.enableMask();  
   
-  spriteRestart = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
+  spriteRestart = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
   spriteRestart.setMask(buttonReplayBigImage);
   spriteRestart.enableMask();  
   
-  spriteSmall   = new ControllerSprite(controlP5,buttonHoverImage,110,330,3);
+  spriteSmall   = new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
   
-  spriteMinimapE= new ControllerSprite(controlP5,buttonHoverImage,110,330,3);
+  spriteMinimapE= new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
   spriteMinimapE.setMask(buttonMapONImage);
   spriteMinimapE.enableMask();   
   
-  spriteMinimapD= new ControllerSprite(controlP5,buttonHoverImage,110,330,3);
+  spriteMinimapD= new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
   spriteMinimapD.setMask(buttonMapOFFImage);
   spriteMinimapD.enableMask();
   
   // demo button
   // used in: start
-  spriteDemo    = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);
+  spriteDemo    = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
   spriteDemo.setMask(buttonDemoImage);
   spriteDemo.enableMask();
   demo = controlP5.addButton("demo",0,425,80,175,175);
-//  demo.setSprite(spriteDemo);
+  demo.setSprite(spriteDemo);
 
   // interactive button
   // used in: start
-  spriteInteractive    = new ControllerSprite(controlP5,buttonHoverBigImage,175,525,3);  
+  spriteInteractive    = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);  
   spriteInteractive.setMask(buttonInteractiveImage);
   spriteInteractive.enableMask();
   interactive = controlP5.addButton("interactive",0, 200,80,175,175);
-//  interactive.setSprite(spriteInteractive);   
+  interactive.setSprite(spriteInteractive);   
   
   // minimap button
   // used in: start; playing/paused;   
   minimap = controlP5.addButton("minimap",0,345,290,110,110);
-//  minimap.setSprite(spriteMinimapD);  
+  minimap.setSprite(spriteMinimapD);  
    
   // mouse dampening button
   // used in: settings
@@ -63,7 +63,7 @@ void setupGUI(){
   // play button (doubles as pause and large restart button)
   // used in: start (play); playing/paused (pause/play); finished (restart)
   play = controlP5.addButton("play",0,312,80,175,175);
-//  play.setSprite(spritePlay);
+  play.setSprite(spritePlay);
  
   // exit button
   // used in: start; playing/paused; finished
@@ -77,14 +77,14 @@ void setupGUI(){
   spriteSmall.setMask(buttonReplayImage);
   spriteSmall.enableMask();
   replay = controlP5.addButton("replay",0,480,290,110,110);
-//  replay.setSprite(spriteSmall.clone()); 
+  replay.setSprite(spriteSmall.clone()); 
 
   // save button
   // used in: playing/paused; finished
   spriteSmall.setMask(buttonSaveImage);
   spriteSmall.enableMask();
   screenshot = controlP5.addButton("screenshot",0,210,290,110,110);
-//  screenshot.setSprite(spriteSmall.clone());
+  screenshot.setSprite(spriteSmall.clone());
 }
 
 // DRAW GUI
