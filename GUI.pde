@@ -16,13 +16,9 @@ void setupGUI(){
   
   spriteSmall   = new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
   
-  spriteMinimapE= new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
-  spriteMinimapE.setMask(buttonMapONImage);
-  spriteMinimapE.enableMask();   
-  
-  spriteMinimapD= new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
-  spriteMinimapD.setMask(buttonMapOFFImage);
-  spriteMinimapD.enableMask();
+  spriteMinimap= new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
+  spriteMinimap.setMask(buttonMapImage);
+  spriteMinimap.enableMask();   
   
   // demo button
   // used in: start
@@ -43,7 +39,7 @@ void setupGUI(){
   // minimap button
   // used in: start; playing/paused;   
   minimap = controlP5.addButton("minimap",0,345,290,110,110);
-  minimap.setSprite(spriteMinimapD);  
+  minimap.setSprite(spriteMinimap);   
    
   // mouse dampening button
   // used in: settings
@@ -166,9 +162,9 @@ public void minimap(int theValue) {
   minimapEnabled = !minimapEnabled;
   // minimap button status
   if(minimapEnabled) {
-    minimap.setSprite(spriteMinimapE);   
+    spriteMinimap.setForceState(0); 
   } else {
-    minimap.setSprite(spriteMinimapD);    
+    spriteMinimap.setForceState(3);     
   }   
 }
 

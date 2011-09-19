@@ -11,7 +11,7 @@ import controlP5.*;
 ControlP5 controlP5;
 ControllerSprite spriteSmall, spritePause, spritePlay,
                  spriteDemo, spriteInteractive,
-                 spriteRestart, spriteMinimapE, spriteMinimapD,
+                 spriteRestart, spriteMinimap,
                  spriteMouseDampening0, spriteMouseDampening1, spriteMouseDampening2,
                  spriteMousePointer0, spriteMousePointer1, spriteMousePointer2,
                  spriteFilter0, spriteFilter1, spriteFilter2, spriteFilter3;
@@ -28,7 +28,7 @@ controlP5.Button screenshot;
 // Button, Menu background, cursor images
 PImage buttonHoverImage, buttonHoverBigImage, buttonReplayImage, buttonInteractiveImage, 
        buttonReplayBigImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, 
-       buttonSaveImage, buttonMapONImage, buttonMapOFFImage, 
+       buttonSaveImage, buttonMapImage, 
        savingImage, overlayImage, tempMenuBG,
        cursorImage_blank, cursorImage_circle, cursorImage_nyancat;
 // minimap, cursor, screenshot status flags
@@ -220,6 +220,9 @@ void setup(){
 
 
   // create minimap
+  // force correct minimap button behavior
+  minimap(0);
+  minimap(0);
   scaledMiniMap = bg.get(0, 0, bg.width, bg.height);
   // resize value is bg.height/50 || where else would this need to be changed in case of canvas size changes?
   scaledMiniMap.resize(0, 18);

@@ -86,8 +86,7 @@ void initImages() {
   buttonReplayImage       = loadImage("gui/MaskReplay.png");
   buttonReplayBigImage    = loadImage("gui/MaskReplayBig.png");
   buttonPauseImage        = loadImage("gui/MaskPause.png");
-  buttonMapONImage        = loadImage("gui/MaskMapON.png");
-  buttonMapOFFImage       = loadImage("gui/MaskMapOFF.png");
+  buttonMapImage          = loadImage("gui/MaskMap.png");
   buttonSaveImage         = loadImage("gui/MaskSave.png");
   overlayImage            = loadImage("OverlayMenu.png");
   savingImage             = loadImage("OverlaySaving.png");    
