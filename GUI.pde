@@ -111,6 +111,7 @@ void drawGUI() {
       }
       play.show(); 
       replay.show();
+      screenshot.setPosition(210,290);
       screenshot.show();
       break;
     // finished
@@ -122,6 +123,7 @@ void drawGUI() {
       play.setSprite(spriteRestart);
       play.show();
       replay.hide();
+      screenshot.setPosition(345,290);
       screenshot.show();
       if(!drawSaveOverlay) { controlP5.show(); }
       else { controlP5.hide(); }

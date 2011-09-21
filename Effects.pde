@@ -28,7 +28,7 @@ int[][] brushOneEventArray  = new int[30][3];  // 0 = delay, 1 = size Flag, 2 = 
 // SPREAD EFFECT
 int[][] brushFourEventArray = new int[ 3][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 // circles and dots
-int[][] brushFiveEventArray = new int[ 2][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
+int[][] brushFiveEventArray = new int[ 1][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 // CRESCENDO EFFECT
 int[][] crescendoEventArray = new int[ 1][3];  // 0 = delay, 1 = do repeat, 2 = Repeat Intervall[ms]
 
@@ -97,8 +97,7 @@ void initEventArrays() {
   
   brushFourEventArray[0][0] = 43300;  brushFourEventArray[0][1] = 1;  brushFourEventArray[0][2] = 100;
 
-  brushFiveEventArray[0][0] = 12300;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 100;  
-  brushFiveEventArray[1][0] = 16000;  brushFiveEventArray[1][1] = 1;  brushFiveEventArray[1][2] = 100;  
+  brushFiveEventArray[0][0] = 12300;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 100;   
 }
 
 void savePauseTime() {
@@ -131,24 +130,11 @@ void scheduleKillEvent() {
   
   /* KILL brushFiveEventArray[0] */
   
-  int killTime = 15000;
+  int killTime = 40000;
   if (killTime - elapsedTime >= 0) {
     timer.schedule(new TimerTask() {
       public void run() {
         brushFiveEventArray[0][2] = 0;
-        pauseAllScheduledEvents();
-        startAllScheduledEvents();
-      }
-    }, killTime - elapsedTime);
-  }
-  
-  /* KILL brushFiveEventArray[1] */
-  
-  killTime = 18000;
-  if (killTime - elapsedTime >= 0) {
-    timer.schedule(new TimerTask() {
-      public void run() {
-        brushFiveEventArray[1][2] = 0;
         pauseAllScheduledEvents();
         startAllScheduledEvents();
       }
