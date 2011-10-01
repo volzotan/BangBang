@@ -63,12 +63,12 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
     float offX = cos(radians(a)) * val * spacing;
     float offY = sin(radians(a)) * val * spacing;          
 //    bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
-      bg.image(combs[rand], x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
+      bg.image(flowerLarge, x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
   }
     if(0 == drawSize) {
 //      bg.fill(0,0,0,alpha2);    
 //      bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
-      bg.image(combs[rand2], x + copyOffsetX + extraOffsetX,  y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2, 2 + size2);  
+      bg.image(flowerSmall, x + copyOffsetX + extraOffsetX,  y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2, 2 + size2);  
     }
   bg.endDraw();  
 
