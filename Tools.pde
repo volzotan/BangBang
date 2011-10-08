@@ -131,8 +131,9 @@ void moveMouse() {
   if(roboY > frame.getLocation().y + height - 10) {
     roboY -= (int) random(70,120);    
   }  
- 
-  robot.mouseMove(roboX,roboY); 
+  if(10 == drawCounter) {
+    robot.mouseMove(roboX,roboY); 
+  }
 }  
 
 void moveViewport(){ 
