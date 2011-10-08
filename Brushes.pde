@@ -24,14 +24,14 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
         extraOffsetY = random(-40,40);    
         break;        
       default:
-        extraOffsetY = (random(1) < 0.5) ? -64+40*player.left.get(1)*random(-1,1)+30*random(-1,1) : 87+60*player.right.get(1)*random(-1,1)+30*random(-1,1);
+        extraOffsetY = (random(1) < 0.5) ? -84+40*player.left.get(1)*random(-1,1)+30*random(-1,1) : 97+60*player.right.get(1)*random(-1,1)+30*random(-1,1);
         extraOffsetX = (random(1) < 0.5) ? -37+60*player.left.get(1)*random(-1,1) : 52+70*player.right.get(1)*random(-1,1);      
     }  
   }  
   
   float val = cos(radians(angle)) * 10.0 + 4;
   angle = (angle > 360) ? 0 : angle + 10;
-  float size1 = 36, size2 = random(8,20), spacing = 1.1;
+  float size1 = 45, size2 = random(8,20), spacing = 1.1;
   int alpha2 = 255;
   int r = 81, g = 61, b = 46, o = 150; // brown
   if(2 == drawSize) { // large
