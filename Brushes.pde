@@ -138,7 +138,11 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
     } else {
       bg.stroke(c);
       bg.strokeWeight(w);
-      bg.line(oldX-100, oldY, deltaMouseX-100, deltaMouseY); // -100 = no paint border to the right      
+      bg.line(oldX-100, oldY, deltaMouseX-100, deltaMouseY); // -100 = no paint border to the right
+      bg.strokeWeight(w*1.3);      
+      bg.line(oldX-100, oldY+w*0.7, deltaMouseX-100, deltaMouseY+w*0.7); // -100 = no paint border to the right      
+      bg.line(oldX-100, oldY+w*1.7, deltaMouseX-100, deltaMouseY+w*1.7); // -100 = no paint border to the right            
+      bg.line(oldX-100, oldY+w*2.7, deltaMouseX-100, deltaMouseY+w*2.7); // -100 = no paint border to the right            
     }  
   bg.endDraw();
   
