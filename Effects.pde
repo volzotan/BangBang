@@ -97,7 +97,7 @@ void initEventArrays() {
   
   brushFourEventArray[0][0] = 43300;  brushFourEventArray[0][1] = 1;  brushFourEventArray[0][2] = 100;
 
-  brushFiveEventArray[0][0] = 12300;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 100;   
+  brushFiveEventArray[0][0] = 13245;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 100;   
 }
 
 void savePauseTime() {
@@ -130,7 +130,7 @@ void scheduleKillEvent() {
   
   /* KILL brushFiveEventArray[0] */
   
-  int killTime = 40000;
+  int killTime = 37000;
   if (killTime - elapsedTime >= 0) {
     timer.schedule(new TimerTask() {
       public void run() {
