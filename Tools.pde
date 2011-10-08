@@ -111,8 +111,8 @@ void initImages() {
 
 void moveMouse() {
   // start = 400 & 225;      
-  roboX += (int) random(-5,25);
-  roboY += (int) random(-70,70);
+  roboX += (int) random(-1,5);
+  roboY += (int) random(-10,10);
    
   // left boundary 
   if(roboX < frame.getLocation().x + 30) {
