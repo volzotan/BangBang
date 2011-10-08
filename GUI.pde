@@ -230,6 +230,7 @@ public void ToggleCursor() {
 // ???
 void keyReleased() {
   if (ESC == key) { exit(); }
+  if ('b' == key || 'B' == key) { switchBGImage = (switchBGImage+1) % 2; initCanvas(true); }  
   if ('d' == key || 'D' == key) { demo(0); }
   if ('f' == key || 'F' == key) { doFilter = (doFilter+1) % 4; }  
   if ('i' == key || 'I' == key) { interactive(0); }

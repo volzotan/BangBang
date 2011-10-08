@@ -62,7 +62,8 @@ BeatDetect beat;
 PGraphics bg;
 int copyOffsetX, copyOffsetY, copyWidth, copyHeight, prevOffsetX = 0, prevOffsetY = 0;
 // Vignette / Background image 
-PImage vignette, bgCanvas, bgTransparent;
+PImage vignette, bgCanvas, bgTransparent, bgCanvasAlt;
+int switchBGImage = 1;
 // Viewport-Initialisierung / Viewport-Movement variables
 float x = 400; // these two describe
 float y = 225; // describe initial viewport positioning

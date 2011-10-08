@@ -65,7 +65,11 @@ void initCanvas(boolean useBGImage) {
   bg.beginDraw();  
   bg.smooth();  
   if(useBGImage) {    
-    bg.background(bgCanvas);    
+    switch(switchBGImage) {
+      case 0: bg.background(bgCanvas); break;
+      case 1: bg.background(bgCanvasAlt);
+    }
+    
   } else {
     bg.background(160);
   }  
@@ -74,6 +78,7 @@ void initCanvas(boolean useBGImage) {
 
 void initImages() {
   bgCanvas                = loadImage("bg_leinwand.jpg");
+  bgCanvasAlt             = loadImage("bg_leinwand_1.jpg");  
   cursorImage_blank       = loadImage("cursor.png");
   cursorImage_circle      = loadImage("cursor_circle.png");
   cursorImage_nyancat     = loadImage("cursor_nyan.png");
