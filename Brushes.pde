@@ -11,6 +11,7 @@
 public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
   float extraOffsetY = 0;  float extraOffsetX = 0;
   int rand = 0, rand2 = 0;  
+  PImage flower;
   // depending on the draw Size (2 = large, 1 = medium, 0 = small
   // a random offset in Y (and X) direction is calculated
   if(useOffset) {
@@ -37,23 +38,26 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
     size1 = 275;
     size2 = 230;
     spacing = 32;
-    alpha2 = 60;
+    //alpha2 = 60;
     val = (val > 9.5 || val < 5) ? random(6,9) : val;
-    r = 240; g = 236; b = 202; o = 160; // white/yellow 
+    flower = flowerLarge;
+  //  r = 240; g = 236; b = 202; o = 160; // white/yellow 
   } else if (1 == drawSize) { // medium
     size1 = 95;
     size2 = 85;
     spacing = 13;
-    alpha2 = 60;
+    //alpha2 = 60;
     val = (val > 8 || val < 5) ? random(5,7.5) : val;
-    r = 213; g = 77; b = 27; o = 100; // dark orange
+//    r = 213; g = 77; b = 27; o = 100; // dark orange
     rand = 1;
+    flower = flowerMedium;
   } else {          // small
     val = random(10,22);
     rand = (int) floor(random(2.0,4.1));
     rand2 = (int) floor(random(0,2.1)) + 2;
    
     if(rand2 == rand) { rand2--; } 
+    flower = flowersSmall[(int) random(0,flowersSmall.length-0.5)];
   }  
   
   bg.beginDraw();
@@ -63,13 +67,13 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
     float offX = cos(radians(a)) * val * spacing;
     float offY = sin(radians(a)) * val * spacing;          
 //    bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
-      bg.image(flowerLarge, x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
+      bg.image(flower, x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
   }
-    if(0 == drawSize) {
+//    if(0 == drawSize) {
 //      bg.fill(0,0,0,alpha2);    
 //      bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
-      bg.image(flowerSmall, x + copyOffsetX + extraOffsetX,  y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2, 2 + size2);  
-    }
+//      bg.image(flowerSmall, x + copyOffsetX + extraOffsetX,  y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2, 2 + size2);  
+//    }
   bg.endDraw();  
 
   // Grab mouse position for use in effects and brushes

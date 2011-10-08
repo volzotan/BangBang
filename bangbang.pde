@@ -32,6 +32,7 @@ PImage buttonHoverImage, buttonHoverBigImage, buttonReplayImage, buttonInteracti
        savingImage, overlayImage, tempMenuBG,
        cursorImage_blank, cursorImage_circle, cursorImage_nyancat,
        flowerSmall, flowerMedium, flowerLarge;
+PImage flowersSmall[] = new PImage[4];       
 // minimap, cursor, screenshot status flags
 boolean minimapEnabled = false, cursorEnabled = true, useNyancat = false, emptyMenuBG; // emptyMenuBG = still photo flag
 // switch Cursor: 1 = pfeil, 2 = leer, 3 = custom, else do nothing; menu: current menu layout

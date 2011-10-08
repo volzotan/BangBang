@@ -96,16 +96,17 @@ void initImages() {
   overlayImage            = loadImage("OverlayMenu.png");
   savingImage             = loadImage("OverlaySaving.png");    
   vignette                = loadImage("vignette.png");
-  flowerSmall             = loadImage("flowers/flowerSmall.png");
-  flowerMedium            = loadImage("flowers/flowerMedium.png"); 
+//  flowerSmall             = loadImage("flowers/flowerSmall.png");
+  flowerMedium            = loadImage("flowers/flowerMedium_0.png"); 
   flowerLarge             = loadImage("flowers/flowerLarge.png"); 
   
+  for(int i = 0; i < flowersSmall.length; i++) {
+    flowersSmall[i]    = loadImage("flowers/flowerSmall_"+i+".png");    
+  } 
+
   for(int i = 0; i < inkSplatter.length; i++) {
     inkSplatter[i]    = loadImage("flowers/"+i+"_100.png");    
-  }
-  for(int i = 0; i < combs.length; i++) {
-    combs[i]    = loadImage("combs/"+i+".png");    
-  }  
+  } 
 }  
 
 void moveViewport(){ 
