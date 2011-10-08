@@ -238,7 +238,7 @@ void keyReleased() {
   if (ESC == key) { exit(); }
   if ('b' == key || 'B' == key) { switchBGImage = (switchBGImage+1) % 2; initCanvas(true); }  
   if ('d' == key || 'D' == key) { demo(0); }
-  if ('f' == key || 'F' == key) { doFilter = (doFilter+1) % 4; }  
+  if ('f' == key || 'F' == key) { doFilter = (doFilter+1) % 7; }  
   if ('i' == key || 'I' == key) { interactive(0); }
   if ('m' == key || 'M' == key) { minimap(0); }
   if ('n' == key || 'N' == key) {

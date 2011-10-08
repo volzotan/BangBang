@@ -54,7 +54,10 @@ PImage getBufSlice() {
   switch(doFilter) {
     case 1: temp.filter(GRAY); break;
     case 2: temp.filter(INVERT); break;
-    case 3: temp.filter(BLUR, 3); break;
+    case 3: temp.filter(ERODE); break;
+    case 4: temp.filter(DILATE); break;   
+    case 5: temp.filter(THRESHOLD, 0.8); break;    
+    case 6: temp.filter(POSTERIZE, 4); break;    
     default:
   }    
   return temp;
