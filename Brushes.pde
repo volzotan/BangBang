@@ -205,7 +205,7 @@ void brushFour(int minAmount, int maxAmount) {
 
 // splatters around main brush
 void brushFive() {
-  int amount = floor(random(0, 6));
+  int amount = floor(random(0, 8));
 
   for(int i = 0; i < amount; i++) {
     int splatterRadius = floor(random(2,4));
