@@ -63,12 +63,13 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
   bg.beginDraw();
 //    bg.noStroke();
 //    bg.fill(r,g,b);
-  for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
-    float offX = cos(radians(a)) * val * spacing;
-    float offY = sin(radians(a)) * val * spacing;          
-//    bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
-      bg.image(flower, x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
-  }
+    for (int a = 0; a < 360; a += 72) { // += als parameter für Pinselmuster
+      float offX = cos(radians(a)) * val * spacing;
+      float offY = sin(radians(a)) * val * spacing;          
+  //    bg.ellipse(x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);
+        bg.image(flower, x + copyOffsetX + offX + extraOffsetX, y + copyOffsetY + offY + player.left.get(0) * 50 + extraOffsetY, val + player.left.get(0) * 20 + size1, val + player.left.get(0) * 20 + size1);     
+        if(0 == drawSize) { break; }
+    }
 //    if(0 == drawSize) {
 //      bg.fill(0,0,0,alpha2);    
 //      bg.ellipse(x + copyOffsetX + extraOffsetX, y + copyOffsetY + player.left.get(0) * 50 + extraOffsetY, 2 + size2 , 2 + size2);
