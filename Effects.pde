@@ -280,7 +280,7 @@ void scheduleSplatterEvents() {
 
 void crescendo() {
   if (firstRun) {
-    oldDeltaX = oldX-25;
+    oldDeltaX = oldX-100; // -100 = no paint border to the right fix
     oldDeltaY = oldY;
               
     tempScrollSpeed = 13;

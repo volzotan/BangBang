@@ -208,8 +208,8 @@ void setup(){
   copyWidth = width;
   copyHeight = height; 
   deltaMouseX = 470;
-  deltaMouseY = 450;  
-  
+  deltaMouseY = 450; 
+  if(isDemo) { cursorEnabled = true; }
   
   // Restart: make song start from very beginning
   if(doClear) {

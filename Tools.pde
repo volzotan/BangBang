@@ -110,28 +110,64 @@ void initImages() {
 }  
 
 void moveMouse() {
-  // start = 400 & 225;      
-  roboX += (int) random(-1,5);
-  roboY += (int) random(-10,10);
-   
+  // start = 400 & 225;
+  float rand = random(0,1);  
+  roboX += (int) random(-1,3);
+  boolean dontSkip = false;
+
+  if(0.26 >= rand) {
+    roboY += (int) random(10,30);
+  } else if(0.26 < rand && 0.5 > rand) {
+    roboY -= (int) random(10,30);
+  } else {
+    roboY += (int) random(-3,3);
+  }  
+  
   // left boundary 
   if(roboX < frame.getLocation().x + 30) {
-    roboX += (int) random(70,120);
+    roboX += (int) random(40,70);
   }
   // right boundary
   if(roboX > frame.getLocation().x + width - 30) {
-    roboX -= (int) random(70,120);    
+    roboX -= (int) random(40,70);    
   } 
 
   // upper boundary 
-  if(roboY < frame.getLocation().y + 10) {
-    roboY += (int) random(70,120);    
+  if(roboY < frame.getLocation().y + 30) {
+    roboY += (int) random(40,70);    
   }
   // lower boundary
-  if(roboY > frame.getLocation().y + height - 10) {
-    roboY -= (int) random(70,120);    
+  if(roboY > frame.getLocation().y + height - 30) {
+    roboY -= (int) random(40,70);    
+  }
+
+  if(player.position() > 14000 && player.position() < 43300) {
+      if(player.position() < 14000) {
+        roboY = frame.getLocation().y+225;
+      } else if(player.position() < 14500 && player.position() > 14050) {
+        roboY = frame.getLocation().y+225-70;
+      } else if(player.position() < 15000 && player.position() > 14550) {
+        roboY = frame.getLocation().y+225+105;
+      } else if(player.position() < 15500 && player.position() > 15050) {
+        roboY = frame.getLocation().y+225-50;
+      } else if(player.position() < 16000 && player.position() > 15550) {
+        roboY = frame.getLocation().y+225;
+      } else if(player.position() < 16500 && player.position() > 16050) {
+        roboY = frame.getLocation().y+225+50;
+      } else if(player.position() < 17000 && player.position() > 16550) {
+        roboY = frame.getLocation().y+225-100;
+      } else if(player.position() < 17500 && player.position() > 17050) {
+        roboY = frame.getLocation().y+225+90;
+      } else if(player.position() < 18000 && player.position() > 17500) {
+        roboY = frame.getLocation().y+225-90;
+      } else if(player.position() < 43300 && player.position() > 43000) {
+        roboY = frame.getLocation().y+225+ (int) random(-20,20);
+      }
+      
+      dontSkip = true;     
   }  
-  if(10 == drawCounter) {
+  
+  if(10 == drawCounter || dontSkip) {
     robot.mouseMove(roboX,roboY); 
   }
 }  

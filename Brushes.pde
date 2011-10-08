@@ -123,7 +123,7 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
   bg.beginDraw();
     bg.stroke(c);
     bg.strokeWeight(w);
-    bg.line(oldX-25, oldY, deltaMouseX-25, deltaMouseY);
+    bg.line(oldX-100, oldY, deltaMouseX-100, deltaMouseY); // -100 = no paint border to the right
   bg.endDraw();
   
   deltaMouseX = oldX;
@@ -213,7 +213,7 @@ void brushFive() {
   int amount = floor(random(0, 3));
 
   for(int i = 0; i < amount; i++) {
-    int splatterRadius = floor(random(4,8));
+    int splatterRadius = floor(random(6,12));
     
     float colorPicker = random(0,1);
     color c = color(5,136,138);

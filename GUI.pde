@@ -160,6 +160,7 @@ public void demo(int theValue) {
 //    bot = new Bot(random(50 , width - 50), random(50, width - 50),
     //               random(5, 20), random(.5, 5), random(.5, 5));                         
   }
+  cursorEnabled = false;
   play(0);  
 }
 
