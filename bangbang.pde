@@ -10,8 +10,8 @@ import controlP5.*;
 // GUI
 ControlP5 controlP5;
 ControllerSprite spriteSmall, spritePause, spritePlay,
-                 spriteDemo, spriteInteractive,
-                 spriteRestart, spriteMinimap,
+                 spriteDemo, spriteInteractive, spriteReplay,
+                 spriteRestart, spriteMinimap, spriteSave,
                  spriteMouseDampening0, spriteMouseDampening1, spriteMouseDampening2,
                  spriteMousePointer0, spriteMousePointer1, spriteMousePointer2,
                  spriteFilter0, spriteFilter1, spriteFilter2, spriteFilter3;
@@ -26,9 +26,8 @@ controlP5.Button play;
 controlP5.Button replay;
 controlP5.Button screenshot;
 // Button, Menu background, cursor images
-PImage buttonHoverImage, buttonHoverBigImage, buttonReplayImage, buttonInteractiveImage, 
-       buttonReplayBigImage, buttonPlayImage, buttonDemoImage, buttonPauseImage, 
-       buttonSaveImage, buttonMapImage, 
+PImage buttonHoverBigDemo, buttonHoverBigInteractive, buttonHoverBigReplay, buttonHoverBigPlay, buttonMaskBig,
+       buttonSave, buttonReplay, buttonMap, buttonMaskSmall,
        savingImage, overlayImage, tempMenuBG,
        cursorImage_blank, cursorImage_circle, cursorImage_nyancat,
        flowerSmall, flowerMedium, flowerLarge;

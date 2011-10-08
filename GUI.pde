@@ -2,36 +2,36 @@ void setupGUI(){
   controlP5 = new ControlP5(this);
   
   // sprites
-  spritePause   = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
-  spritePause.setMask(buttonPauseImage);
-  spritePause.enableMask();    
+  /*
+  spritePause   = new ControllerSprite(controlP5,buttonHoverBigPlay,175,175,3);
+  spritePause.setMask(buttonMaskBig);
+  spritePause.enableMask();
+  */  
   
-  spritePlay    = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
-  spritePlay.setMask(buttonPlayImage);
+  spritePlay    = new ControllerSprite(controlP5,buttonHoverBigPlay,175,175,3);
+  spritePlay.setMask(buttonMaskBig);
   spritePlay.enableMask();  
   
-  spriteRestart = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
-  spriteRestart.setMask(buttonReplayBigImage);
-  spriteRestart.enableMask();  
-  
-  spriteSmall   = new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
-  
-  spriteMinimap= new ControllerSprite(controlP5,buttonHoverImage,110,110,3);
-  spriteMinimap.setMask(buttonMapImage);
-  spriteMinimap.enableMask();   
+  spriteRestart = new ControllerSprite(controlP5,buttonHoverBigReplay,175,175,3);
+  spriteRestart.setMask(buttonMaskBig);
+  spriteRestart.enableMask();
+    
+  spriteMinimap = new ControllerSprite(controlP5,buttonMap,110,110,3);
+  spriteMinimap.setMask(buttonMaskSmall);
+  spriteMinimap.enableMask(); 
   
   // demo button
   // used in: start
-  spriteDemo    = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);
-  spriteDemo.setMask(buttonDemoImage);
+  spriteDemo    = new ControllerSprite(controlP5,buttonHoverBigDemo,175,175,3);
+  spriteDemo.setMask(buttonMaskBig);
   spriteDemo.enableMask();
   demo = controlP5.addButton("demo",0,425,80,175,175);
   demo.setSprite(spriteDemo);
 
   // interactive button
   // used in: start
-  spriteInteractive    = new ControllerSprite(controlP5,buttonHoverBigImage,175,175,3);  
-  spriteInteractive.setMask(buttonInteractiveImage);
+  spriteInteractive    = new ControllerSprite(controlP5,buttonHoverBigInteractive,175,175,3);  
+  spriteInteractive.setMask(buttonMaskBig);
   spriteInteractive.enableMask();
   interactive = controlP5.addButton("interactive",0, 200,80,175,175);
   interactive.setSprite(spriteInteractive);   
@@ -70,17 +70,19 @@ void setupGUI(){
 
   // replay button
   // used in: playing/paused; finished
-  spriteSmall.setMask(buttonReplayImage);
-  spriteSmall.enableMask();
+  spriteReplay   = new ControllerSprite(controlP5,buttonReplay,110,110,3);
+  spriteReplay.setMask(buttonMaskSmall);
+  spriteReplay.enableMask();
   replay = controlP5.addButton("replay",0,480,290,110,110);
-  replay.setSprite(spriteSmall.clone()); 
+  replay.setSprite(spriteReplay); 
 
   // save button
   // used in: playing/paused; finished
-  spriteSmall.setMask(buttonSaveImage);
-  spriteSmall.enableMask();
+  spriteSave = new ControllerSprite(controlP5,buttonSave,110,110,3);
+  spriteSave.setMask(buttonMaskSmall);
+  spriteSave.enableMask();
   screenshot = controlP5.addButton("screenshot",0,210,290,110,110);
-  screenshot.setSprite(spriteSmall.clone());
+  screenshot.setSprite(spriteSave);
 }
 
 // DRAW GUI
@@ -93,7 +95,7 @@ void drawGUI() {
       interactive.show();
       minimap.show();
       // make sure correct play sprite is set
-      play.setSprite(spritePlay);
+      // play.setSprite(spritePlay);
       play.hide();
       replay.hide();
       screenshot.hide();
@@ -104,11 +106,6 @@ void drawGUI() {
       interactive.hide();
       minimap.show();
       // alternate between play/pause if the button is highlighted
-      if(mouseX > 290 && mouseX < 510 && mouseY > 115 && mouseY < 335) {
-        play.setSprite(spritePlay);        
-      } else {
-        play.setSprite(spritePause);      
-      }
       play.show(); 
       replay.show();
       screenshot.setPosition(210,290);
@@ -133,13 +130,13 @@ void drawGUI() {
 public PImage getMenuBG(int b, int m) {
   if(emptyMenuBG || (!emptyMenuBG && drawSaveOverlay)) {
     emptyMenuBG = false;
-    tempMenuBG = loadImage("gui/bg.png");//getBufSlice();
+    tempMenuBG = getBufSlice();
     tempMenuBG.filter(BLUR, b);
-    /*switch(m) {
-      case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY); break;
-      case 2 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, MULTIPLY);
-               tempMenuBG.blend(savingImage , 0, 0, width, height, 290, 115,   220,    220, LIGHTEST); break;
-    }*/
+    switch(m) {
+      case 1 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, BLEND); break;
+      case 2 : tempMenuBG.blend(overlayImage, 0, 0, width, height,   0,   0, width, height, BLEND);
+               tempMenuBG.blend(savingImage , 0, 0, width, height, 312,  80,   175,    175, BLEND); break;
+    }
   }
   return tempMenuBG;
 }
