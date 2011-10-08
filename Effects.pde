@@ -97,7 +97,7 @@ void initEventArrays() {
   
   brushFourEventArray[0][0] = 43300;  brushFourEventArray[0][1] = 1;  brushFourEventArray[0][2] = 100;
 
-  brushFiveEventArray[0][0] = 12300;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 100;   
+  brushFiveEventArray[0][0] = 12300;  brushFiveEventArray[0][1] = 1;  brushFiveEventArray[0][2] = 50;   
 }
 
 void savePauseTime() {
