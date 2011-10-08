@@ -98,7 +98,7 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
       w -= 1;
     }
   } else {  
-    if(tempNyanPos+250 < pos) {
+    /*if(tempNyanPos+250 < pos) {
       switch(tempNyanCol) {
         case 0 : nyanColor = color(255,  42,  12); tempNyanCol++; break; // Red
         case 1 : nyanColor = color(255, 164,   9); tempNyanCol++; break; // Orange
@@ -109,7 +109,7 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
       }        
       tempNyanPos = pos;
     }
-    c = nyanColor;
+    c = nyanColor; */
     w += tempBrushValue*0.13;
   }
   
@@ -121,9 +121,25 @@ public /*synchronized*/ void brushOne(boolean useOffset, int drawSize) {
   oldY = (int) (y + copyOffsetY + verhaeltnisX * (player.left.get(0) * 100));
   
   bg.beginDraw();
-    bg.stroke(c);
-    bg.strokeWeight(w);
-    bg.line(oldX-100, oldY, deltaMouseX-100, deltaMouseY); // -100 = no paint border to the right
+    if(useNyancat) {
+      bg.stroke(color(255,  42,  12));
+      bg.strokeWeight(w);
+      bg.line(oldX-100, oldY, deltaMouseX-100, deltaMouseY); // -100 = no paint border to the right
+      bg.stroke(color(255, 164,   9));
+      bg.line(oldX-100, oldY+w, deltaMouseX-100, deltaMouseY+w); // -100 = no paint border to the right
+      bg.stroke(color(255, 246,   0));
+      bg.line(oldX-100, oldY+w*2, deltaMouseX-100, deltaMouseY+w*2); // -100 = no paint border to the right
+      bg.stroke(color( 50, 233,   3));
+      bg.line(oldX-100, oldY+w*3, deltaMouseX-100, deltaMouseY+w*3); // -100 = no paint border to the right
+      bg.stroke(color(  2, 162, 255));
+      bg.line(oldX-100, oldY+w*4, deltaMouseX-100, deltaMouseY+w*4); // -100 = no paint border to the right
+      bg.stroke(color(119,  85, 255));
+      bg.line(oldX-100, oldY+w*5, deltaMouseX-100, deltaMouseY+w*5); // -100 = no paint border to the right      
+    } else {
+      bg.stroke(c);
+      bg.strokeWeight(w);
+      bg.line(oldX-100, oldY, deltaMouseX-100, deltaMouseY); // -100 = no paint border to the right      
+    }  
   bg.endDraw();
   
   deltaMouseX = oldX;
