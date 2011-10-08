@@ -17,7 +17,7 @@ class RoundSprite {
   }
  
   void checkBoundaries(){
-    if (x>width-radius){
+    if (x>width-radius-20){
       x = width-radius;
       speedX *= -1;
  
@@ -26,7 +26,7 @@ class RoundSprite {
       x = radius;
       speedX *= -1;
     }
-    if (y>height-radius){
+    if (y>height-radius-20){
       y = height-radius;
       speedY *= -1;
     }
@@ -46,14 +46,14 @@ class Bot extends RoundSprite{
   }
  
   void create(){
-    ellipse(x, y, radius*2, radius*2);
+    //ellipse(x, y, radius*2, radius*2);
   }
 }
 
 class RoboMouse extends RoundSprite{
  
   Robot robot;
-  float localX, localY;
+  float localX, localY; 
  
   RoboMouse(float x, float y, float radius, 
                float speedX, float speedY){

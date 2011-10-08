@@ -147,10 +147,18 @@ public PImage getMenuBG(int b, int m) {
 public void demo(int theValue) {
   isDemo = true;
   if(isDemo) {
-    robo = new RoboMouse(frame.getLocation().x/2+width /2,
-                         frame.getLocation().y/2+height/2, 5, 0, 0);
-    bot = new Bot(random(50 , width - 50), random(50, width - 50),
-                   random(5, 20), random(.5, 5), random(.5, 5));                         
+    try { 
+      robot = new Robot();
+      roboX = frame.getLocation().x + 400;
+      roboY = frame.getLocation().y + 225;      
+    } 
+    catch (AWTException e) {
+      e.printStackTrace(); 
+    }
+    //  robo = new RoboMouse(frame.getLocation().x/2+width /2,
+//                         frame.getLocation().y/2+height/2, 5, 0, 0);
+//    bot = new Bot(random(50 , width - 50), random(50, width - 50),
+    //               random(5, 20), random(.5, 5), random(.5, 5));                         
   }
   play(0);  
 }

@@ -41,8 +41,9 @@ int switchCursor, menu, doFilter = 0;
 // ---- Robot Class for Demo ----
 import java.awt.AWTException;
 import java.awt.Robot;
-RoboMouse robo;
-Bot bot;
+Robot robot;
+//RoboMouse robo;
+//Bot bot;
 float roboTempX = 0;
 float roboTempY = 0;
 float roboSpringSpeed = .002;
@@ -108,8 +109,8 @@ boolean mainBrushActive;
 float verhaeltnisSumme = 0;
 float verhaeltnisX = 0;
 float verhaeltnisY = 0;  
-int oldX, oldDeltaX;
-int oldY, oldDeltaY;
+int oldX, oldDeltaX, roboX;
+int oldY, oldDeltaY, roboY;
 boolean firstRun;
 int tempX, tempY;  
 
@@ -194,6 +195,8 @@ void setup(){
   // TODO CREATE COMMENTS
   oldX = 400;
   oldY = 225;
+  roboX = 0;
+  roboY = 0;
   amp = 200;
   xPlus = 0;
   firstRun = true;
@@ -265,15 +268,14 @@ void draw() {
     // play/pause/finished states
     if(!drawSaveOverlay) { 
       // is playing  
-      if(player.isPlaying() && player.position() < 47986) {
-        // get dampened mouse position       
+      if(player.isPlaying() && player.position() < 47986) {       
         if(isDemo) {
-          robo.move();
-          robo.checkBoundaries();
+          moveMouse();
+          /*robo.checkBoundaries();
           
-          bot.create();
           bot.move();
-          bot.checkBoundaries();          
+          bot.checkBoundaries();
+          
           float dx = (bot.x+8-robo.x)*roboSpringSpeed;
           float dy = (bot.y+8-robo.y)*roboSpringSpeed;
           roboTempX += dx;
@@ -281,8 +283,9 @@ void draw() {
           robo.x += roboTempX;
           robo.y += roboTempY;
           roboTempX *= roboDamping;
-          roboTempY *= roboDamping;          
+          roboTempY *= roboDamping;      */    
         }  
+        // get dampened mouse position        
         x = x + (mouseX-x)/mouseDampeningX;
         y = y + (mouseY-y)/mouseDampeningY;
 

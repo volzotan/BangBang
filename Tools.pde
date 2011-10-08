@@ -109,6 +109,32 @@ void initImages() {
   } 
 }  
 
+void moveMouse() {
+  // start = 400 & 225;      
+  roboX += (int) random(-5,25);
+  roboY += (int) random(-70,70);
+   
+  // left boundary 
+  if(roboX < frame.getLocation().x + 30) {
+    roboX += (int) random(70,120);
+  }
+  // right boundary
+  if(roboX > frame.getLocation().x + width - 30) {
+    roboX -= (int) random(70,120);    
+  } 
+
+  // upper boundary 
+  if(roboY < frame.getLocation().y + 10) {
+    roboY += (int) random(70,120);    
+  }
+  // lower boundary
+  if(roboY > frame.getLocation().y + height - 10) {
+    roboY -= (int) random(70,120);    
+  }  
+ 
+  robot.mouseMove(roboX,roboY); 
+}  
+
 void moveViewport(){ 
   image(getBufSlice(), 0, 0);
 
