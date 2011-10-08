@@ -77,8 +77,8 @@ void initImages() {
   cursorImage_blank       = loadImage("cursor.png");
   cursorImage_circle      = loadImage("cursor_circle.png");
   cursorImage_nyancat     = loadImage("cursor_nyan.png");
-  buttonHoverImage        = loadImage("gui/ButtonHover.png");  
-  buttonHoverBigImage     = loadImage("gui/ButtonHoverBig.png");  
+  buttonHoverImage        = loadImage("gui/ButtonHover1.png");  
+  buttonHoverBigImage     = loadImage("gui/ButtonHoverBig1.png");  
 //buttonExitImage         = loadImage("gui/MaskExit.png");
   buttonDemoImage         = loadImage("gui/MaskDemo.png");
   buttonInteractiveImage  = loadImage("gui/MaskInteractive.png");
