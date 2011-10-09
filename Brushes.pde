@@ -237,8 +237,8 @@ void brushFive() {
     
     float colorPicker = random(0,1);
     color c = color(5,136,138);
-    if(colorPicker <= 0.2) {
-      c = color(240,236,202);
+    if(colorPicker <= 0.1) {
+      c = color(5,136,138);
     } else if(0.2 < colorPicker && colorPicker <= 0.4) {
       c = color(227,168,47);    
     } else if(0.4 < colorPicker && colorPicker <= 0.6) {
