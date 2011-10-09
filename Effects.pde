@@ -292,6 +292,8 @@ void crescendo() {
   tempX = (int) (deltaMouseX + xPlus + random(-1,1) * 8);
   tempY = (int) (deltaMouseY + random(-1,1) * 15 + invsVar * (-1) * abs(amp));
   
+  tempX = tempX - 95;
+  
   bg.beginDraw();
   bg.stroke(100-tempBrushValue,100-tempBrushValue,100-tempBrushValue);
   bg.strokeWeight(5+tempBrushValue*0.13);  
