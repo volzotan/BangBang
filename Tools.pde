@@ -115,7 +115,7 @@ void initImages() {
   } 
 
   for(int i = 0; i < inkSplatter.length; i++) {
-    inkSplatter[i]    = loadImage("flowers/"+i+"_100.png");    
+    inkSplatter[i]    = loadImage("flowers/b"+i+"_100.png");    
   } 
 }  
 
